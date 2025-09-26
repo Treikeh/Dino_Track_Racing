@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c56dtjon3irj1"]
+
+[ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
+friction = 0.0
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v4h86"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v4h86"]
+
+[node name="CarController" type="RigidBody3D" groups=["car"]]
+physics_material_override = SubResource("PhysicsMaterial_v4h86")
+script = ExtResource("1_v4h86")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_v4h86")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_v4h86")
