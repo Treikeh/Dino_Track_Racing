@@ -2,12 +2,14 @@ extends SubViewportContainer
 class_name PlayerInputController
 
 
-@export var _camera_3d: Camera3D
-@export var _player_id_label: Label
+@export var _cam_follow_speed: float = 5.0
+@export var _orientation: Node3D
+@export var _player_id_label: Label3D
 
 var _player_id: int = 0
+var _throttle_input: float
+var _turn_input: float
 var _car_controller: CarController
-var _move_dir: Vector2
 
 
 # Add after instatiate (instatiate().with_data()) to setup controller data
@@ -18,19 +20,28 @@ func with_data(id: int, controller: CarController) -> PlayerInputController:
 
 
 func _ready() -> void:
-	var camera_transform := RemoteTransform3D.new()
-	_car_controller.add_child(camera_transform)
-	camera_transform.remote_path = _camera_3d.get_path()
-	_player_id_label.text = str(_player_id + 1)
+	_orientation.global_position = _car_controller.global_position
+	_player_id_label.text = "P%s" % (_player_id + 1)
 
 
 func _input(_event: InputEvent) -> void:
-	_move_dir = Input.get_vector(
-			"move_r" + str(_player_id),
-			"move_l" + str(_player_id),
-			"move_b" + str(_player_id),
-			"move_f" + str(_player_id)
+	_throttle_input = Input.get_axis(
+			"reverse%s" % _player_id,
+			"accelerate%s" % _player_id
+	)
+	_turn_input = Input.get_axis(
+			"turn_r%s" % _player_id,
+			"turn_l%s" % _player_id
 	)
 	
-	_car_controller.throttle = _move_dir.y
-	_car_controller.turn_dir = _move_dir.x
+	_car_controller.throttle = _throttle_input
+	_car_controller.turn_dir = _turn_input
+
+
+func _physics_process(delta: float) -> void:
+	# Make the camera follow the car controller
+	var target_pos: Vector3 = _car_controller.global_position
+	_orientation.global_position = _orientation.global_position.lerp(target_pos, _cam_follow_speed * delta)
+	_orientation.look_at(_car_controller.global_position + -_car_controller.global_basis.z)
+	
+	_player_id_label.global_position = target_pos + Vector3(0.0, 1.0, 0.0)
