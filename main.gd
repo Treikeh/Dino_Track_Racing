@@ -15,7 +15,6 @@ const PLAYER_INPUT_CONTROLLER: PackedScene = preload("uid://d1f50k3xa7iar")
 
 func _ready() -> void:
 	_ui.player_button_pressed.connect(_on_player_button_pressed)
-	_ui.return_to_main_menu.connect(_reset_game)
 
 
 func _on_player_button_pressed(player_count: int) -> void:
@@ -43,14 +42,3 @@ func _on_player_button_pressed(player_count: int) -> void:
 	var empty_spaces: int = (viewport_columns * viewport_rows) - player_count
 	for i: int in empty_spaces:
 		pass
-
-
-func _reset_game() -> void:
-	_world_3d.reset()
-	# Remove palyers and cars
-	for child: Node in _viewports_container.get_children():
-		_viewports_container.remove_child(child)
-		child.queue_free()
-	
-	for car in get_tree().get_nodes_in_group("car"):
-		car.queue_free()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://0aadjdt6m2tc" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://world_3d.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/world_3d.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://b1wcwmqlh1w8a" path="res://gui/ui.gd" id="3_h2yge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]

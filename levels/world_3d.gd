@@ -38,10 +38,3 @@ func _process(_delta: float) -> void:
 
 func _sort_positions(a: int, b: int) -> bool:
 	return _track_follows[a].progress > _track_follows[b].progress
-
-
-func reset() -> void:
-	_car_positions.clear()
-	for track_follow: TrackFollow in _track_follows:
-		track_follow.queue_free()
-	_track_follows.clear()

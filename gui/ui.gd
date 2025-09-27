@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 
-signal return_to_main_menu
 signal player_button_pressed(player_count: int)
 
 
@@ -28,18 +27,15 @@ func _on_player_button_pressed(source: BaseButton) -> void:
 	_main_menu.hide()
 
 
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()
+func _on_resume_button_pressed() -> void:
+	get_tree().paused = false
+	_pause.hide()
 
 
 func _on_main_menu_button_pressed() -> void:
 	get_tree().paused = false
-	_pause.hide()
-	_main_menu.show()
-	_main_menu_focus.grab_focus()
-	return_to_main_menu.emit()
+	get_tree().reload_current_scene()
 
 
-func _on_resume_button_pressed() -> void:
-	get_tree().paused = false
-	_pause.hide()
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
