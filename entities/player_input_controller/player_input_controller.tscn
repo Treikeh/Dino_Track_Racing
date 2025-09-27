@@ -2,38 +2,66 @@
 
 [ext_resource type="Script" uid="uid://pohingt7fxqa" path="res://entities/player_input_controller/player_input_controller.gd" id="1_htsux"]
 
-[node name="PlayerInputController" type="SubViewportContainer" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label")]
+[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label", "_speedometer")]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
 script = ExtResource("1_htsux")
-_orientation = NodePath("SubViewport/Orientation")
-_id_label = NodePath("SubViewport/IdLabel")
+_orientation = NodePath("SubViewportContainer/SubViewport/Orientation")
+_id_label = NodePath("SubViewportContainer/SubViewport/IdLabel")
 _position_label = NodePath("PositionLabel")
+_speedometer = NodePath("Speedometer")
 
-[node name="PositionLabel" type="Label" parent="."]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "1"
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(40, 40)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4)
 
-[node name="IdLabel" type="Label3D" parent="SubViewport"]
+[node name="IdLabel" type="Label3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 text = "P1"
 
-[node name="Orientation" type="Node3D" parent="SubViewport"]
+[node name="Orientation" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="CameraTransform" type="RemoteTransform3D" parent="SubViewport/Orientation"]
+[node name="CameraTransform" type="RemoteTransform3D" parent="SubViewportContainer/SubViewport/Orientation"]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4)
 remote_path = NodePath("../../Camera3D")
+
+[node name="PositionLabel" type="Label" parent="."]
+layout_mode = 1
+offset_right = 26.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 45
+text = "1"
+
+[node name="Speedometer" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "30m/s"

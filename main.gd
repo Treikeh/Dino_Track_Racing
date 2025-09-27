@@ -15,6 +15,9 @@ const PLAYER_INPUT_CONTROLLER: PackedScene = preload("uid://d1f50k3xa7iar")
 
 func _ready() -> void:
 	_ui.player_button_pressed.connect(_on_player_button_pressed)
+	
+	_on_player_button_pressed(1)
+	_ui.hide()
 
 
 func _on_player_button_pressed(player_count: int) -> void:

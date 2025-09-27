@@ -1,11 +1,14 @@
-extends SubViewportContainer
+extends Control
 class_name PlayerInputController
 
 
 @export var _cam_follow_speed: float = 6.0
 @export var _orientation: Node3D
 @export var _id_label: Label3D
+
+@export_group("HUD")
 @export var _position_label: Label
+@export var _speedometer: Label
 
 var _player_id: int = 0
 var _throttle_input: float
@@ -54,7 +57,7 @@ func _input(event: InputEvent) -> void:
 			_car_controller.reset()
 	
 	_car_controller.throttle = _throttle_input
-	_car_controller.turn_dir = _turn_input
+	_car_controller.turn_input = _turn_input
 
 
 func _physics_process(delta: float) -> void:
@@ -66,6 +69,8 @@ func _physics_process(delta: float) -> void:
 	var target_quat: Quaternion = _id_label.quaternion
 	_orientation.global_position = _orientation.global_position.lerp(target_pos, _cam_follow_speed * delta)
 	_orientation.quaternion = _orientation.quaternion.slerp(target_quat, 4.0 * delta)
+	
+	_speedometer.text = "%s kmh" % snappedf(_car_controller.speed_khm, 1.0)
 
 
 ## Crate new input actions for each player
