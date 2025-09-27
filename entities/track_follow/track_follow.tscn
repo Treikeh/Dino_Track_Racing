@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://jp5mah0qlvwj"]
+
+[ext_resource type="Script" uid="uid://b2xp7um5nlwq0" path="res://entities/track_follow/track_follow.gd" id="1_ikht7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ikht7"]
+radius = 0.1
+height = 0.2
+
+[node name="TrackFollow" type="PathFollow3D"]
+script = ExtResource("1_ikht7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ikht7")

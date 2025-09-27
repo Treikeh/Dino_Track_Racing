@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pohingt7fxqa" path="res://entities/player_input_controller/player_input_controller.gd" id="1_htsux"]
 
-[node name="PlayerInputController" type="SubViewportContainer" node_paths=PackedStringArray("_orientation", "_player_id_label")]
+[node name="PlayerInputController" type="SubViewportContainer" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label")]
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
@@ -10,7 +10,13 @@ size_flags_vertical = 3
 stretch = true
 script = ExtResource("1_htsux")
 _orientation = NodePath("SubViewport/Orientation")
-_player_id_label = NodePath("SubViewport/PlayerLabel")
+_id_label = NodePath("SubViewport/IdLabel")
+_position_label = NodePath("PositionLabel")
+
+[node name="PositionLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "1"
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -21,7 +27,7 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4)
 
-[node name="PlayerLabel" type="Label3D" parent="SubViewport"]
+[node name="IdLabel" type="Label3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 text = "P1"
