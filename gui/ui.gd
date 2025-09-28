@@ -1,18 +1,23 @@
 extends CanvasLayer
 
 
-signal player_button_pressed(player_count: int)
+signal play_button_pressed(player_count: int)
 
 
 @export var _main_menu: Control
 @export var _pause: Control
 # Nodes to grab focus when entering the different menus
-@export var _main_menu_focus: Control
 @export var _pause_focus: Control
+
+@export_group("Main Menu")
+@export var _main_menu_focus: Control
+@export var _player_count_label: Label
+@export var _player_count_slider: HSlider
 
 
 func _ready() -> void:
 	_main_menu_focus.grab_focus()
+	_player_count_label.text = str(int(_player_count_slider.value))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -22,9 +27,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_pause_focus.grab_focus()
 
 
-func _on_player_button_pressed(source: BaseButton) -> void:
-	player_button_pressed.emit(source.get_index() + 1)
+func _on_player_count_slider_value_changed(value: float) -> void:
+	_player_count_label.text = str(int(value))
+
+
+func _on_play_button_pressed() -> void:
 	_main_menu.hide()
+	play_button_pressed.emit(int(_player_count_slider.value))
 
 
 func _on_resume_button_pressed() -> void:

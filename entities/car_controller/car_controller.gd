@@ -93,7 +93,7 @@ func _rotate_mesh(delta: float) -> void:
 	
 	# Tilt mesh forward/backwards based on which direction the player is driving
 	var z_dir_dot: float = -global_basis.z.dot(linear_velocity)
-	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.5, _mesh_lerp_speed * delta)
+	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.4, _mesh_lerp_speed * delta)
 
 
 func reset() -> void:

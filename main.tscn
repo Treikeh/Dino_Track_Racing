@@ -75,12 +75,14 @@ grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("_main_menu", "_pause", "_main_menu_focus", "_pause_focus")]
+[node name="Ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("_main_menu", "_pause", "_pause_focus", "_main_menu_focus", "_player_count_label", "_player_count_slider")]
 script = ExtResource("3_h2yge")
 _main_menu = NodePath("MainMenu")
 _pause = NodePath("Pause")
-_main_menu_focus = NodePath("MainMenu/VBoxContainer/1PlayerButton")
 _pause_focus = NodePath("Pause/VBoxContainer/ResumeButton")
+_main_menu_focus = NodePath("MainMenu/VBoxContainer/PlayButton")
+_player_count_label = NodePath("MainMenu/VBoxContainer/PlayerCountLabel")
+_player_count_slider = NodePath("MainMenu/VBoxContainer/PlayerCountSlider")
 
 [node name="MainMenu" type="Control" parent="Ui"]
 layout_mode = 3
@@ -104,21 +106,28 @@ offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="1PlayerButton" type="Button" parent="Ui/MainMenu/VBoxContainer"]
+[node name="Label" type="Label" parent="Ui/MainMenu/VBoxContainer"]
 layout_mode = 2
-text = "1 Player"
+text = "Players"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="2PlayerButton" type="Button" parent="Ui/MainMenu/VBoxContainer"]
+[node name="PlayerCountLabel" type="Label" parent="Ui/MainMenu/VBoxContainer"]
 layout_mode = 2
-text = "2 Players"
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="3PlayerButton" type="Button" parent="Ui/MainMenu/VBoxContainer"]
+[node name="PlayerCountSlider" type="HSlider" parent="Ui/MainMenu/VBoxContainer"]
 layout_mode = 2
-text = "3 Players"
+min_value = 1.0
+max_value = 4.0
+value = 2.0
+allow_greater = true
 
-[node name="4PlayerButton" type="Button" parent="Ui/MainMenu/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Ui/MainMenu/VBoxContainer"]
 layout_mode = 2
-text = "4 Players"
+text = "Play"
 
 [node name="QuitButton" type="Button" parent="Ui/MainMenu/VBoxContainer"]
 layout_mode = 2
@@ -148,10 +157,8 @@ text = "Main Menu"
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="Ui/MainMenu/VBoxContainer/1PlayerButton" to="Ui" method="_on_player_button_pressed" flags=18]
-[connection signal="pressed" from="Ui/MainMenu/VBoxContainer/2PlayerButton" to="Ui" method="_on_player_button_pressed" flags=18]
-[connection signal="pressed" from="Ui/MainMenu/VBoxContainer/3PlayerButton" to="Ui" method="_on_player_button_pressed" flags=18]
-[connection signal="pressed" from="Ui/MainMenu/VBoxContainer/4PlayerButton" to="Ui" method="_on_player_button_pressed" flags=18]
+[connection signal="value_changed" from="Ui/MainMenu/VBoxContainer/PlayerCountSlider" to="Ui" method="_on_player_count_slider_value_changed"]
+[connection signal="pressed" from="Ui/MainMenu/VBoxContainer/PlayButton" to="Ui" method="_on_play_button_pressed"]
 [connection signal="pressed" from="Ui/MainMenu/VBoxContainer/QuitButton" to="Ui" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Ui/Pause/VBoxContainer/ResumeButton" to="Ui" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Ui/Pause/VBoxContainer/MainMenuButton" to="Ui" method="_on_main_menu_button_pressed"]

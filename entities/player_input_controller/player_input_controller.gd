@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	_orientation.global_position = _orientation.global_position.lerp(target_pos, _cam_follow_speed * delta)
 	_orientation.quaternion = _orientation.quaternion.slerp(target_quat, 4.0 * delta)
 	
-	_speedometer.text = "%s kmh" % snappedf(_car_controller.speed_khm, 1.0)
+	_speedometer.text = "%s kmh" % int(snappedf(_car_controller.speed_khm, 1.0))
 
 
 ## Crate new input actions for each player
