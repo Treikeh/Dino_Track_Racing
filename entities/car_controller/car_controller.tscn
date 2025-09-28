@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=9 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
+[ext_resource type="Script" uid="uid://4q67sm5qma1y" path="res://entities/car_controller/wheel.gd" id="2_xt16y"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
@@ -13,19 +14,23 @@ point_count = 4
 
 [sub_resource type="Curve" id="Curve_xt16y"]
 _limits = [0.0, 5.0, 0.0, 100.0]
-_data = [Vector2(0, 0), 0.0, 0.13181463, 0, 0, Vector2(18.975904, 1.964072), -0.003313386, -0.003313386, 0, 0, Vector2(100, 5), 0.16898207, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(22.891567, 2.197605), 0.010040527, 0.010040527, 0, 0, Vector2(100, 0.7964072), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xt16y"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v4h86"]
 height = 1.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_v4h86"]
+size = Vector3(1, 0.8, 1.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v4h86"]
-margin = 0.1
-size = Vector3(0.8, 1, 0.8)
+[sub_resource type="CylinderMesh" id="CylinderMesh_v4h86"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+radial_segments = 16
+rings = 0
 
-[node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_ground_check", "_mesh") groups=["car"]]
+[node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_ground_check", "_mesh", "_wheels") groups=["car"]]
 physics_material_override = SubResource("PhysicsMaterial_v4h86")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
@@ -35,16 +40,62 @@ script = ExtResource("1_v4h86")
 _accel_curve = SubResource("Curve_v4h86")
 _turn_curve = SubResource("Curve_xt16y")
 _ground_check = NodePath("GroundCheck")
+_rest_height = 0.75
+_spring_damping = 10.0
 _mesh = NodePath("MeshInstance3D")
+_wheels = NodePath("Wheels")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_xt16y")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.100000024, 8.742277e-09)
+shape = SubResource("CapsuleShape3D_v4h86")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_v4h86")
 
-[node name="GroundCheck" type="ShapeCast3D" parent="."]
-shape = SubResource("BoxShape3D_v4h86")
-target_position = Vector3(0, -0.35, 0)
-max_results = 1
+[node name="GroundCheck" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.75, 0)
+
+[node name="Wheels" type="Node3D" parent="."]
+
+[node name="WheelFL" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.3, -0.5)
+target_position = Vector3(0, -0.5, 0)
+script = ExtResource("2_xt16y")
+enable_steering = true
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelFL"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.1, -4.371139e-09, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+
+[node name="WheelFR" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.20000002, -0.5)
+target_position = Vector3(0, -0.5, 0)
+script = ExtResource("2_xt16y")
+enable_steering = true
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelFR"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+
+[node name="WheelBL" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.3, 0.5)
+target_position = Vector3(0, -0.5, 0)
+script = ExtResource("2_xt16y")
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelBL"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.1, -4.371139e-09, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+
+[node name="WheelBR" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.20000002, 0.5)
+target_position = Vector3(0, -0.5, 0)
+script = ExtResource("2_xt16y")
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelBR"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v4h86")
