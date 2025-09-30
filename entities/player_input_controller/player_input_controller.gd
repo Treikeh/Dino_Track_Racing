@@ -13,6 +13,7 @@ class_name PlayerInputController
 var _player_id: int = 0
 var _throttle_input: float
 var _turn_input: float
+var _drift_input: bool
 var _car_controller: CarController
 
 # Input actions to copy and assign to each new player
@@ -21,6 +22,7 @@ var _input_actions: Array[String] = [
 	"reverse",
 	"turn_l",
 	"turn_r",
+	"drift",
 	"reset",
 ]
 
@@ -49,6 +51,8 @@ func _input(event: InputEvent) -> void:
 			"turn_l%s" % _player_id
 	)
 	
+	_drift_input = Input.is_action_pressed("drift")
+	
 	# Don't allow player to drive when flipped over
 	if _car_controller.global_basis.y.dot(Vector3.UP) < 0.25:
 		_throttle_input = 0.0
@@ -58,6 +62,7 @@ func _input(event: InputEvent) -> void:
 	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
+	_car_controller.drift_input = _drift_input
 
 
 func _physics_process(delta: float) -> void:

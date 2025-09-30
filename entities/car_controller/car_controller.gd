@@ -21,9 +21,12 @@ class_name CarController
 var throttle: float
 var turn_input: float
 var speed_khm: float
+var drift_input: bool
 
 var _turn_dir: float
-var _ground_normal
+##NOTE: This if reversed. when it's is 1.0 there is no drift
+var _drift_factor: float
+var _ground_normal: Vector3
 
 @onready var _default_linear_damp: float = linear_damp
 
@@ -43,7 +46,7 @@ func _process(delta: float) -> void:
 			wheel.rotation_degrees.y = 25.0 * turn_input
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	speed_khm = linear_velocity.length() * 3.6
 	if _ground_check.is_colliding():
 		_ground_normal = _ground_check.get_collision_normal()
@@ -59,6 +62,7 @@ func _physics_process(_delta: float) -> void:
 		
 		_apply_suspension()
 		_apply_anti_roll()
+		_apply_anti_slip(delta)
 	else:
 		linear_damp = 0.0
 		# Reduce how much the car can rotate in the air
@@ -73,6 +77,18 @@ func _apply_suspension() -> void:
 	var force: float = (_spring_force * dispalcement) - (normal_vel * _spring_damping)
 	apply_central_force(-_ground_normal * force * mass)
 
+# Make the car not slip sideways
+func _apply_anti_slip(delta: float) -> void:
+	const ANI_SLIP_FORCE: float = 0.125
+	var slip_dir: Vector3 = global_basis.x
+	var slip_vel: float = linear_velocity.dot(slip_dir)
+	var force: float = -(slip_vel * ANI_SLIP_FORCE) / delta
+	
+	const DRIFT_LERP_SPEED: float = 2.0
+	_drift_factor = -0.1 if drift_input else lerpf(_drift_factor, 1.0, DRIFT_LERP_SPEED * delta)
+	
+	apply_central_force(slip_dir * force * _drift_factor * mass)
+
 
 # Apply a bit of stabilizing force to make the car align with the ground normal
 func _apply_anti_roll() -> void:
@@ -80,10 +96,6 @@ func _apply_anti_roll() -> void:
 	var left_dot: float = global_basis.x.dot(_ground_check.get_collision_normal())
 	var stabilize_vector: Vector3 = (global_basis.x * up_dot) + (-global_basis.z * left_dot)
 	apply_torque(stabilize_vector * 15.0)
-
-
-func _apply_anti_slip() -> void:
-	pass
 
 
 func _rotate_mesh(delta: float) -> void:
