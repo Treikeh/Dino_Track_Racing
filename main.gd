@@ -30,6 +30,7 @@ func _on_play_button_pressed(player_count: int) -> void:
 	for player_id: int in player_count:
 		# Add car to world
 		var car: CarController = CAR_CONTROLLER.instantiate()
+		_world_3d.add_child(car)
 		_world_3d.add_car(player_id, car)
 		
 		# Add palyer inputs and connect it to the car

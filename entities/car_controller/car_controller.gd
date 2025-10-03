@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	
 	for wheel: RayCast3D in _wheels.get_children():
 		if wheel.enable_steering:
-			wheel.rotation_degrees.y = 25.0 * turn_input
+			wheel.rotation_degrees.y = 30.0 * turn_input
 
 
 func _physics_process(delta: float) -> void:
@@ -101,11 +101,11 @@ func _apply_anti_roll() -> void:
 func _rotate_mesh(delta: float) -> void:
 	# Tilt mesh left/right when turning
 	var x_dir_dot: float = global_basis.x.dot(linear_velocity)
-	_mesh.rotation_degrees.z = lerpf(_mesh.rotation_degrees.z, x_dir_dot, _mesh_lerp_speed * delta)
+	_mesh.rotation_degrees.z = lerpf(_mesh.rotation_degrees.z, x_dir_dot * 0.5, _mesh_lerp_speed * delta)
 	
 	# Tilt mesh forward/backwards based on which direction the player is driving
 	var z_dir_dot: float = -global_basis.z.dot(linear_velocity)
-	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.4, _mesh_lerp_speed * delta)
+	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.1, _mesh_lerp_speed * delta)
 
 
 func reset() -> void:

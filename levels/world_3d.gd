@@ -13,7 +13,6 @@ func add_car(id: int, car: CarController) -> void:
 	_car_positions.append(id)
 	
 	# Spawn the car and set it's position
-	add_child(car)
 	@warning_ignore("integer_division")
 	# The row the current car will spawn on
 	var spawn_row: int = id / 4
