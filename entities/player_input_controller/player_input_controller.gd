@@ -51,7 +51,7 @@ func _input(event: InputEvent) -> void:
 			"turn_l%s" % _player_id
 	)
 	
-	_drift_input = Input.is_action_pressed("drift")
+	_drift_input = Input.is_action_pressed("drift%s" % _player_id)
 	
 	# Don't allow player to drive when flipped over
 	if _car_controller.global_basis.y.dot(Vector3.UP) < 0.25:

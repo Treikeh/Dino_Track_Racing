@@ -10,15 +10,17 @@ config_version=5
 
 [application]
 
-config/name="Splitscreen_multiplayer"
+config/name="Dino_track_racing"
 config/tags=PackedStringArray("prototype")
 run/main_scene="uid://uge4fje706v6"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://b7golcedx5sk1"
 
 [display]
 
-window/size/mode=3
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="viewport"
 
 [editor]
 
