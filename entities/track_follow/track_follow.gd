@@ -2,7 +2,10 @@ extends PathFollow3D
 class_name TrackFollow
 
 
-var player_id: int = 0
+var car_id: int = 0
+var lap: int = 1
+var checkpoint_reached: bool = false
+
 var _car_controller: CarController
 
 @onready var _track: Path3D = get_parent()
@@ -11,7 +14,7 @@ var _car_controller: CarController
 
 # Add after instatiate (instatiate().with_data(.., ..))
 func with_data(id: int, car: CarController) -> PathFollow3D:
-	player_id = id
+	car_id = id
 	_car_controller = car
 	return self
 

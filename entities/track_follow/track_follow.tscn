@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://jp5mah0qlvwj"]
+[gd_scene load_steps=4 format=3 uid="uid://jp5mah0qlvwj"]
 
 [ext_resource type="Script" uid="uid://b2xp7um5nlwq0" path="res://entities/track_follow/track_follow.gd" id="1_ikht7"]
 
@@ -6,8 +6,19 @@
 radius = 0.1
 height = 0.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ikht7"]
+radius = 0.1
+
 [node name="TrackFollow" type="PathFollow3D"]
 script = ExtResource("1_ikht7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ikht7")
+
+[node name="CheckpointCollisionArea" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CheckpointCollisionArea"]
+shape = SubResource("SphereShape3D_ikht7")

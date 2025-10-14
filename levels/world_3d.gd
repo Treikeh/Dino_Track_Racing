@@ -8,7 +8,6 @@ const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 var _car_positions: Array[int]
 var _track_follows: Array[TrackFollow]
 
-
 func add_car(id: int, car: CarController) -> void:
 	_car_positions.append(id)
 	
@@ -36,4 +35,24 @@ func _process(_delta: float) -> void:
 
 
 func _sort_positions(a: int, b: int) -> bool:
-	return _track_follows[a].progress > _track_follows[b].progress
+	if _track_follows[a].lap != _track_follows[b].lap:
+		return _track_follows[a].lap > _track_follows[b].lap
+	else:
+		return _track_follows[a].progress > _track_follows[b].progress
+
+
+func _on_finish_line_area_entered(area: Area3D) -> void:
+	var track_follow: TrackFollow = area.get_parent()
+	if track_follow.checkpoint_reached:
+		track_follow.lap += 1
+		if track_follow.lap >= 4:
+			print("GAME OVER")
+		else:
+			print("New lap: %s" % track_follow.lap)
+			get_tree().current_scene.lap_changed.emit(track_follow.car_id, track_follow.lap)
+
+
+func _on_checkpoint_area_entered(area: Area3D) -> void:
+	var track_follow: TrackFollow = area.get_parent()
+	track_follow.checkpoint_reached = true
+	print("Checkpoint reached for lap %s" % track_follow.lap)

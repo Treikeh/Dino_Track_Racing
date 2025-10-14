@@ -9,6 +9,7 @@ class_name PlayerInputController
 @export_group("HUD")
 @export var _position_label: Label
 @export var _speedometer: Label
+@export var _lap_label: Label
 
 var _player_id: int = 0
 var _throttle_input: float
@@ -23,7 +24,6 @@ var _input_actions: Array[String] = [
 	"turn_l",
 	"turn_r",
 	"drift",
-	"reset",
 ]
 
 
@@ -39,9 +39,10 @@ func _ready() -> void:
 	_orientation.global_position = _car_controller.global_position
 	_id_label.text = "P%s" % (_player_id + 1)
 	get_tree().current_scene.car_positions_updated.connect(_on_car_positions_updated)
+	get_tree().current_scene.lap_changed.connect(_on_lap_changed)
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	_throttle_input = Input.get_axis(
 			"reverse%s" % _player_id,
 			"accelerate%s" % _player_id
@@ -52,13 +53,6 @@ func _input(event: InputEvent) -> void:
 	)
 	
 	_drift_input = Input.is_action_pressed("drift%s" % _player_id)
-	
-	# Don't allow player to drive when flipped over
-	if _car_controller.global_basis.y.dot(Vector3.UP) < 0.25:
-		_throttle_input = 0.0
-		# Reset the car when it has flipped over and the player pressed the reset button
-		if event.is_action_pressed("reset%s" % _player_id):
-			_car_controller.reset()
 	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
@@ -106,3 +100,8 @@ func _get_look_at_pos() -> Vector3:
 
 func _on_car_positions_updated(car_positions: Array[int]) -> void:
 	_position_label.text = str(car_positions.find(_player_id) + 1)
+
+
+func _on_lap_changed(car_id: int, lap: int) -> void:
+	if _player_id == car_id:
+		_lap_label.text = "%s/3" % lap

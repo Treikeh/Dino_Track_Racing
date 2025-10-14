@@ -6,6 +6,7 @@ class_name CarController
 @export var _accel_curve: Curve
 ## How well the car will be able to turn at different speeds (speed is in kmh)
 @export var _turn_curve: Curve
+@export var _drive_dir: Node3D
 @export var _ground_check: RayCast3D
 
 @export_group("Suspension")
@@ -40,6 +41,8 @@ func _process(delta: float) -> void:
 	
 	# Reverse turn direction when driving backwards
 	_turn_dir = turn_input * -1.0 if throttle < 0.0 else turn_input
+	var turn_dir: float = 27.5 if !drift_input else 35.0
+	_drive_dir.rotation_degrees.y = turn_dir * turn_input * _turn_curve.sample(speed_khm)
 	
 	for wheel: RayCast3D in _wheels.get_children():
 		if wheel.enable_steering:
@@ -49,15 +52,25 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	speed_khm = linear_velocity.length() * 3.6
 	if _ground_check.is_colliding():
+		var drive_dir: float = -global_basis.z.dot(linear_velocity.normalized())
 		_ground_normal = _ground_check.get_collision_normal()
 		linear_damp = _default_linear_damp
 		
 		# Move car
 		var accel_force: float = _accel_curve.sample(speed_khm) * throttle
-		apply_central_force(-global_basis.z * accel_force * mass)
+		apply_central_force(-_drive_dir.global_basis.z * accel_force * mass)
+		
+		# Drift
+		var drift_force: Vector3 = -global_basis.z * (40.0 * (1 - _drift_factor))
+		var drift_dir: float = global_basis.x.dot(linear_velocity.normalized())
+		if (drift_dir * turn_input > 0.0):
+			apply_central_force(drift_force * drift_dir * turn_input * throttle)
+		# Is 0.7 when drifting forwards, but 0.9 when drifting backwards
+		#print(drift_dir * turn_input * throttle)
 		
 		# Roatate car
-		var turn_force: float = _turn_curve.sample(speed_khm) * _turn_dir
+		var rot_speed: float = 9.0 if drift_input else 7.0
+		var turn_force: float = -global_basis.z.dot(_drive_dir.global_basis.x) * rot_speed * drive_dir
 		apply_torque(global_basis.y * turn_force * mass)
 		
 		_apply_suspension()
@@ -71,10 +84,11 @@ func _physics_process(delta: float) -> void:
 
 # Make the car float above the ground so that it can drive over small edges and bumps without issues
 func _apply_suspension() -> void:
-	var hit_distance: float = (global_position - _ground_check.get_collision_point()).length()
+	var collision_point: Vector3 = _ground_check.get_collision_point()
+	var hit_distance: float = global_position.distance_to(collision_point)
 	var normal_vel: float = -_ground_normal.dot(linear_velocity)
-	var dispalcement: float = hit_distance - _rest_height
-	var force: float = (_spring_force * dispalcement) - (normal_vel * _spring_damping)
+	var dispalcement: float = _rest_height - hit_distance
+	var force: float = (_spring_force * -dispalcement) - (normal_vel * _spring_damping)
 	apply_central_force(-_ground_normal * force * mass)
 
 # Make the car not slip sideways
@@ -85,7 +99,7 @@ func _apply_anti_slip(delta: float) -> void:
 	var force: float = -(slip_vel * ANI_SLIP_FORCE) / delta
 	
 	const DRIFT_LERP_SPEED: float = 2.0
-	_drift_factor = -0.1 if drift_input else lerpf(_drift_factor, 1.0, DRIFT_LERP_SPEED * delta)
+	_drift_factor = 0.0 if drift_input else lerpf(_drift_factor, 1.0, DRIFT_LERP_SPEED * delta)
 	
 	apply_central_force(slip_dir * force * _drift_factor * mass)
 
@@ -106,12 +120,3 @@ func _rotate_mesh(delta: float) -> void:
 	# Tilt mesh forward/backwards based on which direction the player is driving
 	var z_dir_dot: float = -global_basis.z.dot(linear_velocity)
 	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.1, _mesh_lerp_speed * delta)
-
-
-func reset() -> void:
-	process_mode = Node.PROCESS_MODE_DISABLED
-	linear_velocity = Vector3.ZERO
-	angular_velocity = Vector3.ZERO
-	global_rotation = Vector3.ZERO
-	global_position += Vector3.UP * 3.0
-	process_mode = Node.PROCESS_MODE_INHERIT

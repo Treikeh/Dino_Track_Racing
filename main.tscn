@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://uge4fje706v6"]
+[gd_scene load_steps=10 format=3 uid="uid://uge4fje706v6"]
 
 [ext_resource type="Script" uid="uid://0aadjdt6m2tc" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_0xm2m"]
@@ -20,10 +20,13 @@ tonemap_mode = 2
 [sub_resource type="Curve3D" id="Curve3D_h2yge"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 0, -0.16563028, 0, -28.130651, 0, 0, 0, 0, 0, 0, -13.174606, 0, -42.95197, 0, 0, 0, 0, 0, 0, -40.407738, 0, -29.122644, 0, 0, 0, 0, 0, 0, -41.546, 0, 23.447, 0, 0, 0, 0, 0, 0, -5.7303853, 0, 44.616993, 0, 0, 0, 0, 0, 0, 44.58708, 0, 45.787163, 0, 0, 0, 0, 0, 0, 44.374317, 0, 2.38436, 0, 0, 0, 0, 0, 0, 41.609657, 0, -38.90209, 0, 0, 0, 0, 0, 0, 24.376192, 0, -41.98709, 0, 0, 0, 0, 0, 0, 17.036013, 0, -29.753458, 0, 0, 0, 0, 0, 0, 23.41878, 0, 14.393995, 0, 0, 0, 0, 0, 0, 0, 0, 26.096),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.16563028, 0, -28.130651, 0, 0, 0, 0, 0, 0, -13.174606, 0, -42.95197, 0, 0, 0, 0, 0, 0, -40.407738, 0, -29.122644, 0, 0, 0, 0, 0, 0, -41.546, 0, 23.447, 0, 0, 0, 0, 0, 0, -5.7303853, 0, 44.616993, 0, 0, 0, 0, 0, 0, 44.58708, 0, 45.787163, 0, 0, 0, 0, 0, 0, 44.374317, 0, 2.38436, 0, 0, 0, 0, 0, 0, 41.609657, 0, -38.90209, 0, 0, 0, 0, 0, 0, 24.376192, 0, -41.98709, 0, 0, 0, 0, 0, 0, 17.036013, 0, -29.753458, 0, 0, 0, 0, 0, 0, 23.41878, 0, 14.393995, 0, 0, 0, 0, 0, 0, 0, 0, 26.096),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 13
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
+radius = 1.0
 
 [node name="Main" type="Node" node_paths=PackedStringArray("_world_3d", "_ui", "_viewports_container")]
 script = ExtResource("1_0xm2m")
@@ -44,6 +47,23 @@ environment = SubResource("Environment_1bvp3")
 
 [node name="Track" type="Path3D" parent="World3D"]
 curve = SubResource("Curve3D_h2yge")
+
+[node name="FinishLine" type="Area3D" parent="World3D/Track"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World3D/Track/FinishLine"]
+shape = SubResource("SphereShape3D_1bvp3")
+
+[node name="Checkpoint" type="Area3D" parent="World3D/Track"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44.7)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World3D/Track/Checkpoint"]
+shape = SubResource("SphereShape3D_1bvp3")
 
 [node name="Ground" type="CSGBox3D" parent="World3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -157,6 +177,8 @@ text = "Main Menu"
 layout_mode = 2
 text = "Quit"
 
+[connection signal="area_entered" from="World3D/Track/FinishLine" to="World3D" method="_on_finish_line_area_entered"]
+[connection signal="area_entered" from="World3D/Track/Checkpoint" to="World3D" method="_on_checkpoint_area_entered"]
 [connection signal="value_changed" from="Ui/MainMenu/VBoxContainer/PlayerCountSlider" to="Ui" method="_on_player_count_slider_value_changed"]
 [connection signal="pressed" from="Ui/MainMenu/VBoxContainer/PlayButton" to="Ui" method="_on_play_button_pressed"]
 [connection signal="pressed" from="Ui/MainMenu/VBoxContainer/QuitButton" to="Ui" method="_on_quit_button_pressed"]

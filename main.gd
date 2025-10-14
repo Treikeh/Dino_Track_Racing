@@ -1,8 +1,9 @@
 extends Node
 
 
-@warning_ignore("unused_signal")
+@warning_ignore_start("unused_signal")
 signal car_positions_updated(car_positions: Array[int])
+signal lap_changed(car_id: int, lap: int)
 
 
 const CAR_CONTROLLER: PackedScene = preload("uid://c56dtjon3irj1")

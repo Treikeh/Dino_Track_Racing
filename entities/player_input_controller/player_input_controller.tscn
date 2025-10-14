@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pohingt7fxqa" path="res://entities/player_input_controller/player_input_controller.gd" id="1_htsux"]
 
-[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label", "_speedometer")]
+[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -14,6 +14,7 @@ _orientation = NodePath("SubViewportContainer/SubViewport/Orientation")
 _id_label = NodePath("SubViewportContainer/SubViewport/IdLabel")
 _position_label = NodePath("PositionLabel")
 _speedometer = NodePath("Speedometer")
+_lap_label = NodePath("LapLabel")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -65,3 +66,10 @@ offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "30m/s"
+
+[node name="LapLabel" type="Label" parent="."]
+layout_mode = 1
+offset_top = 50.0
+offset_right = 40.0
+offset_bottom = 73.00006
+text = "1/3"
