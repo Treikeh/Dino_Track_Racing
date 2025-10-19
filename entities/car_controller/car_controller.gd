@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 		#print(drift_dir * turn_input * throttle)
 		
 		# Roatate car
-		var rot_speed: float = 9.0 if drift_input else 7.0
+		var rot_speed: float = 7.0 if drift_input else 5.0
 		var turn_force: float = -global_basis.z.dot(_drive_dir.global_basis.x) * rot_speed * drive_dir
 		apply_torque(global_basis.y * turn_force * mass)
 		
@@ -115,7 +115,7 @@ func _apply_anti_roll() -> void:
 func _rotate_mesh(delta: float) -> void:
 	# Tilt mesh left/right when turning
 	var x_dir_dot: float = global_basis.x.dot(linear_velocity)
-	_mesh.rotation_degrees.z = lerpf(_mesh.rotation_degrees.z, x_dir_dot * 0.5, _mesh_lerp_speed * delta)
+	_mesh.rotation_degrees.z = lerpf(_mesh.rotation_degrees.z, x_dir_dot * 1.0, _mesh_lerp_speed * delta)
 	
 	# Tilt mesh forward/backwards based on which direction the player is driving
 	var z_dir_dot: float = -global_basis.z.dot(linear_velocity)

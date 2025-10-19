@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bxs80yr5qibsn" path="res://entities/car_controller/art/Eight_six.tscn" id="2_hglhj"]
 [ext_resource type="Script" uid="uid://4q67sm5qma1y" path="res://entities/car_controller/wheel.gd" id="2_xt16y"]
 [ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="4_4etui"]
+[ext_resource type="PackedScene" uid="uid://ctpykct1eslcm" path="res://entities/car_controller/art/scooter_dino.glb" id="5_2sd83"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
@@ -20,11 +21,7 @@ _data = [Vector2(0, 0), 0.0, 0.041289747, 0, 0, Vector2(31.927708, 0.902985), 0.
 point_count = 3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hglhj"]
-radius = 0.4
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_hglhj"]
-top_radius = 0.1
-bottom_radius = 0.1
+height = 1.6
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_v4h86"]
 top_radius = 0.15
@@ -36,9 +33,9 @@ rings = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hglhj"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_hglhj"]
-radius = 0.1
-height = 0.2
+[sub_resource type="CylinderMesh" id="CylinderMesh_hglhj"]
+top_radius = 0.1
+bottom_radius = 0.1
 
 [node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_mesh", "_wheels") groups=["car"]]
 physics_material_override = SubResource("PhysicsMaterial_v4h86")
@@ -51,9 +48,11 @@ _accel_curve = SubResource("Curve_v4h86")
 _turn_curve = SubResource("Curve_xt16y")
 _drive_dir = NodePath("DriveDir")
 _ground_check = NodePath("GroundCheck")
-_rest_height = 0.75
-_mesh = NodePath("blockbench_export")
-_wheels = NodePath("Wheels")
+_rest_height = 0.8
+_spring_force = 150.0
+_spring_damping = 20.0
+_mesh = NodePath("blockbench_export2")
+_wheels = NodePath("blockbench_export/Wheels")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
@@ -61,6 +60,63 @@ shape = SubResource("CapsuleShape3D_hglhj")
 
 [node name="blockbench_export" parent="." instance=ExtResource("2_hglhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="blockbench_export"]
+transform = Transform3D(0.07, -1.9428906e-16, -1.2132349e-22, 0, -3.059797e-09, 1, -1.9428906e-16, -0.07, -4.371139e-08, 0, 0.65, 0.235)
+texture = ExtResource("4_4etui")
+
+[node name="Wheels" type="Node3D" parent="blockbench_export"]
+
+[node name="WheelFL" type="RayCast3D" parent="blockbench_export/Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.099999994, -0.6)
+target_position = Vector3(0, -0.4, 0)
+script = ExtResource("2_xt16y")
+enable_steering = true
+_radius = 0.15
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="blockbench_export/Wheels/WheelFL"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
+
+[node name="WheelFR" type="RayCast3D" parent="blockbench_export/Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.099999994, -0.6)
+target_position = Vector3(0, -0.4, 0)
+script = ExtResource("2_xt16y")
+enable_steering = true
+_radius = 0.15
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="blockbench_export/Wheels/WheelFR"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
+
+[node name="WheelBL" type="RayCast3D" parent="blockbench_export/Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.099999994, 0.65)
+target_position = Vector3(0, -0.4, 0)
+script = ExtResource("2_xt16y")
+_radius = 0.15
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="blockbench_export/Wheels/WheelBL"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
+
+[node name="WheelBR" type="RayCast3D" parent="blockbench_export/Wheels" node_paths=PackedStringArray("_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.099999994, 0.65)
+target_position = Vector3(0, -0.4, 0)
+script = ExtResource("2_xt16y")
+_radius = 0.15
+_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="blockbench_export/Wheels/WheelBR"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v4h86")
+surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
 
 [node name="GroundCheck" type="RayCast3D" parent="."]
 target_position = Vector3(0, -0.85, 0)
@@ -69,64 +125,15 @@ target_position = Vector3(0, -0.85, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DriveDir"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -4.371139e-08, -1)
+visible = false
 mesh = SubResource("CylinderMesh_hglhj")
 
-[node name="Wheels" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+[node name="blockbench_export2" parent="." instance=ExtResource("5_2sd83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="WheelFL" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.099999994, -0.6)
-target_position = Vector3(0, -0.4, 0)
-script = ExtResource("2_xt16y")
-enable_steering = true
-_radius = 0.15
-_mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelFL"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_v4h86")
-surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
-
-[node name="WheelFR" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.099999994, -0.6)
-target_position = Vector3(0, -0.4, 0)
-script = ExtResource("2_xt16y")
-enable_steering = true
-_radius = 0.15
-_mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelFR"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_v4h86")
-surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
-
-[node name="WheelBL" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.099999994, 0.65)
-target_position = Vector3(0, -0.4, 0)
-script = ExtResource("2_xt16y")
-_radius = 0.15
-_mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelBL"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_v4h86")
-surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
-
-[node name="WheelBR" type="RayCast3D" parent="Wheels" node_paths=PackedStringArray("_mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.099999994, 0.65)
-target_position = Vector3(0, -0.4, 0)
-script = ExtResource("2_xt16y")
-_radius = 0.15
-_mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheels/WheelBR"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_v4h86")
-surface_material_override/0 = SubResource("StandardMaterial3D_hglhj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_hglhj")
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.07, -1.9428906e-16, -1.2132349e-22, 0, -3.059797e-09, 1, -1.9428906e-16, -0.07, -4.371139e-08, 0, 0.25, 0.235)
+[node name="Sprite3D2" type="Sprite3D" parent="blockbench_export2"]
+transform = Transform3D(-8.742278e-09, 0, 1, 0, 0.2, 0, -0.2, 0, -4.371139e-08, -6.9938224e-09, 0.84000003, -0.060000006)
+visible = false
 texture = ExtResource("4_4etui")
+
+[editable path="blockbench_export2"]
