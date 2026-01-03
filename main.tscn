@@ -95,11 +95,12 @@ grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("_main_menu", "_pause", "_pause_focus", "_main_menu_focus", "_player_count_label", "_player_count_slider")]
+[node name="Ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("_main_menu", "_pause", "_pause_focus", "_fps_label", "_main_menu_focus", "_player_count_label", "_player_count_slider")]
 script = ExtResource("3_h2yge")
 _main_menu = NodePath("MainMenu")
 _pause = NodePath("Pause")
 _pause_focus = NodePath("Pause/VBoxContainer/ResumeButton")
+_fps_label = NodePath("FpsLabel")
 _main_menu_focus = NodePath("MainMenu/VBoxContainer/PlayButton")
 _player_count_label = NodePath("MainMenu/VBoxContainer/PlayerCountLabel")
 _player_count_slider = NodePath("MainMenu/VBoxContainer/PlayerCountSlider")
@@ -176,6 +177,11 @@ text = "Main Menu"
 [node name="QuitButton" type="Button" parent="Ui/Pause/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="FpsLabel" type="Label" parent="Ui"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FPS: 60"
 
 [connection signal="area_entered" from="World3D/Track/FinishLine" to="World3D" method="_on_finish_line_area_entered"]
 [connection signal="area_entered" from="World3D/Track/Checkpoint" to="World3D" method="_on_checkpoint_area_entered"]
