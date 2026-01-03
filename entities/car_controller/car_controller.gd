@@ -17,7 +17,6 @@ class_name CarController
 @export_group("Visuals")
 @export var _mesh_lerp_speed: float = 10.0
 @export var _mesh: Node3D
-@export var _wheels: Node3D
 
 var throttle: float
 var turn_input: float
@@ -25,7 +24,7 @@ var speed_khm: float
 var drift_input: bool
 
 var _turn_dir: float
-##NOTE: This if reversed. when it's is 1.0 there is no drift
+##NOTE: This if reversed. When it's is 1.0 there is no drift
 var _drift_factor: float
 var _ground_normal: Vector3
 
@@ -44,9 +43,9 @@ func _process(delta: float) -> void:
 	var turn_dir: float = 27.5 if !drift_input else 35.0
 	_drive_dir.rotation_degrees.y = turn_dir * turn_input * _turn_curve.sample(speed_khm)
 	
-	for wheel: RayCast3D in _wheels.get_children():
-		if wheel.enable_steering:
-			wheel.rotation_degrees.y = 30.0 * turn_input
+	if (global_position.y < -10.0):
+		global_position = Vector3(0.0, 2.0, 0.0)
+		linear_velocity = Vector3.ZERO
 
 
 func _physics_process(delta: float) -> void:

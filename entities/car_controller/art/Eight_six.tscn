@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxs80yr5qibsn"]
-
-[ext_resource type="PackedScene" uid="uid://b5teghb5857r2" path="res://entities/car_controller/art/Eight_six.glb" id="1_7bcso"]
-
-[node name="blockbench_export" instance=ExtResource("1_7bcso")]

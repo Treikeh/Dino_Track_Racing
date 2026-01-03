@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b5teghb5857r2"
-path="res://.godot/imported/Eight_six.glb-6ac331fb738d71ee3b4ac5b8ba918f54.scn"
+path="res://.godot/imported/Eight_six.glb-359a152fa1654c54bd4fe261d7407d45.scn"
 
 [deps]
 
-source_file="res://entities/car_controller/art/Eight_six.glb"
-dest_files=["res://.godot/imported/Eight_six.glb-6ac331fb738d71ee3b4ac5b8ba918f54.scn"]
+source_file="res://entities/car_controller/art/eight_six/Eight_six.glb"
+dest_files=["res://.godot/imported/Eight_six.glb-359a152fa1654c54bd4fe261d7407d45.scn"]
 
 [params]
 

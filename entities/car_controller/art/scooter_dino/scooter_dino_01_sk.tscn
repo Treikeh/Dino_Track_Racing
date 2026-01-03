@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c34gft7iam7yp"]
+
+[ext_resource type="PackedScene" uid="uid://bbxbbdht0jxtx" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.glb" id="1_wa4pc"]
+
+[node name="ScooterDino_01_SK" instance=ExtResource("1_wa4pc")]

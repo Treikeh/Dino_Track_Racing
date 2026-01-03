@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	_speedometer.text = "%s kmh" % int(snappedf(_car_controller.speed_khm, 1.0))
 
 
-## Crate new input actions for each player
+## Crate new input actions for the player
 func _set_up_player_inputs() -> void:
 	for action: String in _input_actions:
 		var new_action: String = action + str(_player_id)

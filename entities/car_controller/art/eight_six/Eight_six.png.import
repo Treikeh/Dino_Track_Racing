@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbgjrkhjjdk03"
-path.bptc="res://.godot/imported/Eight_six.png-42572b5ee162412a4a02519d9d23d94b.bptc.ctex"
+path.bptc="res://.godot/imported/Eight_six.png-38c988893094aabf4f6f75c8575feac7.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/car_controller/art/Eight_six.png"
-dest_files=["res://.godot/imported/Eight_six.png-42572b5ee162412a4a02519d9d23d94b.bptc.ctex"]
+source_file="res://entities/car_controller/art/eight_six/Eight_six.png"
+dest_files=["res://.godot/imported/Eight_six.png-38c988893094aabf4f6f75c8575feac7.bptc.ctex"]
 
 [params]
 

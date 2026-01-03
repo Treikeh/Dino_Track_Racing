@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dpwfhsevdmr1i"]
 
-[ext_resource type="Texture2D" uid="uid://cbgjrkhjjdk03" path="res://entities/car_controller/art/Eight_six.png" id="1_pnuqa"]
+[ext_resource type="Texture2D" uid="uid://cbgjrkhjjdk03" path="res://entities/car_controller/art/eight_six/Eight_six.png" id="1_pnuqa"]
 
 [resource]
 resource_name = "material_0"
