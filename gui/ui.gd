@@ -8,6 +8,7 @@ signal play_button_pressed(player_count: int)
 @export var _pause: Control
 # Nodes to grab focus when entering the different menus
 @export var _pause_focus: Control
+@export var _fps_conter: Label
 
 @export_group("Main Menu")
 @export var _main_menu_focus: Control
@@ -25,6 +26,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().paused = true
 		_pause.show()
 		_pause_focus.grab_focus()
+
+
+func _process(_delta: float) -> void:
+	_fps_conter.text = "FPS: %s" % Engine.get_frames_per_second()
 
 
 func _on_player_count_slider_value_changed(value: float) -> void:
