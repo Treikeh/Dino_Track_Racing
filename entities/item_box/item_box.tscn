@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://dosd47fqh8thg"]
+
+[ext_resource type="Script" uid="uid://r05j8taagghm" path="res://entities/item_box/item_box.gd" id="1_lk11n"]
+[ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
+[ext_resource type="Resource" uid="uid://8ua8vkdsn5ei" path="res://entities/items/item_01.tres" id="3_cienk"]
+[ext_resource type="Resource" uid="uid://jbthpww8mqiv" path="res://entities/items/item_02.tres" id="4_30yuj"]
+[ext_resource type="Resource" uid="uid://bsi7hj4jmctig" path="res://entities/items/item_03.tres" id="5_i6fuj"]
+[ext_resource type="Resource" uid="uid://dwokx2toq6m8s" path="res://entities/items/item_04.tres" id="6_tn08c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
+size = Vector3(0.75, 1.5, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hyb7p"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_disabled_timer")]
+script = ExtResource("1_lk11n")
+_items = Array[ExtResource("2_ic5go")]([ExtResource("3_cienk"), ExtResource("4_30yuj"), ExtResource("5_i6fuj"), ExtResource("6_tn08c")])
+_mesh_root = NodePath("MeshRoot")
+_disabled_timer = NodePath("DisabledTimer")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_hyb7p")
+
+[node name="MeshRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshRoot"]
+transform = Transform3D(0.70710677, 0.70710677, 0, -0.49999997, 0.49999997, -0.70710677, -0.49999997, 0.49999997, 0.70710677, 0, 0, 0)
+mesh = SubResource("BoxMesh_hyb7p")
+
+[node name="DisabledTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="DisabledTimer" to="." method="_on_disabled_timer_timeout"]

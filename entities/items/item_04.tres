@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://dwokx2toq6m8s"]
+
+[ext_resource type="Texture2D" uid="uid://dqpqvhtlhn3ji" path="res://entities/items/art/among-us-drip-png-png-artwork-download-36642-3248130141.png" id="1_5m8l6"]
+[ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="1_mjxq2"]
+
+[resource]
+script = ExtResource("1_mjxq2")
+name = "Item 04"
+icon = ExtResource("1_5m8l6")
+rarity = 16
+metadata/_custom_type_script = "uid://cueb0e6107vpe"
