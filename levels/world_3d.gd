@@ -31,7 +31,7 @@ func add_car(id: int, car: CarController) -> void:
 func _process(_delta: float) -> void:
 	# Sort the _car_positions array so that the order is the same as how far each car has gotten
 	_car_positions.sort_custom(_sort_positions)
-	get_tree().current_scene.car_positions_updated.emit(_car_positions)
+	Globals.car_positions_updated.emit(_car_positions)
 
 
 func _sort_positions(a: int, b: int) -> bool:
@@ -49,7 +49,7 @@ func _on_finish_line_area_entered(area: Area3D) -> void:
 			print("GAME OVER")
 		else:
 			print("New lap: %s" % track_follow.lap)
-			get_tree().current_scene.lap_changed.emit(track_follow.car_id, track_follow.lap)
+			Globals.lap_changed.emit(track_follow.car_id, track_follow.lap)
 
 
 func _on_checkpoint_area_entered(area: Area3D) -> void:

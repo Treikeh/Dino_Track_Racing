@@ -35,11 +35,12 @@ func with_data(id: int, controller: CarController) -> PlayerInputController:
 
 
 func _ready() -> void:
+	Globals.car_positions_updated.connect(_on_car_positions_updated)
+	Globals.lap_changed.connect(_on_lap_changed)
+	
 	_set_up_player_inputs()
-	_orientation.global_position = _car_controller.global_position
 	_id_label.text = "P%s" % (_player_id + 1)
-	get_tree().current_scene.car_positions_updated.connect(_on_car_positions_updated)
-	get_tree().current_scene.lap_changed.connect(_on_lap_changed)
+	_orientation.global_position = _car_controller.global_position
 
 
 func _input(_event: InputEvent) -> void:

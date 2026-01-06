@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://uge4fje706v6"]
+[gd_scene load_steps=11 format=3 uid="uid://uge4fje706v6"]
 
 [ext_resource type="Script" uid="uid://0aadjdt6m2tc" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/world_3d.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://b1wcwmqlh1w8a" path="res://gui/ui.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -85,6 +86,9 @@ radius = 4.410091
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18, -0.4, 0)
 use_collision = true
 size = Vector3(10, 1, 1)
+
+[node name="ItemBox" parent="World3D" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 16.9)
 
 [node name="ViewportsContainer" type="GridContainer" parent="."]
 anchors_preset = 15

@@ -12,9 +12,16 @@ config_version=5
 
 config/name="Dino_track_racing"
 config/tags=PackedStringArray("prototype")
-run/main_scene="uid://uge4fje706v6"
+run/main_scene="uid://wwcxxmjxspog"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="uid://b7golcedx5sk1"
+
+[autoload]
+
+Globals="*res://common/autoload/globals.gd"
+LevelManager="*res://common/autoload/level_manager.gd"
 
 [display]
 

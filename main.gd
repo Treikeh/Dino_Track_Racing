@@ -1,11 +1,6 @@
 extends Node
 
 
-@warning_ignore_start("unused_signal")
-signal car_positions_updated(car_positions: Array[int])
-signal lap_changed(car_id: int, lap: int)
-
-
 const CAR_CONTROLLER: PackedScene = preload("uid://c56dtjon3irj1")
 const PLAYER_INPUT_CONTROLLER: PackedScene = preload("uid://d1f50k3xa7iar")
 
@@ -46,4 +41,5 @@ func _on_play_button_pressed(player_count: int) -> void:
 	# Get how many empty spaces there will be after all players have been added
 	var empty_spaces: int = (viewport_columns * viewport_rows) - player_count
 	for i: int in empty_spaces:
+		# Do something
 		pass
