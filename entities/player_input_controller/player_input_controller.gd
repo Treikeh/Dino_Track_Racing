@@ -17,15 +17,6 @@ var _turn_input: float
 var _drift_input: bool
 var _car_controller: CarController
 
-# Input actions to copy and assign to each new player
-var _input_actions: Array[String] = [
-	"accelerate",
-	"reverse",
-	"turn_l",
-	"turn_r",
-	"drift",
-]
-
 
 # Add after instatiate (instatiate().with_data(.., ..)) to setup controller data
 func with_data(id: int, controller: CarController) -> PlayerInputController:
@@ -38,7 +29,10 @@ func _ready() -> void:
 	Globals.car_positions_updated.connect(_on_car_positions_updated)
 	Globals.lap_changed.connect(_on_lap_changed)
 	
-	_set_up_player_inputs()
+	if Engine.is_editor_hint():
+		# Create new input actions (if they don't exist)
+		Globals.set_up_player_inputs(_player_id)
+	
 	_id_label.text = "P%s" % (_player_id + 1)
 	_orientation.global_position = _car_controller.global_position
 
@@ -71,25 +65,6 @@ func _physics_process(delta: float) -> void:
 	_orientation.quaternion = _orientation.quaternion.slerp(target_quat, 4.0 * delta)
 	
 	_speedometer.text = "%s kmh" % int(snappedf(_car_controller.speed_khm, 1.0))
-
-
-## Crate new input actions for the player
-func _set_up_player_inputs() -> void:
-	for action: String in _input_actions:
-		var new_action: String = action + str(_player_id)
-		# Don't add the new action if it allready exists
-		if InputMap.has_action(new_action):
-			return
-		
-		# Get event related to the input action
-		var action_events: Array = InputMap.action_get_events(action)
-		
-		InputMap.add_action(new_action)
-		# Duplicate the old events and add them to the input action
-		for event: InputEvent in action_events:
-			var new_event: InputEvent = event.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
-			new_event.device = _player_id
-			InputMap.action_add_event(new_action, new_event)
 
 
 func _get_look_at_pos() -> Vector3:

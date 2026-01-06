@@ -21,3 +21,31 @@ func _ready() -> void:
 	viewports_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	viewports_container.add_theme_constant_override("h_separation", 0)
 	viewports_container.add_theme_constant_override("v_separation", 0)
+
+
+# Input actions to copy and assign to each new player
+var _input_actions: Array[String] = [
+	"accelerate",
+	"reverse",
+	"turn_l",
+	"turn_r",
+	"drift",
+]
+
+## Crate new input actions for the player
+func set_up_player_inputs(player_id: int) -> void:
+	for action: String in _input_actions:
+		var new_action: String = action + str(player_id)
+		# Don't add the new action if it allready exists
+		if InputMap.has_action(new_action):
+			return
+		
+		# Get event related to the input action
+		var action_events: Array = InputMap.action_get_events(action)
+		
+		InputMap.add_action(new_action)
+		# Duplicate the old events and add them to the input action
+		for event: InputEvent in action_events:
+			var new_event: InputEvent = event.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+			new_event.device = player_id
+			InputMap.action_add_event(new_action, new_event)
