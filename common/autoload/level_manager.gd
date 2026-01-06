@@ -11,8 +11,6 @@ extends Node
 
 const LOADING_SCREEN_SCENE: PackedScene = preload("res://gui/loading_screen/loading_screen.tscn")
 
-var current_level: Node
-
 var _loading_screen: LoadingScreen
 
 
@@ -49,14 +47,18 @@ func load_level(level_path: String) -> void:
 	var new_level: Node = load(level_path).instantiate()
 	# Call deffered so that unloading levels can finish properly before adding the new level
 	add_child.call_deferred(new_level)
-	# Make the current level the newly added level
-	current_level = new_level
 	
 	# Hide loading loading screen
 	_loading_screen.fade_out()
 
 
 func _unload_level() -> void:
+	# Remove every player input controller
+	for child: Node in Globals.viewports_container.get_children():
+		remove_child(child)
+		child.queue_free()
+	
+	# Remove level
 	for child: Node in get_children():
 		remove_child(child)
 		child.queue_free()

@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://dd51u4enoyits"]
+
+[ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
+[ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
+[ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="3_tqy1p"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_f5j8r"]
+sky_material = SubResource("ProceduralSkyMaterial_h2yge")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_f5j8r")
+tonemap_mode = 2
+
+[sub_resource type="Curve3D" id="Curve3D_h2yge"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.16563028, 0, -28.130651, 0, 0, 0, 0, 0, 0, -13.174606, 0, -42.95197, 0, 0, 0, 0, 0, 0, -40.407738, 0, -29.122644, 0, 0, 0, 0, 0, 0, -41.546, 0, 23.447, 0, 0, 0, 0, 0, 0, -5.7303853, 0, 44.616993, 0, 0, 0, 0, 0, 0, 44.58708, 0, 45.787163, 0, 0, 0, 0, 0, 0, 44.374317, 0, 2.38436, 0, 0, 0, 0, 0, 0, 41.609657, 0, -38.90209, 0, 0, 0, 0, 0, 0, 24.376192, 0, -41.98709, 0, 0, 0, 0, 0, 0, 17.036013, 0, -29.753458, 0, 0, 0, 0, 0, 0, 23.41878, 0, 14.393995, 0, 0, 0, 0, 0, 0, 0, 0, 26.096),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 13
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
+radius = 1.0
+
+[node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
+script = ExtResource("1_us0s3")
+_track = NodePath("Track")
+_spawn_point = NodePath(".")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="Track" type="Path3D" parent="."]
+curve = SubResource("Curve3D_h2yge")
+
+[node name="FinishLine" type="Area3D" parent="Track"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Track/FinishLine"]
+shape = SubResource("SphereShape3D_1bvp3")
+
+[node name="Checkpoint" type="Area3D" parent="Track"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44.7)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Track/Checkpoint"]
+shape = SubResource("SphereShape3D_1bvp3")
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("2_4fi74")
+use_collision = true
+size = Vector3(200, 1, 200)
+
+[node name="Ramp" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.93863153, -0.34492144, 0, 0.34492144, 0.93863153, 0, 0, -10.857231)
+use_collision = true
+size = Vector3(8.423584, 1, 7.236328)
+
+[node name="Bump" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.292329, -3.7729082, 0.8880811)
+use_collision = true
+radius = 4.410091
+
+[node name="Ledge" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18, -0.4, 0)
+use_collision = true
+size = Vector3(10, 1, 1)
+
+[node name="ItemBox" parent="." instance=ExtResource("3_tqy1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 16.9)
+
+[connection signal="area_entered" from="Track/FinishLine" to="." method="_on_finish_line_area_entered"]
+[connection signal="area_entered" from="Track/Checkpoint" to="." method="_on_checkpoint_area_entered"]

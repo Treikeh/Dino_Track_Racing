@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq1mlqlqbd661"]
+
+[ext_resource type="Script" uid="uid://ck062g2ny5ksf" path="res://gui/main_menu/main_menu.gd" id="1_ahke7"]
+[ext_resource type="Script" uid="uid://dyb1piqij4rso" path="res://gui/main_menu/start_menu.gd" id="2_qy2xc"]
+[ext_resource type="Script" uid="uid://cvdcjdx25s2gh" path="res://gui/main_menu/player_join_menu.gd" id="3_6wy0j"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_start_menu", "_player_join_menu")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahke7")
+_start_menu = NodePath("StartMenu")
+_player_join_menu = NodePath("PlayerJoinMenu")
+
+[node name="StartMenu" type="Control" parent="." node_paths=PackedStringArray("_start_button")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_qy2xc")
+_start_button = NodePath("VBoxContainer/StartButton")
+
+[node name="Title" type="Label" parent="StartMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.0
+offset_top = 119.0
+offset_right = 69.0
+offset_bottom = 142.0
+grow_horizontal = 2
+text = "Dino Track Racing"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -33.0
+offset_right = 21.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="PlayerJoinMenu" type="Control" parent="." node_paths=PackedStringArray("_player_display_container")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_6wy0j")
+_player_display_container = NodePath("GridContainer")
+
+[node name="JoinLabel" type="Label" parent="PlayerJoinMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.5
+offset_right = 54.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Press X to join"
+
+[node name="GridContainer" type="GridContainer" parent="PlayerJoinMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="start_pressed" from="StartMenu" to="." method="_on_start_menu_start_pressed"]
+[connection signal="pressed" from="StartMenu/VBoxContainer/StartButton" to="StartMenu" method="_on_play_button_pressed"]
+[connection signal="pressed" from="StartMenu/VBoxContainer/QuitButton" to="StartMenu" method="_on_quit_button_pressed"]

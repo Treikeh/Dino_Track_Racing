@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7vjvq2mj44l1"]
+
+[ext_resource type="Script" uid="uid://dlglhlfg0iapj" path="res://gui/main_menu/player_join_display/player_join_display.gd" id="1_n5a3w"]
+[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="2_06t76"]
+
+[node name="PlayerJoinDisplay" type="VBoxContainer" node_paths=PackedStringArray("_player_id_label")]
+offset_right = 80.0
+offset_bottom = 107.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("1_n5a3w")
+_player_id_label = NodePath("PlayerIDLabel")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("2_06t76")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerIDLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
