@@ -1,26 +1,65 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7vjvq2mj44l1"]
+[gd_scene load_steps=4 format=3 uid="uid://c7vjvq2mj44l1"]
 
 [ext_resource type="Script" uid="uid://dlglhlfg0iapj" path="res://gui/main_menu/player_join_display/player_join_display.gd" id="1_n5a3w"]
-[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="2_06t76"]
+[ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_06t76"]
+[ext_resource type="AudioStream" uid="uid://d1gll8a2ud454" path="res://gui/main_menu/player_join_display/british-folk-song-the-watchet-sailor-106551.mp3" id="3_7djdl"]
 
-[node name="PlayerJoinDisplay" type="VBoxContainer" node_paths=PackedStringArray("_player_id_label")]
-offset_right = 80.0
-offset_bottom = 107.0
+[node name="PlayerJoinDisplay" type="Control" node_paths=PackedStringArray("_player_id_label", "_mesh", "_scream_stream_player")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 233.0
+offset_bottom = 199.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
 script = ExtResource("1_n5a3w")
-_player_id_label = NodePath("PlayerIDLabel")
+_player_id_label = NodePath("Label")
+_mesh = NodePath("SubViewportContainer/SubViewport/ScooterDino_01_SK")
+_scream_stream_player = NodePath("ScreamStreamPlayer")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture = ExtResource("2_06t76")
-expand_mode = 1
-stretch_mode = 5
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
 
-[node name="PlayerIDLabel" type="Label" parent="."]
-layout_mode = 2
-text = "Player 1"
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(233, 199)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+current = true
+fov = 45.0
+
+[node name="ScooterDino_01_SK" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_06t76")]
+transform = Transform3D(-0.8660253, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660253, 0, -0.8, -3)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 0)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -116.5
+offset_top = -23.0
+offset_right = 116.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Player 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ScreamStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7djdl")
+parameters/looping = true
