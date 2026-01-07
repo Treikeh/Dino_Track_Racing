@@ -6,7 +6,10 @@ const CAR_CONTROLLER: PackedScene = preload("uid://c56dtjon3irj1")
 const PLAYER_INPUT_CONTROLLER: PackedScene = preload("uid://d1f50k3xa7iar")
 const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 
-@export var _countdown_duration: int = 3
+## How many seconds the countdown should be before starting the race.
+## Needs to be 1 more than intended because the number is only updated after 1 sec has passed. This 
+## is to make sure the loading screen has finished fading out before the countdown starts.
+@export var _countdown_duration: int = 4
 @export var _track: Path3D
 @export var _spawn_point: Node3D
 
@@ -139,8 +142,9 @@ func _on_finish_line_area_entered(area: Area3D) -> void:
 	var track_follow: TrackFollow = area.get_parent()
 	if track_follow.checkpoint_reached:
 		track_follow.lap += 1
-		if track_follow.lap >= 4:
+		if track_follow.lap >= 1:
 			print("GAME OVER")
+			Globals.finished_all_laps.emit(track_follow.car_id)
 		else:
 			print("New lap: %s" % track_follow.lap)
 			Globals.lap_changed.emit(track_follow.car_id, track_follow.lap)

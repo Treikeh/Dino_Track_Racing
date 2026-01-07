@@ -12,6 +12,8 @@ class_name PlayerInputController
 @export var _lap_label: Label
 @export var _countdown_label: Label
 
+## If the car should drive by itself (like after completing all laps)
+var _autopilot: bool = false
 var _player_id: int = 0
 var _throttle_input: float
 var _turn_input: float
@@ -30,6 +32,7 @@ func _ready() -> void:
 	Globals.countdown_updated.connect(_on_countdown_updated)
 	Globals.car_positions_updated.connect(_on_car_positions_updated)
 	Globals.lap_changed.connect(_on_lap_changed)
+	Globals.finished_all_laps.connect(_on_finished_all_laps)
 	
 	# Create new input actions (if they don't exist)
 	Globals.set_up_player_inputs(_player_id)
@@ -39,6 +42,12 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
+	if _autopilot:
+		_car_controller.throttle = 1.0
+		_car_controller.turn_input = 1.0
+		_car_controller.drift_input = 0.0
+		return
+	
 	_throttle_input = Input.get_axis(
 			"reverse%s" % _player_id,
 			"accelerate%s" % _player_id
@@ -78,6 +87,7 @@ func _get_look_at_pos() -> Vector3:
 #region UI signal functions
 
 func _on_countdown_updated(seconds_left: int) -> void:
+	_countdown_label.show()
 	if seconds_left <= 0:
 		_countdown_label.text = "GO!"
 		await get_tree().create_timer(2.0).timeout
@@ -93,5 +103,10 @@ func _on_car_positions_updated(car_positions: Array[int]) -> void:
 func _on_lap_changed(car_id: int, lap: int) -> void:
 	if _player_id == car_id:
 		_lap_label.text = "%s/3" % lap
+
+
+func _on_finished_all_laps(car_id: int) -> void:
+	if _player_id == car_id:
+		_autopilot = true
 
 #endregion

@@ -76,6 +76,7 @@ offset_bottom = 73.00006
 text = "1/3"
 
 [node name="CountdownLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
