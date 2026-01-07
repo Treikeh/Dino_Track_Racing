@@ -9,6 +9,7 @@ extends Control
 @export var _interval_time: float = 0.5
 @export var _splash_screens_container: Control
 
+var _main_menu_started_loading: bool = false
 var _splash_screens: Array[Node] = []
 
 
@@ -39,4 +40,6 @@ func _fade_between_screens() -> void:
 
 
 func _load_main_menu() -> void:
-	LevelManager.load_level("res://gui/main_menu/main_menu.tscn")
+	if !_main_menu_started_loading:
+		_main_menu_started_loading = true
+		LevelManager.load_level("res://gui/main_menu/main_menu.tscn")
