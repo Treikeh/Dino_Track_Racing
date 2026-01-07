@@ -6,6 +6,7 @@ const CAR_CONTROLLER: PackedScene = preload("uid://c56dtjon3irj1")
 const PLAYER_INPUT_CONTROLLER: PackedScene = preload("uid://d1f50k3xa7iar")
 const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 
+@export var _countdown_duration: int = 3
 @export var _track: Path3D
 @export var _spawn_point: Node3D
 
@@ -17,6 +18,7 @@ var _track_follows: Dictionary[int, TrackFollow]
 
 func _ready() -> void:
 	_spawn_players()
+	_start_countdown()
 
 
 func _process(_delta: float) -> void:
@@ -60,6 +62,8 @@ func _add_car(id: int) -> CarController:
 	# Add car to level
 	var car: CarController = CAR_CONTROLLER.instantiate()
 	add_child(car)
+	# Disable car until the countdown timer reaches 0
+	car.set_car_enabled(false)
 	# Add cars id to array for sorting positions
 	_car_positions.append(id)
 	return car
@@ -98,6 +102,26 @@ func _get_spawn_position(spawn_number: int) -> Vector3:
 	return _spawn_point.global_position + Vector3(x, y, z)
 
 #endregion
+
+
+func _start_countdown() -> void:
+	var timer := Timer.new()
+	add_child(timer)
+	
+	timer.wait_time = 1.0
+	timer.one_shot = false
+	timer.timeout.connect(_on_countdown_timer_timeout.bind(timer))
+	timer.start()
+
+
+func _on_countdown_timer_timeout(countdown_timer: Timer) -> void:
+	_countdown_duration -= 1
+	if _countdown_duration <= 0:
+		countdown_timer.stop()
+		# Enable all cars
+		get_tree().call_group("car", "set_car_enabled", true)
+	# Update UI to players
+	Globals.countdown_updated.emit(_countdown_duration)
 
 
 # Logic for how the positions (1st, 2nd, 3rd, etc..) of the cars should be sorted

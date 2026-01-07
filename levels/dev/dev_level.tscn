@@ -83,5 +83,7 @@ size = Vector3(10, 1, 1)
 [node name="ItemBox" parent="." instance=ExtResource("3_tqy1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 16.9)
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Track/FinishLine" to="." method="_on_finish_line_area_entered"]
 [connection signal="area_entered" from="Track/Checkpoint" to="." method="_on_checkpoint_area_entered"]

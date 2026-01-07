@@ -23,8 +23,9 @@ var turn_input: float
 var speed_khm: float
 var drift_input: bool
 
+var _enabled: bool = true
 var _turn_dir: float
-##NOTE: This if reversed. When it's is 1.0 there is no drift
+##NOTE: This is reversed. When it's is 1.0 there is no drift
 var _drift_factor: float
 var _ground_normal: Vector3
 
@@ -43,6 +44,7 @@ func _process(delta: float) -> void:
 	var turn_dir: float = 27.5 if !drift_input else 35.0
 	_drive_dir.rotation_degrees.y = turn_dir * turn_input * _turn_curve.sample(speed_khm)
 	
+	# Respawn
 	if (global_position.y < -10.0):
 		global_position = Vector3(0.0, 2.0, 0.0)
 		linear_velocity = Vector3.ZERO
@@ -56,8 +58,9 @@ func _physics_process(delta: float) -> void:
 		linear_damp = _default_linear_damp
 		
 		# Move car
-		var accel_force: float = _accel_curve.sample(speed_khm) * throttle
-		apply_central_force(-_drive_dir.global_basis.z * accel_force * mass)
+		if _enabled: # Don't apply movement when car is disabled
+			var accel_force: float = _accel_curve.sample(speed_khm) * throttle
+			apply_central_force(-_drive_dir.global_basis.z * accel_force * mass)
 		
 		# Drift
 		var drift_force: Vector3 = -global_basis.z * (40.0 * (1 - _drift_factor))
@@ -119,3 +122,8 @@ func _rotate_mesh(delta: float) -> void:
 	# Tilt mesh forward/backwards based on which direction the player is driving
 	var z_dir_dot: float = -global_basis.z.dot(linear_velocity)
 	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.1, _mesh_lerp_speed * delta)
+
+
+#TODO: Find a better name
+func set_car_enabled(is_enabled: bool) -> void:
+	_enabled = is_enabled

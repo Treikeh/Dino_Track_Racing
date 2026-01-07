@@ -1,7 +1,7 @@
 extends Control
 class_name PlayerInputController
 
-
+@export_group("Car")
 @export var _cam_follow_speed: float = 6.0
 @export var _orientation: Node3D
 @export var _id_label: Label3D
@@ -10,6 +10,7 @@ class_name PlayerInputController
 @export var _position_label: Label
 @export var _speedometer: Label
 @export var _lap_label: Label
+@export var _countdown_label: Label
 
 var _player_id: int = 0
 var _throttle_input: float
@@ -26,12 +27,12 @@ func with_data(id: int, controller: CarController) -> PlayerInputController:
 
 
 func _ready() -> void:
+	Globals.countdown_updated.connect(_on_countdown_updated)
 	Globals.car_positions_updated.connect(_on_car_positions_updated)
 	Globals.lap_changed.connect(_on_lap_changed)
 	
-	if Engine.is_editor_hint():
-		# Create new input actions (if they don't exist)
-		Globals.set_up_player_inputs(_player_id)
+	# Create new input actions (if they don't exist)
+	Globals.set_up_player_inputs(_player_id)
 	
 	_id_label.text = "P%s" % (_player_id + 1)
 	_orientation.global_position = _car_controller.global_position
@@ -74,6 +75,17 @@ func _get_look_at_pos() -> Vector3:
 	return car_pos + (car_dir * (3.0 + (4.0 * _throttle_input))) + car_vel
 
 
+#region UI signal functions
+
+func _on_countdown_updated(seconds_left: int) -> void:
+	if seconds_left <= 0:
+		_countdown_label.text = "GO!"
+		await get_tree().create_timer(2.0).timeout
+		_countdown_label.hide()
+	else:
+		_countdown_label.text = str(seconds_left)
+
+
 func _on_car_positions_updated(car_positions: Array[int]) -> void:
 	_position_label.text = str(car_positions.find(_player_id) + 1)
 
@@ -81,3 +93,5 @@ func _on_car_positions_updated(car_positions: Array[int]) -> void:
 func _on_lap_changed(car_id: int, lap: int) -> void:
 	if _player_id == car_id:
 		_lap_label.text = "%s/3" % lap
+
+#endregion

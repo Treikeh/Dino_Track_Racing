@@ -2,11 +2,22 @@ extends Node
 
 
 @warning_ignore_start("unused_signal")
+signal countdown_updated(seconds_left: int)
 signal car_positions_updated(car_positions: Array[int])
 signal lap_changed(car_id: int, lap: int)
+signal finished_all_laps(car_id: int)
 
 
-var player_count: Array[int] = [1, 0, 2, 7]
+# Input actions to copy and assign to each new player
+const INPUT_ACTIONS: Array[String] = [
+	"accelerate",
+	"reverse",
+	"turn_l",
+	"turn_r",
+	"drift",
+]
+
+var player_count: Array[int] = [0, 1]
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
 
@@ -23,18 +34,9 @@ func _ready() -> void:
 	viewports_container.add_theme_constant_override("v_separation", 0)
 
 
-# Input actions to copy and assign to each new player
-var _input_actions: Array[String] = [
-	"accelerate",
-	"reverse",
-	"turn_l",
-	"turn_r",
-	"drift",
-]
-
 ## Crate new input actions for the player
 func set_up_player_inputs(player_id: int) -> void:
-	for action: String in _input_actions:
+	for action: String in INPUT_ACTIONS:
 		var new_action: String = action + str(player_id)
 		# Don't add the new action if it allready exists
 		if InputMap.has_action(new_action):
