@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	_mesh_root.position.y = 1.0 + sin(_time)
 
 
-func _give_car_random_item(_car: CarController) -> void:
+func _give_car_random_item(car: CarController) -> void:
 	# Get the total rarity of all items
 	var rarity_sum: int = 0
 	for item: ItemResource in _items:
@@ -35,6 +35,7 @@ func _give_car_random_item(_car: CarController) -> void:
 		item_sum += item.rarity
 		if item_sum >= item_val:
 			print(item.name)
+			car.pick_up_item(item)
 			return
 
 

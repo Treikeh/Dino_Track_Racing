@@ -2,6 +2,9 @@ extends RigidBody3D
 class_name CarController
 
 
+signal picked_up_item(item: ItemResource)
+
+
 ## How much acceleration is applied at different speeds (speed is in kmh)
 @export var _accel_curve: Curve
 ## How well the car will be able to turn at different speeds (speed is in kmh)
@@ -28,6 +31,7 @@ var _turn_dir: float
 ##NOTE: This is reversed. When it's is 1.0 there is no drift
 var _drift_factor: float
 var _ground_normal: Vector3
+var _held_item: ItemResource
 
 @onready var _default_linear_damp: float = linear_damp
 
@@ -127,3 +131,15 @@ func _rotate_mesh(delta: float) -> void:
 #TODO: Find a better name
 func set_car_enabled(is_enabled: bool) -> void:
 	_enabled = is_enabled
+
+
+func pick_up_item(item: ItemResource) -> void:
+	if not _held_item:
+		_held_item = item
+		picked_up_item.emit(item)
+
+
+func use_held_item() -> void:
+	if _held_item:
+		print("Used %s" % _held_item.name)
+		_held_item = null

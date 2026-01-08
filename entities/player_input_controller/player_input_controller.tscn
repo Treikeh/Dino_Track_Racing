@@ -1,12 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1f50k3xa7iar"]
+[gd_scene load_steps=3 format=3 uid="uid://d1f50k3xa7iar"]
 
 [ext_resource type="Script" uid="uid://pohingt7fxqa" path="res://entities/player_input_controller/player_input_controller.gd" id="1_htsux"]
+[ext_resource type="Texture2D" uid="uid://bcafrhxpv4041" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_bc.png" id="2_jpoqo"]
 
-[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label")]
+[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 150.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_htsux")
@@ -16,6 +17,7 @@ _position_label = NodePath("PositionLabel")
 _speedometer = NodePath("Speedometer")
 _lap_label = NodePath("LapLabel")
 _countdown_label = NodePath("CountdownLabel")
+_item_image = NodePath("ItemImage")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -30,7 +32,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(40, 40)
+size = Vector2i(150, 150)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -93,3 +95,16 @@ theme_override_font_sizes/font_size = 50
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ItemImage" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+offset_right = 10.0
+grow_vertical = 0
+texture = ExtResource("2_jpoqo")
+expand_mode = 1
+stretch_mode = 5
