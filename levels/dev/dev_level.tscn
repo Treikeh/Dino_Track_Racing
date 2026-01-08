@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dd51u4enoyits"]
+[gd_scene load_steps=10 format=3 uid="uid://dd51u4enoyits"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
+[ext_resource type="PackedScene" uid="uid://ldv8etwkdrbu" path="res://gui/leaderboard/leaderboard.tscn" id="2_tqy1p"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="3_tqy1p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
@@ -27,10 +28,16 @@ point_count = 13
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
 radius = 1.0
 
-[node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
+[node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_leader_board")]
 script = ExtResource("1_us0s3")
+_lap_count = 1
 _track = NodePath("Track")
 _spawn_point = NodePath(".")
+_leader_board = NodePath("CanvasLayer/Leaderboard")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("2_tqy1p")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)

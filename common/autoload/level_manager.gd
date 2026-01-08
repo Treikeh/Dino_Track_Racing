@@ -11,6 +11,7 @@ extends Node
 
 const LOADING_SCREEN_SCENE: PackedScene = preload("res://gui/loading_screen/loading_screen.tscn")
 
+var _loading_level: bool = false
 var _loading_screen: LoadingScreen
 
 
@@ -32,11 +33,16 @@ func _hijack_main_scene() -> void:
 
 
 func load_level(level_path: String) -> void:
+	# Don't load another level when a level is already loading
+	if _loading_level:
+		return
+	
 	# Check if the level exists
 	if not ResourceLoader.exists(level_path):
 		push_error("ERROR: %s path is not a valid level" % level_path)
 		return
 	
+	_loading_level = true
 	# Show the loading screen
 	_loading_screen.fade_in()
 	await _loading_screen.fully_visible
@@ -50,12 +56,13 @@ func load_level(level_path: String) -> void:
 	
 	# Hide loading loading screen
 	_loading_screen.fade_out()
+	_loading_level = false
 
 
 func _unload_level() -> void:
 	# Remove every player input controller
 	for child: Node in Globals.viewports_container.get_children():
-		remove_child(child)
+		Globals.viewports_container.remove_child(child)
 		child.queue_free()
 	
 	# Remove level
