@@ -6,6 +6,7 @@ const PLAYER_JOIN_DISPALY_SCENE: PackedScene = preload("res://gui/main_menu/play
 
 @export var _player_display_container: GridContainer
 
+# int = player id
 var _connected_players: Array[int] = []
 
 
@@ -29,5 +30,10 @@ func _add_player(player_id: int) -> void:
 
 
 func _start_level() -> void:
-	Globals.player_count = _connected_players
+	# Rest the players dict
+	Globals.players.clear()
+	# Add all the new players to the players dict
+	for player: int in _connected_players:
+		Globals.players[player] = 0.0
+	
 	LevelManager.load_level("res://levels/dev/dev_level.tscn")

@@ -22,8 +22,8 @@ const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 @export var _spawn_point: Node3D
 @export var _leader_board: Control
 
-var _level_duration: float = 0.0
-var _cars_finished_all_laps: int = 0
+# How long the race has lasted
+var _race_duration: float = 0.0
 var _level_state: LevelStates = LevelStates.COUNTDOWN
 # Race positions of each car (1st, 2nd, 3rd, etc..)
 var _car_positions: Array[int]
@@ -45,27 +45,21 @@ func _process(delta: float) -> void:
 	Globals.car_positions_updated.emit(_car_positions)
 	
 	if _level_state == LevelStates.RACE:
-		_level_duration += delta
+		_race_duration += delta
 
 
 #region Spawning
 
 func _spawn_players() -> void:
-	var player_count: int = Globals.player_count.size()
+	var player_count: int = Globals.players.size()
 	# Get how many columns the _viewports_container should have based on the player_count
 	var viewport_columns: int = ceili(sqrt(player_count))
 	Globals.viewports_container.columns = viewport_columns
 	
 	
+	# Spawn players
 	for i: int in Globals.players.size():
 		var id: int = Globals.players.keys()[i]
-		var time_taken: float = Globals.players[id]
-		print("Id: %s, Time: %s" % [id, time_taken])
-	
-	
-	# Spawn players
-	for i: int in Globals.player_count.size():
-		var id: int = Globals.player_count[i]
 		# Add car to world
 		var car: CarController = _add_car(id)
 		_add_track_follow(id, car)
@@ -167,13 +161,22 @@ func _on_finish_line_area_entered(area: Area3D) -> void:
 		return
 	
 	var track_follow: TrackFollow = area.get_parent()
+	# Check if the car has reached the levels checkpoint. So that the player can't just drive in and
+	# out of the finish line to win
 	if track_follow.checkpoint_reached:
 		track_follow.lap += 1
-		if track_follow.lap >= _lap_count:
+		track_follow.checkpoint_reached = false
+		
+		# Check if the car has completed all the laps
+		if track_follow.lap >= _lap_count and not track_follow.finished_all_laps:
+			track_follow.finished_all_laps = true
+			
+			# Set how long the player spent on the track
+			Globals.players[track_follow.car_id] = _race_duration
+			# Update ui
 			Globals.finished_all_laps.emit(track_follow.car_id)
-			_cars_finished_all_laps += 1
-			if (_cars_finished_all_laps >= _car_positions.size()):
-				_end_level()
+			
+			_end_level()
 		else:
 			print("New lap: %s" % track_follow.lap)
 			Globals.lap_changed.emit(track_follow.car_id, track_follow.lap)
@@ -186,7 +189,13 @@ func _on_checkpoint_area_entered(area: Area3D) -> void:
 
 
 func _end_level() -> void:
+	# Check if all cars have completed the level
+	for i: int in _track_follows:
+		# Exit out of the function if one of the players hasn't finished all the laps
+		if not _track_follows[i].finished_all_laps:
+			return
+	
 	_level_state = LevelStates.END_GAME
 	await get_tree().create_timer(2.0).timeout
 	_leader_board.show()
-	_leader_board.populate(_level_duration)
+	_leader_board.populate()

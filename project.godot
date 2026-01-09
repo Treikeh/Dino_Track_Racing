@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Dino_track_racing"
-config/tags=PackedStringArray("prototype")
+config/version="0.01"
+config/tags=PackedStringArray("proper_project", "school")
 run/main_scene="uid://wwcxxmjxspog"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)

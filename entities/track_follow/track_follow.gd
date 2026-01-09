@@ -4,6 +4,7 @@ class_name TrackFollow
 
 var car_id: int = 0
 var lap: int = 1
+var finished_all_laps: bool = false
 var checkpoint_reached: bool = false
 
 var _car_controller: CarController

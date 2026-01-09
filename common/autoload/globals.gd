@@ -18,9 +18,9 @@ const INPUT_ACTIONS: Array[String] = [
 	"use_held_item",
 ]
 
-# int = player_id, float = time taken to complete level (for leaderboard)
-var players: Dictionary[int, float] = {3: 5.0, 90: 3.0}
-var player_count: Array[int] = [0, 1]
+# Stores info about all the players that are in the game
+#NOTE: int = player_id, float = time taken to complete the race (for leaderboard)
+var players: Dictionary[int, float] = {0: 0.0, 1: 0.0}
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
 
