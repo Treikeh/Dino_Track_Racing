@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnkpb3dawgrxk"]
+
+[ext_resource type="Script" uid="uid://bcv14wku4unfh" path="res://gui/level_ui/level_ui.gd" id="1_lxkqr"]
+[ext_resource type="PackedScene" uid="uid://ldv8etwkdrbu" path="res://gui/level_ui/leaderboard/leaderboard.tscn" id="2_cqata"]
+[ext_resource type="PackedScene" uid="uid://cmy21chwdl2dx" path="res://gui/level_ui/pause_menu/pause_menu.tscn" id="3_irvqn"]
+
+[node name="LevelUi" type="CanvasLayer" node_paths=PackedStringArray("_leaderboard", "_pause_menu")]
+script = ExtResource("1_lxkqr")
+_leaderboard = NodePath("Leaderboard")
+_pause_menu = NodePath("PauseMenu")
+
+[node name="Leaderboard" parent="." instance=ExtResource("2_cqata")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_irvqn")]

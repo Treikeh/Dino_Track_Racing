@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7vjvq2mj44l1"]
 
-[ext_resource type="Script" uid="uid://dlglhlfg0iapj" path="res://gui/main_menu/player_join_display/player_join_display.gd" id="1_n5a3w"]
+[ext_resource type="Script" uid="uid://dlglhlfg0iapj" path="res://gui/main_menu/player_join_menu/join_entry/player_join_entry.gd" id="1_n5a3w"]
 [ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_06t76"]
-[ext_resource type="AudioStream" uid="uid://d1gll8a2ud454" path="res://gui/main_menu/player_join_display/british-folk-song-the-watchet-sailor-106551.mp3" id="3_7djdl"]
+[ext_resource type="AudioStream" uid="uid://d1gll8a2ud454" path="res://gui/main_menu/player_join_menu/join_entry/british-folk-song-the-watchet-sailor-106551.mp3" id="3_7djdl"]
 
-[node name="PlayerJoinDisplay" type="Control" node_paths=PackedStringArray("_player_id_label", "_mesh", "_scream_stream_player")]
+[node name="PlayerJoinEntry" type="Control" node_paths=PackedStringArray("_player_id_label", "_mesh", "_scream_stream_player")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 233.0

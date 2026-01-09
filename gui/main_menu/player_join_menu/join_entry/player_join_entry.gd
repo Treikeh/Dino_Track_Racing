@@ -1,5 +1,5 @@
 extends Control
-class_name PlayerJoinDisplay
+class_name PlayerJoinEntry
 
 
 @export var _mesh_rotation_speed: float = 30.0
@@ -12,7 +12,7 @@ var _throttle_input: float = 1.0
 var _turn_input: float = 0.0
 
 
-func with_data(id: int) -> PlayerJoinDisplay:
+func with_data(id: int) -> PlayerJoinEntry:
 	_player_id = id
 	_player_id_label.text = "Player %s" % (id + 1)
 	return self

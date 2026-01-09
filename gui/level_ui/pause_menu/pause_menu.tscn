@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmy21chwdl2dx"]
 
-[ext_resource type="Script" uid="uid://ewuq06h4clui" path="res://gui/pause_menu/pause_menu.gd" id="1_rwe7i"]
+[ext_resource type="Script" uid="uid://ewuq06h4clui" path="res://gui/level_ui/pause_menu/pause_menu.gd" id="1_rwe7i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rwe7i"]
 

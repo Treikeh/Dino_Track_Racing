@@ -1,7 +1,7 @@
 extends Control
 
 
-const PLAYER_JOIN_DISPALY_SCENE: PackedScene = preload("res://gui/main_menu/player_join_display/player_join_display.tscn")
+const PLAYER_JOIN_ENTRY_SCENE: PackedScene = preload("res://gui/main_menu/player_join_menu/join_entry/player_join_entry.tscn")
 
 
 @export var _player_display_container: GridContainer
@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 func _add_player(player_id: int) -> void:
 	_connected_players.append(player_id)
 	
-	var player_label: PlayerJoinDisplay = PLAYER_JOIN_DISPALY_SCENE.instantiate().with_data(player_id)
+	var player_label: PlayerJoinEntry = PLAYER_JOIN_ENTRY_SCENE.instantiate().with_data(player_id)
 	_player_display_container.add_child(player_label)
 	
 	# Change how many columns the player display grid container should have when a new player joins
