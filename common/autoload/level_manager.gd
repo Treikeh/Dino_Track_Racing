@@ -11,6 +11,8 @@ extends Node
 
 const LOADING_SCREEN_SCENE: PackedScene = preload("res://gui/loading_screen/loading_screen.tscn")
 
+var current_level_path: String = ""
+
 var _loading_level: bool = false
 var _loading_screen: LoadingScreen
 
@@ -42,11 +44,13 @@ func load_level(level_path: String) -> void:
 		push_error("ERROR: %s path is not a valid level" % level_path)
 		return
 	
+	current_level_path = level_path
 	_loading_level = true
 	# Show the loading screen
 	_loading_screen.fade_in()
 	await _loading_screen.fully_visible
 	
+	get_tree().paused = false
 	# Remove old level
 	_unload_level()
 	# Add new level

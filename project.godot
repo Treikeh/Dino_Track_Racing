@@ -53,6 +53,8 @@ folder_colors={
 [global_group]
 
 car=""
+finish_line=""
+checkpoint=""
 
 [input]
 

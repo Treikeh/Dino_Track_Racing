@@ -14,28 +14,27 @@ class_name PlayerInputController
 @export var _item_image: TextureRect
 
 var _finished_all_laps: bool = false
-var _lap_count: int = 3
 var _player_id: int = 0
 var _throttle_input: float
 var _turn_input: float
 var _drift_input: bool
 var _car_controller: CarController
+var _track_follow: TrackFollow
 
 
 # Add after instatiate (instatiate().with_data(.., ..)) to setup controller data
-func with_data(id: int, controller: CarController, lap_count: int = 3) -> PlayerInputController:
+func with_data(
+		id: int,
+		car_controller: CarController,
+		track_follow: TrackFollow
+) -> PlayerInputController:
 	_player_id = id
-	_car_controller = controller
-	_lap_count = lap_count
+	_car_controller = car_controller
+	_track_follow = track_follow
 	return self
 
 
 func _ready() -> void:
-	Globals.countdown_updated.connect(_on_countdown_updated)
-	Globals.car_positions_updated.connect(_on_car_positions_updated)
-	Globals.lap_changed.connect(_on_lap_changed)
-	Globals.finished_all_laps.connect(_on_finished_all_laps)
-	
 	# Create new input actions (if they don't exist)
 	Globals.set_up_player_inputs(_player_id)
 	
@@ -43,8 +42,13 @@ func _ready() -> void:
 	#NOTE: Could also be in the with_data() function, but it looks nicer here
 	_car_controller.picked_up_item.connect(_on_car_picked_up_item)
 	
+	# Connect to trak follow signals
+	#NOTE: This could also be in the with_data() function
+	_track_follow.lap_changed.connect(_on_lap_changed)
+	_track_follow.finished_all_laps.connect(_on_finished_all_laps)
+	
 	_id_label.text = "P%s" % (_player_id + 1)
-	_lap_label.text = "1/%s" % _lap_count
+	_lap_label.text = "1/%s" % _track_follow.total_laps
 	_orientation.global_position = _car_controller.global_position
 
 
@@ -101,35 +105,45 @@ func _get_look_at_pos() -> Vector3:
 
 #region UI signal functions
 
-func _on_countdown_updated(seconds_left: int) -> void:
+func on_countdown_updated(seconds_left: int) -> void:
 	_countdown_label.show()
 	if seconds_left <= 0:
-		_countdown_label.text = "GO!"
-		await get_tree().create_timer(2.0).timeout
-		_countdown_label.hide()
+		_update_countdown_label("GO!", 2.0)
 	else:
-		_countdown_label.text = str(seconds_left)
+		_update_countdown_label(str(seconds_left))
 
 
-func _on_car_positions_updated(car_positions: Array[int]) -> void:
+func on_car_positions_updated(car_positions: Array[int]) -> void:
 	_position_label.text = str(car_positions.find(_player_id) + 1)
 
 
-func _on_lap_changed(car_id: int, lap: int) -> void:
-	if _player_id == car_id:
-		_lap_label.text = "%s/%s" % [lap, _lap_count]
+func _on_lap_changed(lap: int) -> void:
+	_lap_label.text = "%s/%s" % [lap, _track_follow.total_laps]
 
 
-func _on_finished_all_laps(car_id: int) -> void:
-	if _player_id == car_id and not _finished_all_laps:
-		_finished_all_laps = true
-		_countdown_label.show()
-		_countdown_label.text = "FINISHED!"
-		await get_tree().create_timer(2.0).timeout
-		_countdown_label.hide()
+func _on_finished_all_laps(_car_id: int) -> void:
+	_finished_all_laps = true
+	_update_countdown_label("FINISHED", 2.0)
 
 
 func _on_car_picked_up_item(item: ItemResource) -> void:
 	_item_image.texture = item.icon
 
 #endregion
+
+
+func _update_countdown_label(
+		new_text: String,
+		visible_duration: float = 0.6,
+		fade_duration: float = 0.2,
+) -> void:
+	# Reset countdown label
+	_countdown_label.text = new_text
+	_countdown_label.show()
+	_countdown_label.modulate = Color.TRANSPARENT
+	
+	var tween: Tween = create_tween()
+	tween.tween_property(_countdown_label, "modulate", Color.WHITE, fade_duration)
+	tween.tween_interval(visible_duration)
+	tween.tween_property(_countdown_label, "modulate", Color.TRANSPARENT, fade_duration)
+	tween.tween_callback(_countdown_label.hide)

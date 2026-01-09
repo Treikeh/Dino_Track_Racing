@@ -2,11 +2,8 @@ extends Node3D
 class_name Level3D
 
 
-enum LevelStates {
-	COUNTDOWN,
-	RACE,
-	LEADERBOARD,
-}
+signal countdown_updated(seconds_left: int)
+signal car_positions_updated(car_positions: Array[int])
 
 
 const CAR_CONTROLLER: PackedScene = preload("uid://c56dtjon3irj1")
@@ -20,11 +17,11 @@ const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 @export var _countdown_duration: int = 4
 @export var _track: Path3D
 @export var _spawn_point: Node3D
-@export var _leader_board: Control
+@export var _level_ui: CanvasLayer
 
+var _race_active: bool = false
 # How long the race has lasted
 var _race_duration: float = 0.0
-var _level_state: LevelStates = LevelStates.COUNTDOWN
 # Race positions of each car (1st, 2nd, 3rd, etc..)
 var _car_positions: Array[int]
 # int = car id
@@ -34,17 +31,15 @@ var _track_follows: Dictionary[int, TrackFollow]
 func _ready() -> void:
 	_spawn_players()
 	_start_countdown()
-	
-	_leader_board.hide()
 
 
 func _process(delta: float) -> void:
 	# Sort the _car_positions array so that the first position in the array is the player that has
 	# gotten the furthest
 	_car_positions.sort_custom(_sort_positions)
-	Globals.car_positions_updated.emit(_car_positions)
+	car_positions_updated.emit(_car_positions)
 	
-	if _level_state == LevelStates.RACE:
+	if _race_active:
 		_race_duration += delta
 
 
@@ -62,8 +57,8 @@ func _spawn_players() -> void:
 		var id: int = Globals.players.keys()[i]
 		# Add car to world
 		var car: CarController = _add_car(id)
-		_add_track_follow(id, car)
-		_add_player_input(id, car)
+		var track_follow: TrackFollow =_add_track_follow(id, car)
+		_add_player_input(id, car, track_follow)
 		
 		# Set the spawn position of the car
 		car.global_position = _get_spawn_position(i)
@@ -89,20 +84,27 @@ func _add_car(id: int) -> CarController:
 	return car
 
 
-func _add_track_follow(id: int, car: CarController) -> void:
-	var track_follow: TrackFollow = (
-			TRACK_FOLLOW.instantiate().with_data(id, car)
-	)
+func _add_track_follow(id: int, car: CarController) -> TrackFollow:
+	# Add track follow to level
+	var track_follow: TrackFollow = TRACK_FOLLOW.instantiate().with_data(id, car, _lap_count)
 	_track.add_child(track_follow)
+	
+	track_follow.finished_all_laps.connect(_on_car_finished_all_laps)
+	
 	_track_follows[id] = track_follow
+	return track_follow
 
 
-func _add_player_input(id: int, car: CarController) -> void:
+func _add_player_input(id: int, car: CarController, track_follow: TrackFollow) -> void:
 	# Add palyer inputs and connect it to the car
 	var player_inputs: PlayerInputController = (
-			PLAYER_INPUT_CONTROLLER.instantiate().with_data(id, car, _lap_count)
+			PLAYER_INPUT_CONTROLLER.instantiate().with_data(id, car, track_follow)
 	)
 	Globals.viewports_container.add_child(player_inputs)
+	
+	# Connect signals to update HUD on the player input (The inputs also have the HUD)
+	countdown_updated.connect(player_inputs.on_countdown_updated)
+	car_positions_updated.connect(player_inputs.on_car_positions_updated)
 
 
 # Get the spawn position of a car based on the order it was added to the level.
@@ -140,62 +142,35 @@ func _on_countdown_timer_timeout(countdown_timer: Timer) -> void:
 		countdown_timer.stop()
 		# Enable all cars
 		get_tree().call_group("car", "set_car_enabled", true)
-		_level_state = LevelStates.RACE
+		_race_active = true
 	# Update UI to players
-	Globals.countdown_updated.emit(_countdown_duration)
+	countdown_updated.emit(_countdown_duration)
 
 
 # Logic for how the positions (1st, 2nd, 3rd, etc..) of the cars should be sorted
 func _sort_positions(a: int, b: int) -> bool:
 	# Check if both track follows are on the same lap
-	if _track_follows[a].lap != _track_follows[b].lap:
+	if _track_follows[a].current_lap != _track_follows[b].current_lap:
 		# Compare the lap both cars are on
-		return _track_follows[a].lap > _track_follows[b].lap
+		return _track_follows[a].current_lap > _track_follows[b].current_lap
 	else:
 		# Compare the progress of both cars when they're on the same lap
 		return _track_follows[a].progress > _track_follows[b].progress
 
 
-func _on_finish_line_area_entered(area: Area3D) -> void:
-	if _level_state != LevelStates.RACE:
-		return
+func _on_car_finished_all_laps(car_id: int) -> void:
+	# Set how long it took a player ro finish all the laps
+	Globals.players[car_id] = _race_duration
 	
-	var track_follow: TrackFollow = area.get_parent()
-	# Check if the car has reached the levels checkpoint. So that the player can't just drive in and
-	# out of the finish line to win
-	if track_follow.checkpoint_reached:
-		track_follow.lap += 1
-		track_follow.checkpoint_reached = false
-		
-		# Check if the car has completed all the laps
-		if track_follow.lap >= _lap_count and not track_follow.finished_all_laps:
-			track_follow.finished_all_laps = true
-			
-			# Set how long the player spent on the track
-			Globals.players[track_follow.car_id] = _race_duration
-			# Update ui
-			Globals.finished_all_laps.emit(track_follow.car_id)
-			
-			_end_level()
-		else:
-			print("New lap: %s" % track_follow.lap)
-			Globals.lap_changed.emit(track_follow.car_id, track_follow.lap)
-
-
-func _on_checkpoint_area_entered(area: Area3D) -> void:
-	var track_follow: TrackFollow = area.get_parent()
-	track_follow.checkpoint_reached = true
-	print("Checkpoint reached for lap %s" % track_follow.lap)
-
-
-func _end_level() -> void:
 	# Check if all cars have completed the level
 	for i: int in _track_follows:
 		# Exit out of the function if one of the players hasn't finished all the laps
-		if not _track_follows[i].finished_all_laps:
+		if not _track_follows[i].all_laps_finished:
 			return
 	
-	_level_state = LevelStates.LEADERBOARD
-	await get_tree().create_timer(2.0).timeout
-	_leader_board.show()
-	_leader_board.populate()
+	_end_level()
+
+
+func _end_level() -> void:
+	_race_active = false
+	_level_ui.on_race_ended()

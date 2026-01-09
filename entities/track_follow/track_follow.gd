@@ -1,12 +1,18 @@
 extends PathFollow3D
 class_name TrackFollow
+## This class is responsible for keeping track of how far a car has progressed along the track
 
 
-var car_id: int = 0
-var lap: int = 1
-var finished_all_laps: bool = false
-var checkpoint_reached: bool = false
+signal lap_changed(lap: int)
+signal finished_all_laps(id: int)
 
+
+var all_laps_finished: bool = false
+var total_laps: int = 3
+var current_lap: int = 1
+
+var _checkpoint_reached: bool = false
+var _car_id: int = 0
 var _car_controller: CarController
 
 @onready var _track: Path3D = get_parent()
@@ -14,9 +20,10 @@ var _car_controller: CarController
 
 
 # Add after instatiate (instatiate().with_data(.., ..))
-func with_data(id: int, car: CarController) -> PathFollow3D:
-	car_id = id
+func with_data(id: int, car: CarController, laps: int) -> PathFollow3D:
+	_car_id = id
 	_car_controller = car
+	total_laps = laps
 	return self
 
 
@@ -28,3 +35,39 @@ func _get_track_progress() -> float:
 	var local_pos: Vector3 = _car_controller.global_position * _track.global_transform
 	var offset: float = _track_curve.get_closest_offset(local_pos)
 	return offset
+
+
+#region Laps
+
+func _on_checkpoint_collision_area_entered(area: Area3D) -> void:
+	# Don't track laps after all laps have finished
+	if all_laps_finished:
+		return
+	
+	match area.get_groups():
+		["checkpoint", ..]:
+			_entered_checkpoint()
+		["finish_line", ..]:
+			_entered_finish_line()
+
+
+func _entered_checkpoint() -> void:
+	_checkpoint_reached = true
+
+
+func _entered_finish_line() -> void:
+	# Check if the car has reached the levels checkpoint. So that the player can't just drive in
+	# and out of the finish line to win
+	if not _checkpoint_reached:
+		return
+	
+	_checkpoint_reached = false
+	current_lap += 1
+	# Check if it has completed all the laps
+	if current_lap >= total_laps:
+		all_laps_finished = true
+		finished_all_laps.emit(_car_id)
+	else:
+		lap_changed.emit(current_lap)
+
+#endregion

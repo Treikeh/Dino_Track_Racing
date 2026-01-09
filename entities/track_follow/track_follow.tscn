@@ -15,10 +15,12 @@ script = ExtResource("1_ikht7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ikht7")
 
-[node name="CheckpointCollisionArea" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
+[node name="CheckpointCollision" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CheckpointCollisionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CheckpointCollision"]
 shape = SubResource("SphereShape3D_ikht7")
+
+[connection signal="area_entered" from="CheckpointCollision" to="." method="_on_checkpoint_collision_area_entered"]

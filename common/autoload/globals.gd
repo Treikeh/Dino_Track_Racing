@@ -1,13 +1,6 @@
 extends Node
 
 
-@warning_ignore_start("unused_signal")
-signal countdown_updated(seconds_left: int)
-signal car_positions_updated(car_positions: Array[int])
-signal lap_changed(car_id: int, lap: int)
-signal finished_all_laps(car_id: int)
-
-
 # Input actions to copy and assign to each new player
 const INPUT_ACTIONS: Array[String] = [
 	"accelerate",

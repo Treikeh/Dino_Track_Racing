@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://byaesynk2xrfg" path="res://gui/loading_screen/loading_screen.gd" id="1_mkdfe"]
 
 [node name="LoadingScreen" type="CanvasLayer" node_paths=PackedStringArray("_control_root")]
+process_mode = 3
 layer = 10
 script = ExtResource("1_mkdfe")
 _control_root = NodePath("ControlRoot")
