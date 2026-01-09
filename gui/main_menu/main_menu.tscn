@@ -15,7 +15,7 @@ script = ExtResource("1_ahke7")
 _start_menu = NodePath("StartMenu")
 _player_join_menu = NodePath("PlayerJoinMenu")
 
-[node name="StartMenu" type="Control" parent="." node_paths=PackedStringArray("_start_button")]
+[node name="StartMenu" type="Control" parent="." node_paths=PackedStringArray("_start_button", "_version_label")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_qy2xc")
 _start_button = NodePath("VBoxContainer/StartButton")
+_version_label = NodePath("VersionLabel")
 
 [node name="Title" type="Label" parent="StartMenu"]
 layout_mode = 1
@@ -58,6 +59,19 @@ text = "Play"
 [node name="QuitButton" type="Button" parent="StartMenu/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="VersionLabel" type="Label" parent="StartMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "v0.00"
 
 [node name="PlayerJoinMenu" type="Control" parent="." node_paths=PackedStringArray("_player_display_container")]
 layout_mode = 1
