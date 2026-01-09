@@ -1,5 +1,6 @@
 extends Control
 class_name PlayerInputController
+## This class in responsible for allowing a player to control a car
 
 @export_group("Car")
 @export var _cam_follow_speed: float = 6.0
