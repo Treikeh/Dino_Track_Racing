@@ -6,10 +6,12 @@ extends Control
 
 # Add all the entires to the leaderboard
 func populate() -> void:
-	#TODO: Sort list so that the fastest player is at the top
-	for i: int in Globals.players.size():
+	var players: Array[int] = Globals.players.keys()
+	players.sort_custom(_sort_player_time_taken)
+	
+	for i: int in players.size():
 		# Get info about the player
-		var id: int = Globals.players.keys()[i]
+		var id: int = players[i]
 		#TODO: Convert to minutes form seconds
 		var time_taken: float = Globals.players[id]
 		
@@ -31,3 +33,7 @@ func _time_convert(time_in_sec: float) -> String:
 	var hours: int = (seconds / 60) / 60
 	var decimal: float = (time_in_sec - seconds) * 100
 	return "%02d:%02d:%02d.%02d" % [hours, minutes, seconds, floori(decimal)]
+
+
+func _sort_player_time_taken(a: int, b: int) -> bool:
+	return Globals.players[a] < Globals.players[b]
