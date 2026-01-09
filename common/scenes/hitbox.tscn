@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8qkj6honupyt"]
+
+[ext_resource type="Script" uid="uid://dtucoxxpd0qy7" path="res://common/scenes/hitbox.gd" id="1_p50r2"]
+
+[node name="Hitbox" type="Area3D" node_paths=PackedStringArray("_invulnerability_timer")]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_p50r2")
+_invulnerability_timer = NodePath("InvulnerabilityTimer")
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

@@ -45,7 +45,7 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
 
-[node name="Track" type="Path3D" parent="."]
+[node name="Track" type="Path3D" parent="." groups=["track"]]
 curve = SubResource("Curve3D_h2yge")
 
 [node name="FinishLine" type="Area3D" parent="Track" groups=["finish_line"]]

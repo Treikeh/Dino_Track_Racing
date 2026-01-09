@@ -26,7 +26,8 @@ var turn_input: float
 var speed_khm: float
 var drift_input: bool
 
-var _enabled: bool = true
+var _spin_out: bool = false
+var _allow_movement: bool = true
 var _turn_dir: float
 ##NOTE: This is reversed. When it's is 1.0 there is no drift
 var _drift_factor: float
@@ -34,6 +35,7 @@ var _ground_normal: Vector3
 var _held_item: ItemResource
 
 @onready var _default_linear_damp: float = linear_damp
+@onready var _default_angular_damp: float = angular_damp
 
 
 func _ready() -> void:
@@ -62,22 +64,23 @@ func _physics_process(delta: float) -> void:
 		linear_damp = _default_linear_damp
 		
 		# Move car
-		if _enabled: # Don't apply movement when car is disabled
+		if _allow_movement and not _spin_out:
 			var accel_force: float = _accel_curve.sample(speed_khm) * throttle
 			apply_central_force(-_drive_dir.global_basis.z * accel_force * mass)
 		
 		# Drift
 		var drift_force: Vector3 = -global_basis.z * (40.0 * (1 - _drift_factor))
 		var drift_dir: float = global_basis.x.dot(linear_velocity.normalized())
-		if (drift_dir * turn_input > 0.0):
+		if (drift_dir * turn_input > 0.0) and not _spin_out:
 			apply_central_force(drift_force * drift_dir * turn_input * throttle)
 		# Is 0.7 when drifting forwards, but 0.9 when drifting backwards
 		#print(drift_dir * turn_input * throttle)
 		
 		# Roatate car
-		var rot_speed: float = 7.0 if drift_input else 5.0
-		var turn_force: float = -global_basis.z.dot(_drive_dir.global_basis.x) * rot_speed * drive_dir
-		apply_torque(global_basis.y * turn_force * mass)
+		if not _spin_out:
+			var rot_speed: float = 7.0 if drift_input else 5.0
+			var turn_force: float = -global_basis.z.dot(_drive_dir.global_basis.x) * rot_speed * drive_dir
+			apply_torque(global_basis.y * turn_force * mass)
 		
 		_apply_suspension()
 		_apply_anti_roll()
@@ -128,10 +131,11 @@ func _rotate_mesh(delta: float) -> void:
 	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.1, _mesh_lerp_speed * delta)
 
 
-#TODO: Find a better name
-func set_car_enabled(is_enabled: bool) -> void:
-	_enabled = is_enabled
+func set_allow_movement(is_allowed: bool) -> void:
+	_allow_movement = is_allowed
 
+
+#region Items
 
 func pick_up_item(item: ItemResource) -> void:
 	if not _held_item:
@@ -142,4 +146,27 @@ func pick_up_item(item: ItemResource) -> void:
 func use_held_item() -> void:
 	if _held_item:
 		print("Used %s" % _held_item.name)
+		var item: Item3D = _held_item.scene.instantiate().with_data(self)
+		item.global_transform = global_transform
+		LevelManager.add_child(item)
 		_held_item = null
+
+#endregion
+
+
+func _on_hitbox_hit() -> void:
+	_spin_out = true
+	linear_damp *= 0.25
+	angular_damp *= 0.5
+	_mesh.rotation_degrees.y = 0.0
+	
+	var tween: Tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(_mesh, "rotation_degrees:y", 360.0 * 4.0, 2.0)
+
+
+func _on_hitbox_invulnerability_ended() -> void:
+	_spin_out = false
+	linear_damp = _default_linear_damp
+	angular_damp = _default_angular_damp

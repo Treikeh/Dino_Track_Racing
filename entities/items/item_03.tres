@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://bsi7hj4jmctig"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://bsi7hj4jmctig"]
 
 [ext_resource type="Texture2D" uid="uid://dl2teltva3umx" path="res://entities/items/art/alarm.png" id="1_hbhki"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="1_xutj0"]
+[ext_resource type="PackedScene" uid="uid://b2b7aqgmc117l" path="res://entities/items/bullet/Bullet.tscn" id="2_klg6y"]
 
 [resource]
 script = ExtResource("1_xutj0")
 name = "Item 03"
 icon = ExtResource("1_hbhki")
 rarity = 8
+scene = ExtResource("2_klg6y")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"

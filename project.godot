@@ -55,6 +55,7 @@ folder_colors={
 car=""
 finish_line=""
 checkpoint=""
+track=""
 
 [input]
 
@@ -114,6 +115,8 @@ pause={
 3d_physics/layer_1="env"
 3d_physics/layer_2="car"
 3d_physics/layer_3="track_follow"
+3d_physics/layer_4="item"
+3d_physics/layer_5="hitbox"
 
 [physics]
 

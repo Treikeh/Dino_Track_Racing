@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=10 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_xt16y"]
+[ext_resource type="PackedScene" uid="uid://c8qkj6honupyt" path="res://common/scenes/hitbox.tscn" id="3_hglhj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
@@ -24,7 +25,12 @@ height = 1.6
 top_radius = 0.1
 bottom_radius = 0.1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_hglhj"]
+size = Vector3(0.7, 1, 1.6)
+
 [node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_mesh") groups=["car"]]
+collision_layer = 2
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_v4h86")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
@@ -56,3 +62,13 @@ mesh = SubResource("CylinderMesh_hglhj")
 
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Hitbox" parent="." instance=ExtResource("3_hglhj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_hglhj")
+debug_color = Color(0, 1, 0, 0.41960785)
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]
