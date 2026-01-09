@@ -17,6 +17,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func on_race_ended() -> void:
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(2.5).timeout
 	_leaderboard.show()
 	_leaderboard.populate()

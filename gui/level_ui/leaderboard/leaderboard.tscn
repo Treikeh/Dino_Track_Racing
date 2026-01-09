@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ct0xtrnhj2bye" path="res://gui/level_ui/leaderboard/leaderboard.gd" id="1_5kli7"]
 
-[node name="Leaderboard" type="Control" node_paths=PackedStringArray("_entry_container")]
+[node name="Leaderboard" type="Control" node_paths=PackedStringArray("_entry_container", "_start_focus_object")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5kli7")
 _entry_container = NodePath("VBoxContainer")
+_start_focus_object = NodePath("ReplayButton")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_right = 114.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Leaderboard"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -24,6 +39,21 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="ReplayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -75.0
+offset_right = 33.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Replay"
+
 [node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -36,20 +66,7 @@ offset_top = -31.0
 offset_right = 52.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "MAIN MENU"
+text = "Main menu"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -61.0
-offset_right = 61.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 30
-text = "LEVEL FINISHED"
-horizontal_alignment = 1
-vertical_alignment = 1
-
+[connection signal="pressed" from="ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

@@ -2,10 +2,13 @@ extends Control
 
 
 @export var _entry_container: Container
+@export var _start_focus_object: Control
 
 
 # Add all the entires to the leaderboard
 func populate() -> void:
+	_start_focus_object.grab_focus()
+	
 	var players: Array[int] = Globals.players.keys()
 	players.sort_custom(_sort_player_time_taken)
 	
@@ -21,8 +24,8 @@ func populate() -> void:
 		entry_label.text = "Player %s: ------- %s" % [id + 1, _time_convert(time_taken)]
 
 
-func _on_main_menu_button_pressed() -> void:
-	LevelManager.load_level("res://gui/main_menu/main_menu.tscn")
+func _sort_player_time_taken(a: int, b: int) -> bool:
+	return Globals.players[a] < Globals.players[b]
 
 
 func _time_convert(time_in_sec: float) -> String:
@@ -35,5 +38,9 @@ func _time_convert(time_in_sec: float) -> String:
 	return "%02d:%02d:%02d.%02d" % [hours, minutes, seconds, floori(decimal)]
 
 
-func _sort_player_time_taken(a: int, b: int) -> bool:
-	return Globals.players[a] < Globals.players[b]
+func _on_replay_button_pressed() -> void:
+	LevelManager.load_level(LevelManager.current_level_path)
+
+
+func _on_main_menu_button_pressed() -> void:
+	LevelManager.load_level("res://gui/main_menu/main_menu.tscn")
