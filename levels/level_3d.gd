@@ -5,7 +5,7 @@ class_name Level3D
 enum LevelStates {
 	COUNTDOWN,
 	RACE,
-	END_GAME,
+	LEADERBOARD,
 }
 
 
@@ -195,7 +195,7 @@ func _end_level() -> void:
 		if not _track_follows[i].finished_all_laps:
 			return
 	
-	_level_state = LevelStates.END_GAME
+	_level_state = LevelStates.LEADERBOARD
 	await get_tree().create_timer(2.0).timeout
 	_leader_board.show()
 	_leader_board.populate()
