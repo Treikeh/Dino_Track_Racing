@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=11 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_xt16y"]
@@ -17,6 +17,11 @@ point_count = 4
 _limits = [0.0, 1.0, 0.0, 100.0]
 _data = [Vector2(0, 0), 0.0, 0.041289747, 0, 0, Vector2(31.927708, 0.902985), 0.0064610727, 0.0064610727, 0, 0, Vector2(100, 0.81317365), -0.006461084, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Curve" id="Curve_hglhj"]
+_limits = [0.0, 100.0, 0.0, 2.0]
+_data = [Vector2(0, 50), 0.0, 6.82669, 0, 0, Vector2(2, 0), -66.65472, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hglhj"]
 height = 1.6
@@ -44,6 +49,7 @@ _ground_check = NodePath("GroundCheck")
 _rest_height = 0.8
 _spring_force = 150.0
 _spring_damping = 20.0
+_trick_boost_curve = SubResource("Curve_hglhj")
 _mesh = NodePath("ScooterDino_01_SK")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

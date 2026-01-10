@@ -8,7 +8,7 @@ extends Item3D
 func _ready() -> void:
 	top_level = true
 	_hurtbox.set_instigator(instigator)
-	_bullet_body.velocity = -global_basis.z * 10.0
+	_bullet_body.velocity = -global_basis.z * 50.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -16,4 +16,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_hurtbox_hit_hitbox(_hitbox: Hitbox) -> void:
+	queue_free()
+
+
+func _on_lifetime_timeout() -> void:
 	queue_free()

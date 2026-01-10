@@ -2,12 +2,26 @@ extends RigidBody3D
 class_name CarController
 
 
+enum MovementState {
+	NORMAL,
+	DISABLED,
+	SPIN_OUT,
+}
+
+enum TrickState {
+	CAN_PERFORM,
+	WINDOW_PASSED,
+	PERFORMED,
+	BOOSTING,
+}
+
+
 signal picked_up_item(item: ItemResource)
 
 
-## How much acceleration is applied at different speeds (speed is in kmh)
+## How much acceleration is applied at different speeds (speed is in kmh). Y axis is speed
 @export var _accel_curve: Curve
-## How well the car will be able to turn at different speeds (speed is in kmh)
+## How well the car will be able to turn at different speeds (speed is in kmh). Y axis is speed
 @export var _turn_curve: Curve
 @export var _drive_dir: Node3D
 @export var _ground_check: RayCast3D
@@ -17,7 +31,17 @@ signal picked_up_item(item: ItemResource)
 @export var _spring_force: float = 100.0
 @export var _spring_damping: float = 15.0
 
-@export_group("Visuals")
+@export_group("Tricking")
+## How long the player can has to press the trick button after leaving the ground
+@export var _trick_window_duration: float = 0.2
+## The curve used to apply trick boost speed. Y axis is time
+@export var _trick_boost_curve: Curve
+var _trick_window_time: float = 0.0
+var _trick_boost: float = 0.0
+var _trick_boost_time: float = 0.0
+var _trick_state: TrickState = TrickState.CAN_PERFORM
+
+@export_group("Art")
 @export var _mesh_lerp_speed: float = 10.0
 @export var _mesh: Node3D
 
@@ -26,8 +50,7 @@ var turn_input: float
 var speed_khm: float
 var drift_input: bool
 
-var _spin_out: bool = false
-var _allow_movement: bool = true
+var _movement_state: MovementState = MovementState.NORMAL
 var _turn_dir: float
 ##NOTE: This is reversed. When it's is 1.0 there is no drift
 var _drift_factor: float
@@ -63,24 +86,33 @@ func _physics_process(delta: float) -> void:
 		_ground_normal = _ground_check.get_collision_normal()
 		linear_damp = _default_linear_damp
 		
-		# Move car
-		if _allow_movement and not _spin_out:
+		# Only allow input movement when the movement state is normal
+		if _movement_state == MovementState.NORMAL:
+			# Move car
 			var accel_force: float = _accel_curve.sample(speed_khm) * throttle
-			apply_central_force(-_drive_dir.global_basis.z * accel_force * mass)
-		
-		# Drift
-		var drift_force: Vector3 = -global_basis.z * (40.0 * (1 - _drift_factor))
-		var drift_dir: float = global_basis.x.dot(linear_velocity.normalized())
-		if (drift_dir * turn_input > 0.0) and not _spin_out:
-			apply_central_force(drift_force * drift_dir * turn_input * throttle)
-		# Is 0.7 when drifting forwards, but 0.9 when drifting backwards
-		#print(drift_dir * turn_input * throttle)
-		
-		# Roatate car
-		if not _spin_out:
+			apply_central_force(-_drive_dir.global_basis.z * (accel_force + _trick_boost) * mass)
+			
+			# Drift
+			var drift_force: Vector3 = -global_basis.z * (40.0 * (1 - _drift_factor))
+			var drift_dir: float = global_basis.x.dot(linear_velocity.normalized())
+			if (drift_dir * turn_input > 0.0):
+				apply_central_force(drift_force * drift_dir * turn_input * throttle)
+			# Is 0.7 when drifting forwards, but 0.9 when drifting backwards
+			#print(drift_dir * turn_input * throttle)
+			
+			# Roatate car
 			var rot_speed: float = 7.0 if drift_input else 5.0
 			var turn_force: float = -global_basis.z.dot(_drive_dir.global_basis.x) * rot_speed * drive_dir
 			apply_torque(global_basis.y * turn_force * mass)
+			
+			# Trick states
+			match _trick_state:
+				TrickState.PERFORMED:
+					_start_trick_boost()
+				TrickState.BOOSTING:
+					_apply_trick_boost(delta)
+				_:
+					_stop_trick_boost()
 		
 		_apply_suspension()
 		_apply_anti_roll()
@@ -89,6 +121,16 @@ func _physics_process(delta: float) -> void:
 		linear_damp = 0.0
 		# Reduce how much the car can rotate in the air
 		apply_torque(global_basis.y * _turn_dir * 0.5 * mass)
+		
+		# Stop trick boost if the player is in the air
+		if _trick_state == TrickState.BOOSTING:
+			_stop_trick_boost()
+		
+		# Reduce trick window
+		_trick_window_time += delta
+		# Don't allow tricking after the trick window duration has passed
+		if _trick_state == TrickState.CAN_PERFORM and _trick_window_time >= _trick_window_duration:
+			_trick_state = TrickState.WINDOW_PASSED
 
 
 # Make the car float above the ground so that it can drive over small edges and bumps without issues
@@ -131,8 +173,41 @@ func _rotate_mesh(delta: float) -> void:
 	_mesh.rotation_degrees.x = lerpf(_mesh.rotation_degrees.x, z_dir_dot * 0.1, _mesh_lerp_speed * delta)
 
 
-func set_allow_movement(is_allowed: bool) -> void:
-	_allow_movement = is_allowed
+func set_movement_state(new_state: MovementState) -> void:
+	_movement_state = new_state
+
+
+#region Tricking
+
+func perform_trick() -> void:
+	# Only allow tricking when in the air
+	if not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
+		_trick_state = TrickState.PERFORMED
+
+
+func _start_trick_boost() -> void:
+	_trick_boost_time = 0.0
+	_trick_state = TrickState.BOOSTING
+
+
+func _apply_trick_boost(delta: float) -> void:
+	_trick_boost_time += delta
+	# Get how much the boost should be based on the trick boost curve
+	_trick_boost = _trick_boost_curve.sample(_trick_boost_time)
+	# Stop trick boost after it has boosted for the length of the curve
+	if _trick_boost_time >= _trick_boost_curve.max_domain:
+		_stop_trick_boost()
+
+
+func _stop_trick_boost() -> void:
+	# Reset trick window
+	_trick_window_time = 0.0
+	# Reset trick boost
+	_trick_boost = 0.0
+	# Allow new tricks to be made
+	_trick_state = TrickState.CAN_PERFORM
+
+#endregion
 
 
 #region Items
@@ -147,19 +222,22 @@ func use_held_item() -> void:
 	if _held_item:
 		print("Used %s" % _held_item.name)
 		var item: Item3D = _held_item.scene.instantiate().with_data(self)
-		item.global_transform = global_transform
-		LevelManager.add_child(item)
+		add_child(item)
+		item.top_level = true
 		_held_item = null
 
 #endregion
 
 
+#region Damage
+
 func _on_hitbox_hit() -> void:
-	_spin_out = true
+	set_movement_state(MovementState.SPIN_OUT)
 	linear_damp *= 0.25
 	angular_damp *= 0.5
-	_mesh.rotation_degrees.y = 0.0
 	
+	# Spin mesh
+	_mesh.rotation_degrees.y = 0.0
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CIRC)
@@ -167,6 +245,8 @@ func _on_hitbox_hit() -> void:
 
 
 func _on_hitbox_invulnerability_ended() -> void:
-	_spin_out = false
+	set_movement_state(MovementState.NORMAL)
 	linear_damp = _default_linear_damp
 	angular_damp = _default_angular_damp
+
+#endregion

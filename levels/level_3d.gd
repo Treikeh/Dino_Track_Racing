@@ -78,7 +78,7 @@ func _add_car(id: int) -> CarController:
 	var car: CarController = CAR_CONTROLLER.instantiate()
 	add_child(car)
 	# Disable car until the countdown timer reaches 0
-	car.set_allow_movement(false)
+	car.set_movement_state(CarController.MovementState.DISABLED)
 	# Add cars id to array for sorting positions
 	_car_positions.append(id)
 	return car
@@ -141,7 +141,7 @@ func _on_countdown_timer_timeout(countdown_timer: Timer) -> void:
 	if _countdown_duration <= 0:
 		countdown_timer.stop()
 		# Enable all cars
-		get_tree().call_group("car", "set_allow_movement", true)
+		get_tree().call_group("car", "set_movement_state", CarController.MovementState.NORMAL)
 		_race_active = true
 	# Update UI to players
 	countdown_updated.emit(_countdown_duration)

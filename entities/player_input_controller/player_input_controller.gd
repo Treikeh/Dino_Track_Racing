@@ -53,7 +53,7 @@ func _ready() -> void:
 	_orientation.global_position = _car_controller.global_position
 
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	# Disable player input when the player has finished the last lap
 	if _finished_all_laps:
 		return
@@ -69,8 +69,11 @@ func _input(_event: InputEvent) -> void:
 	
 	_drift_input = Input.is_action_pressed("drift%s" % _player_id)
 	
-	if _event.is_action_pressed("use_held_item%s" % _player_id):
+	if event.is_action_pressed("use_held_item%s" % _player_id):
 		_car_controller.use_held_item()
+	
+	if event.is_action_pressed("perform_trick%s" % _player_id):
+		_car_controller.perform_trick()
 	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
