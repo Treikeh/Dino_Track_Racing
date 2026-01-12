@@ -1,7 +1,10 @@
 extends Node3D
 
-@export var _items: Array[ItemResource] = []
+
+@export var _hover_speed: float = 1.0
+@export var _hover_height: float = 0.5
 @export var _disabled_duration: float = 5.0
+@export var _items: Array[ItemResource] = []
 @export var _mesh_root: Node3D
 @export var _disabled_timer: Timer
 
@@ -16,7 +19,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Make the box move up and down
 	_time += delta
-	_mesh_root.position.y = 1.0 + sin(_time)
+	_mesh_root.position.y = 1.0 + (sin(_time * _hover_speed) * _hover_height)
 
 
 func _give_car_random_item(car: CarController) -> void:
@@ -27,14 +30,10 @@ func _give_car_random_item(car: CarController) -> void:
 	
 	# Get the random value that the item is at
 	var item_val: int = randi_range(0, rarity_sum)
-	
-	print(item_val)
-	
 	var item_sum: int = 0
 	for item: ItemResource in _items:
 		item_sum += item.rarity
 		if item_sum >= item_val:
-			print(item.name)
 			car.pick_up_item(item)
 			return
 

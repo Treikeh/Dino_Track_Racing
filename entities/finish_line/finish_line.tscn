@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4sqyesberv8x"]
+
+[ext_resource type="Script" uid="uid://c354r53p70c0q" path="res://entities/finish_line/finish_line.gd" id="1_ituyo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
+radius = 1.0
+
+[node name="FinishLine" type="PathFollow3D"]
+script = ExtResource("1_ituyo")
+
+[node name="TriggerArea" type="Area3D" parent="." groups=["finish_line"]]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+shape = SubResource("SphereShape3D_1bvp3")
+
+[connection signal="area_entered" from="TriggerArea" to="." method="_on_trigger_area_area_entered"]

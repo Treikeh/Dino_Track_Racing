@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://db0hy38cav5y0"]
+
+[ext_resource type="Script" uid="uid://cagf7ar0nl5q1" path="res://entities/checkpoint/checkpoint.gd" id="1_ywa0e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
+radius = 1.0
+
+[node name="Checkpoint" type="PathFollow3D"]
+transform = Transform3D(-0.023249263, 0, -0.9997254, 0, 1, 0, 0.9997254, 0, -0.023249263, 0, 0, 0)
+progress = 178.43
+script = ExtResource("1_ywa0e")
+
+[node name="TriggerArea" type="Area3D" parent="." groups=["checkpoint"]]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+shape = SubResource("SphereShape3D_1bvp3")
+
+[connection signal="area_entered" from="TriggerArea" to="." method="_on_trigger_area_area_entered"]

@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd51u4enoyits"]
+[gd_scene load_steps=11 format=3 uid="uid://dd51u4enoyits"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
 [ext_resource type="PackedScene" uid="uid://dnkpb3dawgrxk" path="res://gui/level_ui/level_ui.tscn" id="2_tqy1p"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="3_tqy1p"]
+[ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="3_vte50"]
+[ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="4_3kek2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,9 +27,6 @@ _data = {
 }
 point_count = 13
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
-radius = 1.0
-
 [node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_level_ui")]
 script = ExtResource("1_us0s3")
 _lap_count = 1
@@ -48,22 +47,11 @@ environment = SubResource("Environment_1bvp3")
 [node name="Track" type="Path3D" parent="." groups=["track"]]
 curve = SubResource("Curve3D_h2yge")
 
-[node name="FinishLine" type="Area3D" parent="Track" groups=["finish_line"]]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
+[node name="FinishLine" parent="Track" instance=ExtResource("3_vte50")]
+transform = Transform3D(0.99998266, 0, 0.0058877906, 0, 1, 0, -0.0058877906, 0, 0.99998266, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Track/FinishLine"]
-shape = SubResource("SphereShape3D_1bvp3")
-
-[node name="Checkpoint" type="Area3D" parent="Track" groups=["checkpoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44.7)
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Track/Checkpoint"]
-shape = SubResource("SphereShape3D_1bvp3")
+[node name="Checkpoint" parent="Track" instance=ExtResource("4_3kek2")]
+transform = Transform3D(-0.023249263, 0, -0.9997254, 0, 1, 0, 0.9997254, 0, -0.023249263, 0.12072235, 0, 44.753067)
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -88,3 +76,22 @@ size = Vector3(10, 1, 1)
 
 [node name="ItemBox" parent="." instance=ExtResource("3_tqy1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 16.9)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.1, 10.800002, 0)
+use_collision = true
+size = Vector3(23.800001, 32.4, 54.7)
+material = ExtResource("2_4fi74")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 12.199997, 0, 0)
+operation = 2
+radius = 10.8
+height = 57.4
+sides = 32
+material = ExtResource("2_4fi74")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.25, 11.000001, 0)
+size = Vector3(39.3, 1, 61.4)
+material = ExtResource("2_4fi74")

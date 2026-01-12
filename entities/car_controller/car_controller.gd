@@ -2,6 +2,13 @@ extends RigidBody3D
 class_name CarController
 
 
+signal item_picked_up(item: ItemResource)
+signal trick_performed
+signal trick_boost_started
+signal trick_boost_ended
+signal took_damage
+
+
 enum MovementState {
 	NORMAL,
 	DISABLED,
@@ -14,9 +21,6 @@ enum TrickState {
 	PERFORMED,
 	BOOSTING,
 }
-
-
-signal picked_up_item(item: ItemResource)
 
 
 ## How much acceleration is applied at different speeds (speed is in kmh). Y axis is speed
@@ -40,6 +44,11 @@ var _trick_window_time: float = 0.0
 var _trick_boost: float = 0.0
 var _trick_boost_time: float = 0.0
 var _trick_state: TrickState = TrickState.CAN_PERFORM
+
+@export_group("Damage")
+@export var _spin_out_duration: float = 2.0
+## How many times the car controller should rotate 360 deg after getting hit
+@export var _spin_out_revolutions: float = 4.0
 
 @export_group("Art")
 @export var _mesh_lerp_speed: float = 10.0
@@ -183,11 +192,13 @@ func perform_trick() -> void:
 	# Only allow tricking when in the air
 	if not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
 		_trick_state = TrickState.PERFORMED
+		trick_performed.emit()
 
 
 func _start_trick_boost() -> void:
 	_trick_boost_time = 0.0
 	_trick_state = TrickState.BOOSTING
+	trick_boost_started.emit()
 
 
 func _apply_trick_boost(delta: float) -> void:
@@ -206,6 +217,7 @@ func _stop_trick_boost() -> void:
 	_trick_boost = 0.0
 	# Allow new tricks to be made
 	_trick_state = TrickState.CAN_PERFORM
+	trick_boost_ended.emit()
 
 #endregion
 
@@ -215,12 +227,11 @@ func _stop_trick_boost() -> void:
 func pick_up_item(item: ItemResource) -> void:
 	if not _held_item:
 		_held_item = item
-		picked_up_item.emit(item)
+		item_picked_up.emit(item)
 
 
 func use_held_item() -> void:
 	if _held_item:
-		print("Used %s" % _held_item.name)
 		var item: Item3D = _held_item.scene.instantiate().with_data(self)
 		add_child(item)
 		item.top_level = true
@@ -235,13 +246,14 @@ func _on_hitbox_hit() -> void:
 	set_movement_state(MovementState.SPIN_OUT)
 	linear_damp *= 0.25
 	angular_damp *= 0.5
+	took_damage.emit()
 	
 	# Spin mesh
 	_mesh.rotation_degrees.y = 0.0
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CIRC)
-	tween.tween_property(_mesh, "rotation_degrees:y", 360.0 * 4.0, 2.0)
+	tween.tween_property(_mesh, "rotation_degrees:y", 360.0 * _spin_out_revolutions, _spin_out_duration)
 
 
 func _on_hitbox_invulnerability_ended() -> void:

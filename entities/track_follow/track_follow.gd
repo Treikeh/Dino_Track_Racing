@@ -39,26 +39,30 @@ func _get_track_progress() -> float:
 
 #region Laps
 
-func _on_checkpoint_collision_area_entered(area: Area3D) -> void:
+#func _on_checkpoint_collision_area_entered(area: Area3D) -> void:
+#	# Don't track laps after all laps have finished
+#	if all_laps_finished:
+#		return
+#	
+#	match area.get_groups():
+#		["checkpoint", ..]:
+#			_entered_checkpoint()
+#		["finish_line", ..]:
+#			_entered_finish_line()
+
+
+func entered_checkpoint() -> void:
 	# Don't track laps after all laps have finished
 	if all_laps_finished:
 		return
 	
-	match area.get_groups():
-		["checkpoint", ..]:
-			_entered_checkpoint()
-		["finish_line", ..]:
-			_entered_finish_line()
-
-
-func _entered_checkpoint() -> void:
 	_checkpoint_reached = true
 
 
-func _entered_finish_line() -> void:
+func entered_finish_line() -> void:
 	# Check if the car has reached the levels checkpoint. So that the player can't just drive in
 	# and out of the finish line to win
-	if not _checkpoint_reached:
+	if not _checkpoint_reached or all_laps_finished:
 		return
 	
 	_checkpoint_reached = false

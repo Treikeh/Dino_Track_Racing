@@ -41,7 +41,7 @@ func _ready() -> void:
 	
 	# Connect to car signals
 	#NOTE: Could also be in the with_data() function, but it looks nicer here
-	_car_controller.picked_up_item.connect(_on_car_picked_up_item)
+	_car_controller.item_picked_up.connect(_on_car_item_picked_up)
 	
 	# Connect to trak follow signals
 	#NOTE: This could also be in the with_data() function
@@ -130,7 +130,7 @@ func _on_finished_all_laps(_car_id: int) -> void:
 	_update_countdown_label("FINISHED", 2.0)
 
 
-func _on_car_picked_up_item(item: ItemResource) -> void:
+func _on_car_item_picked_up(item: ItemResource) -> void:
 	_item_image.texture = item.icon
 
 #endregion
