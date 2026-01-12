@@ -32,6 +32,7 @@ func _ready() -> void:
 func _hijack_main_scene() -> void:
 	var current_scene: Node = get_tree().current_scene
 	current_scene.reparent.call_deferred(self)
+	current_level_path = current_scene.scene_file_path
 
 
 func load_level(level_path: String) -> void:

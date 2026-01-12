@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 	_drive_dir.rotation_degrees.y = turn_dir * turn_input * _turn_curve.sample(speed_khm)
 	
 	# Respawn
-	if (global_position.y < -10.0):
+	if (global_position.y < -100.0):
 		global_position = Vector3(0.0, 2.0, 0.0)
 		linear_velocity = Vector3.ZERO
 

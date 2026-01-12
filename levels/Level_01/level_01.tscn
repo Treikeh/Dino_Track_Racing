@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpqb3feve26hb"]
+
+[ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
+[ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
+[ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_mii42"]
+[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="3_w8irb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_knpns"]
+sky_material = SubResource("ProceduralSkyMaterial_qn7dl")
+
+[sub_resource type="Environment" id="Environment_w8irb"]
+background_mode = 2
+sky = SubResource("Sky_knpns")
+tonemap_mode = 2
+
+[sub_resource type="Curve3D" id="Curve3D_qn7dl"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -17.637852, -6.4100437, -49.10965, 0, 0, 0, 0, 0, 0, 4.6723614, -6.2094707, -79.72258, 0, 0, 0, 0, 0, 0, 3.3504143, -8.071131, -110.74286, 0, 0, 0, 0, 0, 0, -64.10105, -12.671717, -147.23657, 0, 0, 0, 0, 0, 0, -159.0971, -6.249405, -85.46503, 0, 0, 0, 0, 0, 0, -248.98761, 4.5276365, -120.30293, 0, 0, 0, 0, 0, 0, -261.36768, 22.29435, 11.527787, 0, 0, 0, 0, 0, 0, -227.39813, 35.02051, 61.850616, 0, 0, 0, 0, 0, 0, -191.7964, 28.965351, 57.798584, 0, 0, 0, 0, 0, 0, -209.33829, 22.537346, 2.5844402, 0, 0, 0, 0, 0, 0, -153.39403, 16.150486, -6.2932835, 0, 0, 0, 0, 0, 0, -127.63473, 13.160884, 27.509144, 0, 0, 0, 0, 0, 0, -87.28796, 7.7704124, 4.8336287, 0, 0, 0, 0, 0, 0, -11.722607, 4.0703945, 40.959763),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 15
+
+[node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
+script = ExtResource("1_qn7dl")
+_lap_count = 1
+_countdown_duration = 1
+_track = NodePath("Track")
+_spawn_point = NodePath("Track/FinishLine")
+metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w8irb")
+
+[node name="Track" type="Path3D" parent="."]
+curve = SubResource("Curve3D_qn7dl")
+
+[node name="FinishLine" parent="Track" instance=ExtResource("2_knpns")]
+transform = Transform3D(0.9411308, -0.041212518, 0.3354903, 7.4504967e-09, 0.9925363, 0.121925674, -0.33800948, -0.11474935, 0.9341166, 0, 0, 0)
+
+[node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
+transform = Transform3D(-0.9717592, 0.2169412, 0.09266617, 0.20384678, 0.9699139, -0.13298573, -0.11872908, -0.11034177, -0.9867669, -256.13284, 14.781788, -44.21614)
+progress = 485.99432
+
+[node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]

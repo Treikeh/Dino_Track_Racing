@@ -6,6 +6,7 @@ signal countdown_updated(seconds_left: int)
 signal car_positions_updated(car_positions: Array[int])
 
 
+const LEVEL_UI_SCENE: PackedScene = preload("res://gui/level_ui/level_ui.tscn")
 const CAR_CONTROLLER: PackedScene = preload("uid://c56dtjon3irj1")
 const PLAYER_INPUT_CONTROLLER: PackedScene = preload("uid://d1f50k3xa7iar")
 const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
@@ -17,11 +18,11 @@ const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 @export var _countdown_duration: int = 4
 @export var _track: Path3D
 @export var _spawn_point: Node3D
-@export var _level_ui: CanvasLayer
 
 var _race_active: bool = false
 # How long the race has lasted
 var _race_duration: float = 0.0
+var _level_ui: CanvasLayer
 # Race positions of each car (1st, 2nd, 3rd, etc..)
 var _car_positions: Array[int]
 # int = car id
@@ -29,6 +30,10 @@ var _track_follows: Dictionary[int, TrackFollow]
 
 
 func _ready() -> void:
+	# Add the level ui to the scene
+	_level_ui = LEVEL_UI_SCENE.instantiate()
+	add_child(_level_ui)
+	
 	_spawn_players()
 	_start_countdown()
 

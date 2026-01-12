@@ -36,4 +36,4 @@ func _start_level() -> void:
 	for player: int in _connected_players:
 		Globals.players[player] = 0.0
 	
-	LevelManager.load_level("res://levels/dev/dev_level.tscn")
+	LevelManager.load_level("res://levels/Level_01/level_01.tscn")
