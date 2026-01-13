@@ -72,10 +72,6 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("drift%s" % _player_id):
 		_car_controller.release_drift()
 	
-	# Trick input
-	if event.is_action_pressed("perform_trick%s" % _player_id):
-		_car_controller.try_trick()
-	
 	# Use item input
 	if event.is_action_pressed("use_held_item%s" % _player_id):
 		_car_controller.use_held_item()

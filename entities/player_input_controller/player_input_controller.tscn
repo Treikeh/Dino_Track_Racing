@@ -11,6 +11,7 @@ offset_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_htsux")
+_cam_follow_speed = 7.0
 _orientation = NodePath("SubViewportContainer/SubViewport/Orientation")
 _id_label = NodePath("SubViewportContainer/SubViewport/IdLabel")
 _position_label = NodePath("PositionLabel")

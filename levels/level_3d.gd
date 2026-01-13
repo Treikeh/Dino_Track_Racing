@@ -124,7 +124,7 @@ func _get_spawn_position(spawn_number: int) -> Vector3:
 	var spawn_row: int = spawn_number / 4
 	
 	var x: float = -3.0 + (2.0 * (spawn_number - (spawn_row * 4)))
-	var y: float = 5.0
+	var y: float = 1.0
 	var z: float = 3.0 * spawn_row
 	return _spawn_point.global_position + Vector3(x, y, z)
 

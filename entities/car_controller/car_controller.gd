@@ -38,10 +38,10 @@ enum TrickState {
 @export var _spring_damping: float = 15.0
 
 @export_group("Drifting")
-@export var _min_drift_angle: float = 7.5
+@export var _min_drift_angle: float = 10.0
 @export var _max_drift_angle: float = 35.0
 # How much force to apply sideways when drifting
-@export var _sideways_dirft_force: float = 30.0
+@export var _sideways_dirft_force: float = 65.0
 # How long the car has to drift before getting a boost
 @export var _min_drift_boost_duration: float = 1.0
 var _is_drifting: bool = false
@@ -220,6 +220,10 @@ func try_dirft() -> void:
 		_is_drifting = true
 		_drift_time = 0.0
 		_drift_dir = 1 if turn_input > 0.0 else -1
+	# Perform trick in the air if drifting is pressed
+	elif not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
+		_trick_state = TrickState.PERFORMED
+		trick_performed.emit()
 
 
 func release_drift() -> void:
@@ -227,7 +231,6 @@ func release_drift() -> void:
 		stop_drift()
 		if _drift_time >= _min_drift_boost_duration:
 			_start_trick_boost()
-			print("Drift boost")
 
 
 func stop_drift() -> void:
@@ -238,13 +241,6 @@ func stop_drift() -> void:
 
 
 #region Tricking
-
-func try_trick() -> void:
-	# Only allow tricking when in the air
-	if not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
-		_trick_state = TrickState.PERFORMED
-		trick_performed.emit()
-
 
 func _start_trick_boost() -> void:
 	_trick_boost_time = 0.0
