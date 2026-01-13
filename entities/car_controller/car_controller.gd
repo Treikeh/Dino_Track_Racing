@@ -23,6 +23,8 @@ enum TrickState {
 }
 
 
+@export var _max_turn_angle: float = 27.0
+@export var _rot_speed: float = 8.0
 ## How much acceleration is applied at different speeds (speed is in kmh). Y axis is speed
 @export var _accel_curve: Curve
 ## How well the car will be able to turn at different speeds (speed is in kmh). Y axis is speed
@@ -34,6 +36,19 @@ enum TrickState {
 @export var _rest_height: float = 0.65
 @export var _spring_force: float = 100.0
 @export var _spring_damping: float = 15.0
+
+@export_group("Drifting")
+@export var _min_drift_angle: float = 7.5
+@export var _max_drift_angle: float = 35.0
+# How much force to apply sideways when drifting
+@export var _sideways_dirft_force: float = 30.0
+# How long the car has to drift before getting a boost
+@export var _min_drift_boost_duration: float = 1.0
+var _is_drifting: bool = false
+# Which direction the car is drifting in (1 = left, -1 right)
+var _drift_dir: int = 0
+# How long the car has been drifting for
+var _drift_time: float = 0.0
 
 @export_group("Tricking")
 ## How long the player can has to press the trick button after leaving the ground
@@ -57,12 +72,10 @@ var _trick_state: TrickState = TrickState.CAN_PERFORM
 var throttle: float
 var turn_input: float
 var speed_khm: float
-var drift_input: bool
 
 var _movement_state: MovementState = MovementState.NORMAL
 var _turn_dir: float
 ##NOTE: This is reversed. When it's is 1.0 there is no drift
-var _drift_factor: float
 var _ground_normal: Vector3
 var _held_item: ItemResource
 
@@ -79,8 +92,20 @@ func _process(delta: float) -> void:
 	
 	# Reverse turn direction when driving backwards
 	_turn_dir = turn_input * -1.0 if throttle < 0.0 else turn_input
-	var turn_dir: float = 27.5 if !drift_input else 35.0
-	_drive_dir.rotation_degrees.y = turn_dir * turn_input * _turn_curve.sample(speed_khm)
+	# Rotate drive dir based on input
+	if _is_drifting:
+		# Angle between min and max drift angle. Also the angle to use when not turning
+		var center_angle: float = (_min_drift_angle + _max_drift_angle) * 0.5
+		# Difference between center angle and min/max angle.
+		# How much that can be added/subtracted from center angle while still being within min/max angle
+		var angle_diff: float = center_angle - _min_drift_angle
+		# How much to add/subtract from center angle when turning
+		var drift_turn_input: float = angle_diff * _drift_dir * turn_input
+		# Apply drift rotation
+		_drive_dir.rotation_degrees.y = (center_angle + drift_turn_input) * _drift_dir
+	else:
+		# Normal turning
+		_drive_dir.rotation_degrees.y = _max_turn_angle * turn_input * _turn_curve.sample(speed_khm)
 	
 	# Respawn
 	if (global_position.y < -100.0):
@@ -91,7 +116,6 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	speed_khm = linear_velocity.length() * 3.6
 	if _ground_check.is_colliding():
-		var drive_dir: float = -global_basis.z.dot(linear_velocity.normalized())
 		_ground_normal = _ground_check.get_collision_normal()
 		linear_damp = _default_linear_damp
 		
@@ -101,17 +125,22 @@ func _physics_process(delta: float) -> void:
 			var accel_force: float = _accel_curve.sample(speed_khm) * throttle
 			apply_central_force(-_drive_dir.global_basis.z * (accel_force + _trick_boost) * mass)
 			
-			# Drift
-			var drift_force: Vector3 = -global_basis.z * (40.0 * (1 - _drift_factor))
-			var drift_dir: float = global_basis.x.dot(linear_velocity.normalized())
-			if (drift_dir * turn_input > 0.0):
-				apply_central_force(drift_force * drift_dir * turn_input * throttle)
-			# Is 0.7 when drifting forwards, but 0.9 when drifting backwards
-			#print(drift_dir * turn_input * throttle)
+			# Drifting
+			if _is_drifting:
+				# Increase drift duration
+				apply_central_force(_drive_dir.global_basis.x * _sideways_dirft_force * _drift_dir * mass)
+				_drift_time += delta
+				#TODO: Show drift vfx when drift duration >= min drift boost duration
+				# Stop drift if speed gets too low
+				if speed_khm <= 5.0:
+					stop_drift()
 			
 			# Roatate car
-			var rot_speed: float = 7.0 if drift_input else 5.0
-			var turn_force: float = -global_basis.z.dot(_drive_dir.global_basis.x) * rot_speed * drive_dir
+			# Dot product of forwards and the velocity
+			var forward_vel_dot: float = -global_basis.z.dot(linear_velocity.normalized())
+			# How much to mult turn force based on which direction the car wants to drive in
+			var turn_force_mult: float = -global_basis.z.dot(_drive_dir.global_basis.x)
+			var turn_force: float = turn_force_mult * _rot_speed * forward_vel_dot
 			apply_torque(global_basis.y * turn_force * mass)
 			
 			# Trick states
@@ -158,10 +187,7 @@ func _apply_anti_slip(delta: float) -> void:
 	var slip_vel: float = linear_velocity.dot(slip_dir)
 	var force: float = -(slip_vel * ANI_SLIP_FORCE) / delta
 	
-	const DRIFT_LERP_SPEED: float = 2.0
-	_drift_factor = 0.0 if drift_input else lerpf(_drift_factor, 1.0, DRIFT_LERP_SPEED * delta)
-	
-	apply_central_force(slip_dir * force * _drift_factor * mass)
+	apply_central_force(slip_dir * force * mass)
 
 
 # Apply a bit of stabilizing force to make the car align with the ground normal
@@ -186,9 +212,34 @@ func set_movement_state(new_state: MovementState) -> void:
 	_movement_state = new_state
 
 
+#region Drifting
+
+func try_dirft() -> void:
+	# Only allow drift to start when on the ground and when turning
+	if _ground_check.is_colliding() and abs(turn_input) > 0.5:
+		_is_drifting = true
+		_drift_time = 0.0
+		_drift_dir = 1 if turn_input > 0.0 else -1
+
+
+func release_drift() -> void:
+	if _is_drifting:
+		stop_drift()
+		if _drift_time >= _min_drift_boost_duration:
+			_start_trick_boost()
+			print("Drift boost")
+
+
+func stop_drift() -> void:
+	_is_drifting = false
+	_drift_dir = 0
+
+#endregion
+
+
 #region Tricking
 
-func perform_trick() -> void:
+func try_trick() -> void:
 	# Only allow tricking when in the air
 	if not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
 		_trick_state = TrickState.PERFORMED
@@ -243,12 +294,14 @@ func use_held_item() -> void:
 #region Damage
 
 func _on_hitbox_hit() -> void:
+	stop_drift()
 	set_movement_state(MovementState.SPIN_OUT)
 	linear_damp *= 0.25
 	angular_damp *= 0.5
 	took_damage.emit()
 	
 	# Spin mesh
+	#NOTE: Could be replaced with an animation
 	_mesh.rotation_degrees.y = 0.0
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)

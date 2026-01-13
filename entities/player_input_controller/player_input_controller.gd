@@ -18,7 +18,6 @@ var _finished_all_laps: bool = false
 var _player_id: int = 0
 var _throttle_input: float
 var _turn_input: float
-var _drift_input: bool
 var _car_controller: CarController
 var _track_follow: TrackFollow
 
@@ -67,17 +66,22 @@ func _input(event: InputEvent) -> void:
 			"turn_l%s" % _player_id
 	)
 	
-	_drift_input = Input.is_action_pressed("drift%s" % _player_id)
+	# Drift input
+	if event.is_action_pressed("drift%s" % _player_id):
+		_car_controller.try_dirft()
+	elif event.is_action_released("drift%s" % _player_id):
+		_car_controller.release_drift()
 	
+	# Trick input
+	if event.is_action_pressed("perform_trick%s" % _player_id):
+		_car_controller.try_trick()
+	
+	# Use item input
 	if event.is_action_pressed("use_held_item%s" % _player_id):
 		_car_controller.use_held_item()
 	
-	if event.is_action_pressed("perform_trick%s" % _player_id):
-		_car_controller.perform_trick()
-	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
-	_car_controller.drift_input = _drift_input
 
 
 func _physics_process(delta: float) -> void:
@@ -97,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	if _finished_all_laps:
 		_car_controller.throttle = 1.0
 		_car_controller.turn_input = 1.0
-		_car_controller.drift_input = 0.0
+		_car_controller.stop_drift()
 
 
 func _get_look_at_pos() -> Vector3:

@@ -14,7 +14,14 @@ const INPUT_ACTIONS: Array[String] = [
 
 # Stores info about all the players that are in the game
 #NOTE: int = player_id, float = time taken to complete the race (for leaderboard)
-var players: Dictionary[int, float] = {0: 0.0, 1: 0.0}
+var players: Dictionary[int, float] = {
+	0: 0.0,
+	#1: 0.0,
+	#2: 0.0,
+	#3: 0.0,
+	#4: 0.0,
+	#5: 0.0,
+}
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
 
@@ -22,6 +29,7 @@ var viewports_container: GridContainer
 func _ready() -> void:
 	# Spawn viewports container
 	viewports_container = GridContainer.new()
+	# Wait until the end of the frame so that /root is ready
 	get_tree().root.add_child.call_deferred(viewports_container)
 	
 	# Set up viewports container

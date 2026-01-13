@@ -15,7 +15,7 @@ point_count = 4
 
 [sub_resource type="Curve" id="Curve_xt16y"]
 _limits = [0.0, 1.0, 0.0, 100.0]
-_data = [Vector2(0, 0), 0.0, 0.041289747, 0, 0, Vector2(31.927708, 0.902985), 0.0064610727, 0.0064610727, 0, 0, Vector2(100, 0.81317365), -0.006461084, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.041289747, 0, 0, Vector2(23.795181, 1), 6.1839804e-09, 6.1839804e-09, 0, 0, Vector2(100, 0.81317365), -0.011175924, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_hglhj"]
@@ -40,7 +40,7 @@ physics_material_override = SubResource("PhysicsMaterial_v4h86")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
 linear_damp = 1.0
-angular_damp = 4.0
+angular_damp = 10.0
 script = ExtResource("1_v4h86")
 _accel_curve = SubResource("Curve_v4h86")
 _turn_curve = SubResource("Curve_xt16y")
@@ -63,7 +63,6 @@ target_position = Vector3(0, -0.85, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DriveDir"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -4.371139e-08, -1)
-visible = false
 mesh = SubResource("CylinderMesh_hglhj")
 
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
