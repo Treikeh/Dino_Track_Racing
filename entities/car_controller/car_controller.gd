@@ -75,7 +75,6 @@ var speed_khm: float
 
 var _movement_state: MovementState = MovementState.NORMAL
 var _turn_dir: float
-##NOTE: This is reversed. When it's is 1.0 there is no drift
 var _ground_normal: Vector3
 var _held_item: ItemResource
 
@@ -83,8 +82,8 @@ var _held_item: ItemResource
 @onready var _default_angular_damp: float = angular_damp
 
 
-func _ready() -> void:
-	_ground_check.target_position.y = -(_rest_height + 0.1)
+#func _ready() -> void:
+#	_ground_check.target_position.y = -(_rest_height + 0.1)
 
 
 func _process(delta: float) -> void:
@@ -122,7 +121,10 @@ func _physics_process(delta: float) -> void:
 		# Only allow input movement when the movement state is normal
 		if _movement_state == MovementState.NORMAL:
 			# Move car
-			var accel_force: float = _accel_curve.sample(speed_khm) * throttle
+			# Increase the friction when driving on grass
+			var ground_collider: PhysicsBody3D = _ground_check.get_collider()
+			var ground_friction: float = 1.5 if ground_collider.is_in_group("grass") else 1.0
+			var accel_force: float = _accel_curve.sample(speed_khm * ground_friction) * throttle
 			apply_central_force(-_drive_dir.global_basis.z * (accel_force + _trick_boost) * mass)
 			
 			# Drifting
@@ -281,7 +283,6 @@ func use_held_item() -> void:
 	if _held_item:
 		var item: Item3D = _held_item.scene.instantiate().with_data(self)
 		add_child(item)
-		item.top_level = true
 		_held_item = null
 
 #endregion

@@ -8,10 +8,10 @@
 [ext_resource type="Resource" uid="uid://dwokx2toq6m8s" path="res://entities/items/item_04.tres" id="6_tn08c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
-size = Vector3(0.75, 1.5, 0.75)
+size = Vector3(1, 1.5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hyb7p"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.75, 0.75, 0.7)
 
 [node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_disabled_timer")]
 script = ExtResource("1_lk11n")

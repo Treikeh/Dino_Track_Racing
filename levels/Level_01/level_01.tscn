@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=10 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_mii42"]
 [ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="3_w8irb"]
+[ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,10 +21,10 @@ tonemap_mode = 2
 [sub_resource type="Curve3D" id="Curve3D_qn7dl"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -12.637852, -6.4100437, -129.70966, 0, 0, 0, 0, 0, 0, -44.327637, -6.2094707, -95.72258, 0, 0, 0, 0, 0, 0, -115.24959, -8.071131, -102.54286, 0, 0, 0, 0, 0, 0, -175.50105, -12.671717, -129.43657, 0, 0, 0, 0, 0, 0, -175.9971, -6.249405, -35.265026, 0, 0, 0, 0, 0, 0, -100.28761, 4.5276365, -18.202934, 0, 0, 0, 0, 0, 0, -90.06767, 22.29435, 18.727787, 0, 0, 0, 0, 0, 0, -137.29813, 35.02051, 32.750618, 0, 0, 0, 0, 0, 0, -142.3964, 28.965351, 65.798584, 0, 0, 0, 0, 0, 0, -114.23829, 22.537346, 96.98444, 0, 0, 0, 0, 0, 0, 11.405975, 16.150486, 127.60673, 0, 0, 0, 0, 0, 0, 28.265282, 13.160884, 94.80914, 0, 0, 0, 0, 0, 0, -0.08795166, 7.7704124, 71.433624, 0, 0, 0, 0, 0, 0, 2.2773933, 4.0703945, 38.05976),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -26.51, -117.21, 0, 0, 0, 0, 0, 0, -22.747732, -26.634418, -148.13844, 0, 0, 0, 0, 0, 0, -65.28857, -28.103168, -105.567154, 0, 0, 0, 0, 0, 0, -128.93106, -25.206968, -107.125595, 0, 0, 0, 0, 0, 0, -160.3542, -25.039896, -149.03264, 0, 0, 0, 0, 0, 0, -195.33975, -24.532099, -129.7605, 0, 0, 0, 0, 0, 0, -194.80649, -21.064915, -48.59883, 0, 0, 0, 0, 0, 0, -174.52756, -20.44831, -28.335373, 0, 0, 0, 0, 0, 0, -120.28101, -12.0019245, -27.760498, 0, 0, 0, 0, 0, 0, -120.30445, -12.808151, 13.696132, 0, 0, 0, 0, 0, 0, -193.25912, -7.5707874, 24.90606, 0, 0, 0, 0, 0, 0, -200.09311, -8.587221, 61.05408, 0, 0, 0, 0, 0, 0, -175.01207, -8.176037, 95.68005, 0, 0, 0, 0, 0, 0, -75.29448, -0.82180667, 120.1661, 0, 0, 0, 0, 0, 0, -32.349678, -0.03788948, 115.92646, 0, 0, 0, 0, 0, 0, 4.368065, 0.76729774, 134.77971, 0, 0, 0, 0, 0, 0, 22.98108, 0.75219077, 121.73433, 0, 0, 0, 0, 0, 0, 17.61156, 0.22400713, 89.530464, 0, 0, 0, 0, 0, 0, -8.224858, 1.203043, 61.699005, 0, 0, 0, 0, 0, 0, -1.126668, 0.092544556, 38.15397),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 15
+point_count = 21
 
 [node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
 script = ExtResource("1_qn7dl")
@@ -40,14 +41,28 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8irb")
 
-[node name="Track" type="Path3D" parent="."]
+[node name="Track" type="Path3D" parent="." groups=["track"]]
 curve = SubResource("Curve3D_qn7dl")
 
 [node name="FinishLine" parent="Track" instance=ExtResource("2_knpns")]
-transform = Transform3D(0.9952748, -0.004763868, 0.096855074, 2.3282777e-10, 0.99878836, 0.04912585, -0.09697145, -0.048894364, 0.9940803, 0, 0, 0)
+transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.23100014, -0.113905236, -0.9662536, 0.08889481, 0.98648447, -0.1375436, 0.96886605, -0.11766897, -0.21775745, -120.51855, 1.6478183, -22.762228)
-progress = 466.1734
+transform = Transform3D(-0.9917892, -0.12787984, 0.00056532264, -0.12784639, 0.9915909, 0.019443389, -0.0030470884, 0.019211631, -0.9997898, -120.2942, -12.455472, -4.438881)
+progress = 562.9591
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
+
+[node name="ItemBoxes" type="Node3D" parent="."]
+
+[node name="ItemBox" parent="ItemBoxes" instance=ExtResource("5_y6nhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -23.300001, -91.8)
+
+[node name="ItemBox2" parent="ItemBoxes" instance=ExtResource("5_y6nhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, -23.300001, -91.8)
+
+[node name="ItemBox3" parent="ItemBoxes" instance=ExtResource("5_y6nhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, -23.300001, -91.8)
+
+[node name="ItemBox4" parent="ItemBoxes" instance=ExtResource("5_y6nhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3, -23.300001, -91.8)

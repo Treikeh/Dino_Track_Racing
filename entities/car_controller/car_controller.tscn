@@ -1,27 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
+[ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
 [ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_xt16y"]
 [ext_resource type="PackedScene" uid="uid://c8qkj6honupyt" path="res://common/scenes/hitbox.tscn" id="3_hglhj"]
+[ext_resource type="Curve" uid="uid://radwuqd3yqcs" path="res://entities/car_controller/data/turn_curve.tres" id="3_nnry6"]
+[ext_resource type="Curve" uid="uid://pggof20wq2a2" path="res://entities/car_controller/data/trick_boost_curve.tres" id="4_rk01o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
 rough = true
-
-[sub_resource type="Curve" id="Curve_v4h86"]
-_limits = [0.0, 50.0, 0.0, 100.0]
-_data = [Vector2(0, 9.131733), 0.0, 0.0121620335, 0, 0, Vector2(33.13253, 37.544907), 0.0015202526, 0.0015202526, 0, 0, Vector2(70.48193, 34.431137), -0.13969886, -0.13969886, 0, 0, Vector2(90.96386, 0), -0.004845808, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Curve" id="Curve_xt16y"]
-_limits = [0.0, 1.0, 0.0, 100.0]
-_data = [Vector2(0, 0), 0.0, 0.041289747, 0, 0, Vector2(23.795181, 1), 6.1839804e-09, 6.1839804e-09, 0, 0, Vector2(100, 0.81317365), -0.011175924, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_hglhj"]
-_limits = [0.0, 100.0, 0.0, 2.0]
-_data = [Vector2(0, 50), 0.0, 6.82669, 0, 0, Vector2(2, 0), -66.65472, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hglhj"]
 height = 1.6
@@ -42,14 +30,13 @@ center_of_mass = Vector3(0, -1, 0)
 linear_damp = 1.0
 angular_damp = 10.0
 script = ExtResource("1_v4h86")
-_accel_curve = SubResource("Curve_v4h86")
-_turn_curve = SubResource("Curve_xt16y")
+_accel_curve = ExtResource("2_po1a6")
+_turn_curve = ExtResource("3_nnry6")
 _drive_dir = NodePath("DriveDir")
 _ground_check = NodePath("GroundCheck")
 _rest_height = 0.8
-_spring_force = 150.0
-_spring_damping = 20.0
-_trick_boost_curve = SubResource("Curve_hglhj")
+_spring_force = 125.0
+_trick_boost_curve = ExtResource("4_rk01o")
 _mesh = NodePath("ScooterDino_01_SK")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -57,7 +44,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 shape = SubResource("CapsuleShape3D_hglhj")
 
 [node name="GroundCheck" type="RayCast3D" parent="."]
-target_position = Vector3(0, -0.85, 0)
+target_position = Vector3(0, -0.75, 0)
 
 [node name="DriveDir" type="Node3D" parent="."]
 
