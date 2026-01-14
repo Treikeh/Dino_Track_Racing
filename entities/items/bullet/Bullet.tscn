@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2b7aqgmc117l"]
+[gd_scene load_steps=7 format=3 uid="uid://b2b7aqgmc117l"]
 
 [ext_resource type="Script" uid="uid://cxnh6v5a221v1" path="res://entities/items/bullet/bullet.gd" id="1_gwcnu"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_h0vic"]
@@ -7,6 +7,13 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h0vic"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0vic"]
+albedo_color = Color(0.5445129, 0, 0.063065365, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h0vic"]
+material = SubResource("StandardMaterial3D_h0vic")
+size = Vector3(0.75, 0.75, 0.75)
+
 [node name="Bullet" type="Node3D" node_paths=PackedStringArray("_bullet_body", "_hurtbox")]
 script = ExtResource("1_gwcnu")
 _bullet_body = NodePath("BulletBody")
@@ -14,6 +21,7 @@ _hurtbox = NodePath("BulletBody/Hurtbox")
 
 [node name="BulletBody" type="CharacterBody3D" parent="."]
 collision_layer = 8
+motion_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BulletBody"]
 shape = SubResource("SphereShape3D_1ltbr")
@@ -23,6 +31,9 @@ shape = SubResource("SphereShape3D_1ltbr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BulletBody/Hurtbox"]
 shape = SubResource("SphereShape3D_h0vic")
 debug_color = Color(0.99607843, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BulletBody"]
+mesh = SubResource("BoxMesh_h0vic")
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 10.0

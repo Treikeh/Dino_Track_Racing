@@ -1,5 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://c34gft7iam7yp"]
+[gd_scene load_steps=10 format=3 uid="uid://c34gft7iam7yp"]
 
 [ext_resource type="PackedScene" uid="uid://bbxbbdht0jxtx" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.glb" id="1_wa4pc"]
+[ext_resource type="Script" uid="uid://bh3slwgh1545o" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.gd" id="2_40ip0"]
 
-[node name="ScooterDino_01_SK" instance=ExtResource("1_wa4pc")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pyhs6"]
+animation = &"scream_001"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_2dvb1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_40ip0"]
+animation = &"idle_001"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6uei0"]
+animation = &"turn_R_001"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cgq74"]
+animation = &"turn_L_001"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_pyhs6"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_40ip0")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_6uei0")
+blend_point_1/pos = -25.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_cgq74")
+blend_point_2/pos = 25.0
+min_space = -25.0
+max_space = 25.0
+snap = 5.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2dvb1"]
+graph_offset = Vector2(-462.3201, 31.569489)
+nodes/turning/node = SubResource("AnimationNodeBlendSpace1D_pyhs6")
+nodes/turning/position = Vector2(-160, 100)
+nodes/scream_blend/node = SubResource("AnimationNodeBlend2_2dvb1")
+nodes/scream_blend/position = Vector2(100, 140)
+nodes/scream/node = SubResource("AnimationNodeAnimation_pyhs6")
+nodes/scream/position = Vector2(-160, 300)
+node_connections = [&"output", 0, &"scream_blend", &"scream_blend", 0, &"turning", &"scream_blend", 1, &"scream"]
+
+[node name="ScooterDino_01_SK" node_paths=PackedStringArray("_anim_tree") instance=ExtResource("1_wa4pc")]
+script = ExtResource("2_40ip0")
+_anim_tree = NodePath("AnimationTree")
+
+[node name="Skeleton3D" parent="Armature_001" index="0"]
+bones/1/rotation = Quaternion(9.794696e-06, 0.7071068, 0.7071068, -9.856517e-06)
+bones/2/position = Vector3(-5.8002224e-05, 0.21397407, 0.45328817)
+bones/2/rotation = Quaternion(-6.663526e-05, 0.534818, 0.8449673, -1.0178268e-05)
+bones/3/rotation = Quaternion(0.07679991, 0.0001710144, 0.000115668176, 0.99704653)
+bones/4/rotation = Quaternion(0.14372195, -2.9835374e-11, -3.4266723e-08, 0.9896181)
+bones/5/rotation = Quaternion(-0.83942777, 6.478475e-08, 1.0006904e-07, 0.5434713)
+bones/6/position = Vector3(-0.14013767, 0.18052946, -0.058365077)
+bones/6/rotation = Quaternion(-0.6576395, 0.06279333, 0.100517265, 0.7439514)
+bones/8/position = Vector3(0.14015076, 0.18053472, -0.05838277)
+bones/8/rotation = Quaternion(-0.65763915, -0.06286921, -0.10062518, 0.7439307)
+bones/10/rotation = Quaternion(0.9010424, -6.1405306e-05, 4.956819e-05, 0.43373126)
+bones/11/rotation = Quaternion(-0.080124706, 1.6623873e-05, 0.000109972236, 0.99678487)
+bones/12/rotation = Quaternion(-0.04101154, 2.903141e-06, 9.724552e-05, 0.9991587)
+bones/13/rotation = Quaternion(0.9377048, -0.08804862, -0.008624552, -0.33598062)
+bones/16/rotation = Quaternion(0.9375898, 0.08804404, 0.008655931, -0.3363015)
+bones/19/rotation = Quaternion(-0.00017205601, 0.70710665, 0.7071069, -0.0001719942)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_2dvb1")
+anim_player = NodePath("../AnimationPlayer")
+parameters/turning/blend_position = 0.033333335
+parameters/scream_blend/blend_amount = 0.0

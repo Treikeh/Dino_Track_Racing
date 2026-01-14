@@ -88,6 +88,7 @@ var _held_item: ItemResource
 
 func _process(delta: float) -> void:
 	_rotate_mesh(delta)
+	_mesh.turn_input = _drive_dir.rotation_degrees.y
 	
 	# Reverse turn direction when driving backwards
 	_turn_dir = turn_input * -1.0 if throttle < 0.0 else turn_input
@@ -122,8 +123,8 @@ func _physics_process(delta: float) -> void:
 		if _movement_state == MovementState.NORMAL:
 			# Move car
 			# Increase the friction when driving on grass
-			var ground_collider: PhysicsBody3D = _ground_check.get_collider()
-			var ground_friction: float = 1.5 if ground_collider.is_in_group("grass") else 1.0
+			var ground_collider: Node3D = _ground_check.get_collider()
+			var ground_friction: float = 2.0 if ground_collider.is_in_group("grass") else 1.0
 			var accel_force: float = _accel_curve.sample(speed_khm * ground_friction) * throttle
 			apply_central_force(-_drive_dir.global_basis.z * (accel_force + _trick_boost) * mass)
 			

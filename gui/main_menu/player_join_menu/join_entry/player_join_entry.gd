@@ -42,8 +42,10 @@ func _input(event: InputEvent) -> void:
 	# Make a sound when drifting
 	if event.is_action_pressed("drift%s" % _player_id):
 		_start_scream()
+		_mesh.is_screaming = true
 	elif event.is_action_released("drift%s" % _player_id):
 		_scream_stream_player.stream_paused = true
+		_mesh.is_screaming = false
 
 
 func _start_scream() -> void:
