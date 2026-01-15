@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7poo3o6yoe28"]
+
+[ext_resource type="Script" uid="uid://m1nsi3msn7qw" path="res://common/scenes/respawn_trigger.gd" id="1_e2p8v"]
+
+[node name="RespawnTrigger" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_e2p8v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
