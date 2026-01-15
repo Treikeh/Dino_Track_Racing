@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=12 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_mii42"]
 [ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="3_w8irb"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
+[ext_resource type="PackedScene" uid="uid://c7poo3o6yoe28" path="res://common/scenes/respawn_trigger.tscn" id="6_22u7d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,10 +23,13 @@ tonemap_mode = 2
 [sub_resource type="Curve3D" id="Curve3D_qn7dl"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -26.51, -117.21, 0, 0, 0, 0, 0, 0, -22.747732, -26.634418, -148.13844, 0, 0, 0, 0, 0, 0, -65.28857, -28.103168, -105.567154, 0, 0, 0, 0, 0, 0, -128.93106, -25.206968, -107.125595, 0, 0, 0, 0, 0, 0, -160.3542, -25.039896, -149.03264, 0, 0, 0, 0, 0, 0, -195.33975, -24.532099, -129.7605, 0, 0, 0, 0, 0, 0, -194.80649, -21.064915, -48.59883, 0, 0, 0, 0, 0, 0, -174.52756, -20.44831, -28.335373, 0, 0, 0, 0, 0, 0, -120.28101, -12.0019245, -27.760498, 0, 0, 0, 0, 0, 0, -120.30445, -12.808151, 13.696132, 0, 0, 0, 0, 0, 0, -193.25912, -7.5707874, 24.90606, 0, 0, 0, 0, 0, 0, -200.09311, -8.587221, 61.05408, 0, 0, 0, 0, 0, 0, -175.01207, -8.176037, 95.68005, 0, 0, 0, 0, 0, 0, -75.29448, -0.82180667, 120.1661, 0, 0, 0, 0, 0, 0, -32.349678, -0.03788948, 115.92646, 0, 0, 0, 0, 0, 0, 4.368065, 0.76729774, 134.77971, 0, 0, 0, 0, 0, 0, 22.98108, 0.75219077, 121.73433, 0, 0, 0, 0, 0, 0, 17.61156, 0.22400713, 89.530464, 0, 0, 0, 0, 0, 0, -8.224858, 1.203043, 61.699005, 0, 0, 0, 0, 0, 0, -1.126668, 0.092544556, 38.15397),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -26.51, -117.21, 0, 0, 0, 0, 0, 0, -22.747732, -26.634418, -148.13844, 0, 0, 0, 0, 0, 0, -65.28857, -28.103168, -105.567154, 0, 0, 0, 0, 0, 0, -128.93106, -25.206968, -107.125595, 0, 0, 0, 0, 0, 0, -160.3542, -25.039896, -149.03264, 0, 0, 0, 0, 0, 0, -195.33975, -24.532099, -129.7605, 0, 0, 0, 0, 0, 0, -194.80649, -21.064915, -48.59883, 0, 0, 0, 0, 0, 0, -174.52756, -20.44831, -28.335373, 0, 0, 0, 0, 0, 0, -120.28101, -12.0019245, -27.760498, 0, 0, 0, 0, 0, 0, -120.30445, -12.808151, 13.696132, 0, 0, 0, 0, 0, 0, -193.25912, -7.5707874, 24.90606, 0, 0, 0, 0, 0, 0, -200.09311, -8.587221, 61.05408, 0, 0, 0, 0, 0, 0, -175.01207, -8.176037, 95.68005, 0, 0, 0, 0, 0, 0, -112.588234, -2.661266, 140.90028, 0, 0, 0, 0, 0, 0, -32.349678, -0.03788948, 115.92646, 0, 0, 0, 0, 0, 0, 4.368065, 0.76729774, 134.77971, 0, 0, 0, 0, 0, 0, 22.98108, 0.75219077, 121.73433, 0, 0, 0, 0, 0, 0, 17.61156, 0.22400713, 89.530464, 0, 0, 0, 0, 0, 0, -8.224858, 1.203043, 61.699005, 0, 0, 0, 0, 0, 0, -1.126668, 0.092544556, 38.15397),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 21
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rbhar"]
+size = Vector3(227.2, 10, 194.2)
 
 [node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
 script = ExtResource("1_qn7dl")
@@ -37,6 +41,7 @@ metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)
+visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -49,7 +54,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917892, -0.12787984, 0.0005653214, -0.12784639, 0.9915909, 0.019443348, -0.0030470884, 0.019211631, -0.9997876, -120.2942, -12.455472, -4.438881)
+transform = Transform3D(-0.9917892, -0.12787984, 0.0005653114, -0.12784639, 0.9915909, 0.019443003, -0.0030470884, 0.019211631, -0.9997699, -120.2942, -12.455472, -4.438881)
 progress = 562.9591
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -91,3 +96,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108.4, -2.5, 140.3)
 
 [node name="ItemBox13" parent="ItemBoxes" instance=ExtResource("5_y6nhf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108.4, -2.5, 145)
+
+[node name="RespawnTrigger" parent="." node_paths=PackedStringArray("_track") instance=ExtResource("6_22u7d")]
+transform = Transform3D(1, 0, 0, 0, 0.99952877, 0.030695518, 0, -0.030695518, 0.99952877, -189.20001, -19.3, 42.7)
+_track = NodePath("../Track")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RespawnTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6, 0, 47.100002)
+shape = SubResource("BoxShape3D_rbhar")
+debug_color = Color(0.9882353, 0, 0, 1)

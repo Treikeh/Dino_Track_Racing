@@ -41,13 +41,13 @@ _subresources={
 "materials": {
 "dino_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://entities/car_controller/art/scooter_dino/scooter_dino_01_mat.tres",
-"use_external/path": "uid://dppg2qxby42mp"
+"use_external/fallback_path": "res://entities/car_controller/art/scooter_dino/new_shader_material.tres",
+"use_external/path": "uid://bev3yn5lvlyuv"
 },
 "scooter_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://entities/car_controller/art/scooter_dino/scooter_dino_01_mat.tres",
-"use_external/path": "uid://dppg2qxby42mp"
+"use_external/fallback_path": "res://entities/car_controller/art/scooter_dino/new_shader_material.tres",
+"use_external/path": "uid://bev3yn5lvlyuv"
 }
 }
 }

@@ -72,6 +72,7 @@ var _trick_state: TrickState = TrickState.CAN_PERFORM
 var throttle: float
 var turn_input: float
 var speed_khm: float
+var last_ground_pos: Vector3
 
 var _movement_state: MovementState = MovementState.NORMAL
 var _turn_dir: float
@@ -131,7 +132,8 @@ func _physics_process(delta: float) -> void:
 			# Drifting
 			if _is_drifting:
 				# Increase drift duration
-				apply_central_force(_drive_dir.global_basis.x * _sideways_dirft_force * _drift_dir * mass)
+				var side_drift_force: float = _sideways_dirft_force* throttle
+				apply_central_force(_drive_dir.global_basis.x * side_drift_force * _drift_dir * mass)
 				_drift_time += delta
 				#TODO: Show drift vfx when drift duration >= min drift boost duration
 				# Stop drift if speed gets too low
@@ -158,6 +160,8 @@ func _physics_process(delta: float) -> void:
 		_apply_suspension()
 		_apply_anti_roll()
 		_apply_anti_slip(delta)
+		
+		last_ground_pos = global_position
 	else:
 		linear_damp = 0.0
 		# Reduce how much the car can rotate in the air

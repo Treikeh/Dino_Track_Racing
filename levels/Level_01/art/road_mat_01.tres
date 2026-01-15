@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bebafnvnhr0uc"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_st8su"]
+[ext_resource type="Texture2D" uid="uid://k7l6ccf8wts" path="res://levels/Level_01/art/track_01_sm_random_ground_texture.png" id="2_ln0e4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_st8su")
+shader_parameter/color_texture = ExtResource("2_ln0e4")
