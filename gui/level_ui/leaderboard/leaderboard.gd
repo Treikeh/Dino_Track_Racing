@@ -15,7 +15,6 @@ func populate() -> void:
 	for i: int in players.size():
 		# Get info about the player
 		var id: int = players[i]
-		#TODO: Convert to minutes form seconds
 		var time_taken: float = Globals.players[id]
 		
 		# Add label to the leaderboard
@@ -31,9 +30,9 @@ func _sort_player_time_taken(a: int, b: int) -> bool:
 func _time_convert(time_in_sec: float) -> String:
 	var seconds: int = floori(time_in_sec) % 60
 	@warning_ignore("integer_division")
-	var minutes: int = (seconds / 60) % 60
+	var minutes: int = (int(time_in_sec) / 60) % 60
 	@warning_ignore("integer_division")
-	var hours: int = (seconds / 60) / 60
+	var hours: int = (int(time_in_sec) / 60) / 60
 	var decimal: float = (time_in_sec - seconds) * 100
 	return "%02d:%02d:%02d.%02d" % [hours, minutes, seconds, floori(decimal)]
 
