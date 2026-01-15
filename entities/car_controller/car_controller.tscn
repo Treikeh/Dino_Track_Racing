@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=17 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -21,7 +21,36 @@ bottom_radius = 0.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_hglhj"]
 size = Vector3(0.7, 1, 1.6)
 
-[node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_mesh") groups=["car"]]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nnry6"]
+direction = Vector3(0, 1, 1)
+initial_velocity_min = 1.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk01o"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ucq23"]
+material = SubResource("StandardMaterial3D_rk01o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_po1a6"]
+spread = 180.0
+initial_velocity_min = 2.5
+initial_velocity_max = 2.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po1a6"]
+shading_mode = 0
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_nnry6"]
+material = SubResource("StandardMaterial3D_po1a6")
+
+[node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
 collision_layer = 2
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_v4h86")
@@ -38,6 +67,8 @@ _rest_height = 0.8
 _spring_force = 125.0
 _trick_boost_curve = ExtResource("4_rk01o")
 _mesh = NodePath("ScooterDino_01_SK")
+_drift_vfx = NodePath("DriftVFX")
+_trick_vfx = NodePath("TrickVFX")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
@@ -62,6 +93,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("BoxShape3D_hglhj")
 debug_color = Color(0, 1, 0, 0.41960785)
+
+[node name="DriftVFX" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0.6)
+emitting = false
+lifetime = 0.15000000000000002
+visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_nnry6")
+draw_pass_1 = SubResource("QuadMesh_ucq23")
+
+[node name="TrickVFX" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_po1a6")
+draw_pass_1 = SubResource("QuadMesh_nnry6")
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]

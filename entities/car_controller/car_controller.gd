@@ -68,6 +68,8 @@ var _trick_state: TrickState = TrickState.CAN_PERFORM
 @export_group("Art")
 @export var _mesh_lerp_speed: float = 10.0
 @export var _mesh: Node3D
+@export var _drift_vfx: GPUParticles3D
+@export var _trick_vfx: GPUParticles3D
 
 var throttle: float
 var turn_input: float
@@ -89,7 +91,9 @@ var _held_item: ItemResource
 
 func _process(delta: float) -> void:
 	_rotate_mesh(delta)
-	_mesh.turn_input = _drive_dir.rotation_degrees.y
+	_mesh.turn_angle = _drive_dir.rotation_degrees.y
+	_mesh.turn_input = turn_input
+	_mesh.drift_dir = _drift_dir
 	
 	# Reverse turn direction when driving backwards
 	_turn_dir = turn_input * -1.0 if throttle < 0.0 else turn_input
@@ -135,7 +139,9 @@ func _physics_process(delta: float) -> void:
 				var side_drift_force: float = _sideways_dirft_force* throttle
 				apply_central_force(_drive_dir.global_basis.x * side_drift_force * _drift_dir * mass)
 				_drift_time += delta
-				#TODO: Show drift vfx when drift duration >= min drift boost duration
+				# Show drift vfx when drift duration >= min drift boost duration
+				if _drift_time >= _min_drift_boost_duration and not _drift_vfx.emitting:
+					_drift_vfx.emitting = true
 				# Stop drift if speed gets too low
 				if speed_khm <= 5.0:
 					stop_drift()
@@ -231,6 +237,8 @@ func try_dirft() -> void:
 	elif not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
 		_trick_state = TrickState.PERFORMED
 		trick_performed.emit()
+		_mesh.play_trick_anim()
+		_trick_vfx.restart()
 
 
 func release_drift() -> void:
@@ -241,6 +249,7 @@ func release_drift() -> void:
 
 
 func stop_drift() -> void:
+	_drift_vfx.emitting = false
 	_is_drifting = false
 	_drift_dir = 0
 

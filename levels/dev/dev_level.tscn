@@ -60,6 +60,16 @@ transform = Transform3D(1, 0, 0, 0, 0.93863153, -0.34492144, 0, 0.34492144, 0.93
 use_collision = true
 size = Vector3(8.423584, 1, 7.236328)
 
+[node name="Ramp2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.48296288, -0.69590837, 0.53146815, 0.86602545, 0.46931574, -0.1724607, -0.12940948, 0.54355705, 0.8293364, 1.6530108, 4.9072967, -22.434975)
+use_collision = true
+size = Vector3(8.423584, 1, 10.8)
+
+[node name="Ramp3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.25, -0.10772866, 0.9622341, 0.86602545, 0.46931574, -0.17246072, -0.43301266, 0.8764344, 0.21062464, -9.746989, 4.9072967, -32.934975)
+use_collision = true
+size = Vector3(8.423584, 1, 10.8)
+
 [node name="Bump" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.292329, -3.7729082, 0.8880811)
 use_collision = true
