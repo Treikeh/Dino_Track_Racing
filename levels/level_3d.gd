@@ -23,8 +23,10 @@ var _race_active: bool = false
 # How long the race has lasted
 var _race_duration: float = 0.0
 var _level_ui: CanvasLayer
-# Race positions of each car (1st, 2nd, 3rd, etc..)
+# Race positions of each car (1st, 2nd, 3rd, etc..). Array index = position(0 = 1st), int = car id
 var _car_positions: Array[int]
+# All the cars added to the leve and the asociated id to that car. int = car id
+var _cars: Dictionary[int, CarController]
 # int = car id
 var _track_follows: Dictionary[int, TrackFollow]
 
@@ -86,6 +88,7 @@ func _add_car(id: int) -> CarController:
 	car.set_movement_state(CarController.MovementState.DISABLED)
 	# Add cars id to array for sorting positions
 	_car_positions.append(id)
+	_cars[id] = car
 	return car
 
 
@@ -179,3 +182,21 @@ func _on_car_finished_all_laps(car_id: int) -> void:
 func _end_level() -> void:
 	_race_active = false
 	_level_ui.on_race_ended()
+
+
+func get_id_from_car(car: CarController) -> int:
+	return _cars.find_key(car)
+
+
+func get_race_pos_from_car(car: CarController) -> int:
+	var car_id: int = get_id_from_car(car)
+	return _car_positions.find(car_id)
+
+
+func get_car_from_id(id: int) -> CarController:
+	return _track_follows[id]._car_controller
+
+
+func get_car_from_race_position(race_position: int) -> CarController:
+	var car_id: int = _car_positions[race_position]
+	return _track_follows[car_id]._car_controller
