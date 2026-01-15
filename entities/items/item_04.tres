@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqpqvhtlhn3ji" path="res://entities/items/art/among-us-drip-png-png-artwork-download-36642-3248130141.png" id="1_5m8l6"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="1_mjxq2"]
-[ext_resource type="PackedScene" uid="uid://b2b7aqgmc117l" path="res://entities/items/bullet/Bullet.tscn" id="2_mv2jm"]
+[ext_resource type="PackedScene" uid="uid://b2b7aqgmc117l" path="res://entities/items/bullet/bullet.tscn" id="2_mv2jm"]
 
 [resource]
 script = ExtResource("1_mjxq2")

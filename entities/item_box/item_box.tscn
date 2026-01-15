@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
 [ext_resource type="Resource" uid="uid://8ua8vkdsn5ei" path="res://entities/items/item_01.tres" id="3_cienk"]
 [ext_resource type="Resource" uid="uid://jbthpww8mqiv" path="res://entities/items/item_02.tres" id="4_30yuj"]
-[ext_resource type="Resource" uid="uid://bsi7hj4jmctig" path="res://entities/items/item_03.tres" id="5_i6fuj"]
-[ext_resource type="Resource" uid="uid://dwokx2toq6m8s" path="res://entities/items/item_04.tres" id="6_tn08c"]
+[ext_resource type="Resource" uid="uid://dur6tpq66muhr" path="res://entities/items/bullet/bullet.tres" id="5_ic5go"]
+[ext_resource type="Resource" uid="uid://dx8ax8jf5eo0g" path="res://entities/items/lance/lance.tres" id="6_cienk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
 size = Vector3(1, 1.5, 1)
@@ -15,7 +15,7 @@ size = Vector3(0.75, 0.75, 0.7)
 
 [node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_disabled_timer")]
 script = ExtResource("1_lk11n")
-_items = Array[ExtResource("2_ic5go")]([ExtResource("3_cienk"), ExtResource("4_30yuj"), ExtResource("5_i6fuj"), ExtResource("6_tn08c")])
+_items = Array[ExtResource("2_ic5go")]([ExtResource("3_cienk"), ExtResource("4_30yuj"), ExtResource("5_ic5go"), ExtResource("6_cienk")])
 _mesh_root = NodePath("MeshRoot")
 _disabled_timer = NodePath("DisabledTimer")
 

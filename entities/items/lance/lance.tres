@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://dx8ax8jf5eo0g"]
+
+[ext_resource type="PackedScene" uid="uid://cqm8uwhsg88n6" path="res://entities/items/lance/lance.tscn" id="1_wp3p1"]
+[ext_resource type="Texture2D" uid="uid://cm8n6oqxnbq8k" path="res://entities/items/lance/art/carrot.png" id="1_wyn11"]
+[ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_wyn11"]
+
+[resource]
+script = ExtResource("2_wyn11")
+icon = ExtResource("1_wyn11")
+rarity = 8
+scene = ExtResource("1_wp3p1")
+metadata/_custom_type_script = "uid://cueb0e6107vpe"

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqm8uwhsg88n6"]
+
+[ext_resource type="Script" uid="uid://cpvtkidb6kwbq" path="res://entities/items/lance/lance.gd" id="1_fw5ah"]
+[ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_jmxmm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_py646"]
+height = 2.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jmxmm"]
+radius = 0.25
+height = 2.5
+
+[node name="Lance" type="Node3D" node_paths=PackedStringArray("_hurtbox")]
+script = ExtResource("1_fw5ah")
+_hurtbox = NodePath("Hurtbox")
+metadata/_custom_type_script = "uid://751u1m35fd72"
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_jmxmm")]
+transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 0.2, 0.40000004, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -1.25)
+shape = SubResource("CapsuleShape3D_py646")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.371139e-09, -1.15)
+mesh = SubResource("CapsuleMesh_jmxmm")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
