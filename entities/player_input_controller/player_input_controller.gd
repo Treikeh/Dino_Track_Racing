@@ -4,6 +4,9 @@ class_name PlayerInputController
 
 @export_group("Car")
 @export var _cam_follow_speed: float = 6.0
+@export var _fov_lerp_speed: float = 2.5
+@export var _fov_curve: Curve
+@export var _cam: Camera3D
 @export var _orientation: Node3D
 @export var _id_label: Label3D
 
@@ -78,6 +81,12 @@ func _input(event: InputEvent) -> void:
 	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
+
+
+func _process(delta: float) -> void:
+	# Change fov based on speed
+	var desired_fov: float = _fov_curve.sample(_car_controller.speed_khm)
+	_cam.fov = lerpf(_cam.fov, desired_fov, _fov_lerp_speed * delta)
 
 
 func _physics_process(delta: float) -> void:

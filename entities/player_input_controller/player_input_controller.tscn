@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1f50k3xa7iar"]
+[gd_scene load_steps=4 format=3 uid="uid://d1f50k3xa7iar"]
 
 [ext_resource type="Script" uid="uid://pohingt7fxqa" path="res://entities/player_input_controller/player_input_controller.gd" id="1_htsux"]
 [ext_resource type="Texture2D" uid="uid://bcafrhxpv4041" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_bc.png" id="2_jpoqo"]
 
-[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image")]
+[sub_resource type="Curve" id="Curve_jpoqo"]
+_limits = [70.0, 100.0, 40.0, 175.0]
+_data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 100), 0.5463626, 0.0, 0, 0]
+point_count = 2
+
+[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 150.0
@@ -11,7 +16,9 @@ offset_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_htsux")
-_cam_follow_speed = 7.0
+_cam_follow_speed = 15.0
+_fov_curve = SubResource("Curve_jpoqo")
+_cam = NodePath("SubViewportContainer/SubViewport/Camera3D")
 _orientation = NodePath("SubViewportContainer/SubViewport/Orientation")
 _id_label = NodePath("SubViewportContainer/SubViewport/IdLabel")
 _position_label = NodePath("PositionLabel")
@@ -38,7 +45,7 @@ size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4)
+transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4.5)
 
 [node name="IdLabel" type="Label3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,7 +55,7 @@ text = "P1"
 [node name="Orientation" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="CameraTransform" type="RemoteTransform3D" parent="SubViewportContainer/SubViewport/Orientation"]
-transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4)
+transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4.5)
 remote_path = NodePath("../../Camera3D")
 
 [node name="PositionLabel" type="Label" parent="."]
