@@ -33,16 +33,9 @@ size = Vector3(227.2, 10, 194.2)
 
 [node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
 script = ExtResource("1_qn7dl")
-_lap_count = 1
-_countdown_duration = 1
 _track = NodePath("Track")
 _spawn_point = NodePath("Track/FinishLine")
 metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)
-visible = false
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8irb")
@@ -54,7 +47,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917892, -0.12787984, 0.0005653095, -0.12784639, 0.9915909, 0.019442936, -0.0030470884, 0.019211631, -0.9997665, -120.2942, -12.455472, -4.438881)
+transform = Transform3D(-0.9917892, -0.12787984, 0.0005653094, -0.12784639, 0.9915909, 0.019442935, -0.0030470884, 0.019211631, -0.9997664, -120.2942, -12.455472, -4.438881)
 progress = 562.9591
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
