@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dosd47fqh8thg"]
+[gd_scene load_steps=14 format=3 uid="uid://dosd47fqh8thg"]
 
 [ext_resource type="Script" uid="uid://r05j8taagghm" path="res://entities/item_box/item_box.gd" id="1_lk11n"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
@@ -13,10 +13,34 @@ size = Vector3(1, 1.5, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_hyb7p"]
 size = Vector3(0.75, 0.75, 0.7)
 
-[node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_disabled_timer")]
+[sub_resource type="Curve" id="Curve_ic5go"]
+_data = [Vector2(0, 1), 0.0, -0.23650752, 0, 0, Vector2(1, 0), -2.5011203, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cienk"]
+width = 128
+curve = SubResource("Curve_ic5go")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_30yuj"]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 7.5
+initial_velocity_max = 10.0
+scale_min = 0.19999999
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_cienk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6fuj"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_tn08c"]
+material = SubResource("StandardMaterial3D_i6fuj")
+
+[node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_collect_vfx", "_disabled_timer")]
 script = ExtResource("1_lk11n")
 _items = Array[ExtResource("2_ic5go")]([ExtResource("3_cienk"), ExtResource("4_30yuj"), ExtResource("5_ic5go"), ExtResource("6_cienk")])
 _mesh_root = NodePath("MeshRoot")
+_collect_vfx = NodePath("CollectVFX")
 _disabled_timer = NodePath("DisabledTimer")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -34,6 +58,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshRoot"]
 transform = Transform3D(0.70710677, 0.70710677, 0, -0.49999997, 0.49999997, -0.70710677, -0.49999997, 0.49999997, 0.70710677, 0, 0, 0)
 mesh = SubResource("BoxMesh_hyb7p")
+
+[node name="CollectVFX" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-4, -3.5, -4, 8, 8, 8)
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_30yuj")
+draw_pass_1 = SubResource("QuadMesh_tn08c")
 
 [node name="DisabledTimer" type="Timer" parent="."]
 one_shot = true

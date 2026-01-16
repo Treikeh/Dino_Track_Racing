@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=19 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -21,13 +21,22 @@ bottom_radius = 0.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_hglhj"]
 size = Vector3(0.7, 1, 1.6)
 
+[sub_resource type="Curve" id="Curve_po1a6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.5331354, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nnry6"]
+width = 128
+curve = SubResource("Curve_po1a6")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nnry6"]
-direction = Vector3(0, 1, 1)
-initial_velocity_min = 1.5
-initial_velocity_max = 1.5
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.25
 scale_max = 0.25
+scale_curve = SubResource("CurveTexture_nnry6")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk01o"]
 shading_mode = 0
@@ -95,12 +104,12 @@ shape = SubResource("BoxShape3D_hglhj")
 debug_color = Color(0, 1, 0, 0.41960785)
 
 [node name="DriftVFX" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0.6)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202015, 0, -0.34202015, 0.9396926, 0, -0.36136296, 0.58964723)
 emitting = false
-lifetime = 0.15000000000000002
+lifetime = 0.3
 visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
 local_coords = true
-transform_align = 1
+transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_nnry6")
 draw_pass_1 = SubResource("QuadMesh_ucq23")
 
@@ -111,7 +120,7 @@ one_shot = true
 explosiveness = 1.0
 visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
 local_coords = true
-transform_align = 1
+transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_po1a6")
 draw_pass_1 = SubResource("QuadMesh_nnry6")
 

@@ -91,6 +91,8 @@ var _held_item: ItemResource
 
 func _process(delta: float) -> void:
 	_rotate_mesh(delta)
+	_mesh.is_grounded = _ground_check.is_colliding()
+	_mesh.falling_speed = linear_velocity.y
 	_mesh.turn_angle = _drive_dir.rotation_degrees.y
 	_mesh.turn_input = turn_input
 	_mesh.drift_dir = _drift_dir

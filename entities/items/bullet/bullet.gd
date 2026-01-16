@@ -15,7 +15,10 @@ func _ready() -> void:
 	var race_pos: int = level.get_race_pos_from_car(instigator)
 	# Get the car in front of instigator
 	var car_in_front: CarController = level.get_car_from_race_position(race_pos - 1)
-	look_at(car_in_front.global_position, Vector3.UP)
+	
+	# Don't make the bullet look at the car that spawned it (Only happens when there's only 1 player)
+	if car_in_front != instigator:
+		look_at(car_in_front.global_position, Vector3.UP)
 	
 	# Apply force to the bullet
 	_bullet_body.velocity = -global_basis.z * 50.0
