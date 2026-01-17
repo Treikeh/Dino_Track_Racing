@@ -61,7 +61,7 @@ material = SubResource("StandardMaterial3D_po1a6")
 
 [node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 35
 physics_material_override = SubResource("PhysicsMaterial_v4h86")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
