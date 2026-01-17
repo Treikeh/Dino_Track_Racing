@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cysyck4m3rb35"]
-
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_ww71r"]
-[ext_resource type="Texture2D" uid="uid://cfiqb67uw0s4h" path="res://levels/Level_01/art/track_01_sm_lava_01_modified.png" id="2_um231"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_ww71r")
-shader_parameter/color_texture = ExtResource("2_um231")

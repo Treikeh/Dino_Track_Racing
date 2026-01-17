@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bbvq8m8l6gbu1"]
+
+[ext_resource type="Shader" uid="uid://dwa7vgq6ap7lp" path="res://levels/Level_01/art/lava_shader.gdshader" id="1_5u248"]
+[ext_resource type="Texture2D" uid="uid://cfiqb67uw0s4h" path="res://levels/Level_01/art/track_01_sm_lava_01_modified.png" id="2_isg8e"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_isg8e"]
+noise_type = 3
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jbcsu"]
+noise = SubResource("FastNoiseLite_isg8e")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5u248")
+shader_parameter/displacement_map = SubResource("NoiseTexture2D_jbcsu")
+shader_parameter/color_texture = ExtResource("2_isg8e")

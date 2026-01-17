@@ -23,6 +23,7 @@ var _throttle_input: float
 var _turn_input: float
 var _car_controller: CarController
 var _track_follow: TrackFollow
+var _countdown_tween: Tween
 
 
 # Add after instatiate (instatiate().with_data(.., ..)) to setup controller data
@@ -155,8 +156,12 @@ func _update_countdown_label(
 	_countdown_label.show()
 	_countdown_label.modulate = Color.TRANSPARENT
 	
-	var tween: Tween = create_tween()
-	tween.tween_property(_countdown_label, "modulate", Color.WHITE, fade_duration)
-	tween.tween_interval(visible_duration)
-	tween.tween_property(_countdown_label, "modulate", Color.TRANSPARENT, fade_duration)
-	tween.tween_callback(_countdown_label.hide)
+	# Stop tween if allready running
+	if _countdown_tween:
+		_countdown_tween.stop()
+	
+	_countdown_tween = create_tween()
+	_countdown_tween.tween_property(_countdown_label, "modulate", Color.WHITE, fade_duration)
+	_countdown_tween.tween_interval(visible_duration)
+	_countdown_tween.tween_property(_countdown_label, "modulate", Color.TRANSPARENT, fade_duration)
+	_countdown_tween.tween_callback(_countdown_label.hide)

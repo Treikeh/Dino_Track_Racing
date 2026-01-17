@@ -8,3 +8,6 @@
 
 [node name="StaticBody3D" parent="TreesCollision_001" index="0"]
 collision_layer = 32
+
+[node name="StaticBody3D" parent="VulcanoCollision_001" index="0"]
+collision_layer = 32

@@ -46,8 +46,8 @@ _subresources={
 },
 "lava_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://levels/Level_01/art/lava_mat_01.tres",
-"use_external/path": "uid://cysyck4m3rb35"
+"use_external/fallback_path": "res://levels/Level_01/art/lava_shader_mat_01.tres",
+"use_external/path": "uid://bbvq8m8l6gbu1"
 },
 "road_mat.001": {
 "use_external/enabled": true,
