@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://btfrkiblbc5ba"]
+
+[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="1_66up2"]
+[ext_resource type="Script" uid="uid://c3syhjfrkfu1n" path="res://common/scenes/shadow_caster.gd" id="1_aom53"]
+
+[node name="ShadowCaster" type="Node3D" node_paths=PackedStringArray("_shadow_dir_ray", "_shadow_decal")]
+script = ExtResource("1_aom53")
+_shadow_texture = ExtResource("1_66up2")
+_shadow_dir_ray = NodePath("ShadowDirRay")
+_shadow_decal = NodePath("ShadowDecal")
+
+[node name="ShadowDirRay" type="RayCast3D" parent="."]
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+
+[node name="ShadowDecal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+texture_albedo = ExtResource("1_66up2")
+distance_fade_enabled = true
+cull_mask = 2

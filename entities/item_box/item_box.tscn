@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dosd47fqh8thg"]
+[gd_scene load_steps=15 format=3 uid="uid://dosd47fqh8thg"]
 
 [ext_resource type="Script" uid="uid://r05j8taagghm" path="res://entities/item_box/item_box.gd" id="1_lk11n"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://jbthpww8mqiv" path="res://entities/items/item_02.tres" id="4_30yuj"]
 [ext_resource type="Resource" uid="uid://dur6tpq66muhr" path="res://entities/items/bullet/bullet.tres" id="5_ic5go"]
 [ext_resource type="Resource" uid="uid://dx8ax8jf5eo0g" path="res://entities/items/lance/lance.tres" id="6_cienk"]
+[ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster.tscn" id="7_cienk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
 size = Vector3(1, 1.5, 1)
@@ -58,6 +59,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshRoot"]
 transform = Transform3D(0.70710677, 0.70710677, 0, -0.49999997, 0.49999997, -0.70710677, -0.49999997, 0.49999997, 0.70710677, 0, 0, 0)
 mesh = SubResource("BoxMesh_hyb7p")
+
+[node name="ShadowCaster" parent="MeshRoot" instance=ExtResource("7_cienk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollectVFX" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

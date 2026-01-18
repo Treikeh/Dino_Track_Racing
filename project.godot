@@ -113,6 +113,8 @@ pause={
 
 [layer_names]
 
+3d_render/layer_1="default"
+3d_render/layer_2="allow_shadows"
 3d_physics/layer_1="road"
 3d_physics/layer_2="car"
 3d_physics/layer_3="track_follow"
