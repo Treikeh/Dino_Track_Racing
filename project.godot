@@ -126,3 +126,9 @@ pause={
 
 3d/physics_engine="Jolt Physics"
 3d/default_gravity=15.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=3
+textures/decals/filter=2
+textures/light_projectors/filter=2

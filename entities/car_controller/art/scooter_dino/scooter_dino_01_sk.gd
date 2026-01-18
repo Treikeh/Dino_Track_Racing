@@ -28,4 +28,5 @@ func _process(_delta: float) -> void:
 
 
 func play_trick_anim() -> void:
+	_anim_tree.trick_index = randi_range(0, 1)
 	_anim_tree.set("parameters/trick_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
