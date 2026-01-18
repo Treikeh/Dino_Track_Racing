@@ -15,11 +15,13 @@ func pause_game() -> void:
 	show()
 	get_tree().paused = true
 	_pause_focus.grab_focus()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _resume_game() -> void:
 	hide()
 	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _on_resume_button_pressed() -> void:

@@ -11,14 +11,20 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_knpns"]
+[sub_resource type="Sky" id="Sky_22u7d"]
 sky_material = SubResource("ProceduralSkyMaterial_qn7dl")
 
 [sub_resource type="Environment" id="Environment_w8irb"]
 background_mode = 1
 background_color = Color(0.37797713, 0.5558381, 0.74858373, 1)
-sky = SubResource("Sky_knpns")
+background_energy_multiplier = 1.25
+sky = SubResource("Sky_22u7d")
 tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_density = 0.3273
+fog_sky_affect = 0.261
+fog_depth_end = 200.0
 
 [sub_resource type="Curve3D" id="Curve3D_qn7dl"]
 closed = true
@@ -47,7 +53,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917892, -0.12787984, 0.00056530605, -0.12784639, 0.9915909, 0.019442817, -0.0030470884, 0.019211631, -0.9997604, -120.2942, -12.455472, -4.438881)
+transform = Transform3D(-0.9917892, -0.12787984, 0.0005653055, -0.12784639, 0.9915909, 0.0194428, -0.0030470884, 0.019211631, -0.9997595, -120.2942, -12.455472, -4.438881)
 progress = 562.9591
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]

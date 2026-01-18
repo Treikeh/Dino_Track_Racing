@@ -96,7 +96,7 @@ visible = false
 mesh = SubResource("CylinderMesh_hglhj")
 
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
 
 [node name="Skeleton3D" parent="ScooterDino_01_SK" index="0"]
 bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
