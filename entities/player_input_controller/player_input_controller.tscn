@@ -8,7 +8,7 @@ _limits = [70.0, 100.0, 40.0, 175.0]
 _data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 100), 0.5463626, 0.0, 0, 0]
 point_count = 2
 
-[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image")]
+[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image", "_wrong_way_panel", "_debug_label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 150.0
@@ -18,16 +18,18 @@ size_flags_vertical = 3
 script = ExtResource("1_htsux")
 _cam_follow_speed = 15.0
 _fov_curve = SubResource("Curve_jpoqo")
-_cam = NodePath("SubViewportContainer/SubViewport/Camera3D")
-_orientation = NodePath("SubViewportContainer/SubViewport/Orientation")
-_id_label = NodePath("SubViewportContainer/SubViewport/IdLabel")
-_position_label = NodePath("PositionLabel")
-_speedometer = NodePath("Speedometer")
-_lap_label = NodePath("LapLabel")
-_countdown_label = NodePath("CountdownLabel")
-_item_image = NodePath("ItemImage")
+_cam = NodePath("Viewport/SubViewport/Camera3D")
+_orientation = NodePath("Viewport/SubViewport/Orientation")
+_id_label = NodePath("Viewport/SubViewport/IdLabel")
+_position_label = NodePath("Hud/PositionLabel")
+_speedometer = NodePath("Hud/Speedometer")
+_lap_label = NodePath("Hud/LapLabel")
+_countdown_label = NodePath("Hud/CountdownLabel")
+_item_image = NodePath("Hud/ItemImage")
+_wrong_way_panel = NodePath("Hud/WrongWayPanel")
+_debug_label = NodePath("DebugLabel")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="Viewport" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,34 +40,42 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Viewport"]
 handle_input_locally = false
 size = Vector2i(150, 150)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Viewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4.5)
 
-[node name="IdLabel" type="Label3D" parent="SubViewportContainer/SubViewport"]
+[node name="IdLabel" type="Label3D" parent="Viewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 text = "P1"
 
-[node name="Orientation" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="Orientation" type="Node3D" parent="Viewport/SubViewport"]
 
-[node name="CameraTransform" type="RemoteTransform3D" parent="SubViewportContainer/SubViewport/Orientation"]
+[node name="CameraTransform" type="RemoteTransform3D" parent="Viewport/SubViewport/Orientation"]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4.5)
 remote_path = NodePath("../../Camera3D")
 
-[node name="PositionLabel" type="Label" parent="."]
+[node name="Hud" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PositionLabel" type="Label" parent="Hud"]
 layout_mode = 1
 offset_right = 26.0
 offset_bottom = 63.0
 theme_override_font_sizes/font_size = 45
 text = "1"
 
-[node name="Speedometer" type="Label" parent="."]
+[node name="Speedometer" type="Label" parent="Hud"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -78,14 +88,14 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "30m/s"
 
-[node name="LapLabel" type="Label" parent="."]
+[node name="LapLabel" type="Label" parent="Hud"]
 layout_mode = 1
 offset_top = 50.0
 offset_right = 40.0
 offset_bottom = 73.00006
 text = "1/3"
 
-[node name="CountdownLabel" type="Label" parent="."]
+[node name="CountdownLabel" type="Label" parent="Hud"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -94,9 +104,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -11.5
+offset_top = -34.5
 offset_right = 20.0
-offset_bottom = 11.5
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
@@ -104,15 +114,44 @@ text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemImage" type="TextureRect" parent="."]
+[node name="ItemImage" type="TextureRect" parent="Hud"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -10.0
-offset_right = 10.0
+offset_top = -40.0
+offset_right = 40.0
 grow_vertical = 0
 texture = ExtResource("2_jpoqo")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="WrongWayPanel" type="PanelContainer" parent="Hud"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = 20.0
+offset_right = 44.5
+offset_bottom = 60.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud/WrongWayPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="Hud/WrongWayPanel/MarginContainer"]
+layout_mode = 2
+text = "Wrong Way!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DebugLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

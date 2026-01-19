@@ -6,6 +6,7 @@ extends Control
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_enable_menu(_start_menu)
 	_disable_menu(_player_join_menu)
 

@@ -7,6 +7,7 @@ extends Control
 
 # Add all the entires to the leaderboard
 func populate() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_start_focus_object.grab_focus()
 	
 	var players: Array[int] = Globals.players.keys()

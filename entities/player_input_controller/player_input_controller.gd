@@ -16,6 +16,11 @@ class_name PlayerInputController
 @export var _lap_label: Label
 @export var _countdown_label: Label
 @export var _item_image: TextureRect
+@export var _wrong_way_panel: Container
+
+@export_group("Debug")
+@warning_ignore("unused_private_class_variable")
+@export var _debug_label: Label
 
 var _finished_all_laps: bool = false
 var _player_id: int = 0
@@ -88,6 +93,10 @@ func _process(delta: float) -> void:
 	# Change fov based on speed
 	var desired_fov: float = _fov_curve.sample(_car_controller.speed_khm)
 	_cam.fov = lerpf(_cam.fov, desired_fov, _fov_lerp_speed * delta)
+	
+	var track_drive_dir: float = _car_controller.global_basis.z.dot(_track_follow.global_basis.z)
+	var driving_wrong_way: bool = track_drive_dir > -0.2
+	_wrong_way_panel.visible = not driving_wrong_way
 
 
 func _physics_process(delta: float) -> void:
@@ -119,14 +128,6 @@ func _get_look_at_pos() -> Vector3:
 
 #region UI signal functions
 
-func on_countdown_updated(seconds_left: int) -> void:
-	_countdown_label.show()
-	if seconds_left <= 0:
-		_update_countdown_label("GO!", 2.0)
-	else:
-		_update_countdown_label(str(seconds_left))
-
-
 func on_car_positions_updated(car_positions: Array[int]) -> void:
 	_position_label.text = str(car_positions.find(_player_id) + 1)
 
@@ -143,7 +144,13 @@ func _on_finished_all_laps(_car_id: int) -> void:
 func _on_car_item_picked_up(item: ItemResource) -> void:
 	_item_image.texture = item.icon
 
-#endregion
+
+func on_countdown_updated(seconds_left: int) -> void:
+	_countdown_label.show()
+	if seconds_left <= 0:
+		_update_countdown_label("GO!", 2.0)
+	else:
+		_update_countdown_label(str(seconds_left))
 
 
 func _update_countdown_label(
@@ -165,3 +172,5 @@ func _update_countdown_label(
 	_countdown_tween.tween_interval(visible_duration)
 	_countdown_tween.tween_property(_countdown_label, "modulate", Color.TRANSPARENT, fade_duration)
 	_countdown_tween.tween_callback(_countdown_label.hide)
+
+#endregion
