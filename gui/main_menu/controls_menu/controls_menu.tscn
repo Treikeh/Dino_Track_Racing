@@ -1,0 +1,149 @@
+[gd_scene load_steps=6 format=3 uid="uid://m2wbc1dhxton"]
+
+[ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
+[ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="2_j1d6l"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/art/buttons/button_east.png" id="3_j1d6l"]
+[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/art/buttons/button_south.png" id="4_ogjo6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tiy0a"]
+
+[node name="ControlsMenu" type="Control" node_paths=PackedStringArray("_tab_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sbatj")
+_tab_container = NodePath("TabContainer")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tiy0a")
+current_tab = 0
+tabs_visible = false
+tab_focus_mode = 0
+deselect_enabled = true
+
+[node name="Controller" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="TabContainer/Controller"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.0
+offset_right = 73.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Inputs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.0
+offset_top = -160.0
+offset_right = 247.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j1d6l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DriftTrick" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="TabContainer/DriftTrick"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.0
+offset_right = 73.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Drift and Tricking"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Items" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="TabContainer/Items"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.0
+offset_right = 73.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButtonsDisplayContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="InputButtonsDisplay" type="HBoxContainer" parent="InputButtonsDisplayContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackButtonDisplay" type="HBoxContainer" parent="InputButtonsDisplayContainer/InputButtonsDisplay"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="InputButtonsDisplayContainer/InputButtonsDisplay/BackButtonDisplay"]
+layout_mode = 2
+texture = ExtResource("4_ogjo6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InputButtonsDisplayContainer/InputButtonsDisplay/BackButtonDisplay"]
+layout_mode = 2
+text = "Back"
+
+[node name="NextButtonDisplay" type="HBoxContainer" parent="InputButtonsDisplayContainer/InputButtonsDisplay"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="InputButtonsDisplayContainer/InputButtonsDisplay/NextButtonDisplay"]
+layout_mode = 2
+texture = ExtResource("3_j1d6l")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InputButtonsDisplayContainer/InputButtonsDisplay/NextButtonDisplay"]
+layout_mode = 2
+text = "Next"

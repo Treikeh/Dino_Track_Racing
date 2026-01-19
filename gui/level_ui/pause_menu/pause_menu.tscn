@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmy21chwdl2dx"]
+[gd_scene load_steps=5 format=3 uid="uid://cmy21chwdl2dx"]
 
 [ext_resource type="Script" uid="uid://ewuq06h4clui" path="res://gui/level_ui/pause_menu/pause_menu.gd" id="1_rwe7i"]
 [ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="2_b8jsg"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/art/buttons/button_east.png" id="4_7g2an"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8jsg"]
 bg_color = Color(0.34901962, 0.34901962, 0.34901962, 0.5529412)
@@ -98,6 +99,34 @@ grow_vertical = 2
 texture = ExtResource("2_b8jsg")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="InputButtonsDisplayContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="NextButtonDisplay" type="HBoxContainer" parent="InputButtonsDisplayContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="InputButtonsDisplayContainer/NextButtonDisplay"]
+layout_mode = 2
+texture = ExtResource("4_7g2an")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InputButtonsDisplayContainer/NextButtonDisplay"]
+layout_mode = 2
+text = "Select"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

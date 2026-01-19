@@ -2,25 +2,41 @@ extends Control
 
 
 @export var _start_menu: Control
-@export var _player_join_menu: Control
 
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	# Disable all child menus
+	for child: Node in get_children():
+		_disable_menu(child)
+	
+	# Renable the start menu
 	_enable_menu(_start_menu)
-	_disable_menu(_player_join_menu)
-
-
-func _on_start_menu_start_pressed() -> void:
-	_enable_menu(_player_join_menu)
-	_disable_menu(_start_menu)
 
 
 func _enable_menu(menu: Control) -> void:
 	menu.show()
 	menu.process_mode = Node.PROCESS_MODE_INHERIT
+	if menu.has_method("open_menu"):
+		menu.open_menu()
 
 
 func _disable_menu(menu: Control) -> void:
 	menu.hide()
 	menu.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+#region Signals
+
+func _on_start_menu_menu_button_pressed(menu_id: int) -> void:
+	var new_menu: Control = get_child(menu_id)
+	_disable_menu(_start_menu)
+	_enable_menu(new_menu)
+
+
+func _on_menu_closed(menu: Control) -> void:
+	_enable_menu(_start_menu)
+	_disable_menu(menu)
+
+#endregion

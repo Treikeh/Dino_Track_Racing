@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf6kgm67m4shv"]
+
+[ext_resource type="Script" uid="uid://cvdcjdx25s2gh" path="res://gui/main_menu/player_join_menu/player_join_menu.gd" id="1_mb52c"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/art/buttons/button_east.png" id="2_22gan"]
+
+[node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mb52c")
+_player_display_container = NodePath("GridContainer")
+
+[node name="JoinButtonDispalyContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_right = 86.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="JoinButtonDispaly" type="HBoxContainer" parent="JoinButtonDispalyContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="JoinButtonDispalyContainer/JoinButtonDispaly"]
+layout_mode = 2
+text = "Press"
+
+[node name="TextureRect" type="TextureRect" parent="JoinButtonDispalyContainer/JoinButtonDispaly"]
+layout_mode = 2
+texture = ExtResource("2_22gan")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="JoinButtonDispalyContainer/JoinButtonDispaly"]
+layout_mode = 2
+text = "to join"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
