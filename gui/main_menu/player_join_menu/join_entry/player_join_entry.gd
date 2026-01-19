@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	_turn_input += Input.get_axis("turn_l%s" % _player_id, "turn_r%s" % _player_id) * 30.0 * delta
 	
 	# Change the pitch when accelerating or reversing
-	_throttle_input += Input.get_axis("reverse%s" % _player_id, "accelerate%s" % _player_id) * delta
+	#_throttle_input += Input.get_axis("reverse%s" % _player_id, "accelerate%s" % _player_id) * delta
 	# Clamp value so that it doesn't become too high/low
 	_throttle_input = clampf(_throttle_input, 0.1, 5.0)
 	_scream_stream_player.pitch_scale = _throttle_input
@@ -40,10 +40,10 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	# Make a sound when drifting
-	if event.is_action_pressed("drift%s" % _player_id):
+	if event.is_action_pressed("scream%s" % _player_id):
 		_start_scream()
 		_mesh.is_screaming = true
-	elif event.is_action_released("drift%s" % _player_id):
+	elif event.is_action_released("scream%s" % _player_id):
 		_scream_stream_player.stream_paused = true
 		_mesh.is_screaming = false
 

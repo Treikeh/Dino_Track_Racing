@@ -9,6 +9,7 @@ const INPUT_ACTIONS: Array[String] = [
 	"turn_r",
 	"drift",
 	"use_held_item",
+	"scream",
 ]
 
 # Stores info about all the players that are in the game

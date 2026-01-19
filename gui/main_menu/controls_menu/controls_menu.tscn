@@ -129,7 +129,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="InputButtonsDisplayContainer/InputButtonsDisplay/BackButtonDisplay"]
 layout_mode = 2
-texture = ExtResource("4_ogjo6")
+texture = ExtResource("3_j1d6l")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="InputButtonsDisplayContainer/InputButtonsDisplay/BackButtonDisplay"]
@@ -141,7 +141,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="InputButtonsDisplayContainer/InputButtonsDisplay/NextButtonDisplay"]
 layout_mode = 2
-texture = ExtResource("3_j1d6l")
+texture = ExtResource("4_ogjo6")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="InputButtonsDisplayContainer/InputButtonsDisplay/NextButtonDisplay"]

@@ -1,13 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq1mlqlqbd661"]
+[gd_scene load_steps=13 format=3 uid="uid://bq1mlqlqbd661"]
 
 [ext_resource type="Script" uid="uid://ck062g2ny5ksf" path="res://gui/main_menu/main_menu.gd" id="1_ahke7"]
 [ext_resource type="PackedScene" uid="uid://duegxma2hxs6a" path="res://gui/main_menu/start_menu/start_menu.tscn" id="2_6wy0j"]
+[ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_bhc4r"]
+[ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="3_tiy0a"]
 [ext_resource type="PackedScene" uid="uid://cf6kgm67m4shv" path="res://gui/main_menu/player_join_menu/player_join_menu.tscn" id="3_ubcky"]
 [ext_resource type="PackedScene" uid="uid://m2wbc1dhxton" path="res://gui/main_menu/controls_menu/controls_menu.tscn" id="4_1vh24"]
+[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="4_a4tfy"]
 [ext_resource type="PackedScene" uid="uid://b5mba2bh6v4ys" path="res://gui/main_menu/options_menu/options_menu.tscn" id="5_1vh24"]
 [ext_resource type="PackedScene" uid="uid://clb3u028vrack" path="res://gui/main_menu/credits_menu/credits_menu.tscn" id="5_ubcky"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("_start_menu")]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhc4r"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ujcfj"]
+sky_material = SubResource("ProceduralSkyMaterial_bhc4r")
+
+[sub_resource type="Environment" id="Environment_tiy0a"]
+background_mode = 1
+background_color = Color(0.37797713, 0.5558381, 0.74858373, 1)
+background_energy_multiplier = 1.25
+sky = SubResource("Sky_ujcfj")
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.4752319, 0.61359656, 0.679085, 1)
+fog_density = 0.0948
+fog_sky_affect = 0.182
+fog_depth_begin = 20.5
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_menu_root", "_start_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,27 +38,126 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ahke7")
-_start_menu = NodePath("StartMenu")
+_menu_root = NodePath("MenuRoot")
+_start_menu = NodePath("MenuRoot/StartMenu")
 
-[node name="StartMenu" parent="." instance=ExtResource("2_6wy0j")]
+[node name="BackgroundViewport" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="BackgroundViewport"]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BackgroundViewport/SubViewport"]
+environment = SubResource("Environment_tiy0a")
+
+[node name="Camera3D" type="Camera3D" parent="BackgroundViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98)
+fov = 30.0
+
+[node name="ScooterDino_01_SK" parent="BackgroundViewport/SubViewport" instance=ExtResource("2_bhc4r")]
+transform = Transform3D(-0.7968037, 0.03923959, 0.6029627, -0.06721464, 0.98593986, -0.15298584, -0.600488, -0.16242759, -0.78296316, 0.755, -0.941, -2.541)
+
+[node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" index="0"]
+bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
+bones/2/rotation = Quaternion(-0.06671888, 0.66952854, 0.7109416, 0.20455375)
+bones/3/position = Vector3(0.029781204, 0.21053293, 0.38694367)
+bones/3/rotation = Quaternion(0.017043147, 0.53295493, 0.8458708, -0.013089115)
+bones/4/rotation = Quaternion(0.08486411, 0.01772025, 0.012265228, 0.9961595)
+bones/5/rotation = Quaternion(0.16679226, 0.10837294, 0.018447576, 0.9798445)
+bones/6/rotation = Quaternion(-0.83942777, 6.3498874e-08, 1.00343215e-07, 0.5434713)
+bones/7/position = Vector3(-0.1499674, 0.18447673, -0.07156811)
+bones/7/rotation = Quaternion(-0.50442505, 0.12684613, 0.13807273, 0.8428531)
+bones/9/position = Vector3(0.1401376, 0.18052953, -0.058365162)
+bones/9/rotation = Quaternion(-0.49447012, -0.10749217, -0.1570094, 0.84811133)
+bones/11/rotation = Quaternion(0.90141344, 0.046076003, -0.037256345, 0.42888582)
+bones/12/rotation = Quaternion(-0.07349899, -0.0125424955, -0.082375824, 0.9938082)
+bones/13/rotation = Quaternion(-0.0353375, -0.0021754124, -0.07286174, 0.9967135)
+bones/14/rotation = Quaternion(0.77925074, -0.02199004, 0.06868605, -0.6225489)
+bones/15/rotation = Quaternion(-0.6519618, 0.070495375, -0.13728452, 0.74238074)
+bones/16/rotation = Quaternion(0.23976633, -0.1544281, 0.024202293, 0.9581641)
+bones/17/rotation = Quaternion(0.9358175, 0.25158453, 0.033091396, -0.24465479)
+bones/18/rotation = Quaternion(-0.19763292, 0.006921719, 0.15417118, 0.968052)
+bones/19/rotation = Quaternion(0.014524711, 0.15622613, -0.100510605, 0.9824867)
+bones/20/rotation = Quaternion(-0.06385713, 0.7042174, 0.7042176, -0.06385705)
+
+[node name="AnimationTree" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" index="2"]
+active = false
+
+[node name="ShadowCaster" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" instance=ExtResource("3_tiy0a")]
+
+[node name="ScooterDino_01_SK2" parent="BackgroundViewport/SubViewport" instance=ExtResource("2_bhc4r")]
+transform = Transform3D(0.87828106, 0.12419458, -0.46173382, -0.065612696, 0.9878471, 0.14090122, -0.47362158, 0.09345528, -0.8757561, -0.606, 0.137, -6.463)
+
+[node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK2" index="0"]
+bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
+bones/2/rotation = Quaternion(-3.0908623e-08, 0.7071068, 0.7071068, -3.0908623e-08)
+bones/3/position = Vector3(0.031001786, 0.28716335, 0.45328817)
+bones/3/rotation = Quaternion(-0.30089757, 0.5115116, 0.77042514, -0.23294103)
+bones/4/rotation = Quaternion(0.3640228, 3.1586275e-08, -2.2666047e-08, 0.93139005)
+bones/5/rotation = Quaternion(0.41623926, -2.8086077e-08, -3.752366e-08, 0.9092552)
+bones/6/rotation = Quaternion(-0.9833899, 6.058923e-08, 9.3224905e-08, 0.18150583)
+bones/7/position = Vector3(-0.14013767, 0.18052948, -0.058365073)
+bones/7/rotation = Quaternion(-0.61981076, 0.22864854, 0.28715685, 0.6936104)
+bones/9/position = Vector3(0.14013763, 0.18052952, -0.058365144)
+bones/9/rotation = Quaternion(-0.6198108, -0.22864838, -0.2871567, 0.69361055)
+bones/11/rotation = Quaternion(0.8647695, 0.25307357, -0.12182305, 0.41627714)
+bones/12/rotation = Quaternion(-0.0769075, -0.022507003, -0.2799652, 0.95666)
+bones/13/rotation = Quaternion(-0.039367806, -0.011520942, -0.280632, 0.95893854)
+bones/14/rotation = Quaternion(0.8997872, -0.35474232, -0.16239671, -0.1953675)
+bones/15/rotation = Quaternion(-0.56284934, 0.05434433, -0.14444152, 0.81202465)
+bones/16/rotation = Quaternion(-0.2335734, -0.033115987, 0.051064562, 0.97043246)
+bones/17/rotation = Quaternion(0.92758334, 0.16284175, 0.035545584, -0.3343774)
+bones/18/rotation = Quaternion(-0.28507534, -0.007164245, 0.15416008, 0.9459997)
+bones/19/rotation = Quaternion(0.120016135, 0.013198958, -0.05941418, 0.99090457)
+bones/20/rotation = Quaternion(-1.1520229e-07, 0.70710665, 0.7071069, -5.3385083e-08)
+
+[node name="AnimationTree" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK2" index="2"]
+active = false
+
+[node name="ShadowCaster" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK2" instance=ExtResource("3_tiy0a")]
+
+[node name="Track_01_SM2" parent="BackgroundViewport/SubViewport" instance=ExtResource("4_a4tfy")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 110.1, 25.115, -107.84)
+
+[node name="MenuRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartMenu" parent="MenuRoot" instance=ExtResource("2_6wy0j")]
 layout_mode = 1
 
-[node name="PlayerJoinMenu" parent="." instance=ExtResource("3_ubcky")]
-layout_mode = 1
-
-[node name="ControlsMenu" parent="." instance=ExtResource("4_1vh24")]
+[node name="PlayerJoinMenu" parent="MenuRoot" instance=ExtResource("3_ubcky")]
 visible = false
 layout_mode = 1
 
-[node name="OptionsMenu" parent="." instance=ExtResource("5_1vh24")]
+[node name="ControlsMenu" parent="MenuRoot" instance=ExtResource("4_1vh24")]
 visible = false
 layout_mode = 1
 
-[node name="CreditsMenu" parent="." instance=ExtResource("5_ubcky")]
+[node name="OptionsMenu" parent="MenuRoot" instance=ExtResource("5_1vh24")]
 visible = false
 layout_mode = 1
 
-[connection signal="menu_button_pressed" from="StartMenu" to="." method="_on_start_menu_menu_button_pressed"]
-[connection signal="menu_closed" from="ControlsMenu" to="." method="_on_menu_closed"]
-[connection signal="menu_closed" from="OptionsMenu" to="." method="_on_menu_closed"]
-[connection signal="menu_closed" from="CreditsMenu" to="." method="_on_menu_closed"]
+[node name="CreditsMenu" parent="MenuRoot" instance=ExtResource("5_ubcky")]
+visible = false
+layout_mode = 1
+
+[connection signal="menu_button_pressed" from="MenuRoot/StartMenu" to="." method="_on_start_menu_menu_button_pressed"]
+[connection signal="menu_closed" from="MenuRoot/ControlsMenu" to="." method="_on_menu_closed"]
+[connection signal="menu_closed" from="MenuRoot/OptionsMenu" to="." method="_on_menu_closed"]
+[connection signal="menu_closed" from="MenuRoot/CreditsMenu" to="." method="_on_menu_closed"]
+
+[editable path="BackgroundViewport/SubViewport/ScooterDino_01_SK"]
+[editable path="BackgroundViewport/SubViewport/ScooterDino_01_SK2"]

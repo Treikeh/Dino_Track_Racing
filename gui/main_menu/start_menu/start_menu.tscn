@@ -4,20 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_ujcfj"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="3_grf3h"]
 [ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="4_voykp"]
-[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/art/buttons/button_east.png" id="5_ujcfj"]
+[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/art/buttons/button_south.png" id="5_ujcfj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oave4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_knpns"]
+[sub_resource type="Sky" id="Sky_ujcfj"]
 sky_material = SubResource("ProceduralSkyMaterial_oave4")
 
 [sub_resource type="Environment" id="Environment_vnwa6"]
 background_mode = 1
 background_color = Color(0.37797713, 0.5558381, 0.74858373, 1)
 background_energy_multiplier = 1.25
-sky = SubResource("Sky_knpns")
+sky = SubResource("Sky_ujcfj")
 tonemap_mode = 2
 fog_enabled = true
 fog_mode = 1
@@ -38,6 +38,7 @@ _start_button = NodePath("ButtonsContainer/StartButton")
 _version_label = NodePath("VersionLabelContainer/VersionLabel")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +50,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(960, 540)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_vnwa6")
