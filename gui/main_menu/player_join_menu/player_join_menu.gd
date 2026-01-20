@@ -4,12 +4,18 @@ extends Control
 const PLAYER_JOIN_ENTRY_SCENE: PackedScene = preload("res://gui/main_menu/player_join_menu/join_entry/player_join_entry.tscn")
 
 
-@export var _player_display_container: GridContainer
+@export var _player_display_grid: GridContainer
 @export var _start_game_progress_bar: Range
 
-
+var _start_game_pressed: bool = false
+var _start_game_player_id: int = -1
+var _start_game_time: float = 0.0
 # int = player id
 var _connected_players: Array[int] = []
+
+
+func _ready() -> void:
+	_start_game_progress_bar.visible = false
 
 
 func _input(event: InputEvent) -> void:
@@ -36,22 +42,22 @@ func _process(delta: float) -> void:
 		_start_game_time -= delta
 	_start_game_progress_bar.value = _start_game_time
 	
-	_time += delta
-	var alpha: float = sin(_time * 2.0) + 1.0
-	$StartGameLabel.modulate = Color(1.0, 1.0, 1.0, alpha)
-	
-	$DebugLabel.text = "Start game player id: %s \nStart game time: %s \nAlpha: %s" % [_start_game_player_id, _start_game_time, alpha]
+	$DebugLabel.text = "Start game player id: %s \nStart game time: %s" % [_start_game_player_id, _start_game_time]
 
 
 func _add_player(player_id: int) -> void:
 	_connected_players.append(player_id)
 	
 	var player_label: PlayerJoinEntry = PLAYER_JOIN_ENTRY_SCENE.instantiate().with_data(player_id)
-	_player_display_container.add_child(player_label)
+	_player_display_grid.add_child(player_label)
 	
 	# Change how many columns the player display grid container should have when a new player joins
 	var columns: int = ceili(sqrt(_connected_players.size()))
-	_player_display_container.columns = columns
+	_player_display_grid.columns = columns
+	
+	# Show start game progress bar when the first player joins
+	if not _start_game_progress_bar.visible:
+		_start_game_progress_bar.visible = true
 
 
 func _start_level() -> void:

@@ -3,19 +3,12 @@
 [ext_resource type="Script" uid="uid://cvdcjdx25s2gh" path="res://gui/main_menu/player_join_menu/player_join_menu.gd" id="1_mb52c"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/art/buttons/button_south.png" id="2_22gan"]
 
-[sub_resource type="Gradient" id="Gradient_22gan"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.5035461, 0.67021275)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22gan"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_was43"]
-gradient = SubResource("Gradient_22gan")
-width = 128
-height = 128
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_was43"]
+bg_color = Color(1, 1, 1, 1)
 
-[node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_container", "_start_game_progress_bar")]
+[node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +16,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mb52c")
-_player_display_container = NodePath("VBoxContainer/GridContainer")
-_start_game_progress_bar = NodePath("StartGameProgressBar")
+_player_display_grid = NodePath("VBoxContainer/PlayerDisplayGrid")
+_start_game_progress_bar = NodePath("VBoxContainer/StartProgressBar")
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 layout_mode = 1
@@ -43,70 +36,83 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="PlayerDisplayGrid" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="JoinButtonDispalyContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="StartProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
+theme_override_styles/background = SubResource("StyleBoxEmpty_22gan")
+theme_override_styles/fill = SubResource("StyleBoxFlat_was43")
+max_value = 2.0
+step = 0.0
+value = 0.5
+show_percentage = false
 
-[node name="JoinButtonDispaly" type="HBoxContainer" parent="VBoxContainer/JoinButtonDispalyContainer"]
+[node name="StartButtonDispalyContainer" type="MarginContainer" parent="VBoxContainer/StartProgressBar"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -174.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="StartButtonDispaly" type="HBoxContainer" parent="VBoxContainer/StartProgressBar/StartButtonDispalyContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/JoinButtonDispalyContainer/JoinButtonDispaly"]
+[node name="Label" type="Label" parent="VBoxContainer/StartProgressBar/StartButtonDispalyContainer/StartButtonDispaly"]
 layout_mode = 2
-text = "Press"
+text = "Hold"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/JoinButtonDispalyContainer/JoinButtonDispaly"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/StartProgressBar/StartButtonDispalyContainer/StartButtonDispaly"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_22gan")
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="VBoxContainer/JoinButtonDispalyContainer/JoinButtonDispaly"]
+[node name="Label2" type="Label" parent="VBoxContainer/StartProgressBar/StartButtonDispalyContainer/StartButtonDispaly"]
+layout_mode = 2
+text = "to start"
+
+[node name="JoinButtonDispalyContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_right = 87.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="JoinButtonDispaly" type="HBoxContainer" parent="JoinButtonDispalyContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="JoinButtonDispalyContainer/JoinButtonDispaly"]
+layout_mode = 2
+text = "Press"
+
+[node name="TextureRect" type="TextureRect" parent="JoinButtonDispalyContainer/JoinButtonDispaly"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_22gan")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="JoinButtonDispalyContainer/JoinButtonDispaly"]
 layout_mode = 2
 text = "to join"
-
-[node name="StartGameProgressBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-max_value = 2.0
-step = 0.0
-value = 0.5
-fill_mode = 4
-texture_progress = SubResource("GradientTexture2D_was43")
 
 [node name="DebugLabel" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="StartGameLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Hold X to start"
