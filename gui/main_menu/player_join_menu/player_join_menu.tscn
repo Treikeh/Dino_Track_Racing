@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cf6kgm67m4shv"]
 
 [ext_resource type="Script" uid="uid://cvdcjdx25s2gh" path="res://gui/main_menu/player_join_menu/player_join_menu.gd" id="1_mb52c"]
-[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/art/buttons/button_south.png" id="2_22gan"]
+[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="2_22gan"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22gan"]
 

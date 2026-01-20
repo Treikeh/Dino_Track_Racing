@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
 [ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="2_j1d6l"]
-[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/art/buttons/button_east.png" id="3_j1d6l"]
-[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/art/buttons/button_south.png" id="4_ogjo6"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="3_j1d6l"]
+[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_ogjo6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tiy0a"]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhd00l5u00odr"
-path.s3tc="res://.godot/imported/button_east.png-d6da3637ec3037766af561fdbb1c472b.s3tc.ctex"
+uid="uid://bke3qjwvmk6v2"
+path.s3tc="res://.godot/imported/button_west.png-55c37b9c3d3cc85ec341158279f22368.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://gui/art/buttons/button_east.png"
-dest_files=["res://.godot/imported/button_east.png-d6da3637ec3037766af561fdbb1c472b.s3tc.ctex"]
+source_file="res://gui/button_display/art/button_west.png"
+dest_files=["res://.godot/imported/button_west.png-55c37b9c3d3cc85ec341158279f22368.s3tc.ctex"]
 
 [params]
 

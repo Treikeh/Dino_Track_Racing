@@ -17,6 +17,8 @@ class_name PlayerInputController
 @export var _countdown_label: Label
 @export var _item_image: TextureRect
 @export var _wrong_way_panel: Container
+@export var _next_lap_panel: Container
+@export var _next_lap_panel_label: Label
 
 @export_group("Debug")
 @warning_ignore("unused_private_class_variable")
@@ -59,6 +61,8 @@ func _ready() -> void:
 	_id_label.text = "P%s" % (_player_id + 1)
 	_lap_label.text = "1/%s" % _track_follow.total_laps
 	_orientation.global_position = _car_controller.global_position
+	
+	_next_lap_panel.hide()
 
 
 func _input(event: InputEvent) -> void:
@@ -95,7 +99,7 @@ func _process(delta: float) -> void:
 	_cam.fov = lerpf(_cam.fov, desired_fov, _fov_lerp_speed * delta)
 	
 	var track_drive_dir: float = _car_controller.global_basis.z.dot(_track_follow.global_basis.z)
-	var driving_wrong_way: bool = track_drive_dir > -0.2
+	var driving_wrong_way: bool = track_drive_dir > -0.3
 	_wrong_way_panel.visible = not driving_wrong_way
 
 
@@ -134,6 +138,12 @@ func on_car_positions_updated(car_positions: Array[int]) -> void:
 
 func _on_lap_changed(lap: int) -> void:
 	_lap_label.text = "%s/%s" % [lap, _track_follow.total_laps]
+	
+	# Show and update next lap panel
+	_next_lap_panel_label.text = _lap_label.text
+	_next_lap_panel.show()
+	await get_tree().create_timer(2.0).timeout
+	_next_lap_panel.hide()
 
 
 func _on_finished_all_laps(_car_id: int) -> void:
