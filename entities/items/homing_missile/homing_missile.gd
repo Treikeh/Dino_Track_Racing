@@ -1,7 +1,7 @@
 extends Item3D
 
 
-@export var _move_speed: float = 40.0
+@export var _move_speed: float = 50.0
 @export var _bullet_root: Node3D
 @export var _hurtbox: Hurtbox
 @export var _track_follow: PathFollow3D
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	# Where the bullet should move to
 	var lerp_target: Vector3 = follow_target_pos if target_distance > 50.0 else target_car_pos
 	# Move bullet towards lerp target
-	_bullet_root.global_position = lerp(_bullet_root.global_position, lerp_target, 10.0 * delta)
+	_bullet_root.global_position = lerp(_bullet_root.global_position, lerp_target, 12.5 * delta)
 	_bullet_root.look_at(lerp_target)
 
 

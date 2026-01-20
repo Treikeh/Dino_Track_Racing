@@ -7,20 +7,23 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_w1g58"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_uuo1d"]
-radius = 3.0
-height = 6.0
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_ofxjn"]
 radius = 3.0
 
-[node name="Bomb" type="Node3D" node_paths=PackedStringArray("_throw_dir", "_bomb_body", "_hurtbox", "_explosion")]
+[sub_resource type="SphereMesh" id="SphereMesh_uuo1d"]
+flip_faces = true
+radius = 3.0
+height = 6.0
+radial_segments = 16
+rings = 8
+
+[node name="Bomb" type="Node3D" node_paths=PackedStringArray("_throw_dir", "_bomb_body", "_explosion", "_explosion_hurtbox")]
 script = ExtResource("1_lll7j")
 _throw_force = 35.0
 _throw_dir = NodePath("BombThrowDir")
 _bomb_body = NodePath("BombBody")
-_hurtbox = NodePath("Explosion/Hurtbox")
 _explosion = NodePath("Explosion")
+_explosion_hurtbox = NodePath("Explosion/Hurtbox")
 metadata/_custom_type_script = "uid://751u1m35fd72"
 
 [node name="BombThrowDir" type="Node3D" parent="."]
@@ -43,9 +46,6 @@ mesh = SubResource("SphereMesh_w1g58")
 
 [node name="Explosion" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Explosion"]
-mesh = SubResource("SphereMesh_uuo1d")
-
 [node name="Hurtbox" parent="Explosion" instance=ExtResource("2_kwro3")]
 monitoring = false
 
@@ -54,11 +54,8 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 shape = SubResource("SphereShape3D_ofxjn")
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-autostart = true
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Explosion"]
+mesh = SubResource("SphereMesh_uuo1d")
 
 [connection signal="body_entered" from="BombBody" to="." method="_on_bomb_body_body_entered"]
 [connection signal="hit_hitbox" from="Explosion/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

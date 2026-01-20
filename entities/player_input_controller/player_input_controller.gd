@@ -62,6 +62,7 @@ func _ready() -> void:
 	_lap_label.text = "1/%s" % _track_follow.total_laps
 	_orientation.global_position = _car_controller.global_position
 	
+	_item_image.hide()
 	_next_lap_panel.hide()
 
 
@@ -88,6 +89,7 @@ func _input(event: InputEvent) -> void:
 	# Use item input
 	if event.is_action_pressed("use_held_item%s" % _player_id):
 		_car_controller.use_held_item()
+		_item_image.hide()
 	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
@@ -152,6 +154,7 @@ func _on_finished_all_laps(_car_id: int) -> void:
 
 
 func _on_car_item_picked_up(item: ItemResource) -> void:
+	_item_image.show()
 	_item_image.texture = item.icon
 
 

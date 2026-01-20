@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxxkmhklfmce7"]
+
+[ext_resource type="Script" uid="uid://65ate38ndm47" path="res://entities/items/mine/mine.gd" id="1_5w3oq"]
+[ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_hht6s"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5w3oq"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hht6s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uch25"]
+radius = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_hht6s"]
+flip_faces = true
+radius = 3.0
+height = 6.0
+radial_segments = 16
+rings = 8
+
+[node name="Mine" type="Node3D" node_paths=PackedStringArray("_explosion", "_explosion_hurtbox", "_ground_ray")]
+script = ExtResource("1_5w3oq")
+_explosion = NodePath("Explosion")
+_explosion_hurtbox = NodePath("Explosion/Hurtbox")
+_ground_ray = NodePath("GroundRay")
+metadata/_custom_type_script = "uid://751u1m35fd72"
+
+[node name="GroundRay" type="RayCast3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_5w3oq")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+shape = SubResource("SphereShape3D_hht6s")
+
+[node name="Explosion" type="Node3D" parent="."]
+
+[node name="Hurtbox" parent="Explosion" instance=ExtResource("2_hht6s")]
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Explosion/Hurtbox"]
+shape = SubResource("SphereShape3D_uch25")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Explosion"]
+mesh = SubResource("SphereMesh_hht6s")
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
