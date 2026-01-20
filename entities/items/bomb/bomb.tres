@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://ccr4djq6d11yn"]
+
+[ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="1_rv8wl"]
+[ext_resource type="PackedScene" uid="uid://ciuhkd1bgu50q" path="res://entities/items/bomb/bomb.tscn" id="2_kqr5t"]
+[ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="3_oxjvb"]
+
+[resource]
+script = ExtResource("3_oxjvb")
+name = "Bomb"
+icon = ExtResource("1_rv8wl")
+rarity = 20
+scene = ExtResource("2_kqr5t")
+metadata/_custom_type_script = "uid://cueb0e6107vpe"

@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://gg63h5u3qj6x"]
+
+[ext_resource type="Script" uid="uid://dy2y34q6mcut" path="res://entities/items/homing_missile/homing_missile.gd" id="1_612hy"]
+[ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_xbvo7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_612hy"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h0vic"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_73iqi"]
+top_radius = 0.0
+
+[sub_resource type="Curve" id="Curve_612hy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.109197, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_73iqi"]
+width = 64
+curve = SubResource("Curve_612hy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_612hy"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_73iqi")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4exyx"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_73iqi"]
+material = SubResource("StandardMaterial3D_4exyx")
+
+[node name="HomingMissile" type="Node3D" node_paths=PackedStringArray("_bullet_root", "_hurtbox", "_track_follow")]
+script = ExtResource("1_612hy")
+_bullet_root = NodePath("BulletBody")
+_hurtbox = NodePath("BulletBody/Hurtbox")
+_track_follow = NodePath("TrackFollow")
+
+[node name="TrackFollow" type="PathFollow3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrackFollow"]
+mesh = SubResource("BoxMesh_612hy")
+
+[node name="BulletBody" type="Node3D" parent="."]
+
+[node name="Hurtbox" parent="BulletBody" instance=ExtResource("2_xbvo7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletBody/Hurtbox"]
+shape = SubResource("SphereShape3D_h0vic")
+debug_color = Color(0.99607843, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BulletBody"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_73iqi")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="BulletBody/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2.9802322e-08)
+lifetime = 0.25
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_612hy")
+draw_pass_1 = SubResource("QuadMesh_73iqi")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[connection signal="hit_hitbox" from="BulletBody/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
