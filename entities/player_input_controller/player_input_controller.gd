@@ -103,6 +103,9 @@ func _process(delta: float) -> void:
 	var track_drive_dir: float = _car_controller.global_basis.z.dot(_track_follow.global_basis.z)
 	var driving_wrong_way: bool = track_drive_dir > -0.3
 	_wrong_way_panel.visible = not driving_wrong_way
+	
+	_speedometer.text = "%s kmh" % int(snappedf(_car_controller.speed_khm, 1.0))
+	$Hud/SpeedometerPanel/HBoxContainer/TextureProgressBar.value = _car_controller.speed_khm
 
 
 func _physics_process(delta: float) -> void:
@@ -114,8 +117,6 @@ func _physics_process(delta: float) -> void:
 	var target_quat: Quaternion = _id_label.quaternion
 	_orientation.global_position = _orientation.global_position.lerp(target_pos, _cam_follow_speed * delta)
 	_orientation.quaternion = _orientation.quaternion.slerp(target_quat, 4.0 * delta)
-	
-	_speedometer.text = "%s kmh" % int(snappedf(_car_controller.speed_khm, 1.0))
 	
 	# Make the car automatically move when the player has finished the last lap
 	#TODO: Replace with a simple AI that follow the track

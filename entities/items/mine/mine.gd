@@ -22,11 +22,12 @@ func _ready() -> void:
 
 
 func _move_mine_to_ground() -> void:
-	_ground_ray.to_local(global_position + Vector3(0.0, -50.0, 0.0))
+	var target_position: Vector3 = global_position + Vector3(0.0, -50.0, 0.0)
+	_ground_ray.target_position = _ground_ray.to_local(target_position)
 	_ground_ray.force_raycast_update()
 	if _ground_ray.is_colliding():
 		global_position = _ground_ray.get_collision_point()
-		#TODO: Aligin mine to the ground
+		#TODO: Aligin mine to the ground normal
 
 
 func _explode() -> void:
