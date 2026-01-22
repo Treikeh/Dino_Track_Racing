@@ -136,17 +136,49 @@ func _get_look_at_pos() -> Vector3:
 #region UI signal functions
 
 func on_car_positions_updated(car_positions: Array[int]) -> void:
-	_position_label.text = str(car_positions.find(_player_id) + 1)
+	# Get the position the this player is in the array
+	var car_pos: int = car_positions.find(_player_id) + 1
+	# Turn position into a string
+	var car_pos_string: String = str(car_pos)
+	# Change the car pos string to match the fonts values if in 1 - 3 place
+	# See positions font image and the ASCII character codes positions (48 - 60)
+	match car_pos:
+		1:
+			car_pos_string = ":"
+		2:
+			car_pos_string = ";"
+		3:
+			car_pos_string = "<"
+	# Set position label text
+	_position_label.text = car_pos_string
 
 
 func _on_lap_changed(lap: int) -> void:
 	_lap_label.text = "%s/%s" % [lap, _track_follow.total_laps]
 	
-	# Show and update next lap panel
-	_next_lap_panel_label.text = _lap_label.text
+	# Make the next lap panel move and rotate at the bottom of the screen
 	_next_lap_panel.show()
-	await get_tree().create_timer(2.0).timeout
-	_next_lap_panel.hide()
+	const ROTATION_OFFSET: float = 30.0
+	const TWEEN_DURATION: float = 1.5
+	var start_y_pos: float = size.y + _next_lap_panel.size.y
+	# Reset panel
+	_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
+	_next_lap_panel.position.y = start_y_pos
+	_next_lap_panel_label.text = _lap_label.text
+	
+	# Start tweening panel
+	var tween: Tween = create_tween()
+	# Move up
+	var end_y_pos: float = (size.y / 2.0) + _next_lap_panel.size.y
+	tween.tween_property(_next_lap_panel, "position:y", end_y_pos, 0.5)
+	# Rotate
+	tween.tween_property(_next_lap_panel, "rotation_degrees", ROTATION_OFFSET, TWEEN_DURATION)
+	tween.parallel().tween_property(_next_lap_panel, "position:y", end_y_pos - 10.0, TWEEN_DURATION)
+	# Move down
+	tween.tween_property(_next_lap_panel, "position:y", start_y_pos, 0.5)
+	
+	# Hide panel after tween is finished
+	tween.tween_callback(_next_lap_panel.hide)
 
 
 func _on_finished_all_laps(_car_id: int) -> void:

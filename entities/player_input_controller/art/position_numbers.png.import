@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://bdpk3r1acp6i4"
+path="res://.godot/imported/position_numbers.png-6c7dab7f6f8f9eaf4c7d491185b22fe4.fontdata"
+
+[deps]
+
+source_file="res://entities/player_input_controller/art/position_numbers.png"
+dest_files=["res://.godot/imported/position_numbers.png-6c7dab7f6f8f9eaf4c7d491185b22fe4.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("48-60")
+kerning_pairs=PackedStringArray()
+columns=13
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2
