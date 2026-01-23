@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://o23pygopte4a"]
+
+[ext_resource type="Script" uid="uid://clr7bx31nqsgq" path="res://entities/player_input_controller/hud/speedometer/speedometer.gd" id="1_fp6yl"]
+
+[sub_resource type="Gradient" id="Gradient_jpoqo"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.40425533, 0.6666667)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_utykj"]
+gradient = SubResource("Gradient_jpoqo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Speedometer" type="PanelContainer" node_paths=PackedStringArray("_speedometer_bar", "_speed_label")]
+offset_right = 85.0
+offset_bottom = 64.0
+script = ExtResource("1_fp6yl")
+_speedometer_bar = NodePath("HBoxContainer/SpeedometerBar")
+_speed_label = NodePath("HBoxContainer/SpeedLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -46
+
+[node name="SpeedometerBar" type="TextureProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+max_value = 160.0
+value = 100.0
+fill_mode = 4
+radial_initial_angle = 180.0
+radial_fill_degrees = 230.0
+texture_progress = SubResource("GradientTexture2D_utykj")
+
+[node name="SpeedLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "123 kmh"
+horizontal_alignment = 2
+vertical_alignment = 1

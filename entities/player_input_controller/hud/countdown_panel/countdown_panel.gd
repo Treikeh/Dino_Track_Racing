@@ -1,0 +1,38 @@
+extends PanelContainer
+
+
+@export var _label: Label
+
+var _countdown_tween: Tween
+
+
+func _ready() -> void:
+	modulate = Color.TRANSPARENT
+
+
+func update_secs_left(secs_left: float) -> void:
+	if secs_left <= 0:
+		update_label("GO!", 2.0)
+	else:
+		update_label(str(secs_left))
+
+
+func update_label(
+		new_text: String,
+		visible_duration: float = 0.6,
+		fade_duration: float = 0.2,
+) -> void:
+	# Update countdown label
+	_label.text = new_text
+	
+	# Stop tween if allready running
+	if _countdown_tween:
+		_countdown_tween.stop()
+	
+	# Reset panel
+	modulate = Color.TRANSPARENT
+	# Animate panel
+	_countdown_tween = create_tween()
+	_countdown_tween.tween_property(self, "modulate", Color.WHITE, fade_duration)
+	_countdown_tween.tween_interval(visible_duration)
+	_countdown_tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration)

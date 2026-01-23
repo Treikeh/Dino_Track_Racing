@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqeoqnx8fllh2"]
+
+[ext_resource type="Script" uid="uid://cmwvcip0uue8h" path="res://entities/player_input_controller/hud/countdown_panel/countdown_panel.gd" id="1_ly7g5"]
+
+[node name="CountdownPanel" type="PanelContainer" node_paths=PackedStringArray("_label")]
+offset_right = 216.0
+offset_bottom = 69.0
+script = ExtResource("1_ly7g5")
+_label = NodePath("CountdownLabel")
+
+[node name="CountdownLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Finished!"
+horizontal_alignment = 1
+vertical_alignment = 1

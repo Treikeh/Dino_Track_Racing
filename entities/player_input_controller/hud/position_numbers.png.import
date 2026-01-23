@@ -3,12 +3,12 @@
 importer="font_data_image"
 type="FontFile"
 uid="uid://bdpk3r1acp6i4"
-path="res://.godot/imported/position_numbers.png-6c7dab7f6f8f9eaf4c7d491185b22fe4.fontdata"
+path="res://.godot/imported/position_numbers.png-989c24afa87de77911fdc793c75b006b.fontdata"
 
 [deps]
 
-source_file="res://entities/player_input_controller/art/position_numbers.png"
-dest_files=["res://.godot/imported/position_numbers.png-6c7dab7f6f8f9eaf4c7d491185b22fe4.fontdata"]
+source_file="res://entities/player_input_controller/hud/position_numbers.png"
+dest_files=["res://.godot/imported/position_numbers.png-989c24afa87de77911fdc793c75b006b.fontdata"]
 
 [params]
 

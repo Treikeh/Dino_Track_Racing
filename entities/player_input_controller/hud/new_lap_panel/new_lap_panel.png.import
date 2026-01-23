@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvg4q2567raki"
-path.s3tc="res://.godot/imported/new_lap_panel.png-420bf8c138e1a71b94a02963f743c283.s3tc.ctex"
+path.s3tc="res://.godot/imported/new_lap_panel.png-0e2c6a6f2c207246464d549d02159a67.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/player_input_controller/hud_elements/new_lap_panel.png"
-dest_files=["res://.godot/imported/new_lap_panel.png-420bf8c138e1a71b94a02963f743c283.s3tc.ctex"]
+source_file="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png"
+dest_files=["res://.godot/imported/new_lap_panel.png-0e2c6a6f2c207246464d549d02159a67.s3tc.ctex"]
 
 [params]
 

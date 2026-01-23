@@ -11,15 +11,12 @@ class_name PlayerInputController
 @export var _id_label: Label3D
 
 @export_group("HUD")
-@export var _position_label: Label
-@export var _speedometer: Label
-@export var _lap_label: Label
-@export var _countdown_label: Label
-@export var _item_image_panel: Control
-@export var _item_image: TextureRect
+@export var _speedometer: PanelContainer
+@export var _position_panel: PanelContainer
+@export var _next_lap_panel: PanelContainer
+@export var _item_panel: PanelContainer
+@export var _countdown_panel: PanelContainer
 @export var _wrong_way_panel: Container
-@export var _next_lap_panel: Control
-@export var _next_lap_panel_label: Label
 
 @export_group("Debug")
 @warning_ignore("unused_private_class_variable")
@@ -31,7 +28,6 @@ var _throttle_input: float
 var _turn_input: float
 var _car_controller: CarController
 var _track_follow: TrackFollow
-var _countdown_tween: Tween
 
 
 # Add after instatiate (instatiate().with_data(.., ..)) to setup controller data
@@ -60,11 +56,47 @@ func _ready() -> void:
 	_track_follow.finished_all_laps.connect(_on_finished_all_laps)
 	
 	_id_label.text = "P%s" % (_player_id + 1)
-	_lap_label.text = "1/%s" % _track_follow.total_laps
 	_orientation.global_position = _car_controller.global_position
 	
-	_item_image_panel.hide()
-	_next_lap_panel.hide()
+	# Set up hud
+	_position_panel.update_lap_label(1, _track_follow.total_laps)
+	
+	await get_tree().process_frame
+	_on_lap_changed(1)
+	#_set_control_node_percent_offset(_next_lap_panel, self, 0.5, 0.5)
+	return
+	
+	var texture: Texture2D = load("res://icon.svg")
+	var top_left_texture := TextureRect.new()
+	add_child(top_left_texture)
+	top_left_texture.texture = texture
+	top_left_texture.global_position = get_screen_position()
+	
+	var bottom_right_texture := TextureRect.new()
+	add_child(bottom_right_texture)
+	bottom_right_texture.texture = texture
+	bottom_right_texture.global_position = get_screen_position() + size
+	
+	var screen_pos: Vector2 = get_screen_position()
+	var buttom_center_texture := TextureRect.new()
+	add_child(buttom_center_texture)
+	buttom_center_texture.texture = texture
+	
+	var x_offset: float = (size.x * 0.5) - (bottom_right_texture.size.x * 0.5)
+	var y_offset: float = (size.y * 1.0) - (bottom_right_texture.size.y * 1.0)
+	bottom_right_texture.global_position = screen_pos + Vector2(x_offset, y_offset)
+
+
+func _set_control_node_percent_offset(
+		node: Control,
+		parent: Control,
+		x_offset: float = 1.0,
+		y_offset: float = 1.0
+) -> void:
+	var x_pos: float = (parent.size.x * x_offset) - (node.size.x * x_offset)
+	var y_pos: float = (parent.size.y * y_offset) - (node.size.y * y_offset)
+	var parent_pos: Vector2 = parent.get_screen_position()
+	node.global_position = parent_pos + Vector2(x_pos, y_pos)
 
 
 func _input(event: InputEvent) -> void:
@@ -90,7 +122,7 @@ func _input(event: InputEvent) -> void:
 	# Use item input
 	if event.is_action_pressed("use_held_item%s" % _player_id):
 		_car_controller.use_held_item()
-		_item_image_panel.hide()
+		_item_panel.used_item()
 	
 	_car_controller.throttle = _throttle_input
 	_car_controller.turn_input = _turn_input
@@ -101,12 +133,10 @@ func _process(delta: float) -> void:
 	var desired_fov: float = _fov_curve.sample(_car_controller.speed_khm)
 	_cam.fov = lerpf(_cam.fov, desired_fov, _fov_lerp_speed * delta)
 	
-	var track_drive_dir: float = _car_controller.global_basis.z.dot(_track_follow.global_basis.z)
-	var driving_wrong_way: bool = track_drive_dir > -0.3
-	_wrong_way_panel.visible = not driving_wrong_way
+	var drive_dir: float = _car_controller.global_basis.z.dot(_track_follow.global_basis.z)
+	_wrong_way_panel.update(drive_dir)
 	
-	_speedometer.text = "%s kmh" % int(snappedf(_car_controller.speed_khm, 1.0))
-	$Hud/SpeedometerPanel/HBoxContainer/TextureProgressBar.value = _car_controller.speed_khm
+	_speedometer.update(_car_controller.speed_khm)
 
 
 func _physics_process(delta: float) -> void:
@@ -138,86 +168,60 @@ func _get_look_at_pos() -> Vector3:
 
 func on_car_positions_updated(car_positions: Array[int]) -> void:
 	# Get the position the this player is in the array
-	var car_pos: int = car_positions.find(_player_id) + 1
-	# Turn position into a string
-	var car_pos_string: String = str(car_pos)
-	# Change the car pos string to match the fonts values if in 1 - 3 place
-	# See positions font image and the ASCII character codes positions (48 - 60)
-	match car_pos:
-		1:
-			car_pos_string = ":"
-		2:
-			car_pos_string = ";"
-		3:
-			car_pos_string = "<"
-	# Set position label text
-	_position_label.text = car_pos_string
+	var race_pos: int = car_positions.find(_player_id) + 1
+	_position_panel.update_race_pos(race_pos)
 
 
 func _on_lap_changed(lap: int) -> void:
-	_lap_label.text = "%s/%s" % [lap, _track_follow.total_laps]
+	_next_lap_panel.update(lap, _track_follow.total_laps)
+	_position_panel.update_lap_label(lap, _track_follow.total_laps)
 	
 	# Make the next lap panel move and rotate at the bottom of the screen
 	_next_lap_panel.show()
 	const ROTATION_OFFSET: float = 30.0
 	const TWEEN_DURATION: float = 1.5
-	var start_y_pos: float = size.y + _next_lap_panel.size.y
+	#var start_y_pos: float = size.y + _next_lap_panel.size.y
+	var default_pos: Vector2 = _next_lap_panel.global_position
+	var start_pos: Vector2 = default_pos + Vector2(0.0, _next_lap_panel.size.y)
+	_next_lap_panel.global_position = start_pos
+	#_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
 	# Reset panel
-	_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
-	_next_lap_panel.position.y = start_y_pos
-	_next_lap_panel_label.text = _lap_label.text
+	#_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
+	#_next_lap_panel.position.x = size.x / 2.0
+	#_next_lap_panel.position.y = start_y_pos
+	#_set_control_node_percent_offset(_next_lap_panel, self, 0.5, 1.0)
+	#return
 	
 	# Start tweening panel
 	var tween: Tween = create_tween()
 	# Move up
 	var end_y_pos: float = (size.y / 2.0) + _next_lap_panel.size.y
-	tween.tween_property(_next_lap_panel, "position:y", end_y_pos, 0.5)
+	tween.tween_property(_next_lap_panel, "global_position", default_pos, 0.5)
 	# Rotate
-	tween.tween_property(_next_lap_panel, "rotation_degrees", ROTATION_OFFSET, TWEEN_DURATION)
-	tween.parallel().tween_property(_next_lap_panel, "position:y", end_y_pos - 10.0, TWEEN_DURATION)
+	tween.tween_interval(TWEEN_DURATION)
+	#tween.tween_property(_next_lap_panel, "rotation_degrees", ROTATION_OFFSET, TWEEN_DURATION)
+	#tween.parallel().tween_property(_next_lap_panel, "position:y", end_y_pos - 10.0, TWEEN_DURATION)
 	# Move down
-	tween.tween_property(_next_lap_panel, "position:y", start_y_pos, 0.5)
+	tween.tween_property(_next_lap_panel, "global_position", start_pos, 0.5)
 	
 	# Hide panel after tween is finished
-	tween.tween_callback(_next_lap_panel.hide)
+	await tween.finished
+	_next_lap_panel.hide()
+	_next_lap_panel.rotation_degrees = 0.0
+	_next_lap_panel.global_position = default_pos
+	#tween.tween_callback(_next_lap_panel.hide)
 
 
 func _on_finished_all_laps(_car_id: int) -> void:
 	_finished_all_laps = true
-	_update_countdown_label("FINISHED", 2.0)
+	_countdown_panel.update_label("FINISHED")
 
 
 func _on_car_item_picked_up(item: ItemResource) -> void:
-	_item_image_panel.show()
-	_item_image.texture = item.icon
+	_item_panel.picked_up_item(item)
 
 
 func on_countdown_updated(seconds_left: int) -> void:
-	_countdown_label.show()
-	if seconds_left <= 0:
-		_update_countdown_label("GO!", 2.0)
-	else:
-		_update_countdown_label(str(seconds_left))
-
-
-func _update_countdown_label(
-		new_text: String,
-		visible_duration: float = 0.6,
-		fade_duration: float = 0.2,
-) -> void:
-	# Reset countdown label
-	_countdown_label.text = new_text
-	_countdown_label.show()
-	_countdown_label.modulate = Color.TRANSPARENT
-	
-	# Stop tween if allready running
-	if _countdown_tween:
-		_countdown_tween.stop()
-	
-	_countdown_tween = create_tween()
-	_countdown_tween.tween_property(_countdown_label, "modulate", Color.WHITE, fade_duration)
-	_countdown_tween.tween_interval(visible_duration)
-	_countdown_tween.tween_property(_countdown_label, "modulate", Color.TRANSPARENT, fade_duration)
-	_countdown_tween.tween_callback(_countdown_label.hide)
+	_countdown_panel.update_secs_left(seconds_left)
 
 #endregion
