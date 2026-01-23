@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl2teltva3umx"
-path="res://.godot/imported/alarm.png-e274f8cd937379a9e0dc8bf33178f76a.ctex"
+uid="uid://bltvplbcwaguh"
+path="res://.godot/imported/bomb_icon.png-a3d9279d11e7b69420e45b7bdb3fd8ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/items/art/alarm.png"
-dest_files=["res://.godot/imported/alarm.png-e274f8cd937379a9e0dc8bf33178f76a.ctex"]
+source_file="res://entities/items/bomb/art/bomb_icon.png"
+dest_files=["res://.godot/imported/bomb_icon.png-a3d9279d11e7b69420e45b7bdb3fd8ea.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

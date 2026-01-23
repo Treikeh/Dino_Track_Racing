@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://cxj84srk7f5fr"]
 
-[ext_resource type="Texture2D" uid="uid://cvkeihtfqvcgt" path="res://entities/items/homing_missile/art/gun_towards_camera.png" id="1_xwwvl"]
+[ext_resource type="Texture2D" uid="uid://bvg6cmeagmxac" path="res://entities/items/homing_missile/art/missile_icon.png" id="1_4bd84"]
 [ext_resource type="PackedScene" uid="uid://gg63h5u3qj6x" path="res://entities/items/homing_missile/homing_missile.tscn" id="2_4bd84"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="3_phku3"]
 
 [resource]
 script = ExtResource("3_phku3")
 name = "Homing missile"
-icon = ExtResource("1_xwwvl")
-rarity = 6
+icon = ExtResource("1_4bd84")
+rarity = 12
 scene = ExtResource("2_4bd84")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"

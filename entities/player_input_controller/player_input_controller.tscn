@@ -21,7 +21,7 @@ gradient = SubResource("Gradient_jpoqo")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image", "_wrong_way_panel", "_next_lap_panel", "_next_lap_panel_label", "_debug_label")]
+[node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_position_label", "_speedometer", "_lap_label", "_countdown_label", "_item_image_panel", "_item_image", "_wrong_way_panel", "_next_lap_panel", "_next_lap_panel_label", "_debug_label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 494.0
@@ -38,9 +38,10 @@ _position_label = NodePath("Hud/PosLapPanel/VBoxContainer/PositionLabel")
 _speedometer = NodePath("Hud/SpeedometerPanel/HBoxContainer/Speedometer")
 _lap_label = NodePath("Hud/PosLapPanel/VBoxContainer/MarginContainer/HBoxContainer/LapLabel")
 _countdown_label = NodePath("Hud/CountdownLabel")
-_item_image = NodePath("Hud/ItemImage")
+_item_image_panel = NodePath("Hud/ItemPanel")
+_item_image = NodePath("Hud/ItemPanel/ItemImage")
 _wrong_way_panel = NodePath("Hud/WrongWayPanel")
-_next_lap_panel = NodePath("")
+_next_lap_panel = NodePath("Hud/NextLapPanel")
 _next_lap_panel_label = NodePath("Hud/NextLapPanel/TextureRect/HBoxContainer/NextLapPanelLabel")
 _debug_label = NodePath("DebugLabel")
 
@@ -172,13 +173,16 @@ text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemImage" type="TextureRect" parent="Hud"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-offset_left = 14.0
+[node name="ItemPanel" type="PanelContainer" parent="Hud"]
+layout_mode = 0
+offset_left = 16.0
 offset_top = 16.0
-offset_right = 85.0
-offset_bottom = 78.0
+offset_right = 83.0
+offset_bottom = 81.0
+
+[node name="ItemImage" type="TextureRect" parent="Hud/ItemPanel"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
 texture = ExtResource("2_jpoqo")
 expand_mode = 1
 stretch_mode = 5

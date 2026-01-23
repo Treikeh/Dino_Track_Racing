@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqpqvhtlhn3ji"
-path="res://.godot/imported/among-us-drip-png-png-artwork-download-36642-3248130141.png-55048f3dcba8f5b38ea7d6db3902935b.ctex"
+uid="uid://w27qonhcr8rt"
+path="res://.godot/imported/mine_icon.png-f1229e9652cf900bd56d737ec60428e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/items/art/among-us-drip-png-png-artwork-download-36642-3248130141.png"
-dest_files=["res://.godot/imported/among-us-drip-png-png-artwork-download-36642-3248130141.png-55048f3dcba8f5b38ea7d6db3902935b.ctex"]
+source_file="res://entities/items/mine/art/mine_icon.png"
+dest_files=["res://.godot/imported/mine_icon.png-f1229e9652cf900bd56d737ec60428e5.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvkeihtfqvcgt"
-path="res://.godot/imported/gun_towards_camera.png-13b253c30f461a198a61b85221a38724.ctex"
+uid="uid://bvg6cmeagmxac"
+path="res://.godot/imported/missile_icon.png-48560a3838388dd7c61865c6cef3fabd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/items/homing_missile/art/gun_towards_camera.png"
-dest_files=["res://.godot/imported/gun_towards_camera.png-13b253c30f461a198a61b85221a38724.ctex"]
+source_file="res://entities/items/homing_missile/art/missile_icon.png"
+dest_files=["res://.godot/imported/missile_icon.png-48560a3838388dd7c61865c6cef3fabd.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

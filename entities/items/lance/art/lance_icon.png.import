@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8n6oqxnbq8k"
-path="res://.godot/imported/carrot.png-dca500632045c5a6b5d09c179fd55533.ctex"
+uid="uid://ba2ij7fnbp8e5"
+path="res://.godot/imported/lance_icon.png-52a5b1ef78a4ad2ec5217dfb6d6d3533.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/items/lance/art/carrot.png"
-dest_files=["res://.godot/imported/carrot.png-dca500632045c5a6b5d09c179fd55533.ctex"]
+source_file="res://entities/items/lance/art/lance_icon.png"
+dest_files=["res://.godot/imported/lance_icon.png-52a5b1ef78a4ad2ec5217dfb6d6d3533.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
