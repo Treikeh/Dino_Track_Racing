@@ -8,6 +8,7 @@ var _countdown_tween: Tween
 
 func _ready() -> void:
 	modulate = Color.TRANSPARENT
+	pivot_offset.x = size.x / 2.0
 
 
 func update_secs_left(secs_left: float) -> void:

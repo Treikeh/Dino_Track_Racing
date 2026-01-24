@@ -7,6 +7,7 @@
 [node name="PositionPanel" type="PanelContainer" node_paths=PackedStringArray("_race_pos_label", "_lap_label")]
 offset_right = 71.0
 offset_bottom = 85.0
+pivot_offset = Vector2(0, 85)
 script = ExtResource("1_awfkn")
 _race_pos_label = NodePath("VBoxContainer/RacePosLabel")
 _lap_label = NodePath("VBoxContainer/MarginContainer/HBoxContainer/LapLabel")

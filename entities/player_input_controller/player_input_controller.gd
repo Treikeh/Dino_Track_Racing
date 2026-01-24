@@ -13,7 +13,7 @@ class_name PlayerInputController
 @export_group("HUD")
 @export var _speedometer: PanelContainer
 @export var _position_panel: PanelContainer
-@export var _next_lap_panel: PanelContainer
+@export var _next_lap_panel: Control
 @export var _item_panel: PanelContainer
 @export var _countdown_panel: PanelContainer
 @export var _wrong_way_panel: Container
@@ -28,6 +28,8 @@ var _throttle_input: float
 var _turn_input: float
 var _car_controller: CarController
 var _track_follow: TrackFollow
+
+var _ui_scale_factor: float = 1.0
 
 
 # Add after instatiate (instatiate().with_data(.., ..)) to setup controller data
@@ -62,41 +64,8 @@ func _ready() -> void:
 	_position_panel.update_lap_label(1, _track_follow.total_laps)
 	
 	await get_tree().process_frame
+	_scale_ui_elements()
 	_on_lap_changed(1)
-	#_set_control_node_percent_offset(_next_lap_panel, self, 0.5, 0.5)
-	return
-	
-	var texture: Texture2D = load("res://icon.svg")
-	var top_left_texture := TextureRect.new()
-	add_child(top_left_texture)
-	top_left_texture.texture = texture
-	top_left_texture.global_position = get_screen_position()
-	
-	var bottom_right_texture := TextureRect.new()
-	add_child(bottom_right_texture)
-	bottom_right_texture.texture = texture
-	bottom_right_texture.global_position = get_screen_position() + size
-	
-	var screen_pos: Vector2 = get_screen_position()
-	var buttom_center_texture := TextureRect.new()
-	add_child(buttom_center_texture)
-	buttom_center_texture.texture = texture
-	
-	var x_offset: float = (size.x * 0.5) - (bottom_right_texture.size.x * 0.5)
-	var y_offset: float = (size.y * 1.0) - (bottom_right_texture.size.y * 1.0)
-	bottom_right_texture.global_position = screen_pos + Vector2(x_offset, y_offset)
-
-
-func _set_control_node_percent_offset(
-		node: Control,
-		parent: Control,
-		x_offset: float = 1.0,
-		y_offset: float = 1.0
-) -> void:
-	var x_pos: float = (parent.size.x * x_offset) - (node.size.x * x_offset)
-	var y_pos: float = (parent.size.y * y_offset) - (node.size.y * y_offset)
-	var parent_pos: Vector2 = parent.get_screen_position()
-	node.global_position = parent_pos + Vector2(x_pos, y_pos)
 
 
 func _input(event: InputEvent) -> void:
@@ -166,6 +135,21 @@ func _get_look_at_pos() -> Vector3:
 
 #region UI signal functions
 
+func _scale_ui_elements() -> void:
+	var window_height: float = get_window().size.y
+	var view_height: float = size.y
+	
+	_ui_scale_factor = view_height / window_height
+	var ui_scale: Vector2 = Vector2.ONE * _ui_scale_factor
+	
+	_item_panel.scale = ui_scale
+	_next_lap_panel.scale = ui_scale
+	_position_panel.scale = ui_scale
+	_speedometer.scale = ui_scale
+	_countdown_panel.scale = ui_scale
+	_wrong_way_panel.scale = ui_scale
+
+
 func on_car_positions_updated(car_positions: Array[int]) -> void:
 	# Get the position the this player is in the array
 	var race_pos: int = car_positions.find(_player_id) + 1
@@ -176,40 +160,34 @@ func _on_lap_changed(lap: int) -> void:
 	_next_lap_panel.update(lap, _track_follow.total_laps)
 	_position_panel.update_lap_label(lap, _track_follow.total_laps)
 	
-	# Make the next lap panel move and rotate at the bottom of the screen
+	# Show the next lap panel and move it up and down form the screen
 	_next_lap_panel.show()
-	const ROTATION_OFFSET: float = 30.0
-	const TWEEN_DURATION: float = 1.5
-	#var start_y_pos: float = size.y + _next_lap_panel.size.y
+	# Save the default positoin so it can be used to reset it after the tween has finished
 	var default_pos: Vector2 = _next_lap_panel.global_position
-	var start_pos: Vector2 = default_pos + Vector2(0.0, _next_lap_panel.size.y)
-	_next_lap_panel.global_position = start_pos
-	#_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
-	# Reset panel
-	#_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
-	#_next_lap_panel.position.x = size.x / 2.0
-	#_next_lap_panel.position.y = start_y_pos
-	#_set_control_node_percent_offset(_next_lap_panel, self, 0.5, 1.0)
-	#return
+	
+	# Where the tween should start and end
+	var tween_down_pos: Vector2 = default_pos + (_next_lap_panel.size * _ui_scale_factor)
+	_next_lap_panel.global_position = tween_down_pos
+	# Set start rotation
+	const ROTATION_OFFSET: float = 30.0
+	_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
 	
 	# Start tweening panel
+	const TWEEN_DURATION: float = 1.5
 	var tween: Tween = create_tween()
 	# Move up
-	var end_y_pos: float = (size.y / 2.0) + _next_lap_panel.size.y
-	tween.tween_property(_next_lap_panel, "global_position", default_pos, 0.5)
+	var tween_up_pos: Vector2 = default_pos + (_next_lap_panel.size * 0.35 * _ui_scale_factor)
+	tween.tween_property(_next_lap_panel, "global_position", tween_up_pos, 0.5)
 	# Rotate
-	tween.tween_interval(TWEEN_DURATION)
-	#tween.tween_property(_next_lap_panel, "rotation_degrees", ROTATION_OFFSET, TWEEN_DURATION)
-	#tween.parallel().tween_property(_next_lap_panel, "position:y", end_y_pos - 10.0, TWEEN_DURATION)
+	tween.tween_property(_next_lap_panel, "rotation_degrees", ROTATION_OFFSET, TWEEN_DURATION)
 	# Move down
-	tween.tween_property(_next_lap_panel, "global_position", start_pos, 0.5)
+	tween.tween_property(_next_lap_panel, "global_position", tween_down_pos, 0.5)
 	
-	# Hide panel after tween is finished
+	# Hide and reset after tween has finished
 	await tween.finished
 	_next_lap_panel.hide()
 	_next_lap_panel.rotation_degrees = 0.0
 	_next_lap_panel.global_position = default_pos
-	#tween.tween_callback(_next_lap_panel.hide)
 
 
 func _on_finished_all_laps(_car_id: int) -> void:

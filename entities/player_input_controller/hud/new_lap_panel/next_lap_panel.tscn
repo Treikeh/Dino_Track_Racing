@@ -1,21 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bly7ariee4yik"]
+[gd_scene load_steps=4 format=3 uid="uid://bly7ariee4yik"]
 
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="1_4r700"]
 [ext_resource type="Script" uid="uid://ce7d0ty1t3q7k" path="res://entities/player_input_controller/hud/new_lap_panel/next_lap_panel.gd" id="1_wgvxv"]
 [ext_resource type="Texture2D" uid="uid://ccv670s0y7qhi" path="res://entities/player_input_controller/hud/lap_flag.png" id="2_wgvxv"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4r700"]
-
-[node name="NextLapPanel" type="PanelContainer" node_paths=PackedStringArray("_lap_label")]
-offset_right = 170.0
-offset_bottom = 170.00012
-pivot_offset = Vector2(85, 170)
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4r700")
+[node name="NextLapPanel" type="Control" node_paths=PackedStringArray("_dino_image", "_lap_label")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_wgvxv")
+_dino_image = NodePath("DinoImage")
 _lap_label = NodePath("DinoImage/HBoxContainer/LapLabel")
 
 [node name="DinoImage" type="TextureRect" parent="."]
-layout_mode = 2
+layout_mode = 0
+offset_left = -85.0
+offset_top = -170.0
+offset_right = 85.0
+offset_bottom = 0.00012207031
 texture = ExtResource("1_4r700")
 stretch_mode = 5
 

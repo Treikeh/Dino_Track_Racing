@@ -5,6 +5,10 @@ extends PanelContainer
 @export var _lap_label: Label
 
 
+func _ready() -> void:
+	pivot_offset.y = size.y
+
+
 func update_race_pos(race_pos: int) -> void:
 	# Turn position into a string
 	var car_pos_string: String = str(race_pos)

@@ -15,9 +15,11 @@ point_count = 2
 
 [node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_speedometer", "_position_panel", "_next_lap_panel", "_item_panel", "_countdown_panel", "_wrong_way_panel", "_debug_label")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 515.0
-offset_bottom = 321.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_htsux")
@@ -47,7 +49,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Viewport"]
 handle_input_locally = false
-size = Vector2i(515, 321)
+size = Vector2i(1152, 648)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -66,6 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96
 remote_path = NodePath("../../Camera3D")
 
 [node name="Hud" type="Control" parent="."]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,20 +97,6 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -85.0
 offset_bottom = 0.0
-grow_vertical = 0
-
-[node name="NextLapPanel" parent="Hud" instance=ExtResource("5_jlmbq")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -84.5
-offset_top = -105.0
-offset_right = 85.5
-offset_bottom = 65.00012
-grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ItemPanel" parent="Hud" instance=ExtResource("5_5jfa6")]
@@ -141,6 +130,16 @@ offset_top = 15.0
 offset_right = 51.5
 offset_bottom = 55.0
 grow_horizontal = 2
+
+[node name="NextLapPanel" parent="Hud" instance=ExtResource("5_jlmbq")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="DebugLabel" type="Label" parent="."]
 layout_mode = 0
