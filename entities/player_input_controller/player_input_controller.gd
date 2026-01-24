@@ -30,6 +30,7 @@ var _car_controller: CarController
 var _track_follow: TrackFollow
 
 var _ui_scale_factor: float = 1.0
+var _cpu: PlayerCpuController
 
 
 # Add after instatiate (instatiate().with_data(.., ..)) to setup controller data
@@ -66,6 +67,9 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_scale_ui_elements()
 	_on_lap_changed(1)
+	
+	if _player_id > 0:
+		_add_cpu_controller()
 
 
 func _input(event: InputEvent) -> void:
@@ -117,13 +121,6 @@ func _physics_process(delta: float) -> void:
 	var target_quat: Quaternion = _id_label.quaternion
 	_orientation.global_position = _orientation.global_position.lerp(target_pos, _cam_follow_speed * delta)
 	_orientation.quaternion = _orientation.quaternion.slerp(target_quat, 4.0 * delta)
-	
-	# Make the car automatically move when the player has finished the last lap
-	#TODO: Replace with a simple AI that follow the track
-	if _finished_all_laps:
-		_car_controller.throttle = 1.0
-		_car_controller.turn_input = 1.0
-		_car_controller.stop_drift()
 
 
 func _get_look_at_pos() -> Vector3:
@@ -193,6 +190,13 @@ func _on_lap_changed(lap: int) -> void:
 func _on_finished_all_laps(_car_id: int) -> void:
 	_finished_all_laps = true
 	_countdown_panel.update_label("FINISHED")
+	# Add ai controller
+
+
+func _add_cpu_controller() -> void:
+	if not _cpu:
+		_cpu = PlayerCpuController.new(_car_controller, _track_follow)
+		add_child(_cpu)
 
 
 func _on_car_item_picked_up(item: ItemResource) -> void:
