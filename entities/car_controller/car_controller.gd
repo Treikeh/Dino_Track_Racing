@@ -40,9 +40,9 @@ enum TrickState {
 @export_group("Drifting")
 @export var _min_drift_angle: float = 10.0
 @export var _max_drift_angle: float = 35.0
-# How much force to apply sideways when drifting
+## How much force to apply sideways when drifting
 @export var _sideways_dirft_force: float = 65.0
-# How long the car has to drift before getting a boost
+## How long the car has to drift before getting a boost
 @export var _min_drift_boost_duration: float = 1.0
 var _is_drifting: bool = false
 # Which direction the car is drifting in (1 = left, -1 right)
@@ -52,12 +52,14 @@ var _drift_time: float = 0.0
 
 @export_group("Tricking")
 ## How long the player can has to press the trick button after leaving the ground
-@export var _trick_window_duration: float = 0.2
+@export var _trick_window_duration: float = 0.25
+@export var _trick_buffer_duration: float = 0.2
 ## The curve used to apply trick boost speed. Y axis is time
 @export var _trick_boost_curve: Curve
 var _trick_window_time: float = 0.0
 var _trick_boost: float = 0.0
 var _trick_boost_time: float = 0.0
+var _trick_buffer_time: float = 0.0
 var _trick_state: TrickState = TrickState.CAN_PERFORM
 
 @export_group("Damage")
@@ -156,6 +158,9 @@ func _physics_process(delta: float) -> void:
 			var turn_force: float = turn_force_mult * _rot_speed * forward_vel_dot
 			apply_torque(global_basis.y * turn_force * mass)
 			
+			# Reduce trick buffer time
+			_trick_buffer_time -= delta
+			
 			# Trick states
 			match _trick_state:
 				TrickState.PERFORMED:
@@ -174,6 +179,11 @@ func _physics_process(delta: float) -> void:
 		linear_damp = 0.0
 		# Reduce how much the car can rotate in the air
 		apply_torque(global_basis.y * _turn_dir * 0.5 * mass)
+		
+		# Perform trick when entering the air while the trick buffer is active
+		if _trick_buffer_time > 0.0 and _trick_state == TrickState.CAN_PERFORM:
+			_trick_buffer_time = 0.0
+			_perform_trick()
 		
 		# Stop trick boost if the player is in the air
 		if _trick_state == TrickState.BOOSTING:
@@ -231,16 +241,17 @@ func set_movement_state(new_state: MovementState) -> void:
 
 func try_dirft() -> void:
 	# Only allow drift to start when on the ground and when turning
-	if _ground_check.is_colliding() and abs(turn_input) > 0.5:
-		_is_drifting = true
-		_drift_time = 0.0
-		_drift_dir = 1 if turn_input > 0.0 else -1
+	if _ground_check.is_colliding():
+		# Start trick buffer
+		_trick_buffer_time = _trick_buffer_duration
+		# Perform drift
+		if abs(turn_input) > 0.5:
+			_is_drifting = true
+			_drift_time = 0.0
+			_drift_dir = 1 if turn_input > 0.0 else -1
 	# Perform trick in the air if drifting is pressed
 	elif not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
-		_trick_state = TrickState.PERFORMED
-		trick_performed.emit()
-		_mesh.play_trick_anim()
-		_trick_vfx.restart()
+		_perform_trick()
 
 
 func release_drift() -> void:
@@ -259,6 +270,13 @@ func stop_drift() -> void:
 
 
 #region Tricking
+
+func _perform_trick() -> void:
+	_trick_state = TrickState.PERFORMED
+	_mesh.play_trick_anim()
+	_trick_vfx.restart()
+	trick_performed.emit()
+
 
 func _start_trick_boost() -> void:
 	_trick_boost_time = 0.0
