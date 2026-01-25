@@ -331,6 +331,8 @@ func _on_hitbox_hit() -> void:
 	angular_damp *= 0.5
 	took_damage.emit()
 	
+	_mesh.play_hit_anim()
+	
 	# Spin mesh
 	#NOTE: Could be replaced with an animation
 	_mesh.rotation_degrees.y = 0.0

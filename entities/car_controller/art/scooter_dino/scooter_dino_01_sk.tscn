@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c34gft7iam7yp"]
+[gd_scene load_steps=32 format=3 uid="uid://c34gft7iam7yp"]
 
 [ext_resource type="PackedScene" uid="uid://bbxbbdht0jxtx" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.glb" id="1_wa4pc"]
 [ext_resource type="Script" uid="uid://bh3slwgh1545o" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.gd" id="2_40ip0"]
@@ -71,6 +71,11 @@ states/turning/node = SubResource("AnimationNodeBlendSpace1D_6uei0")
 states/turning/position = Vector2(431, 100)
 transitions = ["Start", "turning", SubResource("AnimationNodeStateMachineTransition_cgq74"), "turning", "drifting", SubResource("AnimationNodeStateMachineTransition_pyhs6"), "drifting", "turning", SubResource("AnimationNodeStateMachineTransition_2dvb1")]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_apc3q"]
+animation = &"hit_001"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_px080"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pyhs6"]
 animation = &"scream_001"
 
@@ -109,6 +114,8 @@ transitions = ["Start", "trick_001", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-14, 60)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2dvb1"]
+graph_offset = Vector2(-335.18365, 86.29117)
+nodes/output/position = Vector2(540, 160)
 nodes/falling/node = SubResource("AnimationNodeAnimation_83df8")
 nodes/falling/position = Vector2(-1040, 160)
 nodes/scream_blend/node = SubResource("AnimationNodeBlend2_2dvb1")
@@ -123,11 +130,38 @@ nodes/trick_one_shot/node = SubResource("AnimationNodeOneShot_83df8")
 nodes/trick_one_shot/position = Vector2(120, 160)
 nodes/trick_sm/node = SubResource("AnimationNodeStateMachine_rvrms")
 nodes/trick_sm/position = Vector2(-340, 380)
-node_connections = [&"output", 0, &"trick_one_shot", &"scream_blend", 0, &"fall_blend", &"scream_blend", 1, &"scream", &"fall_blend", 0, &"ground", &"fall_blend", 1, &"falling", &"trick_one_shot", 0, &"scream_blend", &"trick_one_shot", 1, &"trick_sm"]
+nodes/hit/node = SubResource("AnimationNodeAnimation_apc3q")
+nodes/hit/position = Vector2(120, 460)
+nodes/hit_one_shot/node = SubResource("AnimationNodeOneShot_px080")
+nodes/hit_one_shot/position = Vector2(381.86127, 293.24634)
+node_connections = [&"output", 0, &"hit_one_shot", &"scream_blend", 0, &"fall_blend", &"scream_blend", 1, &"scream", &"fall_blend", 0, &"ground", &"fall_blend", 1, &"falling", &"trick_one_shot", 0, &"scream_blend", &"trick_one_shot", 1, &"trick_sm", &"hit_one_shot", 0, &"trick_one_shot", &"hit_one_shot", 1, &"hit"]
 
 [node name="ScooterDino_01_SK" node_paths=PackedStringArray("_anim_tree") instance=ExtResource("1_wa4pc")]
 script = ExtResource("2_40ip0")
 _anim_tree = NodePath("AnimationTree")
+
+[node name="Skeleton3D" parent="." index="0"]
+bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
+bones/2/rotation = Quaternion(-0.005538567, 0.70708513, 0.70708513, 0.005538508)
+bones/3/position = Vector3(0.03267289, 0.21397403, 0.4532882)
+bones/3/rotation = Quaternion(0.03760372, 0.5336248, 0.844865, 0.0057947915)
+bones/4/rotation = Quaternion(0.0722837, -0.09616349, -0.065065436, 0.9906029)
+bones/5/rotation = Quaternion(0.14372194, -5.9013763e-09, -3.302043e-08, 0.9896181)
+bones/6/rotation = Quaternion(-0.83942777, 5.8157756e-08, 9.3482605e-08, 0.5434713)
+bones/7/position = Vector3(-0.14752555, 0.1834961, -0.06828829)
+bones/7/rotation = Quaternion(-0.6524199, 0.09035495, 0.14452115, 0.7384429)
+bones/9/position = Vector3(0.14013767, 0.18052946, -0.058365144)
+bones/9/rotation = Quaternion(-0.6533817, -0.047581125, -0.08375782, 0.7508748)
+bones/11/rotation = Quaternion(0.9016182, 0.03463901, -0.028008588, 0.43023306)
+bones/12/rotation = Quaternion(-0.07519688, -0.009431593, -0.061944, 0.99519825)
+bones/13/rotation = Quaternion(-0.03676771, -0.0016356462, -0.054783177, 0.9978198)
+bones/14/rotation = Quaternion(0.90263647, -0.09355936, -0.010310625, -0.41998535)
+bones/15/rotation = Quaternion(-0.28507537, 0.0071642213, -0.15416007, 0.9459997)
+bones/16/rotation = Quaternion(0.120016165, -0.013198962, 0.059414167, 0.99090457)
+bones/17/rotation = Quaternion(0.96623325, 0.09598942, -0.0074718245, -0.23900533)
+bones/18/rotation = Quaternion(-0.28507537, -0.007164265, 0.1541601, 0.9459997)
+bones/19/rotation = Quaternion(0.12001614, 0.013198952, -0.059414174, 0.99090457)
+bones/20/rotation = Quaternion(0.096617974, 0.70047474, 0.7004749, 0.09661805)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_2dvb1")
@@ -139,4 +173,7 @@ parameters/ground/turning/blend_position = -18.789665
 parameters/trick_one_shot/active = false
 parameters/trick_one_shot/internal_active = false
 parameters/trick_one_shot/request = 0
+parameters/hit_one_shot/active = false
+parameters/hit_one_shot/internal_active = false
+parameters/hit_one_shot/request = 0
 script = ExtResource("3_6uei0")

@@ -1,9 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bev3yn5lvlyuv"]
 
 [ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_hwck0"]
-[ext_resource type="Texture2D" uid="uid://bcafrhxpv4041" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_bc.png" id="2_wv2pe"]
+[ext_resource type="Texture2D" uid="uid://04f3miqlpa6y" path="res://entities/car_controller/art/scooter_dino/dino_01_bc.png" id="2_k5ng5"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_hwck0")
-shader_parameter/color_texture = ExtResource("2_wv2pe")
+shader_parameter/color_texture = ExtResource("2_k5ng5")
