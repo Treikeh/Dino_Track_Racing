@@ -66,7 +66,6 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	_scale_ui_elements()
-	_on_lap_changed(1)
 	
 	if _player_id > 0:
 		_add_cpu_controller()
@@ -191,6 +190,7 @@ func _on_finished_all_laps(_car_id: int) -> void:
 	_finished_all_laps = true
 	_countdown_panel.update_label("FINISHED")
 	# Add ai controller
+	_add_cpu_controller()
 
 
 func _add_cpu_controller() -> void:

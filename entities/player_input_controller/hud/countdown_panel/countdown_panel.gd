@@ -15,7 +15,7 @@ func update_secs_left(secs_left: float) -> void:
 	if secs_left <= 0:
 		update_label("GO!", 2.0)
 	else:
-		update_label(str(secs_left))
+		update_label(str(int(secs_left)))
 
 
 func update_label(

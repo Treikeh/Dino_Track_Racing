@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	var should_follow_car: bool = follow_distance < 50.0
 	
 	# Get the target the missile should move to and the speed at which it should move
-	var lerp_speed: float = 20.0 if should_follow_car else 12.5
+	var lerp_speed: float = 20.0 if should_follow_car else 15.0
 	var lerp_target: Vector3 = target_car_pos if should_follow_car else track_follow_pos
 	# Move bullet towards lerp target
 	_bullet_root.global_position = lerp(_bullet_root.global_position, lerp_target, lerp_speed * delta)

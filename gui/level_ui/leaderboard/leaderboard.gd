@@ -21,7 +21,7 @@ func populate() -> void:
 		# Add label to the leaderboard
 		var entry_label := Label.new()
 		_entry_container.add_child(entry_label)
-		entry_label.text = "Player %s: ------- %s" % [id + 1, _time_convert(time_taken)]
+		entry_label.text = "Player %s: ------- %s" % [id + 1, _time_convert(snappedf(time_taken, 0.01))]
 
 
 func _sort_player_time_taken(a: int, b: int) -> bool:
