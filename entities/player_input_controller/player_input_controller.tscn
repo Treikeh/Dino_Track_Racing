@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1f50k3xa7iar"]
+[gd_scene load_steps=10 format=3 uid="uid://d1f50k3xa7iar"]
 
 [ext_resource type="Script" uid="uid://pohingt7fxqa" path="res://entities/player_input_controller/player_input_controller.gd" id="1_htsux"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_8seoj"]
 [ext_resource type="PackedScene" uid="uid://o0j26svo2pfl" path="res://entities/player_input_controller/hud/position_panel/position_panel.tscn" id="2_jlmbq"]
 [ext_resource type="PackedScene" uid="uid://o23pygopte4a" path="res://entities/player_input_controller/hud/speedometer/speedometer.tscn" id="4_5jfa6"]
 [ext_resource type="PackedScene" uid="uid://b4re4rda2ts5x" path="res://entities/player_input_controller/hud/item_panel/item_panel.tscn" id="5_5jfa6"]
@@ -55,11 +56,14 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Viewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96592593, 0, 2, 4.5)
+keep_aspect = 0
 
 [node name="IdLabel" type="Label3D" parent="Viewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
+texture_filter = 2
 text = "P1"
+font = ExtResource("2_8seoj")
 
 [node name="Orientation" type="Node3D" parent="Viewport/SubViewport"]
 
@@ -111,10 +115,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -108.0
-offset_top = -34.5
-offset_right = 108.0
-offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=16 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
+[ext_resource type="Shader" uid="uid://cym5tvj1581t" path="res://levels/Level_01/art/skybox_shader.gdshader" id="2_vnc2o"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_mii42"]
-[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="3_w8irb"]
+[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_mesh/track_01_sm.tscn" id="3_w8irb"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
 [ext_resource type="PackedScene" uid="uid://c7poo3o6yoe28" path="res://common/scenes/respawn_trigger.tscn" id="6_22u7d"]
+[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="8_kctjg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,16 +17,28 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_qn7dl")
 
 [sub_resource type="Environment" id="Environment_w8irb"]
-background_mode = 1
-background_color = Color(0.37797713, 0.5558381, 0.74858373, 1)
-background_energy_multiplier = 1.25
+background_color = Color(0.2627451, 0.42352942, 0.64705884, 1)
 sky = SubResource("Sky_22u7d")
 tonemap_mode = 2
 fog_enabled = true
 fog_mode = 1
-fog_density = 0.3273
+fog_light_color = Color(0.7372549, 0.81960785, 0.8509804, 1)
+fog_density = 0.097
 fog_sky_affect = 0.261
 fog_depth_end = 200.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnc2o"]
+render_priority = 0
+shader = ExtResource("2_vnc2o")
+shader_parameter/scroll_speed = 0.001
+shader_parameter/color_texture = ExtResource("8_kctjg")
+
+[sub_resource type="SphereMesh" id="SphereMesh_mq051"]
+flip_faces = true
+radius = 50.0
+height = 100.0
+radial_segments = 16
+rings = 8
 
 [sub_resource type="Curve3D" id="Curve3D_qn7dl"]
 closed = true
@@ -39,12 +53,18 @@ size = Vector3(227.2, 10, 194.2)
 
 [node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
 script = ExtResource("1_qn7dl")
+_lap_count = 1
 _track = NodePath("Track")
 _spawn_point = NodePath("Track/FinishLine")
 metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8irb")
+
+[node name="Skybox" type="MeshInstance3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -85.912, 0, 20.5)
+material_override = SubResource("ShaderMaterial_vnc2o")
+mesh = SubResource("SphereMesh_mq051")
 
 [node name="Track" type="Path3D" parent="." groups=["track"]]
 curve = SubResource("Curve3D_qn7dl")
@@ -53,7 +73,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917892, -0.12787984, 0.0005653032, -0.12784639, 0.9915909, 0.01944272, -0.0030470884, 0.019211631, -0.9997554, -120.2942, -12.455472, -4.438881)
+transform = Transform3D(-0.9917892, -0.12787984, 0.0005653019, -0.12784639, 0.9915909, 0.019442676, -0.0030470884, 0.019211631, -0.9997531, -120.2942, -12.455472, -4.438881)
 progress = 562.9591
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]

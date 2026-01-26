@@ -24,30 +24,85 @@ offset_top = 25.0
 offset_right = 175.0
 offset_bottom = 94.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_pnibf")
 theme_override_font_sizes/font_size = 50
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -323.0
-offset_top = -27.0
-offset_right = 323.0
-offset_bottom = 27.0
+offset_left = -385.0
+offset_top = -145.0
+offset_right = 385.0
+offset_bottom = 187.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_pnibf")
-text = "FONT: Press Start 2P by cody@zone38.net licensed under the SIL Open Font License, Version 1.1."
+text = "Game made by Treikeh"
+horizontal_alignment = 1
+
+[node name="Font" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_pnibf")
+text = "FONT:
+Press Start 2P by cody@zone38.net
+licensed under the SIL Open Font License
+Version 1.1."
+horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Audio" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_pnibf")
+text = "Audio:
+All audio is licensed under
+Creative Commons  - CC0"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonDisplay" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -63,7 +118,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="ButtonDisplay" parent="MarginContainer" instance=ExtResource("2_yfhft")]
+[node name="ButtonDisplay" parent="ButtonDisplay" instance=ExtResource("2_yfhft")]
 layout_mode = 2
 alignment = 2
 _front_text = ""

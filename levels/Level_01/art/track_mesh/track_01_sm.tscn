@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://uyqpdbitujjk"]
 
-[ext_resource type="PackedScene" uid="uid://bn56eff0cmsll" path="res://levels/Level_01/art/track_01_sm.glb" id="1_1laj4"]
+[ext_resource type="PackedScene" uid="uid://bn56eff0cmsll" path="res://levels/Level_01/art/track_mesh/track_01_sm.glb" id="1_1laj4"]
 
 [node name="Track_01_SM" instance=ExtResource("1_1laj4")]
 

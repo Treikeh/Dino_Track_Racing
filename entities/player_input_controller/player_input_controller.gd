@@ -15,7 +15,7 @@ class_name PlayerInputController
 @export var _position_panel: PanelContainer
 @export var _next_lap_panel: Control
 @export var _item_panel: Control
-@export var _countdown_panel: PanelContainer
+@export var _countdown_panel: Control
 @export var _wrong_way_panel: Container
 
 @export_group("Debug")
@@ -144,8 +144,8 @@ func _scale_ui_elements() -> void:
 	_next_lap_panel.scale = ui_scale
 	_position_panel.scale = ui_scale
 	_speedometer.scale = ui_scale
-	_countdown_panel.scale = ui_scale
 	_wrong_way_panel.scale = ui_scale
+	_countdown_panel.scale = ui_scale
 
 
 func on_car_positions_updated(car_positions: Array[int]) -> void:
@@ -190,7 +190,7 @@ func _on_lap_changed(lap: int) -> void:
 
 func _on_finished_all_laps(_car_id: int) -> void:
 	_finished_all_laps = true
-	_countdown_panel.update_label("FINISHED")
+	_countdown_panel.update_label("FINISHED", 2.0)
 	# Add ai controller
 	_add_cpu_controller()
 

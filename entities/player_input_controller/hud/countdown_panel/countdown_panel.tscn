@@ -3,23 +3,25 @@
 [ext_resource type="Script" uid="uid://cmwvcip0uue8h" path="res://entities/player_input_controller/hud/countdown_panel/countdown_panel.gd" id="1_ly7g5"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_wcpdb"]
 
-[node name="CountdownPanel" type="PanelContainer" node_paths=PackedStringArray("_label")]
-offset_right = 216.0
-offset_bottom = 69.0
+[node name="CountdownPanel" type="Control" node_paths=PackedStringArray("_label")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_ly7g5")
-_label = NodePath("MarginContainer/CountdownLabel")
+_label = NodePath("CountdownLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="CountdownLabel" type="Label" parent="MarginContainer"]
-layout_mode = 2
+[node name="CountdownLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 555.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_wcpdb")
 theme_override_font_sizes/font_size = 50
-text = "Finished!"
+text = " Finished! "
 horizontal_alignment = 1
 vertical_alignment = 1

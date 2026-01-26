@@ -13,6 +13,11 @@ _back_label = NodePath("BackLabel")
 
 [node name="FrontLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_68uln")
 text = "Front"
 
@@ -23,5 +28,10 @@ stretch_mode = 5
 
 [node name="BackLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_68uln")
 text = "back"

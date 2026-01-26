@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvg4q2567raki"
-path.s3tc="res://.godot/imported/new_lap_panel.png-0e2c6a6f2c207246464d549d02159a67.s3tc.ctex"
+uid="uid://bc2laxv2hlpru"
+path.s3tc="res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png"
-dest_files=["res://.godot/imported/new_lap_panel.png-0e2c6a6f2c207246464d549d02159a67.s3tc.ctex"]
+source_file="res://levels/Level_01/art/track_mesh/road_01.png"
+dest_files=["res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.s3tc.ctex"]
 
 [params]
 

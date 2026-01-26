@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="3_tiy0a"]
 [ext_resource type="PackedScene" uid="uid://cf6kgm67m4shv" path="res://gui/main_menu/player_join_menu/player_join_menu.tscn" id="3_ubcky"]
 [ext_resource type="PackedScene" uid="uid://m2wbc1dhxton" path="res://gui/main_menu/controls_menu/controls_menu.tscn" id="4_1vh24"]
-[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="4_a4tfy"]
+[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_mesh/track_01_sm.tscn" id="4_a4tfy"]
 [ext_resource type="PackedScene" uid="uid://b5mba2bh6v4ys" path="res://gui/main_menu/options_menu/options_menu.tscn" id="5_1vh24"]
 [ext_resource type="PackedScene" uid="uid://clb3u028vrack" path="res://gui/main_menu/credits_menu/credits_menu.tscn" id="5_ubcky"]
 

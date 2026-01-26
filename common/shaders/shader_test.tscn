@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bceavob47grg"]
 
-[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="1_vpdm7"]
+[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_mesh/track_01_sm.tscn" id="1_vpdm7"]
 [ext_resource type="Material" uid="uid://cd4rbuweru42" path="res://common/shaders/vertex_color_mult.tres" id="2_ubr3h"]
 
 [node name="ShaderTest" type="Node3D"]

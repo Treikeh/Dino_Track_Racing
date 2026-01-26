@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 
 @export var _label: Label
@@ -8,7 +8,7 @@ var _countdown_tween: Tween
 
 func _ready() -> void:
 	modulate = Color.TRANSPARENT
-	pivot_offset.x = size.x / 2.0
+	#pivot_offset = size / 2.0
 
 
 func update_secs_left(secs_left: float) -> void:
@@ -25,6 +25,8 @@ func update_label(
 ) -> void:
 	# Update countdown label
 	_label.text = new_text
+	# Recenter the label
+	_label.position = -_label.size / 2.0
 	
 	# Stop tween if allready running
 	if _countdown_tween:
