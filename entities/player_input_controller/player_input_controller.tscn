@@ -10,7 +10,7 @@
 
 [sub_resource type="Curve" id="Curve_jpoqo"]
 _limits = [70.0, 100.0, 40.0, 175.0]
-_data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 100), 0.5463626, 0.0, 0, 0]
+_data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 100), 0.10072536, 0.0, 0, 0]
 point_count = 2
 
 [node name="PlayerInputController" type="Control" node_paths=PackedStringArray("_cam", "_orientation", "_id_label", "_speedometer", "_position_panel", "_next_lap_panel", "_item_panel", "_countdown_panel", "_wrong_way_panel", "_debug_label")]
@@ -100,11 +100,9 @@ offset_bottom = 0.0
 grow_vertical = 0
 
 [node name="ItemPanel" parent="Hud" instance=ExtResource("5_5jfa6")]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 20.0
-offset_right = 94.0
-offset_bottom = 85.0
+layout_mode = 1
+offset_right = 67.0
+offset_bottom = 65.0
 
 [node name="CountdownPanel" parent="Hud" instance=ExtResource("6_5jfa6")]
 layout_mode = 1

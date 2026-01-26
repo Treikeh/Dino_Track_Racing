@@ -20,10 +20,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		_pause_menu.pause_game()
 
 
-func _physics_process(_delta: float) -> void:
-	$FpsLabel.text = str(int(Engine.get_frames_per_second()))
-
-
 func on_race_ended() -> void:
 	_race_ended = true
 	await get_tree().create_timer(2.5).timeout

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmy21chwdl2dx"]
+[gd_scene load_steps=7 format=3 uid="uid://cmy21chwdl2dx"]
 
 [ext_resource type="Script" uid="uid://ewuq06h4clui" path="res://gui/level_ui/pause_menu/pause_menu.gd" id="1_rwe7i"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_7g2an"]
 [ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="2_b8jsg"]
+[ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_w05sg"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="3_ytytr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8jsg"]
@@ -37,6 +39,7 @@ offset_top = 17.0
 offset_right = 70.5
 offset_bottom = 72.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7g2an")
 theme_override_font_sizes/font_size = 40
 text = "Paused"
 horizontal_alignment = 1
@@ -70,16 +73,19 @@ alignment = 1
 
 [node name="ResumeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7g2an")
 theme_override_font_sizes/font_size = 27
 text = "Resume"
 
 [node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7g2an")
 theme_override_font_sizes/font_size = 27
 text = "Restart"
 
 [node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7g2an")
 theme_override_font_sizes/font_size = 27
 text = "Main menu"
 
@@ -116,17 +122,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="NextButtonDisplay" type="HBoxContainer" parent="InputButtonsDisplayContainer"]
+[node name="ButtonDisplay" parent="InputButtonsDisplayContainer" instance=ExtResource("3_w05sg")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="InputButtonsDisplayContainer/NextButtonDisplay"]
-layout_mode = 2
-texture = ExtResource("3_ytytr")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="InputButtonsDisplayContainer/NextButtonDisplay"]
-layout_mode = 2
-text = "Select"
+alignment = 2
+_front_text = ""
+_button_texture = ExtResource("3_ytytr")
+_back_text = "Select"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

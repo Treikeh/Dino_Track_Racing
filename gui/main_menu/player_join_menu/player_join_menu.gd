@@ -41,8 +41,6 @@ func _process(delta: float) -> void:
 	elif _start_game_time > 0.0:
 		_start_game_time -= delta
 	_start_game_progress_bar.value = _start_game_time
-	
-	$DebugLabel.text = "Start game player id: %s \nStart game time: %s" % [_start_game_player_id, _start_game_time]
 
 
 func _add_player(player_id: int) -> void:

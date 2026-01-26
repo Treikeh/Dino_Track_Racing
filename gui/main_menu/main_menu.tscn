@@ -63,10 +63,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98)
 fov = 30.0
 
 [node name="ScooterDino_01_SK" parent="BackgroundViewport/SubViewport" instance=ExtResource("2_bhc4r")]
-transform = Transform3D(-0.7968037, 0.03923959, 0.6029627, -0.06721464, 0.98593986, -0.15298584, -0.600488, -0.16242759, -0.78296316, 0.755, -0.941, -2.541)
+transform = Transform3D(-0.7949368, 0.011854864, 0.6065763, -0.06761746, 0.9918487, -0.107999355, -0.60291225, -0.12686782, -0.78765553, 0.755, -1.037, -2.541)
 
 [node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" index="0"]
-bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
 bones/2/rotation = Quaternion(-0.06671888, 0.66952854, 0.7109416, 0.20455375)
 bones/3/position = Vector3(0.029781204, 0.21053293, 0.38694367)
 bones/3/rotation = Quaternion(0.017043147, 0.53295493, 0.8458708, -0.013089115)
@@ -92,12 +91,13 @@ bones/20/rotation = Quaternion(-0.06385713, 0.7042174, 0.7042176, -0.06385705)
 active = false
 
 [node name="ShadowCaster" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" instance=ExtResource("3_tiy0a")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.315, 0)
 
 [node name="ScooterDino_01_SK2" parent="BackgroundViewport/SubViewport" instance=ExtResource("2_bhc4r")]
 transform = Transform3D(0.87828106, 0.12419458, -0.46173382, -0.065612696, 0.9878471, 0.14090122, -0.47362158, 0.09345528, -0.8757561, -0.606, 0.137, -6.463)
 
 [node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK2" index="0"]
-bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
 bones/2/rotation = Quaternion(-3.0908623e-08, 0.7071068, 0.7071068, -3.0908623e-08)
 bones/3/position = Vector3(0.031001786, 0.28716335, 0.45328817)
 bones/3/rotation = Quaternion(-0.30089757, 0.5115116, 0.77042514, -0.23294103)

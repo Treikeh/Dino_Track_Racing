@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2blrti5eokjj"]
+[gd_scene load_steps=4 format=3 uid="uid://b2blrti5eokjj"]
 
 [ext_resource type="Texture2D" uid="uid://blpgqau4mk7qn" path="res://gui/button_display/art/button_none.png" id="1_pxl4m"]
 [ext_resource type="Script" uid="uid://dd6q7vvrsw7k7" path="res://gui/button_display/button_display.gd" id="1_xg7yi"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="4_68uln"]
 
 [node name="ButtonDisplay" type="HBoxContainer" node_paths=PackedStringArray("_front_label", "_texture_rect", "_back_label")]
 script = ExtResource("1_xg7yi")
@@ -12,6 +13,7 @@ _back_label = NodePath("BackLabel")
 
 [node name="FrontLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_68uln")
 text = "Front"
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -21,4 +23,5 @@ stretch_mode = 5
 
 [node name="BackLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_68uln")
 text = "back"

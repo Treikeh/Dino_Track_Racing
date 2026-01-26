@@ -1,4 +1,4 @@
-extends PanelContainer
+extends MarginContainer
 
 
 @export var _item_icon: TextureRect

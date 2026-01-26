@@ -1,17 +1,31 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4re4rda2ts5x"]
 
-[ext_resource type="Texture2D" uid="uid://bcafrhxpv4041" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_bc.png" id="1_rmuc4"]
 [ext_resource type="Script" uid="uid://48xjgrjn0t18" path="res://entities/player_input_controller/hud/item_panel/item_panel.gd" id="1_teqg3"]
+[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="2_teqg3"]
 
-[node name="ItemPanel" type="PanelContainer" node_paths=PackedStringArray("_item_icon")]
-offset_right = 67.0
-offset_bottom = 65.0
+[node name="ItemPanel" type="MarginContainer" node_paths=PackedStringArray("_item_icon")]
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 script = ExtResource("1_teqg3")
-_item_icon = NodePath("ItemIcon")
+_item_icon = NodePath("PanelContainer/MarginContainer/ItemIcon")
 
-[node name="ItemIcon" type="TextureRect" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemIcon" type="TextureRect" parent="PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_rmuc4")
+texture = ExtResource("2_teqg3")
 expand_mode = 1
 stretch_mode = 5

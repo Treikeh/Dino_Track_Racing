@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://duegxma2hxs6a"]
+[gd_scene load_steps=5 format=3 uid="uid://duegxma2hxs6a"]
 
 [ext_resource type="Script" uid="uid://dyb1piqij4rso" path="res://gui/main_menu/start_menu/start_menu.gd" id="1_i1nwf"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_i1nwf"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="5_ujcfj"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="6_grf3h"]
 
@@ -48,22 +49,27 @@ theme_override_constants/separation = 10
 
 [node name="StartButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i1nwf")
 text = "Play"
 
 [node name="ControlsButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i1nwf")
 text = "Controls"
 
 [node name="OptionsButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i1nwf")
 text = "Options"
 
 [node name="CreditsButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i1nwf")
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i1nwf")
 text = "Quit"
 
 [node name="VersionLabelContainer" type="MarginContainer" parent="."]
@@ -81,7 +87,8 @@ theme_override_constants/margin_bottom = 5
 
 [node name="VersionLabel" type="Label" parent="VersionLabelContainer"]
 layout_mode = 2
-text = "v0.00"
+theme_override_fonts/font = ExtResource("2_i1nwf")
+text = "v0.0.0"
 
 [node name="SelectButtonDisplayContainer" type="MarginContainer" parent="."]
 layout_mode = 1

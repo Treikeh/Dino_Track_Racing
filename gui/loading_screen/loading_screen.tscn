@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi224kerifv8w"]
+[gd_scene load_steps=3 format=3 uid="uid://bi224kerifv8w"]
 
 [ext_resource type="Script" uid="uid://byaesynk2xrfg" path="res://gui/loading_screen/loading_screen.gd" id="1_mkdfe"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_vsl4m"]
 
 [node name="LoadingScreen" type="CanvasLayer" node_paths=PackedStringArray("_control_root")]
 process_mode = 3
@@ -36,6 +37,7 @@ offset_right = 36.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_vsl4m")
 text = "LOADING"
 horizontal_alignment = 1
 vertical_alignment = 1

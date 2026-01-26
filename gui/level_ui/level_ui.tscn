@@ -12,8 +12,3 @@ _pause_menu = NodePath("PauseMenu")
 [node name="Leaderboard" parent="." instance=ExtResource("2_cqata")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_irvqn")]
-
-[node name="FpsLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "60.0"

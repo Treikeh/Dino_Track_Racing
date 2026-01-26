@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnf3g65k68bsb"]
+[gd_scene load_steps=3 format=3 uid="uid://bnf3g65k68bsb"]
 
 [ext_resource type="Script" uid="uid://o8o0mnj08os0" path="res://entities/player_input_controller/hud/wrong_way_panel/wrong_way_panel.gd" id="1_7mmi0"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_arqd6"]
 
 [node name="WrongWayPanel" type="PanelContainer"]
 offset_right = 103.0
@@ -16,6 +17,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Label" type="Label" parent="MarginContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_arqd6")
 text = "Wrong Way!"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -11,4 +11,4 @@ func _ready() -> void:
 
 func update(speed_khm: float) -> void:
 	_speedometer_bar.value = speed_khm
-	_speed_label.text = "%s kmh" % int(snappedf(speed_khm, 1.0))
+	_speed_label.text = "%skm/h" % int(snappedf(speed_khm, 1.0))

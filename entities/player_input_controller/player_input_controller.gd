@@ -14,7 +14,7 @@ class_name PlayerInputController
 @export var _speedometer: PanelContainer
 @export var _position_panel: PanelContainer
 @export var _next_lap_panel: Control
-@export var _item_panel: PanelContainer
+@export var _item_panel: Control
 @export var _countdown_panel: PanelContainer
 @export var _wrong_way_panel: Container
 
@@ -132,11 +132,13 @@ func _get_look_at_pos() -> Vector3:
 #region UI signal functions
 
 func _scale_ui_elements() -> void:
-	var window_height: float = get_window().size.y
+	var window_height: float = get_viewport().get_visible_rect().size.y
 	var view_height: float = size.y
 	
 	_ui_scale_factor = view_height / window_height
 	var ui_scale: Vector2 = Vector2.ONE * _ui_scale_factor
+	
+	print(ui_scale)
 	
 	_item_panel.scale = ui_scale
 	_next_lap_panel.scale = ui_scale
