@@ -6,6 +6,7 @@ extends Item3D
 @export var _hurtbox: Hurtbox
 @export var _track_follow: PathFollow3D
 
+var _should_follow_car: bool = false
 var _target_track_follow: TrackFollow
 var _target_car: CarController
 
@@ -29,11 +30,10 @@ func _ready() -> void:
 	_target_track_follow = level._track_follows[level.get_id_from_car(_target_car)]
 
 
-func _process(delta: float) -> void:
-	_track_follow.progress += _move_speed * delta
-
-
 func _physics_process(delta: float) -> void:
+	# Move track follow forwards
+	_track_follow.progress += _move_speed * delta
+	
 	# Move the bullet towards the follow target until it gets close to the target car track follow
 	# then move it towards the target car
 	var target_car_pos: Vector3 = _target_car.global_position
@@ -45,11 +45,12 @@ func _physics_process(delta: float) -> void:
 	var car_follow_pos: Vector3 = _target_track_follow.global_position
 	# Distance between the missiles track follow and the target cars track follow
 	var follow_distance: float = _bullet_root.global_position.distance_squared_to(car_follow_pos)
-	var should_follow_car: bool = follow_distance < 50.0
+	if not _should_follow_car:
+		_should_follow_car = follow_distance < 50.0
 	
 	# Get the target the missile should move to and the speed at which it should move
-	var lerp_speed: float = 20.0 if should_follow_car else 15.0
-	var lerp_target: Vector3 = target_car_pos if should_follow_car else track_follow_pos
+	var lerp_speed: float = 20.0 if _should_follow_car else 15.0
+	var lerp_target: Vector3 = target_car_pos if _should_follow_car else track_follow_pos
 	# Move bullet towards lerp target
 	_bullet_root.global_position = lerp(_bullet_root.global_position, lerp_target, lerp_speed * delta)
 	_bullet_root.look_at(lerp_target)
