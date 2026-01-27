@@ -114,7 +114,7 @@ transitions = ["Start", "trick_001", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-14, 60)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2dvb1"]
-graph_offset = Vector2(-335.18365, 86.29117)
+graph_offset = Vector2(-1111, 0)
 nodes/output/position = Vector2(540, 160)
 nodes/falling/node = SubResource("AnimationNodeAnimation_83df8")
 nodes/falling/position = Vector2(-1040, 160)
@@ -142,34 +142,34 @@ _anim_tree = NodePath("AnimationTree")
 
 [node name="Skeleton3D" parent="." index="0"]
 bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
-bones/2/rotation = Quaternion(-0.005538567, 0.70708513, 0.70708513, 0.005538508)
-bones/3/position = Vector3(0.03267289, 0.21397403, 0.4532882)
-bones/3/rotation = Quaternion(0.03760372, 0.5336248, 0.844865, 0.0057947915)
-bones/4/rotation = Quaternion(0.0722837, -0.09616349, -0.065065436, 0.9906029)
-bones/5/rotation = Quaternion(0.14372194, -5.9013763e-09, -3.302043e-08, 0.9896181)
-bones/6/rotation = Quaternion(-0.83942777, 5.8157756e-08, 9.3482605e-08, 0.5434713)
-bones/7/position = Vector3(-0.14752555, 0.1834961, -0.06828829)
-bones/7/rotation = Quaternion(-0.6524199, 0.09035495, 0.14452115, 0.7384429)
-bones/9/position = Vector3(0.14013767, 0.18052946, -0.058365144)
-bones/9/rotation = Quaternion(-0.6533817, -0.047581125, -0.08375782, 0.7508748)
-bones/11/rotation = Quaternion(0.9016182, 0.03463901, -0.028008588, 0.43023306)
-bones/12/rotation = Quaternion(-0.07519688, -0.009431593, -0.061944, 0.99519825)
-bones/13/rotation = Quaternion(-0.03676771, -0.0016356462, -0.054783177, 0.9978198)
-bones/14/rotation = Quaternion(0.90263647, -0.09355936, -0.010310625, -0.41998535)
-bones/15/rotation = Quaternion(-0.28507537, 0.0071642213, -0.15416007, 0.9459997)
-bones/16/rotation = Quaternion(0.120016165, -0.013198962, 0.059414167, 0.99090457)
-bones/17/rotation = Quaternion(0.96623325, 0.09598942, -0.0074718245, -0.23900533)
-bones/18/rotation = Quaternion(-0.28507537, -0.007164265, 0.1541601, 0.9459997)
-bones/19/rotation = Quaternion(0.12001614, 0.013198952, -0.059414174, 0.99090457)
-bones/20/rotation = Quaternion(0.096617974, 0.70047474, 0.7004749, 0.09661805)
+bones/2/rotation = Quaternion(-3.0908623e-08, 0.7071068, 0.7071068, -3.0908623e-08)
+bones/3/position = Vector3(-3.962769e-08, 0.21397407, 0.45328817)
+bones/3/rotation = Quaternion(9.065177e-08, 0.5348194, 0.8449664, 1.0413319e-07)
+bones/4/rotation = Quaternion(0.07680702, 3.169266e-08, -2.0753657e-08, 0.997046)
+bones/5/rotation = Quaternion(0.14372195, 9.3525854e-15, -3.4265973e-08, 0.9896181)
+bones/6/rotation = Quaternion(-0.83942777, 6.4786796e-08, 1.0006759e-07, 0.5434713)
+bones/7/position = Vector3(-0.14013767, 0.18052946, -0.058365077)
+bones/7/rotation = Quaternion(-0.6576467, 0.06282034, 0.100547, 0.7439387)
+bones/9/position = Vector3(0.14013764, 0.18052946, -0.058365162)
+bones/9/rotation = Quaternion(-0.65764683, -0.06282019, -0.10054688, 0.7439387)
+bones/11/rotation = Quaternion(0.90103966, 6.549233e-08, -1.3605346e-07, 0.43373668)
+bones/12/rotation = Quaternion(-0.080133185, -1.188265e-07, 9.552697e-09, 0.99678415)
+bones/13/rotation = Quaternion(-0.041018974, 7.3690625e-13, 9.7797175e-09, 0.9991584)
+bones/14/rotation = Quaternion(0.9376451, -0.088033654, -0.008653126, -0.33615008)
+bones/15/rotation = Quaternion(-0.28507537, 0.007164218, -0.15416007, 0.9459997)
+bones/16/rotation = Quaternion(0.120016165, -0.01319896, 0.05941417, 0.99090457)
+bones/17/rotation = Quaternion(0.9376451, 0.08803358, 0.008652924, -0.33615008)
+bones/18/rotation = Quaternion(-0.28507537, -0.0071642655, 0.1541601, 0.9459997)
+bones/19/rotation = Quaternion(0.12001612, 0.013198959, -0.059414174, 0.99090457)
+bones/20/rotation = Quaternion(-1.1520229e-07, 0.70710665, 0.7071069, -5.3385083e-08)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_2dvb1")
 anim_player = NodePath("../AnimationPlayer")
 parameters/scream_blend/blend_amount = 0.0
 parameters/fall_blend/blend_amount = 0.0
-parameters/ground/drifting/blend_position = Vector2(-0.04, 0)
-parameters/ground/turning/blend_position = -18.789665
+parameters/ground/drifting/blend_position = Vector2(0, 0)
+parameters/ground/turning/blend_position = 0.0
 parameters/trick_one_shot/active = false
 parameters/trick_one_shot/internal_active = false
 parameters/trick_one_shot/request = 0
