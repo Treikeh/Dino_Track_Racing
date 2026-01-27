@@ -1,7 +1,8 @@
 shader_type spatial;
 render_mode unshaded;
 
-uniform float scroll_speed;
+uniform vec2 offset;
+uniform vec2 scroll_speed;
 uniform sampler2D color_texture: source_color, filter_nearest_mipmap;
 
 void vertex() {
@@ -9,7 +10,7 @@ void vertex() {
 }
 
 void fragment() {
-	vec2 uv_pos = UV + (TIME * scroll_speed);
+	vec2 uv_pos = UV + (TIME * scroll_speed) + offset;
 	ALBEDO = texture(color_texture, uv_pos).rgb * COLOR.rgb;
 }
 

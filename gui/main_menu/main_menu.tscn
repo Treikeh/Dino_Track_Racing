@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bq1mlqlqbd661"]
+[gd_scene load_steps=17 format=3 uid="uid://bq1mlqlqbd661"]
 
 [ext_resource type="Script" uid="uid://ck062g2ny5ksf" path="res://gui/main_menu/main_menu.gd" id="1_ahke7"]
 [ext_resource type="PackedScene" uid="uid://duegxma2hxs6a" path="res://gui/main_menu/start_menu/start_menu.tscn" id="2_6wy0j"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://m2wbc1dhxton" path="res://gui/main_menu/controls_menu/controls_menu.tscn" id="4_1vh24"]
 [ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_mesh/track_01_sm.tscn" id="4_a4tfy"]
 [ext_resource type="PackedScene" uid="uid://b5mba2bh6v4ys" path="res://gui/main_menu/options_menu/options_menu.tscn" id="5_1vh24"]
+[ext_resource type="Shader" uid="uid://cym5tvj1581t" path="res://levels/Level_01/art/skybox_shader.gdshader" id="5_a4tfy"]
 [ext_resource type="PackedScene" uid="uid://clb3u028vrack" path="res://gui/main_menu/credits_menu/credits_menu.tscn" id="5_ubcky"]
+[ext_resource type="Texture2D" uid="uid://bmfg1ifhi2ag" path="res://levels/Level_01/art/skybox.png" id="6_3llyq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhc4r"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,7 +20,6 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_bhc4r")
 
 [sub_resource type="Environment" id="Environment_tiy0a"]
-background_mode = 1
 background_color = Color(0.37797713, 0.5558381, 0.74858373, 1)
 background_energy_multiplier = 1.25
 sky = SubResource("Sky_ujcfj")
@@ -29,6 +30,20 @@ fog_light_color = Color(0.4752319, 0.61359656, 0.679085, 1)
 fog_density = 0.0948
 fog_sky_affect = 0.182
 fog_depth_begin = 20.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4tfy"]
+render_priority = 0
+shader = ExtResource("5_a4tfy")
+shader_parameter/offset = Vector2(1.16, 0.27)
+shader_parameter/scroll_speed = Vector2(0, 0)
+shader_parameter/color_texture = ExtResource("6_3llyq")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fomve"]
+flip_faces = true
+radius = 50.0
+height = 100.0
+radial_segments = 16
+rings = 8
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("_menu_root", "_start_menu")]
 layout_mode = 3
@@ -58,12 +73,17 @@ render_target_update_mode = 4
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BackgroundViewport/SubViewport"]
 environment = SubResource("Environment_tiy0a")
 
+[node name="Skybox" type="MeshInstance3D" parent="BackgroundViewport/SubViewport"]
+transform = Transform3D(12.720721, 0, 7.948789, 0, 15, 0, -7.948789, 0, 12.720721, 47.588013, 354, -36.5)
+material_override = SubResource("ShaderMaterial_a4tfy")
+mesh = SubResource("SphereMesh_fomve")
+
 [node name="Camera3D" type="Camera3D" parent="BackgroundViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98)
 fov = 30.0
 
 [node name="ScooterDino_01_SK" parent="BackgroundViewport/SubViewport" instance=ExtResource("2_bhc4r")]
-transform = Transform3D(-0.7949368, 0.011854864, 0.6065763, -0.06761746, 0.9918487, -0.107999355, -0.60291225, -0.12686782, -0.78765553, 0.755, -1.037, -2.541)
+transform = Transform3D(-0.7949368, 0.011854864, 0.6065763, -0.06761746, 0.9918487, -0.107999355, -0.60291225, -0.12686782, -0.78765553, 0.865, -1.037, -2.541)
 
 [node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" index="0"]
 bones/2/rotation = Quaternion(-0.06671888, 0.66952854, 0.7109416, 0.20455375)

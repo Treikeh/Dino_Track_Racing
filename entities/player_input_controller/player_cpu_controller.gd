@@ -19,7 +19,7 @@ func _init(car_controller: CarController, track_follow: TrackFollow) -> void:
 func _ready() -> void:
 	visual = MeshInstance3D.new()
 	LevelManager.add_child(visual)
-	visual.mesh = BoxMesh.new()
+	#visual.mesh = BoxMesh.new()
 
 
 func _process(_delta: float) -> void:

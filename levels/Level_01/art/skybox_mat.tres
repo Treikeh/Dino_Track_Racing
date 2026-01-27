@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://kjerpjb00hj8"]
+
+[ext_resource type="Shader" uid="uid://cym5tvj1581t" path="res://levels/Level_01/art/skybox_shader.gdshader" id="1_e7tyy"]
+[ext_resource type="Texture2D" uid="uid://bmfg1ifhi2ag" path="res://levels/Level_01/art/skybox.png" id="2_ccu8e"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_e7tyy")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scroll_speed = Vector2(0.007, 0.003)
+shader_parameter/color_texture = ExtResource("2_ccu8e")
