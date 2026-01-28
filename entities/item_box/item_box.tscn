@@ -1,9 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dosd47fqh8thg"]
+[gd_scene load_steps=17 format=3 uid="uid://dosd47fqh8thg"]
 
 [ext_resource type="Script" uid="uid://r05j8taagghm" path="res://entities/item_box/item_box.gd" id="1_lk11n"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
+[ext_resource type="Resource" uid="uid://ccr4djq6d11yn" path="res://entities/items/bomb/bomb.tres" id="4_30yuj"]
 [ext_resource type="Resource" uid="uid://cxj84srk7f5fr" path="res://entities/items/homing_missile/homing_missile.tres" id="5_30yuj"]
+[ext_resource type="Resource" uid="uid://dx8ax8jf5eo0g" path="res://entities/items/lance/lance.tres" id="5_i6fuj"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="5_rcuga"]
+[ext_resource type="Resource" uid="uid://difualdbs5ylv" path="res://entities/items/mine/mine.tres" id="6_tn08c"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_cienk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
@@ -44,7 +47,7 @@ material = SubResource("StandardMaterial3D_i6fuj")
 
 [node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_collect_vfx", "_disabled_timer")]
 script = ExtResource("1_lk11n")
-_items = Array[ExtResource("2_ic5go")]([ExtResource("5_30yuj")])
+_items = Array[ExtResource("2_ic5go")]([ExtResource("5_30yuj"), ExtResource("4_30yuj"), ExtResource("5_i6fuj"), ExtResource("6_tn08c")])
 _mesh_root = NodePath("MeshRoot")
 _collect_vfx = NodePath("CollectVFX")
 _disabled_timer = NodePath("DisabledTimer")
