@@ -21,7 +21,9 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
+	hide()
 	menu_closed.emit(self)
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 
 

@@ -118,7 +118,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.315, 0)
 transform = Transform3D(0.87828106, 0.12419458, -0.46173382, -0.065612696, 0.9878471, 0.14090122, -0.47362158, 0.09345528, -0.8757561, -0.606, 0.137, -6.463)
 
 [node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK2" index="0"]
-bones/2/rotation = Quaternion(-3.0908623e-08, 0.7071068, 0.7071068, -3.0908623e-08)
 bones/3/position = Vector3(0.031001786, 0.28716335, 0.45328817)
 bones/3/rotation = Quaternion(-0.30089757, 0.5115116, 0.77042514, -0.23294103)
 bones/4/rotation = Quaternion(0.3640228, 3.1586275e-08, -2.2666047e-08, 0.93139005)
@@ -137,7 +136,6 @@ bones/16/rotation = Quaternion(-0.2335734, -0.033115987, 0.051064562, 0.97043246
 bones/17/rotation = Quaternion(0.92758334, 0.16284175, 0.035545584, -0.3343774)
 bones/18/rotation = Quaternion(-0.28507534, -0.007164245, 0.15416008, 0.9459997)
 bones/19/rotation = Quaternion(0.120016135, 0.013198958, -0.05941418, 0.99090457)
-bones/20/rotation = Quaternion(-1.1520229e-07, 0.70710665, 0.7071069, -5.3385083e-08)
 
 [node name="AnimationTree" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK2" index="2"]
 active = false

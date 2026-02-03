@@ -10,7 +10,8 @@ func _ready() -> void:
 	
 	# Disable all child menus
 	for child: Node in _menu_root.get_children():
-		_disable_menu(child)
+		if child != _start_menu:
+			_disable_menu(child)
 	
 	# Renable the start menu
 	_enable_menu(_start_menu)
@@ -23,9 +24,10 @@ func _enable_menu(menu: Control) -> void:
 		menu.open_menu()
 
 
-func _disable_menu(menu: Control) -> void:
-	menu.hide()
-	menu.process_mode = Node.PROCESS_MODE_DISABLED
+func _disable_menu(_menu: Control) -> void:
+	pass
+	#menu.hide()
+	#menu.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 #region Signals
