@@ -17,6 +17,7 @@ class_name PlayerInputController
 @export var _item_panel: Control
 @export var _countdown_panel: Control
 @export var _wrong_way_panel: Container
+@export var _speed_lines: ColorRect
 
 @export_group("Debug")
 @warning_ignore("unused_private_class_variable")
@@ -109,6 +110,10 @@ func _process(delta: float) -> void:
 	_wrong_way_panel.update(drive_dir)
 	
 	_speedometer.update(_car_controller.speed_khm)
+	
+	var speed_lines_mask: float = remap(_car_controller.speed_khm, 70.0, 110.0, 1.0, 0.5)
+	speed_lines_mask = clampf(speed_lines_mask, 0.5, 1.0)
+	_speed_lines.material.set("shader_parameter/mask_edge", speed_lines_mask)
 
 
 func _physics_process(delta: float) -> void:
