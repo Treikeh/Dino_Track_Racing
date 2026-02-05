@@ -15,6 +15,7 @@ var _splash_screens: Array[Node] = []
 func _ready() -> void:
 	_get_screens()
 	_fade_between_screens()
+	Globals.set_allow_cursor(false)
 
 
 func _input(event: InputEvent) -> void:

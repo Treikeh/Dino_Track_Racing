@@ -6,7 +6,7 @@ extends Control
 
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Globals.set_allow_cursor(true)
 	
 	# Disable all child menus
 	for child: Node in _menu_root.get_children():

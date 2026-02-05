@@ -1,6 +1,15 @@
 extends Node
 
 
+signal input_mode_changed(input_mode: InputModes)
+
+
+enum InputModes {
+	MOUSE_KEYBOARD,
+	GAMEPAD,
+}
+
+
 # Input actions to copy and assign to each new player
 const INPUT_ACTIONS: Array[String] = [
 	"accelerate",
@@ -82,6 +91,9 @@ var players: Dictionary[int, float] = {
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
 
+var _allow_cursor: bool = true
+var _input_mode: InputModes = InputModes.MOUSE_KEYBOARD
+
 
 func _ready() -> void:
 	# Spawn viewports container
@@ -89,11 +101,36 @@ func _ready() -> void:
 	# Wait until the end of the frame so that /root is ready
 	get_tree().root.add_child.call_deferred(viewports_container)
 	
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	# Set up viewports container
 	viewports_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	viewports_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	viewports_container.add_theme_constant_override("h_separation", 0)
 	viewports_container.add_theme_constant_override("v_separation", 0)
+
+
+func _input(event: InputEvent) -> void:
+	if not _allow_cursor:
+		return
+	
+	# Check if input is on a game pad
+	var is_joy_button: bool = event is InputEventJoypadButton
+	var is_joy_motion: bool = event is InputEventJoypadMotion
+	if is_joy_button or is_joy_motion:
+		_change_input_mode(InputModes.GAMEPAD)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		return
+	
+	# Check if input is mouse or keyboard
+	var is_mouse_motion: bool = event is InputEventMouseMotion
+	var is_mouse_button: bool = event is InputEventMouseButton
+	var is_keyboard: bool = event is InputEventKey
+	if is_mouse_motion or is_mouse_button or is_keyboard:
+		_change_input_mode(InputModes.MOUSE_KEYBOARD)
+		# Show mouse cursor if event was mouse motion and the cursor is hidden
+		if is_mouse_motion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 ## Crate new input actions for the player
@@ -113,3 +150,16 @@ func set_up_player_inputs(player_id: int) -> void:
 			var new_event: InputEvent = event.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
 			new_event.device = player_id
 			InputMap.action_add_event(new_action, new_event)
+
+
+func set_allow_cursor(allow: bool) -> void:
+	_allow_cursor = allow
+	# Hide the cursor if it isn't allowed
+	if not allow:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _change_input_mode(input_mode: InputModes) -> void:
+	if _input_mode != input_mode:
+		_input_mode = input_mode
+		input_mode_changed.emit(input_mode)

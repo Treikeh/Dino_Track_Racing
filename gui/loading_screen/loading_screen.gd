@@ -15,6 +15,7 @@ func _ready() -> void:
 
 
 func fade_in() -> void:
+	Globals.set_allow_cursor(false)
 	# Reset control node when showing the loading screen
 	_control_root.modulate = Color.TRANSPARENT
 	_control_root.show()

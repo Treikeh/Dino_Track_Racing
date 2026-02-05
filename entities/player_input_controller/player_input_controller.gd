@@ -143,7 +143,7 @@ func _scale_ui_elements() -> void:
 	_ui_scale_factor = view_height / window_height
 	var ui_scale: Vector2 = Vector2.ONE * _ui_scale_factor
 	
-	print(ui_scale)
+	print("UI scale: %s" % ui_scale)
 	
 	_item_panel.scale = ui_scale
 	_next_lap_panel.scale = ui_scale

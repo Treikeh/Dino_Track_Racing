@@ -9,11 +9,10 @@ var _tween: Tween
 
 
 func _ready() -> void:
-	focus_entered.connect(_on_focus_entered)
-	mouse_entered.connect(_on_focus_entered)
+	mouse_entered.connect(_on_mouse_entered.bind(self))
 	
+	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
-	mouse_exited.connect(_on_focus_exited)
 	
 	button_down.connect(_on_button_down)
 	button_up.connect(_on_button_up)
@@ -21,6 +20,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	pivot_offset = size / 2
+
+
+func _on_mouse_entered(source: Control) -> void:
+	source.grab_focus()
+	_on_focus_entered()
 
 
 func _on_focus_entered() -> void:
