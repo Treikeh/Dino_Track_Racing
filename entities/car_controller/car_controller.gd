@@ -124,6 +124,14 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	speed_khm = linear_velocity.length() * 3.6
+	
+	# Increase trick boost 
+	_trick_boost_time += delta
+	# Stop trick boost after it has boosted for the length of the curve
+	if _trick_boost_time >= _trick_boost_curve.max_domain and _trick_state != TrickState.PERFORMED:
+		_trick_boost = 0.0
+		_stop_trick_boost()
+	
 	if _ground_check.is_colliding():
 		_ground_normal = _ground_check.get_collision_normal()
 		linear_damp = _default_linear_damp
@@ -166,7 +174,7 @@ func _physics_process(delta: float) -> void:
 				TrickState.PERFORMED:
 					_start_trick_boost()
 				TrickState.BOOSTING:
-					_apply_trick_boost(delta)
+					_apply_trick_boost()
 				_:
 					_stop_trick_boost()
 		
@@ -282,19 +290,16 @@ func _start_trick_boost() -> void:
 	_trick_boost_time = 0.0
 	_trick_state = TrickState.BOOSTING
 	trick_boost_started.emit()
+	print("start trick boost")
 
 
-func _apply_trick_boost(delta: float) -> void:
-	_trick_boost_time += delta
+func _apply_trick_boost() -> void:
 	# Get how much the boost should be based on the trick boost curve
 	_trick_boost = _trick_boost_curve.sample(_trick_boost_time)
-	# Stop trick boost after it has boosted for the length of the curve
-	if _trick_boost_time >= _trick_boost_curve.max_domain:
-		_stop_trick_boost()
-		_trick_boost = 0.0
 
 
 func _stop_trick_boost() -> void:
+	print("stop trick boost")
 	# Reset trick window
 	_trick_window_time = 0.0
 	# Reset trick boost
