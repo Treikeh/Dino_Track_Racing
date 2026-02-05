@@ -69,7 +69,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917826, -0.127881, 0.0005653259, -0.12784556, 0.99159986, 0.019443499, -0.0030470681, 0.019211803, -0.99979556, -120.29342, -12.428657, -5.817641)
+transform = Transform3D(-0.9917826, -0.127881, 0.00056532584, -0.12784556, 0.99159986, 0.019443497, -0.0030470681, 0.019211803, -0.99979544, -120.29342, -12.428657, -5.817641)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -121,11 +121,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6, 0, 47.100002)
 shape = SubResource("BoxShape3D_rbhar")
 debug_color = Color(0.9882353, 0, 0, 1)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -80.11213, 6.95, 144.38788)
-use_collision = true
-size = Vector3(23, 1, 39.100002)
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(0.1830127, -0.1830127, 0.9659258, 0.70710677, 0.70710677, 1.4901161e-08, -0.68301266, 0.6830127, 0.258819, -17.311045, -26.114824, -153.24814)
 visible = false
@@ -133,7 +128,7 @@ size = Vector3(23, 1, 39.100002)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="."]
 transform = Transform3D(0.84482324, 0, -0.5350455, 0, 1, 0, 0.5350455, 0, 0.84482324, -8.751976, -3.2430372, -145.3516)
-use_collision = true
+visible = false
 size = Vector3(94.700005, 55.010742, 58.2)
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="CSGBox3D9"]
@@ -173,13 +168,3 @@ size = Vector3(23, 1, 39.100002)
 transform = Transform3D(-0.12940954, -0.22414385, 0.9659258, 0.8660254, -0.50000006, 3.7252903e-08, 0.48296297, 0.83651626, 0.258819, -16.56294, -11.218629, -156.0401)
 visible = false
 size = Vector3(23, 1, 39.100002)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.25881904, 0.084185906, 0.96225035, -5.029142e-08, 0.9961947, -0.08715573, -0.9659259, -0.02255755, -0.25783423, -57.44078, -13.762207, -159.37372)
-use_collision = true
-size = Vector3(28.800001, 1, 44.8)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.86532897, 0.06162834, 0.49740097, 0.022557467, 0.9961948, -0.084186, -0.5006964, -0.0616284, -0.86342645, -94.76076, -12.064132, -124.40595)
-use_collision = true
-size = Vector3(22.800001, 1, 44.8)
