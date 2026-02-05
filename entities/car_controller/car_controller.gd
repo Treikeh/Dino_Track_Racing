@@ -291,13 +291,14 @@ func _apply_trick_boost(delta: float) -> void:
 	# Stop trick boost after it has boosted for the length of the curve
 	if _trick_boost_time >= _trick_boost_curve.max_domain:
 		_stop_trick_boost()
+		_trick_boost = 0.0
 
 
 func _stop_trick_boost() -> void:
 	# Reset trick window
 	_trick_window_time = 0.0
 	# Reset trick boost
-	_trick_boost = 0.0
+	#_trick_boost = 0.0
 	# Allow new tricks to be made
 	_trick_state = TrickState.CAN_PERFORM
 	trick_boost_ended.emit()
