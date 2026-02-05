@@ -12,7 +12,7 @@
 
 [sub_resource type="Curve" id="Curve_jpoqo"]
 _limits = [70.0, 100.0, 40.0, 175.0]
-_data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 100), 0.10072536, 0.0, 0, 0]
+_data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 95), 0.10072536, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_o1714"]
@@ -45,7 +45,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_htsux")
-_cam_follow_speed = 15.0
+_cam_follow_speed = 17.5
 _fov_curve = SubResource("Curve_jpoqo")
 _cam = NodePath("Viewport/SubViewport/Camera3D")
 _orientation = NodePath("Viewport/SubViewport/Orientation")

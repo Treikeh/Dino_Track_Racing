@@ -179,14 +179,19 @@ func _physics_process(delta: float) -> void:
 					_stop_trick_boost()
 		
 		_apply_suspension()
-		_apply_anti_roll()
+		_apply_anti_roll(_ground_normal, 15.0)
 		_apply_anti_slip(delta)
 		
 		last_ground_pos = global_position
 	else:
 		linear_damp = 0.0
 		# Reduce how much the car can rotate in the air
-		apply_torque(global_basis.y * _turn_dir * 0.5 * mass)
+		apply_torque(global_basis.y * _turn_dir * 0.75 * mass)
+		
+		# Rotate the controller to have the wheels towards the ground
+		_apply_anti_roll(Vector3.UP, 5.0)
+		# Add a bit of forwards force when in the air to allow for recovering after driving on walls
+		apply_central_force(-_drive_dir.global_basis.z * 5.0 * throttle)
 		
 		# Perform trick when entering the air while the trick buffer is active
 		if _trick_buffer_time > 0.0 and _trick_state == TrickState.CAN_PERFORM:
@@ -224,11 +229,11 @@ func _apply_anti_slip(delta: float) -> void:
 
 
 # Apply a bit of stabilizing force to make the car align with the ground normal
-func _apply_anti_roll() -> void:
-	var up_dot: float = global_basis.z.dot(_ground_check.get_collision_normal())
-	var left_dot: float = global_basis.x.dot(_ground_check.get_collision_normal())
+func _apply_anti_roll(desired_up: Vector3, stabilize_force: float) -> void:
+	var up_dot: float = global_basis.z.dot(desired_up)
+	var left_dot: float = global_basis.x.dot(desired_up)
 	var stabilize_vector: Vector3 = (global_basis.x * up_dot) + (-global_basis.z * left_dot)
-	apply_torque(stabilize_vector * 15.0)
+	apply_torque(stabilize_vector * stabilize_force)
 
 
 func _rotate_mesh(delta: float) -> void:
