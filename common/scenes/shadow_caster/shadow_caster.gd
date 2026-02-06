@@ -4,6 +4,7 @@ extends RayCast3D
 @export var _ray_end_offset: Vector3 = Vector3(0.0, -10.0, 0.0)
 @export var _shadow_texture: Texture2D
 @export var _shadow_decal: Decal
+@export var _scale_curve: Curve
 
 
 func _ready() -> void:
@@ -20,6 +21,6 @@ func _process(_delta: float) -> void:
 		
 		# Set scale of decal
 		var distance: float = global_position.distance_to(collision_point)
-		_shadow_decal.scale = Vector3.ONE * distance
+		_shadow_decal.scale = Vector3.ONE * _scale_curve.sample(distance)
 	
 	_shadow_decal.visible = is_colliding()

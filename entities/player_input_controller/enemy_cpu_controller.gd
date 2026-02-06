@@ -6,8 +6,12 @@ class_name EnemyCpuController
 
 var _can_drift: bool = true
 var _is_drifting: bool = false
+#NOTE: In radians
+var _activate_drift_angle: float = 0.6
+var _drift_duration: float = 1.25
 var _drift_time: float = 0.0
-var _drift_cooldown: float = 0.0
+var _drift_cooldown: float = 3.0
+var _drift_cooldown_time: float = 0.0
 
 var _car_controller: CarController
 var _track_follow: TrackFollow
@@ -45,27 +49,27 @@ func _process(_delta: float) -> void:
 	_car_controller.turn_input = turn_dir
 	_car_controller.throttle = 1.0
 	
-	
-	if not _can_drift:
-		_drift_cooldown += _delta
-		if _drift_cooldown >= 3.0:
-			_can_drift = true
-			_drift_cooldown = 0.0
-	
+	# Drifting
 	if _is_drifting:
 		_drift_time += _delta
 	
-	if abs(turn_dir) > 0.65 and not _is_drifting and _can_drift:
+	if not _can_drift:
+		_drift_cooldown_time += _delta
+		if _drift_cooldown_time >= _drift_cooldown:
+			_can_drift = true
+			_drift_cooldown_time = 0.0
+	
+	if abs(turn_dir) > _activate_drift_angle and not _is_drifting and _can_drift:
 		_is_drifting = true
 		_can_drift = false
 		_car_controller.try_dirft()
 		_drift_time = 0.0
-	elif _is_drifting and _drift_time >= 1.25:
+	elif _is_drifting and _drift_time >= _drift_duration:
 		_is_drifting = false
 		_car_controller.release_drift()
 
 
 func _use_item() -> void:
-	var tmp: int = randi_range(0, 10)
-	if _car_controller._held_item and tmp == 1:
+	var chance: int = randi_range(0, 100)
+	if _car_controller._held_item and chance <= 10:
 		_car_controller.use_held_item()

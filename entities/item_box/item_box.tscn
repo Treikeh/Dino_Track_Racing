@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_cienk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
-size = Vector3(1, 1.5, 1)
+size = Vector3(1.5, 2, 1.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hyb7p"]
 flip_faces = true
@@ -47,6 +47,7 @@ material = SubResource("StandardMaterial3D_i6fuj")
 
 [node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_collect_vfx", "_disabled_timer")]
 script = ExtResource("1_lk11n")
+_disabled_duration = 2.5
 _items = Array[ExtResource("2_ic5go")]([ExtResource("5_30yuj"), ExtResource("4_30yuj"), ExtResource("5_i6fuj"), ExtResource("6_tn08c")])
 _mesh_root = NodePath("MeshRoot")
 _collect_vfx = NodePath("CollectVFX")
@@ -58,11 +59,11 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_hyb7p")
 
 [node name="MeshRoot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshRoot"]
 transform = Transform3D(0.70710677, 0.70710677, 0, -0.49999997, 0.49999997, -0.70710677, -0.49999997, 0.49999997, 0.70710677, 0, 0, 0)

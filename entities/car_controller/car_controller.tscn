@@ -97,10 +97,10 @@ visible = false
 mesh = SubResource("CylinderMesh_hglhj")
 
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.55, 0)
 
 [node name="WheelBack" type="BoneAttachment3D" parent="ScooterDino_01_SK"]
-transform = Transform3D(1, -7.1054274e-15, -6.357303e-08, 2.1316282e-14, 0.99999994, -5.5577317e-15, 6.357301e-08, 0, 0.9999997, -4.656639e-10, 0.12303725, 0.43386912)
+transform = Transform3D(1, -7.1054274e-15, -6.357303e-08, 2.1316282e-14, 0.99999994, -5.5577317e-15, 6.357301e-08, 0, 0.9999997, -4.656639e-10, 0.12303728, 0.43386912)
 bone_name = "wheel_B.001"
 bone_idx = 22
 use_external_skeleton = true

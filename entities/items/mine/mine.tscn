@@ -28,14 +28,15 @@ radial_segments = 16
 rings = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hht6s"]
+radius = 0.75
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uch25"]
-radius = 3.0
+radius = 4.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_hht6s"]
 flip_faces = true
-radius = 3.0
-height = 6.0
+radius = 4.0
+height = 8.0
 radial_segments = 16
 rings = 8
 
@@ -49,7 +50,7 @@ metadata/_custom_type_script = "uid://751u1m35fd72"
 [node name="GroundRay" type="RayCast3D" parent="."]
 
 [node name="Mesh" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.07, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
 mesh = SubResource("CylinderMesh_5w3oq")
