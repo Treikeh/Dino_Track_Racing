@@ -60,15 +60,29 @@ func _spawn_players() -> void:
 	
 	
 	# Spawn players
-	for i: int in Globals.players.size():
-		var id: int = Globals.players.keys()[i]
+	for p: int in player_count:
+		var player_id: int = Globals.players.keys()[p]
 		# Add car to world
-		var car: CarController = _add_car(id)
-		var track_follow: TrackFollow =_add_track_follow(id, car)
-		_add_player_input(id, car, track_follow)
+		var car: CarController = _add_car(player_id)
+		var track_follow: TrackFollow =_add_track_follow(player_id, car)
+		_add_player_input(player_id, car, track_follow)
 		
 		# Set the spawn position of the car
-		car.global_position = _get_spawn_position(i)
+		car.global_position = _get_spawn_position(p)
+		print("Player id: %s" % p)
+	
+	
+	if Globals.allow_cpus:
+		var cpu_count: int = Globals.min_cars_ammount - player_count
+		for c: int in cpu_count:
+			var cpu_id: int = player_count + c
+			var car: CarController = _add_car(cpu_id)
+			var track_follow: TrackFollow = _add_track_follow(cpu_id, car)
+			_add_cpu_controller(car, track_follow)
+			
+			# Set spawn position of car
+			car.global_position = _get_spawn_position(cpu_id)
+	
 	
 	# Fill the empty spaces with stuff. Could maybe add a cinematic camera that looks at different players
 	# Get how many rows the _viewports_container will have
@@ -113,6 +127,11 @@ func _add_player_input(id: int, car: CarController, track_follow: TrackFollow) -
 	# Connect signals to update HUD on the player input (The inputs also have the HUD)
 	countdown_updated.connect(player_inputs.on_countdown_updated)
 	car_positions_updated.connect(player_inputs.on_car_positions_updated)
+
+
+func _add_cpu_controller(car: CarController, track_follow: TrackFollow) -> void:
+	var cpu_controller := EnemyCpuController.new(car, track_follow)
+	car.add_child(cpu_controller)
 
 
 # Get the spawn position of a car based on the order it was added to the level.

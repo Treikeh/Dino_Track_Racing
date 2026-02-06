@@ -295,7 +295,6 @@ func _start_trick_boost() -> void:
 	_trick_boost_time = 0.0
 	_trick_state = TrickState.BOOSTING
 	trick_boost_started.emit()
-	print("start trick boost")
 
 
 func _apply_trick_boost() -> void:
@@ -304,7 +303,6 @@ func _apply_trick_boost() -> void:
 
 
 func _stop_trick_boost() -> void:
-	print("stop trick boost")
 	# Reset trick window
 	_trick_window_time = 0.0
 	# Reset trick boost

@@ -76,6 +76,7 @@ _drive_dir = NodePath("DriveDir")
 _ground_check = NodePath("GroundCheck")
 _rest_height = 0.8
 _spring_force = 125.0
+_min_drift_angle = 7.5
 _trick_boost_curve = ExtResource("4_rk01o")
 _mesh = NodePath("ScooterDino_01_SK")
 _drift_vfx = NodePath("ScooterDino_01_SK/WheelBack/DriftVFX")
@@ -98,31 +99,8 @@ mesh = SubResource("CylinderMesh_hglhj")
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
 
-[node name="Skeleton3D" parent="ScooterDino_01_SK" index="0"]
-bones/2/position = Vector3(-1.3027007e-15, 0.18553723, -0.2990747)
-bones/2/rotation = Quaternion(-0.005538567, 0.70708513, 0.70708513, 0.005538508)
-bones/3/position = Vector3(0.03267289, 0.21397403, 0.4532882)
-bones/3/rotation = Quaternion(0.03760372, 0.5336248, 0.844865, 0.0057947915)
-bones/4/rotation = Quaternion(0.0722837, -0.09616349, -0.065065436, 0.9906029)
-bones/5/rotation = Quaternion(0.14372194, -5.9013763e-09, -3.302043e-08, 0.9896181)
-bones/6/rotation = Quaternion(-0.83942777, 5.8157756e-08, 9.3482605e-08, 0.5434713)
-bones/7/position = Vector3(-0.14752555, 0.1834961, -0.06828829)
-bones/7/rotation = Quaternion(-0.6524199, 0.09035495, 0.14452115, 0.7384429)
-bones/9/position = Vector3(0.14013767, 0.18052946, -0.058365144)
-bones/9/rotation = Quaternion(-0.6533817, -0.047581125, -0.08375782, 0.7508748)
-bones/11/rotation = Quaternion(0.9016182, 0.03463901, -0.028008588, 0.43023306)
-bones/12/rotation = Quaternion(-0.07519688, -0.009431593, -0.061944, 0.99519825)
-bones/13/rotation = Quaternion(-0.03676771, -0.0016356462, -0.054783177, 0.9978198)
-bones/14/rotation = Quaternion(0.90263647, -0.09355936, -0.010310625, -0.41998535)
-bones/15/rotation = Quaternion(-0.28507537, 0.0071642213, -0.15416007, 0.9459997)
-bones/16/rotation = Quaternion(0.120016165, -0.013198962, 0.059414167, 0.99090457)
-bones/17/rotation = Quaternion(0.96623325, 0.09598942, -0.0074718245, -0.23900533)
-bones/18/rotation = Quaternion(-0.28507537, -0.007164265, 0.1541601, 0.9459997)
-bones/19/rotation = Quaternion(0.12001614, 0.013198952, -0.059414174, 0.99090457)
-bones/20/rotation = Quaternion(0.096617974, 0.70047474, 0.7004749, 0.09661805)
-
 [node name="WheelBack" type="BoneAttachment3D" parent="ScooterDino_01_SK"]
-transform = Transform3D(0.99987733, 3.5930228e-09, -0.015664926, -3.6037306e-09, 0.99999994, -5.32863e-15, 0.015664931, 1.3694661e-09, 0.99987704, -0.011481468, 0.12303725, 0.43377924)
+transform = Transform3D(1, -7.1054274e-15, -6.357303e-08, 2.1316282e-14, 0.99999994, -5.5577317e-15, 6.357301e-08, 0, 0.9999997, -4.656639e-10, 0.12303725, 0.43386912)
 bone_name = "wheel_B.001"
 bone_idx = 22
 use_external_skeleton = true
