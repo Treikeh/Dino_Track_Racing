@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=22 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8qkj6honupyt" path="res://common/scenes/hitbox.tscn" id="3_hglhj"]
 [ext_resource type="Curve" uid="uid://radwuqd3yqcs" path="res://entities/car_controller/data/turn_curve.tres" id="3_nnry6"]
 [ext_resource type="Curve" uid="uid://pggof20wq2a2" path="res://entities/car_controller/data/trick_boost_curve.tres" id="4_rk01o"]
+[ext_resource type="PackedScene" uid="uid://dpwrutkvsid1l" path="res://common/scenes/skid_marker/skid_marker.tscn" id="6_ucq23"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_nnry6"]
 [ext_resource type="Texture2D" uid="uid://wmuug41wcqhb" path="res://entities/car_controller/art/scooter_dino/dino_shadow.png" id="8_rk01o"]
 
@@ -61,7 +62,7 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_nnry6"]
 material = SubResource("StandardMaterial3D_po1a6")
 
-[node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
+[node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_front_skid_marker", "_back_skid_marker", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
 collision_layer = 2
 collision_mask = 35
 physics_material_override = SubResource("PhysicsMaterial_v4h86")
@@ -77,6 +78,8 @@ _ground_check = NodePath("GroundCheck")
 _rest_height = 0.8
 _spring_force = 125.0
 _min_drift_angle = 7.5
+_front_skid_marker = NodePath("ScooterDino_01_SK/WheelFront/FrontSkidMarker")
+_back_skid_marker = NodePath("ScooterDino_01_SK/WheelBack/BackSkidMarker")
 _trick_boost_curve = ExtResource("4_rk01o")
 _mesh = NodePath("ScooterDino_01_SK")
 _drift_vfx = NodePath("ScooterDino_01_SK/WheelBack/DriftVFX")
@@ -99,6 +102,15 @@ mesh = SubResource("CylinderMesh_hglhj")
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.55, 0)
 
+[node name="WheelFront" type="BoneAttachment3D" parent="ScooterDino_01_SK"]
+transform = Transform3D(1, -9.9286e-14, -1.1368684e-13, 1.1349686e-13, 0.9999998, 3.3727324e-07, 7.1054274e-14, -3.372731e-07, 0.9999996, 6.9851547e-10, 0.12303728, -0.5625001)
+bone_name = "wheel_F.001"
+bone_idx = 21
+use_external_skeleton = true
+external_skeleton = NodePath("../Skeleton3D")
+
+[node name="FrontSkidMarker" parent="ScooterDino_01_SK/WheelFront" instance=ExtResource("6_ucq23")]
+
 [node name="WheelBack" type="BoneAttachment3D" parent="ScooterDino_01_SK"]
 transform = Transform3D(1, -7.1054274e-15, -6.357303e-08, 2.1316282e-14, 0.99999994, -5.5577317e-15, 6.357301e-08, 0, 0.9999997, -4.656639e-10, 0.12303728, 0.43386912)
 bone_name = "wheel_B.001"
@@ -115,6 +127,8 @@ local_coords = true
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_nnry6")
 draw_pass_1 = SubResource("QuadMesh_ucq23")
+
+[node name="BackSkidMarker" parent="ScooterDino_01_SK/WheelBack" instance=ExtResource("6_ucq23")]
 
 [node name="Hitbox" parent="." instance=ExtResource("3_hglhj")]
 
@@ -139,6 +153,10 @@ _shadow_texture = ExtResource("8_rk01o")
 
 [node name="ShadowDecal" parent="ShadowCaster" index="0"]
 size = Vector3(2, 2, 2)
+
+[node name="SkidMarkMesh" type="MeshInstance3D" parent="."]
+top_level = true
+cast_shadow = 0
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]

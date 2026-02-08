@@ -72,6 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="BulletBody/Missile_01_SM"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 lifetime = 0.25
+draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_612hy")
 draw_pass_1 = SubResource("QuadMesh_73iqi")
 

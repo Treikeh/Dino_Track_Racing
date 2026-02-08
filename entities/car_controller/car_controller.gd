@@ -44,6 +44,8 @@ enum TrickState {
 @export var _sideways_dirft_force: float = 65.0
 ## How long the car has to drift before getting a boost
 @export var _min_drift_boost_duration: float = 1.0
+@export var _front_skid_marker: RayCast3D
+@export var _back_skid_marker: RayCast3D
 var _is_drifting: bool = false
 # Which direction the car is drifting in (1 = left, -1 right)
 var _drift_dir: int = 0
@@ -259,9 +261,7 @@ func try_dirft() -> void:
 		_trick_buffer_time = _trick_buffer_duration
 		# Perform drift
 		if abs(turn_input) > 0.5:
-			_is_drifting = true
-			_drift_time = 0.0
-			_drift_dir = 1 if turn_input > 0.0 else -1
+			_start_drift()
 	# Perform trick in the air if drifting is pressed
 	elif not _ground_check.is_colliding() and _trick_state == TrickState.CAN_PERFORM:
 		_perform_trick()
@@ -274,10 +274,20 @@ func release_drift() -> void:
 			_start_trick_boost()
 
 
+func _start_drift() -> void:
+	_is_drifting = true
+	_drift_time = 0.0
+	_drift_dir = 1 if turn_input > 0.0 else -1
+	_front_skid_marker.start_making_marks()
+	_back_skid_marker.start_making_marks()
+
+
 func stop_drift() -> void:
 	_drift_vfx.emitting = false
 	_is_drifting = false
 	_drift_dir = 0
+	_front_skid_marker.stop_making_marks()
+	_back_skid_marker.stop_making_marks()
 
 #endregion
 
