@@ -20,8 +20,6 @@ background_mode = 1
 background_color = Color(0.42186144, 0.5888606, 0.82232565, 1)
 sky = SubResource("Sky_22u7d")
 tonemap_mode = 2
-ssao_enabled = true
-ssil_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.7372549, 0.81960785, 0.8509804, 1)
@@ -69,7 +67,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917826, -0.127881, 0.0005653251, -0.12784556, 0.99159986, 0.019443471, -0.0030470681, 0.019211803, -0.9997941, -120.29342, -12.428657, -5.817641)
+transform = Transform3D(-0.9917826, -0.127881, 0.00056532485, -0.12784556, 0.99159986, 0.019443462, -0.0030470681, 0.019211803, -0.99979365, -120.29342, -12.428657, -5.817641)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]

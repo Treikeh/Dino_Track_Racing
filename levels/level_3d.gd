@@ -71,6 +71,7 @@ func _spawn_players() -> void:
 		car.global_position = _get_spawn_position(p)
 		print("Player id: %s" % p)
 	
+	await get_tree().process_frame
 	
 	if Globals.allow_cpus:
 		var cpu_count: int = Globals.min_cars_ammount - player_count
