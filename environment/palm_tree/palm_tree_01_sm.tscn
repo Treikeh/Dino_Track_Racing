@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7vedx747ywaw"]
+
+[ext_resource type="PackedScene" uid="uid://djhmyrtx7cojb" path="res://environment/palm_tree/palm_tree_01_sm.glb" id="1_q3kgd"]
+
+[node name="PalmTree_01_SM" instance=ExtResource("1_q3kgd")]

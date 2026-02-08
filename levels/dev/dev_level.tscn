@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd51u4enoyits"]
+[gd_scene load_steps=11 format=3 uid="uid://dd51u4enoyits"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="3_tqy1p"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="3_vte50"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="4_3kek2"]
+[ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="6_vte50"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -100,3 +101,6 @@ material = ExtResource("2_4fi74")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.25, 11.000001, 0)
 size = Vector3(39.3, 1, 61.4)
 material = ExtResource("2_4fi74")
+
+[node name="PalmTree_01_SM" parent="." instance=ExtResource("6_vte50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.1, 10.7)

@@ -198,6 +198,8 @@ func _on_finished_all_laps(_car_id: int) -> void:
 	_countdown_panel.update_label("FINISHED", 2.0)
 	# Add ai controller
 	_add_cpu_controller()
+	_speedometer.hide()
+	_position_panel.hide()
 
 
 func _add_cpu_controller() -> void:

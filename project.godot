@@ -48,6 +48,7 @@ folder_colors={
 "res://common/": "gray",
 "res://debug/": "red",
 "res://entities/": "blue",
+"res://environment/": "purple",
 "res://gui/": "green",
 "res://levels/": "orange"
 }

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://fs3rfrffxcvi"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_uxxyo"]
+[ext_resource type="Texture2D" uid="uid://v8vghjni7hlo" path="res://environment/palm_tree/palm_tree_01_bc.png" id="2_pq1tg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_uxxyo")
+shader_parameter/color_texture = ExtResource("2_pq1tg")
