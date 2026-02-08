@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn8ao58ojhitn"]
+
+[ext_resource type="PackedScene" uid="uid://ug81voh08jt" path="res://entities/items/bomb/art/bomb_01_sm.glb" id="1_y2w2i"]
+
+[node name="Bomb_01_SM" instance=ExtResource("1_y2w2i")]
