@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgqyvp3qxe7v2"
-path.s3tc="res://.godot/imported/missile_01_bc.png-b04b39dc8d629f8621f7572fd9bd746c.s3tc.ctex"
+uid="uid://cp8jkvtulg2gq"
+path.bptc="res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://entities/items/homing_missile/art/missile_01_bc.png"
-dest_files=["res://.godot/imported/missile_01_bc.png-b04b39dc8d629f8621f7572fd9bd746c.s3tc.ctex"]
+source_file="res://entities/items/mine/art/mine_01_bc.png"
+dest_files=["res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

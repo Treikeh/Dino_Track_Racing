@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://don3je28oahk2"]
+
+[ext_resource type="PackedScene" uid="uid://cd7eqqfj1o8i6" path="res://entities/items/mine/art/mine_01_sm.glb" id="1_xvjum"]
+
+[node name="Mine_01_SM" instance=ExtResource("1_xvjum")]
