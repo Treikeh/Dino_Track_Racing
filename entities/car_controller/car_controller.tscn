@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=28 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -21,11 +21,18 @@ height = 1.6
 top_radius = 0.1
 bottom_radius = 0.1
 
+[sub_resource type="Gradient" id="Gradient_ucq23"]
+offsets = PackedFloat32Array(0, 0.472, 0.836)
+colors = PackedColorArray(0.79607844, 0.25882354, 0.31764707, 1, 1, 0.74509805, 0.20392157, 1, 1, 0.96862745, 0.7254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ucq23"]
+gradient = SubResource("Gradient_ucq23")
+
 [sub_resource type="Curve" id="Curve_po1a6"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.5331354, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.072520584, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_nnry6"]
+[sub_resource type="CurveTexture" id="CurveTexture_j652r"]
 width = 128
 curve = SubResource("Curve_po1a6")
 
@@ -36,16 +43,34 @@ initial_velocity_max = 3.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.25
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_nnry6")
+scale_curve = SubResource("CurveTexture_j652r")
+color_ramp = SubResource("GradientTexture1D_ucq23")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk01o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xtfu"]
 shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ucq23"]
-material = SubResource("StandardMaterial3D_rk01o")
+material = SubResource("StandardMaterial3D_3xtfu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hglhj"]
 size = Vector3(0.7, 1, 1.6)
+
+[sub_resource type="Gradient" id="Gradient_64u7k"]
+offsets = PackedFloat32Array(0, 0.808)
+colors = PackedColorArray(0.99999946, 0.9820798, 0.56994355, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j652r"]
+gradient = SubResource("Gradient_64u7k")
+
+[sub_resource type="Curve" id="Curve_ucq23"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.215519, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_64u7k"]
+curve = SubResource("Curve_ucq23")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_po1a6"]
 spread = 180.0
@@ -54,9 +79,13 @@ initial_velocity_max = 2.5
 gravity = Vector3(0, 0, 0)
 scale_min = 0.25
 scale_max = 0.25
+scale_curve = SubResource("CurveTexture_64u7k")
+color_ramp = SubResource("GradientTexture1D_j652r")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po1a6"]
 shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_nnry6"]
@@ -121,6 +150,7 @@ external_skeleton = NodePath("../Skeleton3D")
 [node name="DriftVFX" type="GPUParticles3D" parent="ScooterDino_01_SK/WheelBack"]
 transform = Transform3D(1.0000001, -2.1755113e-08, 5.977927e-08, -2.131601e-14, 0.9396926, 0.34202012, -6.3562766e-08, -0.34202027, 0.9396928, 1.0375516e-08, 0.015599847, 0.15577811)
 emitting = false
+amount = 6
 lifetime = 0.3
 visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
 local_coords = true
@@ -153,10 +183,6 @@ _shadow_texture = ExtResource("8_rk01o")
 
 [node name="ShadowDecal" parent="ShadowCaster" index="0"]
 size = Vector3(2, 2, 2)
-
-[node name="SkidMarkMesh" type="MeshInstance3D" parent="."]
-top_level = true
-cast_shadow = 0
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]

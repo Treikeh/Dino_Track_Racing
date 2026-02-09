@@ -1,20 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://bly7ariee4yik"]
+[gd_scene load_steps=10 format=3 uid="uid://bly7ariee4yik"]
 
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="1_4r700"]
 [ext_resource type="Script" uid="uid://ce7d0ty1t3q7k" path="res://entities/player_input_controller/hud/new_lap_panel/next_lap_panel.gd" id="1_wgvxv"]
 [ext_resource type="Texture2D" uid="uid://ccv670s0y7qhi" path="res://entities/player_input_controller/hud/lap_flag.png" id="2_wgvxv"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="4_mdbm8"]
 
+[sub_resource type="Curve" id="Curve_mdbm8"]
+_limits = [-150.0, 150.0, 0.0, 1.0]
+_data = [Vector2(0, -150), 0.0, 293.28586, 0, 0, Vector2(1, 150), 300.1877, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_42vvm"]
+_limits = [-100.0, 150.0, 0.0, 1.0]
+_data = [Vector2(0, 150), 0.0, -1029.7682, 0, 0, Vector2(0.49687502, -100), 0.0, 0.0, 0, 0, Vector2(1, 150), 1013.2916, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_1ccxq"]
+_limits = [-20.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, -20), 0.0, 0.0, 0, 0, Vector2(1, 20), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_376fi"]
+curve_x = SubResource("Curve_mdbm8")
+curve_y = SubResource("Curve_42vvm")
+curve_z = SubResource("Curve_1ccxq")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mdbm8"]
 
-[node name="NextLapPanel" type="Control" node_paths=PackedStringArray("_dino_image", "_lap_label")]
+[node name="NextLapPanel" type="Control" node_paths=PackedStringArray("_lap_label", "_dino_root", "_dino_image")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_wgvxv")
-_dino_image = NodePath("DinoImage")
-_lap_label = NodePath("DinoImage/HBoxContainer/LapLabel")
+_lap_label = NodePath("DinoImage2/HBoxContainer/LapLabel")
+_dino_root = NodePath("DinoRoot")
+_dino_image = NodePath("DinoRoot/DinoImage")
+_anim_curve = SubResource("CurveXYZTexture_376fi")
 
-[node name="DinoImage" type="TextureRect" parent="."]
+[node name="DinoImage2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -85.0
 offset_top = -170.0
@@ -23,7 +46,7 @@ offset_bottom = 0.00012207031
 texture = ExtResource("1_4r700")
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="DinoImage"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DinoImage2"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -37,10 +60,10 @@ size_flags_horizontal = 4
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DinoImage/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DinoImage2/HBoxContainer"]
 layout_mode = 2
 
-[node name="LapFlagImage" type="TextureRect" parent="DinoImage/HBoxContainer/VBoxContainer"]
+[node name="LapFlagImage" type="TextureRect" parent="DinoImage2/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -48,12 +71,65 @@ texture = ExtResource("2_wgvxv")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HSeparator" type="HSeparator" parent="DinoImage/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="DinoImage2/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 theme_override_styles/separator = SubResource("StyleBoxEmpty_mdbm8")
 
-[node name="LapLabel" type="Label" parent="DinoImage/HBoxContainer"]
+[node name="LapLabel" type="Label" parent="DinoImage2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_mdbm8")
+theme_override_font_sizes/font_size = 14
+text = "1/3"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="DinoRoot" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DinoImage" type="TextureRect" parent="DinoRoot"]
+layout_mode = 0
+offset_left = -85.0
+offset_top = -170.0
+offset_right = 85.0
+offset_bottom = 0.00012207031
+texture = ExtResource("1_4r700")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DinoRoot/DinoImage"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -30.000061
+offset_bottom = -6.000061
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DinoRoot/DinoImage/HBoxContainer"]
+layout_mode = 2
+
+[node name="LapFlagImage" type="TextureRect" parent="DinoRoot/DinoImage/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_wgvxv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="DinoRoot/DinoImage/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxEmpty_mdbm8")
+
+[node name="LapLabel" type="Label" parent="DinoRoot/DinoImage/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_mdbm8")

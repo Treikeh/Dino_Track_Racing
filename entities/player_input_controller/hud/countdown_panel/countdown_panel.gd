@@ -3,7 +3,9 @@ extends Control
 
 @export var _label: Label
 
+var default_scale: Vector2
 var _countdown_tween: Tween
+
 
 
 func _ready() -> void:
@@ -34,8 +36,14 @@ func update_label(
 	
 	# Reset panel
 	modulate = Color.TRANSPARENT
+	scale = default_scale * Vector2.ONE * 2.5
+	rotation_degrees = 15.0 if randi() % 2 else -15.0
 	# Animate panel
 	_countdown_tween = create_tween()
+	_countdown_tween.set_trans(Tween.TRANS_QUAD)
 	_countdown_tween.tween_property(self, "modulate", Color.WHITE, fade_duration)
+	_countdown_tween.parallel().tween_property(self, "scale", default_scale, fade_duration)
+	_countdown_tween.parallel().tween_property(self, "rotation_degrees", 0.0, fade_duration)
 	_countdown_tween.tween_interval(visible_duration)
 	_countdown_tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration)
+	_countdown_tween.parallel().tween_property(self, "scale", Vector2.ZERO, fade_duration)

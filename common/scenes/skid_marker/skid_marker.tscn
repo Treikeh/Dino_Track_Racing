@@ -1,17 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpwrutkvsid1l"]
+[gd_scene load_steps=8 format=3 uid="uid://dpwrutkvsid1l"]
 
 [ext_resource type="Script" uid="uid://b07epr34vpm1c" path="res://common/scenes/skid_marker/skid_marker.gd" id="1_3l6pr"]
 [ext_resource type="Material" uid="uid://b0uge1xin5lvc" path="res://common/scenes/skid_marker/skid_marker_mat.tres" id="2_uknak"]
 
-[node name="SkidMarker" type="RayCast3D" node_paths=PackedStringArray("_mesh", "_makrer")]
+[sub_resource type="Curve" id="Curve_uknak"]
+_data = [Vector2(0, 0.7688479), 0.0, 0.62073714, 0, 0, Vector2(0.55797106, 0.9630157), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3645334, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sexg6"]
+width = 128
+curve = SubResource("Curve_uknak")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0qc74"]
+emission_shape_scale = Vector3(0.15, 0.15, 0.15)
+emission_shape = 2
+emission_sphere_radius = 1.0
+angle_min = -360.0
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_min = 0.25
+initial_velocity_max = 0.75
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_sexg6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uknak"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_sexg6"]
+material = SubResource("StandardMaterial3D_uknak")
+radial_segments = 8
+rings = 4
+
+[node name="SkidMarker" type="RayCast3D" node_paths=PackedStringArray("_mesh", "_makrer", "_smoke_vfx")]
 target_position = Vector3(0, -0.25, 0)
 script = ExtResource("1_3l6pr")
 _mat = ExtResource("2_uknak")
 _mesh = NodePath("MeshInstance3D")
 _makrer = NodePath("Marker3D")
+_smoke_vfx = NodePath("Somke")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 top_level = true
 cast_shadow = 0
 
 [node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Somke" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 4
+lifetime = 0.15000000000000002
+process_material = SubResource("ParticleProcessMaterial_0qc74")
+draw_pass_1 = SubResource("SphereMesh_sexg6")

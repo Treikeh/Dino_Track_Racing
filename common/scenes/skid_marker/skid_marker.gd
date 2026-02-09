@@ -4,6 +4,7 @@ extends RayCast3D
 @export var _mat: Material
 @export var _mesh: MeshInstance3D
 @export var _makrer: Marker3D
+@export var _smoke_vfx: GPUParticles3D
 
 var _is_active: bool = false
 var _mark: ImmediateMesh
@@ -13,10 +14,13 @@ var _verts: Array = []
 func _ready() -> void:
 	_mark = ImmediateMesh.new()
 	_mesh.mesh = _mark
+	_smoke_vfx.emitting = false
 
 
 func _process(_delta: float) -> void:
-	if is_colliding() and _is_active:
+	var is_grounded: bool = is_colliding()
+	_smoke_vfx.emitting = is_grounded and _is_active
+	if is_grounded and _is_active:
 		_makrer.global_position = get_collision_point() + (get_collision_normal() * 0.05)
 		_verts.append([
 			_makrer.global_position + global_basis.z * 0.1,

@@ -151,6 +151,7 @@ func _scale_ui_elements() -> void:
 	_speedometer.scale = ui_scale
 	_wrong_way_panel.scale = ui_scale
 	_countdown_panel.scale = ui_scale
+	_countdown_panel.default_scale = ui_scale
 
 
 func on_car_positions_updated(car_positions: Array[int]) -> void:
@@ -165,32 +166,6 @@ func _on_lap_changed(lap: int) -> void:
 	
 	# Show the next lap panel and move it up and down form the screen
 	_next_lap_panel.show()
-	# Save the default positoin so it can be used to reset it after the tween has finished
-	var default_pos: Vector2 = _next_lap_panel.global_position
-	
-	# Where the tween should start and end
-	var tween_down_pos: Vector2 = default_pos + (_next_lap_panel.size * _ui_scale_factor)
-	_next_lap_panel.global_position = tween_down_pos
-	# Set start rotation
-	const ROTATION_OFFSET: float = 30.0
-	_next_lap_panel.rotation_degrees = -ROTATION_OFFSET
-	
-	# Start tweening panel
-	const TWEEN_DURATION: float = 1.5
-	var tween: Tween = create_tween()
-	# Move up
-	var tween_up_pos: Vector2 = default_pos + (_next_lap_panel.size * 0.35 * _ui_scale_factor)
-	tween.tween_property(_next_lap_panel, "global_position", tween_up_pos, 0.5)
-	# Rotate
-	tween.tween_property(_next_lap_panel, "rotation_degrees", ROTATION_OFFSET, TWEEN_DURATION)
-	# Move down
-	tween.tween_property(_next_lap_panel, "global_position", tween_down_pos, 0.5)
-	
-	# Hide and reset after tween has finished
-	await tween.finished
-	_next_lap_panel.hide()
-	_next_lap_panel.rotation_degrees = 0.0
-	_next_lap_panel.global_position = default_pos
 
 
 func _on_finished_all_laps(_car_id: int) -> void:
