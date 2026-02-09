@@ -1,6 +1,6 @@
 [gd_resource type="Curve" format=3 uid="uid://pggof20wq2a2"]
 
 [resource]
-_limits = [0.0, 100.0, 0.0, 2.3]
-_data = [Vector2(0, 38.39612), 0.0, 0.0, 0, 0, Vector2(2.2991073, 0), -51.633312, 0.0, 0, 0]
+_limits = [0.0, 100.0, 0.0, 2.4]
+_data = [Vector2(0, 38.39612), 0.0, 0.0, 0, 0, Vector2(2.4, 0), -63.052452, 0.0, 0, 0]
 point_count = 2

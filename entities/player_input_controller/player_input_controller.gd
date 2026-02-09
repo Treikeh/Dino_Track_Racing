@@ -111,7 +111,7 @@ func _process(delta: float) -> void:
 	
 	_speedometer.update(_car_controller.speed_khm)
 	
-	var speed_lines_mask: float = remap(_car_controller.speed_khm, 70.0, 110.0, 1.0, 0.5)
+	var speed_lines_mask: float = remap(_car_controller.speed_khm, 80.0, 110.0, 1.0, 0.5)
 	speed_lines_mask = clampf(speed_lines_mask, 0.5, 1.0)
 	_speed_lines.material.set("shader_parameter/mask_edge", speed_lines_mask)
 

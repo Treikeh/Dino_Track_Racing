@@ -12,7 +12,7 @@
 
 [sub_resource type="Curve" id="Curve_jpoqo"]
 _limits = [70.0, 100.0, 40.0, 175.0]
-_data = [Vector2(70, 70), 0.0, 0.37312862, 0, 0, Vector2(175, 95), 0.10072536, 0.0, 0, 0]
+_data = [Vector2(80.58544, 70), 0.0, 0.37312862, 0, 0, Vector2(145.52214, 97.77001), 0.10072536, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_o1714"]
