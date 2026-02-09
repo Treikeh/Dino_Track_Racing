@@ -4,6 +4,7 @@ extends CanvasLayer
 @export var _leaderboard: Control
 @export var _pause_menu: Control
 
+var finished_cars: Dictionary[int, float]
 var _race_ended: bool = false
 
 
@@ -24,4 +25,4 @@ func on_race_ended() -> void:
 	_race_ended = true
 	await get_tree().create_timer(2.5).timeout
 	_leaderboard.show()
-	_leaderboard.populate()
+	_leaderboard.populate(finished_cars)

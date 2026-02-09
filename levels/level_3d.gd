@@ -188,7 +188,10 @@ func _sort_positions(a: int, b: int) -> bool:
 
 func _on_car_finished_all_laps(car_id: int) -> void:
 	# Set how long it took a player ro finish all the laps
-	Globals.players[car_id] = _race_duration
+	if Globals.players.has(car_id):
+		Globals.players[car_id] = _race_duration
+	
+	_level_ui.finished_cars[car_id] = _race_duration
 	
 	# Check if all cars have completed the level
 	for i: int in _track_follows:

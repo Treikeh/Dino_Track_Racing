@@ -22,6 +22,7 @@ const INPUT_ACTIONS: Array[String] = [
 
 # Stores info about all the players that are in the game
 #NOTE: int = player_id, float = time taken to complete the race (for leaderboard)
+#NOTE: The float is no longer necessary
 var players: Dictionary[int, float] = {
 	0: 0.0,
 	#1: 0.0,
@@ -90,7 +91,7 @@ var players: Dictionary[int, float] = {
 }
 
 var allow_cpus: bool = true
-var min_cars_ammount: int = 12
+var min_cars_ammount: int = 2
 
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
