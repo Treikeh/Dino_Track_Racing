@@ -79,6 +79,8 @@ var throttle: float
 var turn_input: float
 var speed_khm: float
 var last_ground_pos: Vector3
+var item_boost: float = 0.0
+var turn_mult: float = 1.0
 
 var _movement_state: MovementState = MovementState.NORMAL
 var _turn_dir: float
@@ -145,7 +147,8 @@ func _physics_process(delta: float) -> void:
 			var ground_collider: Node3D = _ground_check.get_collider()
 			var ground_friction: float = 2.0 if ground_collider.is_in_group("grass") else 1.0
 			var accel_force: float = _accel_curve.sample(speed_khm * ground_friction) * throttle
-			apply_central_force(-_drive_dir.global_basis.z * (accel_force + _trick_boost) * mass)
+			var forward_speed: float = accel_force + _trick_boost + item_boost
+			apply_central_force(-_drive_dir.global_basis.z * forward_speed * mass)
 			
 			# Drifting
 			if _is_drifting:
@@ -166,7 +169,7 @@ func _physics_process(delta: float) -> void:
 			# How much to mult turn force based on which direction the car wants to drive in
 			var turn_force_mult: float = -global_basis.z.dot(_drive_dir.global_basis.x)
 			var turn_force: float = turn_force_mult * _rot_speed * forward_vel_dot
-			apply_torque(global_basis.y * turn_force * mass)
+			apply_torque(global_basis.y * turn_force * turn_mult * mass)
 			
 			# Reduce trick buffer time
 			_trick_buffer_time -= delta

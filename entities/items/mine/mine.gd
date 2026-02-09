@@ -1,9 +1,9 @@
 extends Item3D
 
 
+@export var _physics_body: CharacterBody3D
 @export var _explosion: Node3D
 @export var _explosion_hurtbox: Hurtbox
-@export var _ground_ray: RayCast3D
 
 var _is_armed: bool = false
 
@@ -14,20 +14,15 @@ func _ready() -> void:
 	_explosion.hide()
 	_explosion_hurtbox.set_instigator(instigator, true)
 	
-	_move_mine_to_ground()
-	
 	# Arm the mine after a short duration so that it won't be triggered when it spawns
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
 	_is_armed = true
 
 
-func _move_mine_to_ground() -> void:
-	var target_position: Vector3 = global_position + Vector3(0.0, -50.0, 0.0)
-	_ground_ray.target_position = _ground_ray.to_local(target_position)
-	_ground_ray.force_raycast_update()
-	if _ground_ray.is_colliding():
-		global_position = _ground_ray.get_collision_point()
-		#TODO: Aligin mine to the ground normal
+func _physics_process(delta: float) -> void:
+	# Move the mine down to the ground
+	_physics_body.velocity += Vector3.DOWN * 20.0 * delta
+	_physics_body.move_and_slide()
 
 
 func _explode() -> void:

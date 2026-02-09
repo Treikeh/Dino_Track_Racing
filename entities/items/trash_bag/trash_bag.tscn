@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxvndtfus24sx"]
+
+[ext_resource type="Script" uid="uid://bggo4nj7q34p3" path="res://entities/items/trash_bag/trash_bag.gd" id="1_2n4p8"]
+[ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="3_wl078"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vue83"]
+radius = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hht6s"]
+radius = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_vue83"]
+radius = 0.8
+height = 1.6
+
+[node name="TrashBag" type="Node3D" node_paths=PackedStringArray("_physics_body", "_hurtbox")]
+script = ExtResource("1_2n4p8")
+_physics_body = NodePath("PhysicsBody")
+_hurtbox = NodePath("PhysicsBody/Hurtbox")
+metadata/_custom_type_script = "uid://751u1m35fd72"
+
+[node name="PhysicsBody" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody"]
+shape = SubResource("SphereShape3D_vue83")
+
+[node name="Hurtbox" parent="PhysicsBody" instance=ExtResource("3_wl078")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody/Hurtbox"]
+shape = SubResource("SphereShape3D_hht6s")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsBody"]
+mesh = SubResource("SphereMesh_vue83")
+skeleton = NodePath("../..")
+
+[connection signal="hit_hitbox" from="PhysicsBody/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]

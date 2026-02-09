@@ -56,7 +56,7 @@ metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 environment = SubResource("Environment_w8irb")
 
 [node name="Skybox" type="MeshInstance3D" parent="."]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -85.912, 307.5, 20.5)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -85.912, 120.39995, 20.5)
 material_override = ExtResource("2_rbhar")
 mesh = SubResource("SphereMesh_mq051")
 
@@ -67,7 +67,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917826, -0.127881, 0.0005653243, -0.12784556, 0.99159986, 0.019443445, -0.0030470681, 0.019211803, -0.99979275, -120.29342, -12.428657, -5.817641)
+transform = Transform3D(-0.9917826, -0.127881, 0.00056532404, -0.12784556, 0.99159986, 0.019443434, -0.0030470681, 0.019211803, -0.9997922, -120.29342, -12.428657, -5.817641)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -118,51 +118,3 @@ _track = NodePath("../Track")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6, 0, 47.100002)
 shape = SubResource("BoxShape3D_rbhar")
 debug_color = Color(0.9882353, 0, 0, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(0.1830127, -0.1830127, 0.9659258, 0.70710677, 0.70710677, 1.4901161e-08, -0.68301266, 0.6830127, 0.258819, -17.311045, -26.114824, -153.24814)
-visible = false
-size = Vector3(23, 1, 39.100002)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="."]
-transform = Transform3D(0.84482324, 0, -0.5350455, 0, 1, 0, 0.5350455, 0, 0.84482324, -8.751976, -3.2430372, -145.3516)
-visible = false
-size = Vector3(94.700005, 55.010742, 58.2)
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGBox3D9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46)
-operation = 2
-inner_radius = 7.1
-outer_radius = 58.2
-sides = 32
-ring_sides = 32
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.835796, 0)
-operation = 2
-size = Vector3(96.44043, 37.252075, 70.30176)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.763718, -11.93985, 0)
-operation = 2
-size = Vector3(96.44043, 37.252075, 70.30176)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
-transform = Transform3D(0.6123724, -0.6123725, 0.5, 0.70710677, 0.70710677, 1.5408908e-08, -0.35355335, 0.35355338, 0.8660253, 5.5757675, -26.114824, -135.91179)
-visible = false
-size = Vector3(23, 1, 39.100002)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(-1.1175871e-08, -0.25881904, 0.9659258, 1, -5.9604645e-08, 2.9802322e-08, 2.9802322e-08, 0.9659258, 0.258819, -16.69235, -21.51863, -155.55714)
-visible = false
-size = Vector3(23, 1, 39.100002)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(-1.1175871e-08, -0.8660253, 0.5, 1, -5.2505033e-08, 6.499036e-09, 2.9802322e-08, 0.49999997, 0.8660253, 4.848836, -21.51863, -143.66235)
-visible = false
-size = Vector3(23, 1, 39.100002)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.12940954, -0.22414385, 0.9659258, 0.8660254, -0.50000006, 3.7252903e-08, 0.48296297, 0.83651626, 0.258819, -16.56294, -11.218629, -156.0401)
-visible = false
-size = Vector3(23, 1, 39.100002)

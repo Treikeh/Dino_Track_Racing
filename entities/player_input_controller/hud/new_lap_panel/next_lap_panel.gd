@@ -39,3 +39,4 @@ func update(lap: int, total_laps: int) -> void:
 	_tween.parallel().tween_property(self, "_x_value", 1.0, _tween_duration)
 	_tween.parallel().tween_property(self, "_y_value", 1.0, _tween_duration)
 	_tween.parallel().tween_property(self, "_z_value", 1.0, _tween_duration)
+	_tween.tween_callback(hide)

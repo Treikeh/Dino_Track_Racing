@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://d10bdd7c0ndfl"]
+
+[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="1_hw1rq"]
+[ext_resource type="PackedScene" uid="uid://bxvndtfus24sx" path="res://entities/items/trash_bag/trash_bag.tscn" id="2_hw1rq"]
+[ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="3_vj281"]
+
+[resource]
+script = ExtResource("3_vj281")
+name = "Trash Bag"
+icon = ExtResource("1_hw1rq")
+rarity = 13
+scene = ExtResource("2_hw1rq")
+metadata/_custom_type_script = "uid://cueb0e6107vpe"

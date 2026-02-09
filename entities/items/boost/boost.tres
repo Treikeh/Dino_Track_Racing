@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://djggaumelxdqx"]
+
+[ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="1_q7fw4"]
+[ext_resource type="PackedScene" uid="uid://coa88ept8mxrt" path="res://entities/items/boost/boost.tscn" id="2_q7fw4"]
+[ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="3_7c4g7"]
+
+[resource]
+script = ExtResource("3_7c4g7")
+name = "Boost"
+icon = ExtResource("1_q7fw4")
+rarity = 11
+scene = ExtResource("2_q7fw4")
+metadata/_custom_type_script = "uid://cueb0e6107vpe"
