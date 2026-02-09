@@ -193,11 +193,17 @@ func _on_car_finished_all_laps(car_id: int) -> void:
 	
 	_level_ui.finished_cars[car_id] = _race_duration
 	
-	# Check if all cars have completed the level
-	for i: int in _track_follows:
-		# Exit out of the function if one of the players hasn't finished all the laps
-		if not _track_follows[i].all_laps_finished:
+	
+	for i:int in Globals.players:
+		var track_follow: TrackFollow = _track_follows[i]
+		if not track_follow.all_laps_finished:
 			return
+	
+	# Check if all cars have completed the level
+	#for i: int in _track_follows:
+	#	# Exit out of the function if one of the players hasn't finished all the laps
+	#	if not _track_follows[i].all_laps_finished:
+	#		return
 	
 	_end_level()
 
