@@ -1,10 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dosd47fqh8thg"]
+[gd_scene load_steps=20 format=3 uid="uid://dosd47fqh8thg"]
 
 [ext_resource type="Script" uid="uid://r05j8taagghm" path="res://entities/item_box/item_box.gd" id="1_lk11n"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
 [ext_resource type="Resource" uid="uid://sxi5wl3l54s2" path="res://entities/items/meteor_rain/meteor_rain.tres" id="3_rcuga"]
+[ext_resource type="Resource" uid="uid://difualdbs5ylv" path="res://entities/items/mine/mine.tres" id="4_dfyjk"]
+[ext_resource type="Resource" uid="uid://d10bdd7c0ndfl" path="res://entities/items/trash_bag/trash_bag.tres" id="5_kwh0m"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="5_rcuga"]
+[ext_resource type="Resource" uid="uid://dx8ax8jf5eo0g" path="res://entities/items/lance/lance.tres" id="6_et168"]
+[ext_resource type="Resource" uid="uid://cxj84srk7f5fr" path="res://entities/items/homing_missile/homing_missile.tres" id="7_aml61"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_cienk"]
+[ext_resource type="Resource" uid="uid://djggaumelxdqx" path="res://entities/items/boost/boost.tres" id="8_cvxbj"]
+[ext_resource type="Resource" uid="uid://ccr4djq6d11yn" path="res://entities/items/bomb/bomb.tres" id="9_kc1bj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
 size = Vector3(1.5, 2, 1.5)
@@ -45,7 +51,7 @@ material = SubResource("StandardMaterial3D_i6fuj")
 [node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_collect_vfx", "_disabled_timer")]
 script = ExtResource("1_lk11n")
 _disabled_duration = 2.5
-_items = Array[ExtResource("2_ic5go")]([ExtResource("3_rcuga")])
+_items = Array[ExtResource("2_ic5go")]([ExtResource("3_rcuga"), ExtResource("4_dfyjk"), ExtResource("5_kwh0m"), ExtResource("6_et168"), ExtResource("7_aml61"), ExtResource("8_cvxbj"), ExtResource("9_kc1bj")])
 _mesh_root = NodePath("MeshRoot")
 _collect_vfx = NodePath("CollectVFX")
 _disabled_timer = NodePath("DisabledTimer")

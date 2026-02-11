@@ -20,6 +20,7 @@ func _ready() -> void:
 	visual = MeshInstance3D.new()
 	LevelManager.add_child(visual)
 	#visual.mesh = BoxMesh.new()
+	_car_controller.stop_drift()
 
 
 func _process(_delta: float) -> void:
