@@ -21,6 +21,7 @@ radial_segments = 16
 rings = 8
 
 [node name="Mine" type="Node3D" node_paths=PackedStringArray("_physics_body", "_explosion", "_explosion_hurtbox")]
+top_level = true
 script = ExtResource("1_5w3oq")
 _physics_body = NodePath("PhysicsBody")
 _explosion = NodePath("PhysicsBody/Explosion")

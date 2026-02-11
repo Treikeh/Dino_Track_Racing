@@ -91,7 +91,7 @@ var players: Dictionary[int, float] = {
 }
 
 var allow_cpus: bool = true
-var min_cars_ammount: int = 12
+var min_cars_ammount: int = 2
 
 # Container that will hold all the player cameras
 var viewports_container: GridContainer

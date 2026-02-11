@@ -209,8 +209,9 @@ func _on_car_finished_all_laps(car_id: int) -> void:
 
 
 func _end_level() -> void:
-	_race_active = false
-	_level_ui.on_race_ended()
+	if _race_active:
+		_race_active = false
+		_level_ui.on_race_ended()
 
 
 func get_id_from_car(car: CarController) -> int:

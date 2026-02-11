@@ -12,6 +12,7 @@ extends Node
 const LOADING_SCREEN_SCENE: PackedScene = preload("res://gui/loading_screen/loading_screen.tscn")
 
 var current_level_path: String = ""
+var current_level: Level3D
 
 var _loading_level: bool = false
 var _loading_screen: LoadingScreen
@@ -33,6 +34,8 @@ func _hijack_main_scene() -> void:
 	var current_scene: Node = get_tree().current_scene
 	current_scene.reparent.call_deferred(self)
 	current_level_path = current_scene.scene_file_path
+	if current_scene is Level3D:
+		current_level = current_scene
 
 
 func load_level(level_path: String) -> void:
@@ -58,6 +61,8 @@ func load_level(level_path: String) -> void:
 	var new_level: Node = load(level_path).instantiate()
 	# Call deffered so that unloading levels can finish properly before adding the new level
 	add_child.call_deferred(new_level)
+	if new_level is Level3D:
+		current_level = new_level
 	
 	# Hide loading loading screen
 	_loading_screen.fade_out()

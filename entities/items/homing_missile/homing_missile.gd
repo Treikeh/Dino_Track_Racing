@@ -16,7 +16,7 @@ func _ready() -> void:
 	_hurtbox.set_instigator(instigator)
 	
 	# Get the level
-	var level: Level3D = LevelManager.get_child(0)
+	var level: Level3D = LevelManager.current_level
 	
 	# Attach the track follow to the track
 	var local_pos: Vector3 = level._track.to_local(global_position)
