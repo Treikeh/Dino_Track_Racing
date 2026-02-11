@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://gg63h5u3qj6x"]
+[gd_scene load_steps=14 format=3 uid="uid://gg63h5u3qj6x"]
 
 [ext_resource type="Script" uid="uid://dy2y34q6mcut" path="res://entities/items/homing_missile/homing_missile.gd" id="1_612hy"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_xbvo7"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_612hy"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_73iqi"]
+radius = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h0vic"]
 
@@ -47,29 +50,34 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_73iqi"]
 material = SubResource("StandardMaterial3D_4exyx")
 
-[node name="HomingMissile" type="Node3D" node_paths=PackedStringArray("_bullet_root", "_hurtbox", "_track_follow")]
+[node name="HomingMissile" type="Node3D" node_paths=PackedStringArray("_hurtbox", "_track_follow", "_physics_body")]
 script = ExtResource("1_612hy")
-_bullet_root = NodePath("BulletBody")
-_hurtbox = NodePath("BulletBody/Hurtbox")
+_hurtbox = NodePath("PhysicsBody/Hurtbox")
 _track_follow = NodePath("TrackFollow")
+_physics_body = NodePath("PhysicsBody")
 
 [node name="TrackFollow" type="PathFollow3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TrackFollow"]
 mesh = SubResource("BoxMesh_612hy")
 
-[node name="BulletBody" type="Node3D" parent="."]
+[node name="PhysicsBody" type="CharacterBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
-[node name="Hurtbox" parent="BulletBody" instance=ExtResource("2_xbvo7")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody"]
+shape = SubResource("SphereShape3D_73iqi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletBody/Hurtbox"]
+[node name="Hurtbox" parent="PhysicsBody" instance=ExtResource("2_xbvo7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody/Hurtbox"]
 shape = SubResource("SphereShape3D_h0vic")
 debug_color = Color(0.99607843, 0, 0, 0.41960785)
 
-[node name="Missile_01_SM" parent="BulletBody" instance=ExtResource("3_73iqi")]
+[node name="Missile_01_SM" parent="PhysicsBody" instance=ExtResource("3_73iqi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="BulletBody/Missile_01_SM"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="PhysicsBody/Missile_01_SM"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 lifetime = 0.25
 draw_order = 1
@@ -80,5 +88,5 @@ draw_pass_1 = SubResource("QuadMesh_73iqi")
 wait_time = 20.0
 one_shot = true
 
-[connection signal="hit_hitbox" from="BulletBody/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]
+[connection signal="hit_hitbox" from="PhysicsBody/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
