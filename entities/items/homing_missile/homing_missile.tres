@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_phku3")
-name = "Homing missile"
+name = "Missile"
 icon = ExtResource("1_4bd84")
 rarity = 12
 scene = ExtResource("2_4bd84")

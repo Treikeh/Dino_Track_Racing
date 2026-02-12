@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4re4rda2ts5x"]
+[gd_scene load_steps=7 format=3 uid="uid://b4re4rda2ts5x"]
 
 [ext_resource type="Script" uid="uid://48xjgrjn0t18" path="res://entities/player_input_controller/hud/item_panel/item_panel.gd" id="1_teqg3"]
-[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="2_teqg3"]
+[ext_resource type="Shader" uid="uid://cy885nlbujkap" path="res://entities/player_input_controller/hud/item_panel/art/item_panel_display.gdshader" id="3_tjklg"]
+[ext_resource type="Texture2D" uid="uid://cwfkhxvk3140g" path="res://entities/player_input_controller/hud/item_panel/art/item_list.png" id="4_uka50"]
 
-[node name="ItemPanel" type="MarginContainer" node_paths=PackedStringArray("_item_icon")]
+[sub_resource type="Gradient" id="Gradient_uka50"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eur6w"]
+gradient = SubResource("Gradient_uka50")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uka50"]
+shader = ExtResource("3_tjklg")
+shader_parameter/rot_amount = 90.0
+shader_parameter/scroll_speed = 0.0
+shader_parameter/item_list_texture = ExtResource("4_uka50")
+shader_parameter/mask_gradient = SubResource("GradientTexture1D_eur6w")
+
+[node name="ItemPanel" type="MarginContainer" node_paths=PackedStringArray("_item_list")]
 offset_right = 100.0
 offset_bottom = 100.0
 theme_override_constants/margin_left = 10
@@ -11,7 +27,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_teqg3")
-_item_icon = NodePath("PanelContainer/MarginContainer/ItemIcon")
+_item_list = NodePath("PanelContainer/MarginContainer/ListRoot/ItemList")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -23,9 +39,14 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ItemIcon" type="TextureRect" parent="PanelContainer/MarginContainer"]
+[node name="ListRoot" type="Control" parent="PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("2_teqg3")
-expand_mode = 1
-stretch_mode = 5
+
+[node name="ItemList" type="ColorRect" parent="PanelContainer/MarginContainer/ListRoot"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_uka50")
+layout_mode = 0
+offset_right = 70.0
+offset_bottom = 280.0

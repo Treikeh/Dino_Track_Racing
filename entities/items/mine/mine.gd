@@ -9,6 +9,7 @@ var _is_armed: bool = false
 
 
 func _ready() -> void:
+	top_level = true
 	_explosion.hide()
 	_explosion_hurtbox.set_instigator(instigator, true)
 	
