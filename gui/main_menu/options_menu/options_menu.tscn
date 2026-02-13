@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5mba2bh6v4ys"]
+[gd_scene load_steps=8 format=3 uid="uid://b5mba2bh6v4ys"]
 
 [ext_resource type="Script" uid="uid://c2ffsve8ee2io" path="res://gui/main_menu/options_menu/options_menu.gd" id="1_6uhmo"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="2_cqamk"]
@@ -6,7 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="3_g635g"]
 [ext_resource type="Texture2D" uid="uid://bke3qjwvmk6v2" path="res://gui/button_display/art/button_west.png" id="4_6rlu2"]
 
-[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("_confirm_pop_up", "_save_button", "_discard_button", "_master_volume_slider", "_master_volume_value", "_effects_volume_slider", "_effects_volume_value", "_music_volume_slider", "_music_volume_value")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rlu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hlk55"]
+
+[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("_confirm_pop_up", "_save_button", "_discard_button", "_master_volume_slider", "_master_volume_value", "_effects_volume_slider", "_effects_volume_value", "_music_volume_slider", "_music_volume_value", "_display_mode_options_button", "_vsync_mode_options_button", "_fps_slider", "_fps_value", "_allow_cpu_check_button", "_cpu_amount_slider", "_cpu_amount_value")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,14 +19,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6uhmo")
 _confirm_pop_up = NodePath("ConfirmPopUp")
-_save_button = NodePath("ConfirmPopUp/VBoxContainer/HBoxContainer/SaveButton")
-_discard_button = NodePath("ConfirmPopUp/VBoxContainer/HBoxContainer/DiscardButton")
+_save_button = NodePath("ConfirmPopUp/MarginContainer/VBoxContainer/HBoxContainer/SaveButton")
+_discard_button = NodePath("ConfirmPopUp/MarginContainer/VBoxContainer/HBoxContainer/DiscardButton")
 _master_volume_slider = NodePath("SettingsPanel/MarginContainer/VBoxContainer/MasterVolume/MasterVolumeSlider")
 _master_volume_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/MasterVolume/MasterVolumeValue")
 _effects_volume_slider = NodePath("SettingsPanel/MarginContainer/VBoxContainer/EffectsVolume/EffectsVolumeSlider")
 _effects_volume_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/EffectsVolume/EffectsVolumeValue")
 _music_volume_slider = NodePath("SettingsPanel/MarginContainer/VBoxContainer/MusicVolume/MusicVolumeSlider")
 _music_volume_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/MusicVolume/MusicVolumeValue")
+_display_mode_options_button = NodePath("SettingsPanel/MarginContainer/VBoxContainer/DisplayMode/DisplayModeOptionsButton")
+_vsync_mode_options_button = NodePath("SettingsPanel/MarginContainer/VBoxContainer/Vsync/VsyncModeOptionsButton")
+_fps_slider = NodePath("SettingsPanel/MarginContainer/VBoxContainer/FpsSlider/FpsSlider")
+_fps_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/FpsSlider/FpsValue")
+_allow_cpu_check_button = NodePath("SettingsPanel/MarginContainer/VBoxContainer/AllowCpus/AllowCpusCheckButton")
+_cpu_amount_slider = NodePath("SettingsPanel/MarginContainer/VBoxContainer/CpuAmount/CpuAmountSlider")
+_cpu_amount_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/CpuAmount/CpuAmountValue")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -51,9 +62,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -385.0
+offset_left = -344.0
 offset_top = -145.0
-offset_right = 385.0
+offset_right = 344.0
 offset_bottom = 187.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -63,24 +74,95 @@ layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 1
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 14
 alignment = 1
+
+[node name="DisplayMode" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Display mode"
+
+[node name="DisplayModeOptionsButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Windowed"
+popup/item_2/id = 2
+
+[node name="Vsync" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vsync"
+
+[node name="VsyncModeOptionsButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+popup/item_2/disabled = true
+popup/item_3/text = "Mailbox"
+popup/item_3/id = 3
+popup/item_3/disabled = true
+
+[node name="FpsSlider" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fps:"
+
+[node name="FpsSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 240.0
+value = 1.0
+allow_greater = true
+
+[node name="FpsValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
+layout_mode = 2
+text = "10"
+
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6rlu2")
 
 [node name="MasterVolume" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Title" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/MasterVolume"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Master Volume: "
 vertical_alignment = 1
 
 [node name="MasterVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/MasterVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
 
 [node name="MasterVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/MasterVolume"]
 layout_mode = 2
@@ -93,12 +175,15 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/EffectsVolume"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Effects Volume: "
 vertical_alignment = 1
 
 [node name="EffectsVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/EffectsVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
 
 [node name="EffectsVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/EffectsVolume"]
 layout_mode = 2
@@ -111,18 +196,53 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Music Volume: "
 vertical_alignment = 1
 
 [node name="MusicVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
 
 [node name="MusicVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_hlk55")
+
+[node name="AllowCpus" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AllowCpus"]
+layout_mode = 2
+text = "Allow CPUs"
+
+[node name="AllowCpusCheckButton" type="CheckButton" parent="SettingsPanel/MarginContainer/VBoxContainer/AllowCpus"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CpuAmount" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CPU Amount"
+
+[node name="CpuAmountSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_greater = true
+
+[node name="CpuAmountValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
+layout_mode = 2
+text = "10"
 
 [node name="ButtonDisplays" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -179,22 +299,41 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPopUp"]
+[node name="MarginContainer" type="MarginContainer" parent="ConfirmPopUp"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPopUp/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer"]
+[node name="Label" type="Label" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings Changed"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="SaveButton" type="Button" parent="ConfirmPopUp/VBoxContainer/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="ConfirmPopUp/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../DiscardButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../DiscardButton")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../DiscardButton")
+focus_previous = NodePath("../DiscardButton")
 text = "Save"
 
-[node name="DiscardButton" type="Button" parent="ConfirmPopUp/VBoxContainer/HBoxContainer"]
+[node name="DiscardButton" type="Button" parent="ConfirmPopUp/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../SaveButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../SaveButton")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../SaveButton")
+focus_previous = NodePath("../SaveButton")
 text = "Discard"

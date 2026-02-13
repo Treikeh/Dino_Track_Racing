@@ -157,18 +157,22 @@ grow_vertical = 2
 layout_mode = 1
 
 [node name="PlayerJoinMenu" parent="MenuRoot" instance=ExtResource("3_ubcky")]
+process_mode = 4
 visible = false
 layout_mode = 1
 
 [node name="ControlsMenu" parent="MenuRoot" instance=ExtResource("4_1vh24")]
+process_mode = 4
 visible = false
 layout_mode = 1
 
 [node name="OptionsMenu" parent="MenuRoot" instance=ExtResource("5_1vh24")]
+process_mode = 4
 visible = false
 layout_mode = 1
 
 [node name="CreditsMenu" parent="MenuRoot" instance=ExtResource("5_ubcky")]
+process_mode = 4
 visible = false
 layout_mode = 1
 
