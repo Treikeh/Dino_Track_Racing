@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="2_yfhft"]
 [ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="3_pnibf"]
 
-[node name="CreditsMenu" type="Control"]
+[node name="CreditsMenu" type="Control" node_paths=PackedStringArray("_title", "_panel", "_button_display")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m8lnb")
+_title = NodePath("Title")
+_panel = NodePath("PanelContainer")
+_button_display = NodePath("ButtonDisplay")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -53,11 +56,11 @@ layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 1
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 35
 alignment = 1
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -70,6 +73,7 @@ theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_pnibf")
 text = "Game made by Treikeh"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Font" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
@@ -85,7 +89,7 @@ Press Start 2P by cody@zone38.net
 licensed under the SIL Open Font License
 Version 1.1."
 horizontal_alignment = 1
-autowrap_mode = 2
+vertical_alignment = 1
 
 [node name="Audio" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
@@ -100,7 +104,7 @@ text = "Audio:
 All audio is licensed under
 Creative Commons  - CC0"
 horizontal_alignment = 1
-autowrap_mode = 2
+vertical_alignment = 1
 
 [node name="ButtonDisplay" type="MarginContainer" parent="."]
 layout_mode = 1

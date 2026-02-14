@@ -3,12 +3,30 @@ extends Control
 
 signal menu_closed(menu: Control)
 
+const TWEEN_DURATION: float = 0.5
+
+@export var _title: Label
+@export var _settings_panel: PanelContainer
+@export var _button_display: Control
+
+var _title_start_pos: Vector2
+var _panel_start_pos: Vector2
+var _button_dispaly_start_pos: Vector2
+
 
 func _ready() -> void:
 	_setup_audio_settings()
 	_setup_video_settings()
 	_setup_gameplay_settings()
 	_setup_confirm_pop_up()
+	
+	_title_start_pos = _title.position
+	_panel_start_pos = _settings_panel.position
+	_button_dispaly_start_pos = _button_display.position
+	
+	_title.position.y = -_title.size.y
+	_settings_panel.position.x = size.x
+	_button_display.position.y = size.y
 
 
 func _input(event: InputEvent) -> void:
@@ -21,8 +39,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_back_button_pressed() -> void:
 	if !_are_new_and_old_settings_matching():
-		_confirm_pop_up.show()
-		_save_button.grab_focus()
+		_show_confirm_pop_up()
 		return
 	else:
 		_close_settings_menu()
@@ -38,9 +55,32 @@ func _close_settings_menu() -> void:
 
 
 func open_menu() -> void:
-	show()
-	_confirm_pop_up.hide()
 	process_mode = Node.PROCESS_MODE_INHERIT
+	show()
+	
+	await get_tree().create_timer(TWEEN_DURATION / 2.0).timeout
+	
+	var title_tween: Tween = create_tween()
+	title_tween.set_trans(Tween.TRANS_BACK)
+	title_tween.set_ease(Tween.EASE_OUT)
+	title_tween.tween_property(_title, "position", _title_start_pos, TWEEN_DURATION)
+	
+	var panel_tween: Tween = create_tween()
+	panel_tween.set_trans(Tween.TRANS_BACK)
+	panel_tween.set_ease(Tween.EASE_OUT)
+	panel_tween.tween_property(_settings_panel, "position", _panel_start_pos, TWEEN_DURATION)
+	
+	var button_dispaly_tween: Tween = create_tween()
+	button_dispaly_tween.set_trans(Tween.TRANS_BACK)
+	button_dispaly_tween.set_ease(Tween.EASE_OUT)
+	button_dispaly_tween.tween_property(
+			_button_display,
+			"position",
+			_button_dispaly_start_pos,
+			TWEEN_DURATION
+	)
+	
+	_confirm_pop_up.hide()
 	_cpu_amount_slider.grab_focus()
 	
 	_update_audio_settings()
@@ -49,8 +89,27 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
-	hide()
+	var title_tween: Tween = create_tween()
+	title_tween.set_trans(Tween.TRANS_BACK)
+	title_tween.set_ease(Tween.EASE_IN)
+	title_tween.tween_property(_title, "position:y", -_title.size.y, TWEEN_DURATION)
+	
+	var panel_tween: Tween = create_tween()
+	panel_tween.set_trans(Tween.TRANS_BACK)
+	panel_tween.set_ease(Tween.EASE_IN)
+	panel_tween.tween_property(_settings_panel, "position:x", size.x, TWEEN_DURATION)
+	
+	var button_dispaly_tween: Tween = create_tween()
+	button_dispaly_tween.set_trans(Tween.TRANS_BACK)
+	button_dispaly_tween.tween_property(_button_display, "position:y", size.y, TWEEN_DURATION)
+	
+	await get_tree().create_timer(TWEEN_DURATION / 2.0).timeout
+	
 	menu_closed.emit(self)
+	
+	await get_tree().create_timer(TWEEN_DURATION).timeout
+	
+	hide()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 
@@ -99,6 +158,8 @@ func _are_new_and_old_settings_matching() -> bool:
 @export var _save_button: Button
 @export var _discard_button: Button
 
+var _confirm_tween: Tween
+
 
 func _setup_confirm_pop_up() -> void:
 	_confirm_pop_up.hide()
@@ -106,12 +167,43 @@ func _setup_confirm_pop_up() -> void:
 	_discard_button.pressed.connect(_on_discard_button_pressed)
 
 
+func _show_confirm_pop_up() -> void:
+	_confirm_pop_up.show()
+	_save_button.grab_focus()
+	
+	if _confirm_tween:
+		_confirm_tween.kill()
+	
+	_confirm_pop_up.pivot_offset = _confirm_pop_up.size / 2.0
+	_confirm_pop_up.scale = Vector2.ZERO
+	
+	_confirm_tween = create_tween()
+	_confirm_tween.set_ease(Tween.EASE_OUT)
+	_confirm_tween.set_trans(Tween.TRANS_BACK)
+	_confirm_tween.tween_property(_confirm_pop_up, "scale", Vector2.ONE, TWEEN_DURATION)
+
+
+func _hide_confirm_pop_up() -> void:
+	if _confirm_tween:
+		_confirm_tween.kill()
+	
+	_confirm_pop_up.scale = Vector2.ONE
+	
+	_confirm_tween = create_tween()
+	_confirm_tween.set_ease(Tween.EASE_IN)
+	_confirm_tween.set_trans(Tween.TRANS_BACK)
+	_confirm_tween.tween_property(_confirm_pop_up, "scale", Vector2.ZERO, TWEEN_DURATION)
+	_confirm_tween.tween_callback(_confirm_pop_up.hide)
+
+
 func _on_save_button_pressed() -> void:
 	_on_apply_button_pressed()
+	_hide_confirm_pop_up()
 	_close_settings_menu()
 
 
 func _on_discard_button_pressed() -> void:
+	_hide_confirm_pop_up()
 	_close_settings_menu()
 
 #endregion

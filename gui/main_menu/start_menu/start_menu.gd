@@ -75,7 +75,7 @@ func open_menu() -> void:
 			_bottom_container,
 			"position:y",
 			_bottom_container.position.y - 50.0,
-			_move_in_out_duration * 2.0
+			_move_in_out_duration
 	)
 	
 	# Stop menu from being disabled when opening the menu
@@ -113,13 +113,13 @@ func close_menu(new_menu: int = 0) -> void:
 	)
 	
 	var bottom_tween: Tween = create_tween()
-	bottom_tween.set_ease(Tween.EASE_OUT)
+	bottom_tween.set_ease(Tween.EASE_IN)
 	bottom_tween.set_trans(Tween.TRANS_BACK)
 	bottom_tween.tween_property(
 			_bottom_container,
 			"position:y",
 			_bottom_container.position.y + 50.0,
-			_move_in_out_duration * 2.0
+			_move_in_out_duration
 	)
 	
 	# Start timer to disable menu

@@ -26,7 +26,7 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1jrn"]
 
-[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("_confirm_pop_up", "_save_button", "_discard_button", "_master_volume_slider", "_master_volume_value", "_effects_volume_slider", "_effects_volume_value", "_music_volume_slider", "_music_volume_value", "_display_mode_options_button", "_vsync_mode_options_button", "_fps_slider", "_fps_value", "_cpu_amount_slider", "_cpu_amount_value")]
+[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("_title", "_settings_panel", "_button_display", "_confirm_pop_up", "_save_button", "_discard_button", "_master_volume_slider", "_master_volume_value", "_effects_volume_slider", "_effects_volume_value", "_music_volume_slider", "_music_volume_value", "_display_mode_options_button", "_vsync_mode_options_button", "_fps_slider", "_fps_value", "_cpu_amount_slider", "_cpu_amount_value")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,6 +34,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6uhmo")
+_title = NodePath("Title")
+_settings_panel = NodePath("SettingsPanel")
+_button_display = NodePath("ButtonDisplays")
 _confirm_pop_up = NodePath("ConfirmPopUp")
 _save_button = NodePath("ConfirmPopUp/MarginContainer/VBoxContainer/SaveButton")
 _discard_button = NodePath("ConfirmPopUp/MarginContainer/VBoxContainer/DiscardButton")
