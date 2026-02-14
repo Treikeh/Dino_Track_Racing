@@ -73,16 +73,14 @@ func _spawn_players() -> void:
 	
 	await get_tree().process_frame
 	
-	if Globals.allow_cpus:
-		var cpu_count: int = Globals.min_cars_ammount - player_count
-		for c: int in cpu_count:
-			var cpu_id: int = player_count + c
-			var car: CarController = _add_car(cpu_id)
-			var track_follow: TrackFollow = _add_track_follow(cpu_id, car)
-			_add_cpu_controller(car, track_follow)
-			
-			# Set spawn position of car
-			car.global_position = _get_spawn_position(cpu_id)
+	for c: int in Globals.cpu_amount:
+		var cpu_id: int = player_count + c
+		var car: CarController = _add_car(cpu_id)
+		var track_follow: TrackFollow = _add_track_follow(cpu_id, car)
+		_add_cpu_controller(car, track_follow)
+		
+		# Set spawn position of car
+		car.global_position = _get_spawn_position(cpu_id)
 	
 	
 	# Fill the empty spaces with stuff. Could maybe add a cinematic camera that looks at different players

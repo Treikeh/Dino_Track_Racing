@@ -25,6 +25,7 @@ noise = SubResource("FastNoiseLite_o1714")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rlgv"]
+resource_local_to_scene = true
 shader = ExtResource("9_o1714")
 shader_parameter/noise = SubResource("NoiseTexture2D_4rlgv")
 shader_parameter/line_color = Color(1, 1, 1, 1)

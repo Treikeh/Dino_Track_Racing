@@ -13,13 +13,14 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 gradient = SubResource("Gradient_uka50")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uka50"]
+resource_local_to_scene = true
 shader = ExtResource("3_tjklg")
 shader_parameter/rot_amount = 90.0
 shader_parameter/scroll_speed = 0.0
 shader_parameter/item_list_texture = ExtResource("4_uka50")
 shader_parameter/mask_gradient = SubResource("GradientTexture1D_eur6w")
 
-[node name="ItemPanel" type="MarginContainer" node_paths=PackedStringArray("_item_list")]
+[node name="ItemPanel" type="MarginContainer" node_paths=PackedStringArray("_panel", "_item_list")]
 offset_right = 100.0
 offset_bottom = 100.0
 theme_override_constants/margin_left = 10
@@ -27,6 +28,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_teqg3")
+_panel = NodePath("PanelContainer")
 _item_list = NodePath("PanelContainer/MarginContainer/ListRoot/ItemList")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

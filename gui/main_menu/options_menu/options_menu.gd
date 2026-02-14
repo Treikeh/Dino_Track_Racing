@@ -4,17 +4,11 @@ extends Control
 signal menu_closed(menu: Control)
 
 
-#@onready var _apply_button: Button = %ApplyButton
-
-
 func _ready() -> void:
 	_setup_audio_settings()
 	_setup_video_settings()
 	_setup_gameplay_settings()
 	_setup_confirm_pop_up()
-	
-	## Connect signals
-	#_apply_button.pressed.connect(_on_apply_button_pressed)
 
 
 func _input(event: InputEvent) -> void:
@@ -47,7 +41,11 @@ func open_menu() -> void:
 	show()
 	_confirm_pop_up.hide()
 	process_mode = Node.PROCESS_MODE_INHERIT
-	_display_mode_options_button.grab_focus()
+	_cpu_amount_slider.grab_focus()
+	
+	_update_audio_settings()
+	_update_video_settings()
+	_update_gameplay_settings()
 
 
 func close_menu() -> void:
@@ -59,9 +57,12 @@ func close_menu() -> void:
 func _on_defaults_button_pressed() -> void:
 	var defaults: Dictionary = SettingsManager.DEFAULTS
 	_on_master_volume_changed(defaults.AUDIO.MASTER_VOLUME)
+	_on_effects_volume_changed(defaults.AUDIO.EFFECTS_VOLUME)
+	_on_music_volume_changed(defaults.AUDIO.MUSIC_VOLUME)
 	_on_display_mode_changed(defaults.VIDEO.DISPLAY_MODE)
 	_on_vsync_mode_changed(defaults.VIDEO.VSYNC_MODE)
 	_on_fps_changed(defaults.VIDEO.MAX_FPS)
+	_on_cpu_amount_changed(defaults.GAMEPLAY.CPU_AMOUNT)
 
 
 func _on_apply_button_pressed() -> void:
@@ -80,7 +81,6 @@ func _on_apply_button_pressed() -> void:
 	_old_audio_settings = _new_audio_settings.duplicate()
 	_old_video_settings = _new_video_settings.duplicate()
 	_old_gameplay_settings = _new_gameplay_settings.duplicate()
-	#_apply_button.disabled = true
 
 
 func _are_new_and_old_settings_matching() -> bool:
@@ -88,7 +88,6 @@ func _are_new_and_old_settings_matching() -> bool:
 	var video: bool = _new_video_settings == _old_video_settings
 	var gameplay: bool = _new_gameplay_settings == _old_gameplay_settings
 	var total: bool = video and audio and gameplay
-	print("Audio: %s, Video: %s, Gameplay: %s, Total: %s" % [audio, video, gameplay, total])
 	return total
 
 
@@ -138,23 +137,30 @@ var _new_audio_settings: Dictionary
 
 
 func _setup_audio_settings() -> void:
+	_update_audio_settings()
+	
+	# Master volume
+	_master_volume_slider.value_changed.connect(_on_master_volume_changed)
+	
+	# Effects volume
+	_effects_volume_slider.value_changed.connect(_on_effects_volume_changed)
+	
+	# Music
+	_music_volume_slider.value_changed.connect(_on_music_volume_changed)
+
+
+func _update_audio_settings() -> void:
 	var audio_settings: Dictionary = SettingsManager.load_audio_settings()
 	_old_audio_settings = audio_settings.duplicate()
 	_new_audio_settings = audio_settings.duplicate()
 	
-	# Master volume
 	_master_volume_slider.value = audio_settings.master_volume
-	_master_volume_slider.value_changed.connect(_on_master_volume_changed)
 	_master_volume_value.text = str(audio_settings.master_volume)
 	
-	# Effects volume
 	_effects_volume_slider.value = audio_settings.effects_volume
-	#_effects_volume_slider.value_changed.connect(_on_effects_volume_changed)
 	_effects_volume_value.text = str(audio_settings.effects_volume)
 	
-	# Music
 	_music_volume_slider.value = audio_settings.music_volume
-	#_music_volume_slider.value_changed.connect(_on_music_volume_changed)
 	_music_volume_value.text = str(audio_settings.music_volume)
 
 
@@ -163,9 +169,20 @@ func _on_master_volume_changed(value: float) -> void:
 	_master_volume_slider.value = value
 	_master_volume_value.text = str(value)
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
-	
-	# Disable the apply button if the new and old values aren't matching
-	#_apply_button.disabled = _are_new_and_old_settings_matching()
+
+
+func _on_effects_volume_changed(value: float) -> void:
+	_new_audio_settings.effects_volume = value
+	_effects_volume_slider.value = value
+	_effects_volume_value.text = str(value)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Effects"), value)
+
+
+func _on_music_volume_changed(value: float) -> void:
+	_new_audio_settings.music_volume = value
+	_music_volume_slider.value = value
+	_music_volume_value.text = str(value)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
 
 #endregion
 
@@ -187,23 +204,30 @@ var _new_video_settings: Dictionary
 
 
 func _setup_video_settings() -> void:
+	_update_video_settings()
+	# Display mode
+	_display_mode_options_button.item_selected.connect(_on_display_mode_changed)
+	#VSync
+	_vsync_mode_options_button.item_selected.connect(_on_vsync_mode_changed)
+	# Frame rate
+	_fps_slider.value_changed.connect(_on_fps_changed)
+
+
+func _update_video_settings() -> void:
 	var video_settings: Dictionary = SettingsManager.load_video_settings()
 	_old_video_settings = video_settings.duplicate()
 	_new_video_settings = video_settings.duplicate()
 	
 	# Display mode
 	_display_mode_options_button.selected = video_settings.display_mode
-	_display_mode_options_button.item_selected.connect(_on_display_mode_changed)
 	
 	#VSync
 	_vsync_mode_options_button.selected = video_settings.vsync_mode
-	_vsync_mode_options_button.item_selected.connect(_on_vsync_mode_changed)
 	
 	# Frame rate
 	var vsync_enabled: bool = _vsync_mode_options_button.selected == DisplayServer.VSYNC_ENABLED
 	_fps_slider.editable = not vsync_enabled
 	_fps_slider.value = video_settings.max_fps
-	_fps_slider.value_changed.connect(_on_fps_changed)
 	
 	_fps_value.text = str(int(video_settings.max_fps))
 
@@ -211,9 +235,6 @@ func _setup_video_settings() -> void:
 func _on_display_mode_changed(index: int) -> void:
 	_new_video_settings.display_mode = index
 	SettingsManager.set_display_mode(index)
-	
-	# Disable the apply button if the new and old values aren't matching
-	#_apply_button.disabled = _are_new_and_old_settings_matching()
 
 
 func _on_vsync_mode_changed(index: int) -> void:
@@ -225,24 +246,19 @@ func _on_vsync_mode_changed(index: int) -> void:
 		_fps_slider.editable = false
 	else:
 		_fps_slider.editable = true
-	
-	# Disable the apply button if the new and old values aren't matching
-	#_apply_button.disabled = _are_new_and_old_settings_matching()
 
 
 func _on_fps_changed(value: float) -> void:
 	_new_video_settings.max_fps = value
 	_fps_slider.value = value
 	_fps_value.text = str(int(value))
-	
-	# Disable the apply button if the new and old values aren't matching
-	#_apply_button.disabled = _are_new_and_old_settings_matching()
 
 #endregion
 
 
+#region Gameplay
+
 @export_group("Gameplay")
-@export var _allow_cpu_check_button: CheckButton
 @export var _cpu_amount_slider: HSlider
 @export var _cpu_amount_value: Label
 
@@ -254,30 +270,24 @@ var _new_gameplay_settings: Dictionary
 
 
 func _setup_gameplay_settings() -> void:
+	_update_gameplay_settings()
+	# Cpu amount
+	_cpu_amount_slider.value_changed.connect(_on_cpu_amount_changed)
+
+
+func _update_gameplay_settings() -> void:
 	var gameplay_settings: Dictionary = SettingsManager.load_gameplay_settings()
 	_old_gameplay_settings = gameplay_settings.duplicate()
 	_new_gameplay_settings = gameplay_settings.duplicate()
 	
-	# Allow cpus
-	var allow_cpus: bool = gameplay_settings.allow_cpus
-	_allow_cpu_check_button.button_pressed = allow_cpus
-	_allow_cpu_check_button.toggled.connect(_on_allow_cpus_check_button_toggled)
-	
 	# Cpu amount
-	_cpu_amount_slider.value = gameplay_settings.min_car_amount
-	_cpu_amount_value.text = str(gameplay_settings.min_car_amount)
-	_cpu_amount_slider.value_changed.connect(_on_cpu_amount_slider_value_changed)
-	
-	_cpu_amount_slider.editable = allow_cpus
+	_cpu_amount_slider.value = gameplay_settings.cpu_amount
+	_cpu_amount_value.text = str(gameplay_settings.cpu_amount)
 
 
-func _on_allow_cpus_check_button_toggled(toggled_on: bool) -> void:
-	_new_gameplay_settings.allow_cpus = toggled_on
-	_allow_cpu_check_button.button_pressed = toggled_on
-	_cpu_amount_slider.editable = toggled_on
-
-
-func _on_cpu_amount_slider_value_changed(value: float) -> void:
-	_new_gameplay_settings.min_car_amount = int(value)
+func _on_cpu_amount_changed(value: float) -> void:
+	_new_gameplay_settings.cpu_amount = int(value)
 	_cpu_amount_slider.value = value
 	_cpu_amount_value.text = str(int(value))
+
+#endregion

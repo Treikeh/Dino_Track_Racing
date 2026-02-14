@@ -1,16 +1,17 @@
 extends MarginContainer
 
 
+@export var _panel: PanelContainer
 @export var _item_list: Control
 
 
 func _ready() -> void:
-	hide()
+	_panel.hide()
 	_item_list.material.set("shader_parameter/scroll_speed", 0.0)
 
 
 func picked_up_item(item: ItemResource) -> void:
-	show()
+	_panel.show()
 	
 	var item_offset: float = 0.0
 	match item.name:
@@ -29,4 +30,4 @@ func picked_up_item(item: ItemResource) -> void:
 
 
 func used_item() -> void:
-	hide()
+	_panel.hide()

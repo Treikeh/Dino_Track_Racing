@@ -1,12 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://m2wbc1dhxton"]
+[gd_scene load_steps=13 format=3 uid="uid://m2wbc1dhxton"]
 
 [ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_fjb12"]
 [ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="2_j1d6l"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_ogjo6"]
+[ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="4_1lgak"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_ogjo6"]
+[ext_resource type="Texture2D" uid="uid://w27qonhcr8rt" path="res://entities/items/mine/art/mine_icon.png" id="5_5srox"]
+[ext_resource type="Texture2D" uid="uid://ba2ij7fnbp8e5" path="res://entities/items/lance/art/lance_icon.png" id="6_o6m73"]
+[ext_resource type="Texture2D" uid="uid://bvg6cmeagmxac" path="res://entities/items/homing_missile/art/missile_icon.png" id="7_dvl5a"]
+[ext_resource type="Texture2D" uid="uid://bltvplbcwaguh" path="res://entities/items/bomb/art/bomb_icon.png" id="8_6svv1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tiy0a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvl5a"]
 
 [node name="ControlsMenu" type="Control" node_paths=PackedStringArray("_tab_container")]
 layout_mode = 3
@@ -36,15 +43,19 @@ deselect_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Label" type="Label" parent="TabContainer/Controller"]
+[node name="Title" type="Label" parent="TabContainer/Controller"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -73.0
-offset_right = 73.0
-offset_bottom = 42.0
+offset_left = -175.0
+offset_right = 175.0
+offset_bottom = 69.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 30
 text = "Inputs"
@@ -73,18 +84,139 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="TabContainer/DriftTrick"]
+[node name="Title" type="Label" parent="TabContainer/DriftTrick"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -73.0
-offset_right = 73.0
-offset_bottom = 42.0
+offset_left = -270.0
+offset_right = 270.0
+offset_bottom = 69.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 30
 text = "Drift and Tricking"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/DriftTrick"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -369.0
+offset_top = -182.0
+offset_right = 369.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/DriftTrick/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Drifting" type="VBoxContainer" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 13
+text = "Drifting"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 13
+text = "Press [DRIFT BUTTON] while turning to initiate a drift.
+
+Release [DRIFT BUTTON] after 0.2 sec to get a speed boost."
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_1lgak")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "GIF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Tricking" type="VBoxContainer" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 13
+text = "Tricking"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 13
+text = "Press [TRICK BUTTON] when entering the air to perform a trick.
+
+Landig after performing a trick will give you a speed boost."
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_1lgak")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "GIF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -93,20 +225,211 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Label" type="Label" parent="TabContainer/Items"]
+[node name="Title" type="Label" parent="TabContainer/Items"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -73.0
-offset_right = 73.0
-offset_bottom = 42.0
+offset_left = -270.0
+offset_right = 270.0
+offset_bottom = 69.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 30
 text = "Items"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/Items"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -369.0
+offset_top = -182.0
+offset_right = 369.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Items/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Mine" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Mine"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("5_5srox")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Mine"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Mine:
+Placed behind
+Explodes on contact"
+autowrap_mode = 2
+
+[node name="Boost" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("5_5srox")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Boost:
+Large speed boost"
+autowrap_mode = 2
+
+[node name="Lance" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Lance"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("6_o6m73")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Lance"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Lance:
+Small speed boost
+Hits oponents on contact"
+autowrap_mode = 2
+
+[node name="MeteorRain" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("5_5srox")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Meteor Rain:
+Targets first player
+Makes it rain meteors"
+autowrap_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TrashBag" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("5_5srox")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Trash bag:
+Placed behind
+Hits oponent on contact"
+autowrap_mode = 2
+
+[node name="Missile" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Missile"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("7_dvl5a")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Missile"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Missile:
+Targets player infront
+Explodes on contact"
+autowrap_mode = 2
+
+[node name="Bomb" type="HBoxContainer" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Bomb"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("8_6svv1")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Bomb"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_fjb12")
+theme_override_font_sizes/font_size = 12
+text = "Bomb:
+Throw infront
+Explodes on contact"
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dvl5a")
 
 [node name="InputButtonsDisplayContainer" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -29,7 +29,7 @@ point_count = 13
 
 [node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
 script = ExtResource("1_us0s3")
-_lap_count = 1
+_lap_count = 2
 _countdown_duration = 0
 _track = NodePath("Track")
 _spawn_point = NodePath(".")

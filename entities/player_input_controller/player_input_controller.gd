@@ -2,6 +2,7 @@ extends Control
 class_name PlayerInputController
 ## This class in responsible for allowing a player to control a car
 
+
 @export_group("Car")
 @export var _cam_follow_speed: float = 6.0
 @export var _fov_lerp_speed: float = 2.5
@@ -48,7 +49,7 @@ func with_data(
 
 func _ready() -> void:
 	# Create new input actions (if they don't exist)
-	Globals.set_up_player_inputs(_player_id)
+	Globals.setup_player_inputs(_player_id)
 	
 	# Connect to car signals
 	#NOTE: Could also be in the with_data() function, but it looks nicer here
@@ -172,6 +173,7 @@ func _on_finished_all_laps(_car_id: int) -> void:
 	_add_cpu_controller()
 	_speedometer.hide()
 	_position_panel.hide()
+	_item_panel.hide()
 
 
 func _add_cpu_controller() -> void:

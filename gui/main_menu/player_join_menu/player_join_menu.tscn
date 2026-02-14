@@ -85,6 +85,6 @@ theme_override_constants/margin_bottom = 10
 
 [node name="ButtonDisplay" parent="JoinButtonDispaly" instance=ExtResource("3_was43")]
 layout_mode = 2
-_front_text = "Press"
+_front_text = ""
 _button_texture = ExtResource("2_22gan")
 _back_text = "to join"

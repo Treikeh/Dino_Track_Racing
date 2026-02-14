@@ -90,8 +90,7 @@ var players: Dictionary[int, float] = {
 	#65: 0.0,
 }
 
-var allow_cpus: bool = true
-var min_cars_ammount: int = 2
+var cpu_amount: int = 40
 
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
@@ -138,8 +137,21 @@ func _input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
+func set_allow_cursor(allow: bool) -> void:
+	_allow_cursor = allow
+	# Hide the cursor if it isn't allowed
+	if not allow:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _change_input_mode(input_mode: InputModes) -> void:
+	if _input_mode != input_mode:
+		_input_mode = input_mode
+		input_mode_changed.emit(input_mode)
+
+
 ## Crate new input actions for the player
-func set_up_player_inputs(player_id: int) -> void:
+func setup_player_inputs(player_id: int) -> void:
 	for action: String in INPUT_ACTIONS:
 		var new_action: String = action + str(player_id)
 		# Don't add the new action if it allready exists
@@ -155,16 +167,3 @@ func set_up_player_inputs(player_id: int) -> void:
 			var new_event: InputEvent = event.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
 			new_event.device = player_id
 			InputMap.action_add_event(new_action, new_event)
-
-
-func set_allow_cursor(allow: bool) -> void:
-	_allow_cursor = allow
-	# Hide the cursor if it isn't allowed
-	if not allow:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-
-func _change_input_mode(input_mode: InputModes) -> void:
-	if _input_mode != input_mode:
-		_input_mode = input_mode
-		input_mode_changed.emit(input_mode)

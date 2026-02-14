@@ -20,7 +20,7 @@ func with_data(id: int) -> PlayerJoinEntry:
 
 func _ready() -> void:
 	# Create input actions for this player
-	Globals.set_up_player_inputs(_player_id)
+	Globals.setup_player_inputs(_player_id)
 
 
 func _process(delta: float) -> void:

@@ -1,6 +1,9 @@
 extends Control
 
 
+const ENTRY_SCENE: PackedScene = preload("res://gui/level_ui/leaderboard/leaderboard_entry/leaderboard_entry.tscn")
+
+
 @export var _entry_container: Container
 @export var _start_focus_object: Control
 
@@ -22,25 +25,15 @@ func populate(__finished_cars: Dictionary[int, float]) -> void:
 		#var time_taken: float = _finished_cars[id]
 		var time_taken: float = Globals.players[id]
 		
-		# Add label to the leaderboard
-		var entry_label := Label.new()
-		_entry_container.add_child(entry_label)
-		entry_label.text = "Player %s: ------- %s" % [id + 1, _time_convert(snappedf(time_taken, 0.01))]
+		# Add an entry to the leaderboard
+		var entry: LeaderboardEntry = ENTRY_SCENE.instantiate().with_data(id, time_taken)
+		_entry_container.add_child(entry)
+		
 
 
 func _sort_player_time_taken(a: int, b: int) -> bool:
 	#return _finished_cars[a] < _finished_cars[b]
 	return Globals.players[a] < Globals.players[b]
-
-
-func _time_convert(time_in_sec: float) -> String:
-	var seconds: int = floori(time_in_sec) % 60
-	@warning_ignore("integer_division")
-	var minutes: int = (int(time_in_sec) / 60) % 60
-	@warning_ignore("integer_division")
-	var hours: int = (int(time_in_sec) / 60) / 60
-	var decimal: float = (time_in_sec - seconds) * 100
-	return "%02d:%02d:%02d.%02d" % [hours, minutes, seconds, floori(decimal)]
 
 
 func _on_replay_button_pressed() -> void:

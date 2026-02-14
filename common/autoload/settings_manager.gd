@@ -30,8 +30,7 @@ const DEFAULTS: Dictionary = {
 		"MAX_FPS": 60.0,
 	},
 	"GAMEPLAY": {
-		"ALLOW_CPUS": true,
-		"MIN_CAR_AMOUNT": 12,
+		"CPU_AMOUNT": 40,
 	},
 }
 
@@ -158,7 +157,6 @@ func apply_gameplay_settings() -> void:
 	if gameplay_settings.is_empty():
 		return
 	
-	Globals.allow_cpus = gameplay_settings.allow_cpus
-	Globals.min_cars_ammount = gameplay_settings.min_car_amount
+	Globals.cpu_amount = gameplay_settings.cpu_amount
 
 #endregion

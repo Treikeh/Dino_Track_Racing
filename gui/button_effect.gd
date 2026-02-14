@@ -30,7 +30,7 @@ func _on_mouse_entered(source: Control) -> void:
 func _on_focus_entered() -> void:
 	if _tween:
 		_tween.stop()
-	rotation_degrees = _rotation if randi() % 2 else _rotation
+	rotation_degrees = _rotation if randi() % 2 else -_rotation
 	_tween = create_tween()
 	_tween.set_trans(Tween.TRANS_BACK)
 	_tween.parallel().tween_property(self, "scale", Vector2.ONE * _focus_scale, _tween_duration)
@@ -41,7 +41,7 @@ func _on_focus_exited() -> void:
 	if _tween:
 		_tween.stop()
 	
-	rotation_degrees = _rotation if randi() % 2 else _rotation
+	rotation_degrees = _rotation if randi() % 2 else -_rotation
 	_tween = create_tween()
 	_tween.set_trans(Tween.TRANS_BACK)
 	_tween.tween_property(self, "scale", Vector2.ONE, _tween_duration)
