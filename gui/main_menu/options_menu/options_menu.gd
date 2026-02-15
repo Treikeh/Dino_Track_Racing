@@ -326,11 +326,13 @@ func _update_video_settings() -> void:
 
 func _on_display_mode_changed(index: int) -> void:
 	_new_video_settings.display_mode = index
+	_display_mode_options_button.selected = index
 	SettingsManager.set_display_mode(index)
 
 
 func _on_vsync_mode_changed(index: int) -> void:
 	_new_video_settings.vsync_mode = index
+	_vsync_mode_options_button.selected = index
 	SettingsManager.set_vsync_mode(index as DisplayServer.VSyncMode)
 	# Disable/Enable fps options if vsync is enabled
 	if index == DisplayServer.VSYNC_ENABLED:

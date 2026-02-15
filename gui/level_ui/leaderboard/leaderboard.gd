@@ -7,10 +7,9 @@ const ENTRY_SCENE: PackedScene = preload("res://gui/level_ui/leaderboard/leaderb
 @export var _entry_container: Container
 @export var _start_focus_object: Control
 
-#var _finished_cars: Dictionary[int, float]
 
 # Add all the entires to the leaderboard
-func populate(__finished_cars: Dictionary[int, float]) -> void:
+func populate() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_start_focus_object.grab_focus()
 	
@@ -25,10 +24,27 @@ func populate(__finished_cars: Dictionary[int, float]) -> void:
 		#var time_taken: float = _finished_cars[id]
 		var time_taken: float = Globals.players[id]
 		
-		# Add an entry to the leaderboard
-		var entry: LeaderboardEntry = ENTRY_SCENE.instantiate().with_data(id, time_taken)
-		_entry_container.add_child(entry)
-		
+		_add_entry.call_deferred(i, id, time_taken)
+
+
+func _add_entry(index: int, id: int, time_taken: float) -> void:
+	#TODO: Find a way to make the wait duration start slow and then ramp up
+	const WAIT_DURATION: float = 0.1
+	await get_tree().create_timer(WAIT_DURATION * index).timeout
+	
+	# Add an entry to the leaderboard
+	var entry: LeaderboardEntry = ENTRY_SCENE.instantiate().with_data(id, time_taken)
+	_entry_container.add_child(entry)
+	entry.pivot_offset = entry.size / 2.0
+	entry.scale = Vector2.ZERO
+	entry.rotation_degrees = -5.0 if randi()&1 else 5.0
+	
+	# Scale the entry up
+	const TWEEN_DURATION: float = 0.5
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property(entry, "scale", Vector2.ONE, 0.25)
+	tween.parallel().tween_property(entry, "rotation_degrees", 0.0, TWEEN_DURATION)
 
 
 func _sort_player_time_taken(a: int, b: int) -> bool:

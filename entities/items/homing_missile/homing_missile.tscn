@@ -59,6 +59,7 @@ _physics_body = NodePath("PhysicsBody")
 [node name="TrackFollow" type="PathFollow3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TrackFollow"]
+visible = false
 mesh = SubResource("BoxMesh_612hy")
 
 [node name="PhysicsBody" type="CharacterBody3D" parent="."]

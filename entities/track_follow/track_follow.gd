@@ -32,7 +32,8 @@ func _process(_delta: float) -> void:
 
 
 func _get_track_progress() -> float:
-	var local_pos: Vector3 = _car_controller.global_position * _track.global_transform
+	var local_pos: Vector3 = _track.to_local(_car_controller.global_position)
+	#NOTE: This is the most process intensive part of the game
 	var offset: float = _track_curve.get_closest_offset(local_pos)
 	return offset
 

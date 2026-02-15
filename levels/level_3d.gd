@@ -189,9 +189,6 @@ func _on_car_finished_all_laps(car_id: int) -> void:
 	if Globals.players.has(car_id):
 		Globals.players[car_id] = _race_duration
 	
-	_level_ui.finished_cars[car_id] = _race_duration
-	
-	
 	for i:int in Globals.players:
 		var track_follow: TrackFollow = _track_follows[i]
 		if not track_follow.all_laps_finished:

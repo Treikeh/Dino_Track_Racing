@@ -13,6 +13,7 @@ radius = 0.1
 script = ExtResource("1_ikht7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_ikht7")
 
 [node name="CheckpointCollision" type="Area3D" parent="."]

@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://du0rfhlkcibfd"]
+[gd_scene load_steps=5 format=3 uid="uid://du0rfhlkcibfd"]
 
 [ext_resource type="Script" uid="uid://dx3cbmx7ce6ai" path="res://gui/level_ui/leaderboard/leaderboard_entry/leaderboard_entry.gd" id="1_cpta0"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_8pscf"]
+[ext_resource type="AudioStream" uid="uid://b6cl4tnlan5ih" path="res://gui/level_ui/leaderboard/leaderboard_entry/audio/plip.wav" id="3_185e6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hglvs"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("3_185e6")
 
 [node name="LeaderboardEntry" type="PanelContainer" node_paths=PackedStringArray("_id_label", "_time_label")]
 offset_right = 339.0
@@ -29,6 +35,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_8pscf")
 text = "00:01:50"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_hglvs")
+autoplay = true
+bus = &"Effects"
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
