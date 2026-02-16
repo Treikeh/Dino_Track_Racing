@@ -48,6 +48,9 @@ func load_level(level_path: String) -> void:
 		push_error("ERROR: %s path is not a valid level" % level_path)
 		return
 	
+	# Stop all sounds
+	AudioWorld3d.stop_all_sounds()
+	
 	current_level_path = level_path
 	_loading_level = true
 	# Show the loading screen
@@ -55,6 +58,7 @@ func load_level(level_path: String) -> void:
 	await _loading_screen.fully_visible
 	
 	get_tree().paused = false
+	
 	# Remove old level
 	_unload_level()
 	# Add new level

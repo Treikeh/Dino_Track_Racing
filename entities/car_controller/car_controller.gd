@@ -76,8 +76,8 @@ var _trick_state: TrickState = TrickState.CAN_PERFORM
 @export var _trick_vfx: GPUParticles3D
 
 @export_group("Audio")
-#@export var _engine_sfx: AudioStreamPlayer3D
 @export var _engine_sfx_pitch_curve: Curve
+var base_priority: int = 1
 
 var throttle: float
 var turn_input: float
@@ -95,9 +95,8 @@ var _held_item: ItemResource
 @onready var _default_angular_damp: float = angular_damp
 
 
-func _ready() -> void:
+#func _ready() -> void:
 	#_ground_check.target_position.y = -(_rest_height + 0.1)
-	AudioWorld3d.play_sound_at_point(Sfx3D.Type.ENGINE, global_position)
 
 
 func _process(delta: float) -> void:
@@ -130,7 +129,9 @@ func _process(delta: float) -> void:
 		global_position = Vector3(0.0, 2.0, 0.0)
 		linear_velocity = Vector3.ZERO
 	
-	#_engine_sfx.pitch_scale = _engine_sfx_pitch_curve.sample(speed_khm)
+	var engine_pitch: float = _engine_sfx_pitch_curve.sample(speed_khm)
+	var priority: int = int(engine_pitch * 10.0)
+	AudioWorld3d.play_sound(Sfx3D.Type.ENGINE, global_position, base_priority + priority, engine_pitch)
 
 
 func _physics_process(delta: float) -> void:
@@ -309,7 +310,7 @@ func _perform_trick() -> void:
 	_mesh.play_trick_anim()
 	_trick_vfx.restart()
 	trick_performed.emit()
-	AudioWorld3d.play_sound_at_point(Sfx3D.Type.TRICK, global_position)
+	AudioWorld3d.play_sound(Sfx3D.Type.TRICK, global_position)
 
 
 func _start_trick_boost() -> void:

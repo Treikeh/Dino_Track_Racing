@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Sfx3D" load_steps=3 format=3 uid="uid://vrnilj0884ga"]
+
+[ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="1_ku1mu"]
+[ext_resource type="AudioStream" uid="uid://bkaanlkvqak51" path="res://entities/car_controller/audio/engine.ogg" id="2_3l3o3"]
+
+[resource]
+script = ExtResource("1_ku1mu")
+limit = 4
+volume = -5.0
+stream = ExtResource("2_3l3o3")
+metadata/_custom_type_script = "uid://lxow7d5fycpj"

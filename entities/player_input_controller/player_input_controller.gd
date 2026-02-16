@@ -54,6 +54,8 @@ func _ready() -> void:
 	# Connect to car signals
 	#NOTE: Could also be in the with_data() function, but it looks nicer here
 	_car_controller.item_picked_up.connect(_on_car_item_picked_up)
+	# Give sounds played by player cars a higher priority
+	_car_controller.base_priority = 10
 	
 	# Connect to trak follow signals
 	#NOTE: This could also be in the with_data() function

@@ -10,10 +10,12 @@ enum Type {
 
 @export var limit: int = 5
 @export var type: Type = Type.ENGINE
+@export var volume: float = 0.0
 @export var stream: AudioStream
 
-var _audio_count: int = 0
+var audio_count: int = 0
+var audio_pool: Array[AudioStreamPlayer3D] = []
 
 
 func has_space() -> bool:
-	return _audio_count < limit
+	return audio_count < limit
