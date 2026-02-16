@@ -16,7 +16,6 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_qn7dl")
 
 [sub_resource type="Environment" id="Environment_w8irb"]
-background_mode = 1
 background_color = Color(0.42186144, 0.5888606, 0.82232565, 1)
 sky = SubResource("Sky_22u7d")
 tonemap_mode = 2
@@ -66,7 +65,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917826, -0.127881, 0.00056532293, -0.12784556, 0.99159986, 0.019443396, -0.0030470681, 0.019211803, -0.99979025, -120.29342, -12.428657, -5.817641)
+transform = Transform3D(-0.9917826, -0.127881, 0.00056531973, -0.12784556, 0.99159986, 0.019443287, -0.0030470681, 0.019211803, -0.99978465, -120.29342, -12.428657, -5.817641)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]

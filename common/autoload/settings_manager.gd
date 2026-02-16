@@ -20,7 +20,7 @@ const DEBUG_PATH: String = "res://debug/"
 const FILE_NAME: String = "settings.ini"
 const DEFAULTS: Dictionary = {
 	"AUDIO": {
-		"MASTER_VOLUME": 0.75,
+		"MASTER_VOLUME": 1.0,
 		"EFFECTS_VOLUME": 1.0,
 		"MUSIC_VOLUME": 1.0,
 	},

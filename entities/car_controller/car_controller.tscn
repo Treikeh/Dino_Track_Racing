@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=30 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -9,17 +9,22 @@
 [ext_resource type="PackedScene" uid="uid://dpwrutkvsid1l" path="res://common/scenes/skid_marker/skid_marker.tscn" id="6_ucq23"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_nnry6"]
 [ext_resource type="Texture2D" uid="uid://wmuug41wcqhb" path="res://entities/car_controller/art/scooter_dino/dino_shadow.png" id="8_rk01o"]
+[ext_resource type="AudioStream" uid="uid://bkaanlkvqak51" path="res://entities/car_controller/audio/engine.ogg" id="10_64u7k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
 rough = true
 
+[sub_resource type="Curve" id="Curve_64u7k"]
+_limits = [0.0, 4.0, 0.0, 150.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(80, 2), 0.03401178, 0.03401178, 0, 0, Vector2(150, 3.5), -0.013310662, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hglhj"]
 height = 1.6
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_hglhj"]
-top_radius = 0.1
-bottom_radius = 0.1
+[sub_resource type="BoxShape3D" id="BoxShape3D_hglhj"]
+size = Vector3(0.7, 1, 1.6)
 
 [sub_resource type="Gradient" id="Gradient_ucq23"]
 offsets = PackedFloat32Array(0, 0.472, 0.836)
@@ -55,9 +60,6 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_ucq23"]
 material = SubResource("StandardMaterial3D_3xtfu")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hglhj"]
-size = Vector3(0.7, 1, 1.6)
-
 [sub_resource type="Gradient" id="Gradient_64u7k"]
 offsets = PackedFloat32Array(0, 0.808)
 colors = PackedColorArray(0.99999946, 0.9820798, 0.56994355, 1, 1, 1, 1, 1)
@@ -91,6 +93,11 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_nnry6"]
 material = SubResource("StandardMaterial3D_po1a6")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_64u7k"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("10_64u7k")
+
 [node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_front_skid_marker", "_back_skid_marker", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
 collision_layer = 2
 collision_mask = 35
@@ -100,33 +107,47 @@ center_of_mass = Vector3(0, -1, 0)
 linear_damp = 1.0
 angular_damp = 10.0
 script = ExtResource("1_v4h86")
+_max_turn_angle = null
+_rot_speed = null
 _accel_curve = ExtResource("2_po1a6")
 _turn_curve = ExtResource("3_nnry6")
 _drive_dir = NodePath("DriveDir")
 _ground_check = NodePath("GroundCheck")
 _rest_height = 0.8
 _spring_force = 125.0
+_spring_damping = null
 _min_drift_angle = 7.5
-_front_skid_marker = NodePath("ScooterDino_01_SK/WheelFront/FrontSkidMarker")
-_back_skid_marker = NodePath("ScooterDino_01_SK/WheelBack/BackSkidMarker")
+_max_drift_angle = null
+_sideways_dirft_force = null
+_min_drift_boost_duration = null
+_front_skid_marker = NodePath("VFX/WheelFront/FrontSkidMarker")
+_back_skid_marker = NodePath("VFX/WheelBack/BackSkidMarker")
+_trick_window_duration = null
+_trick_buffer_duration = null
 _trick_boost_curve = ExtResource("4_rk01o")
+_spin_out_duration = null
+_spin_out_revolutions = null
+_mesh_lerp_speed = null
 _mesh = NodePath("ScooterDino_01_SK")
-_drift_vfx = NodePath("ScooterDino_01_SK/WheelBack/DriftVFX")
-_trick_vfx = NodePath("TrickVFX")
+_drift_vfx = NodePath("VFX/WheelBack/DriftVFX")
+_trick_vfx = NodePath("VFX/TrickVFX")
+_engine_sfx_pitch_curve = SubResource("Curve_64u7k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_hglhj")
 
+[node name="DriveDir" type="Node3D" parent="."]
+
 [node name="GroundCheck" type="RayCast3D" parent="."]
 target_position = Vector3(0, -0.75, 0)
 
-[node name="DriveDir" type="Node3D" parent="."]
+[node name="Hitbox" parent="." instance=ExtResource("3_hglhj")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DriveDir"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -4.371139e-08, -1)
-visible = false
-mesh = SubResource("CylinderMesh_hglhj")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_hglhj")
+debug_color = Color(0, 1, 0, 0.41960785)
 
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.55, 0)
@@ -151,25 +172,33 @@ bones/17/rotation = Quaternion(0.9376451, 0.08803358, 0.008652924, -0.33615008)
 bones/18/rotation = Quaternion(-0.28507537, -0.0071642655, 0.1541601, 0.9459997)
 bones/19/rotation = Quaternion(0.12001612, 0.013198959, -0.059414174, 0.99090457)
 
-[node name="WheelFront" type="BoneAttachment3D" parent="ScooterDino_01_SK"]
-transform = Transform3D(1, -9.9286e-14, -1.1368684e-13, 1.1349686e-13, 0.9999998, 3.3727324e-07, 7.1054274e-14, -3.372731e-07, 0.9999996, 6.9851547e-10, 0.12303728, -0.5625001)
+[node name="VFX" type="Node3D" parent="."]
+
+[node name="ShadowCaster" parent="VFX" instance=ExtResource("7_nnry6")]
+_shadow_texture = ExtResource("8_rk01o")
+
+[node name="ShadowDecal" parent="VFX/ShadowCaster" index="0"]
+size = Vector3(2, 2, 2)
+
+[node name="WheelFront" type="BoneAttachment3D" parent="VFX"]
+transform = Transform3D(1.15, -1.1417889e-13, -1.3073986e-13, 1.3052138e-13, 1.1499997, 3.878642e-07, 8.1712415e-14, -3.8786405e-07, 1.1499995, 8.0329277e-10, -0.40850714, -0.64687514)
 bone_name = "wheel_F.001"
 bone_idx = 21
 use_external_skeleton = true
-external_skeleton = NodePath("../Skeleton3D")
+external_skeleton = NodePath("../../ScooterDino_01_SK/Skeleton3D")
 
-[node name="FrontSkidMarker" parent="ScooterDino_01_SK/WheelFront" instance=ExtResource("6_ucq23")]
+[node name="FrontSkidMarker" parent="VFX/WheelFront" instance=ExtResource("6_ucq23")]
 
-[node name="Node" type="Node" parent="ScooterDino_01_SK/WheelFront/FrontSkidMarker"]
+[node name="Node" type="Node" parent="VFX/WheelFront/FrontSkidMarker"]
 
-[node name="WheelBack" type="BoneAttachment3D" parent="ScooterDino_01_SK"]
-transform = Transform3D(1, -7.1054274e-15, -6.357303e-08, 2.1316282e-14, 0.99999994, -5.5577317e-15, 6.357301e-08, 0, 0.9999997, -4.656639e-10, 0.12303728, 0.43386912)
+[node name="WheelBack" type="BoneAttachment3D" parent="VFX"]
+transform = Transform3D(1.15, -8.171241e-15, -7.3108986e-08, 2.4513723e-14, 1.1499999, -6.3913913e-15, 7.3108964e-08, 0, 1.1499996, -5.3551347e-10, -0.40850717, 0.49894947)
 bone_name = "wheel_B.001"
 bone_idx = 22
 use_external_skeleton = true
-external_skeleton = NodePath("../Skeleton3D")
+external_skeleton = NodePath("../../ScooterDino_01_SK/Skeleton3D")
 
-[node name="DriftVFX" type="GPUParticles3D" parent="ScooterDino_01_SK/WheelBack"]
+[node name="DriftVFX" type="GPUParticles3D" parent="VFX/WheelBack"]
 transform = Transform3D(1.0000001, -2.1755113e-08, 5.977927e-08, -2.131601e-14, 0.9396926, 0.34202012, -6.3562766e-08, -0.34202027, 0.9396928, 1.0375516e-08, 0.015599847, 0.15577811)
 emitting = false
 amount = 6
@@ -180,16 +209,9 @@ transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_nnry6")
 draw_pass_1 = SubResource("QuadMesh_ucq23")
 
-[node name="BackSkidMarker" parent="ScooterDino_01_SK/WheelBack" instance=ExtResource("6_ucq23")]
+[node name="BackSkidMarker" parent="VFX/WheelBack" instance=ExtResource("6_ucq23")]
 
-[node name="Hitbox" parent="." instance=ExtResource("3_hglhj")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-shape = SubResource("BoxShape3D_hglhj")
-debug_color = Color(0, 1, 0, 0.41960785)
-
-[node name="TrickVFX" type="GPUParticles3D" parent="."]
+[node name="TrickVFX" type="GPUParticles3D" parent="VFX"]
 emitting = false
 lifetime = 0.6
 one_shot = true
@@ -200,14 +222,15 @@ transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_po1a6")
 draw_pass_1 = SubResource("QuadMesh_nnry6")
 
-[node name="ShadowCaster" parent="." instance=ExtResource("7_nnry6")]
-_shadow_texture = ExtResource("8_rk01o")
+[node name="SFX" type="Node3D" parent="."]
 
-[node name="ShadowDecal" parent="ShadowCaster" index="0"]
-size = Vector3(2, 2, 2)
+[node name="EngineSFX" type="AudioStreamPlayer3D" parent="SFX"]
+stream = SubResource("AudioStreamRandomizer_64u7k")
+volume_db = -4.0
+bus = &"Effects"
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]
 
 [editable path="ScooterDino_01_SK"]
-[editable path="ShadowCaster"]
+[editable path="VFX/ShadowCaster"]

@@ -69,9 +69,11 @@ func _spawn_players() -> void:
 		
 		# Set the spawn position of the car
 		car.global_position = _get_spawn_position(p)
-		print("Player id: %s" % p)
 	
 	await get_tree().process_frame
+	
+	# Update the audio listeners on the audio world 3d
+	AudioWorld3d.update_audio_listeners()
 	
 	for c: int in Globals.cpu_amount:
 		var cpu_id: int = player_count + c
@@ -81,7 +83,6 @@ func _spawn_players() -> void:
 		
 		# Set spawn position of car
 		car.global_position = _get_spawn_position(cpu_id)
-	
 	
 	# Fill the empty spaces with stuff. Could maybe add a cinematic camera that looks at different players
 	# Get how many rows the _viewports_container will have

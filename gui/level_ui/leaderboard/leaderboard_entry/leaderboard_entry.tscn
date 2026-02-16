@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dx3cbmx7ce6ai" path="res://gui/level_ui/leaderboard/leaderboard_entry/leaderboard_entry.gd" id="1_cpta0"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_8pscf"]
-[ext_resource type="AudioStream" uid="uid://b6cl4tnlan5ih" path="res://gui/level_ui/leaderboard/leaderboard_entry/audio/plip.wav" id="3_185e6"]
+[ext_resource type="AudioStream" uid="uid://djyvggwey8q0b" path="res://gui/level_ui/leaderboard/leaderboard_entry/audio/plip.ogg" id="3_185e6"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hglvs"]
 random_pitch = 1.2

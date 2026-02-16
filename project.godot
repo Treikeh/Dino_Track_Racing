@@ -25,6 +25,8 @@ config/size/mode=0
 Globals="*res://common/autoload/globals.gd"
 LevelManager="*res://common/autoload/level_manager.gd"
 SettingsManager="*res://common/autoload/settings_manager.gd"
+AudioWorld3d="*res://common/autoload/audio_world_3d/audio_world_3d.tscn"
+AudioWorldUi="*res://common/autoload/audio_world_ui/audio_world_ui.tscn"
 
 [display]
 
@@ -61,6 +63,7 @@ finish_line=""
 checkpoint=""
 track=""
 grass=""
+va_listener=""
 
 [input]
 
@@ -152,3 +155,4 @@ textures/default_filters/anisotropic_filtering_level=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 textures/decals/filter=2
 textures/light_projectors/filter=2
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

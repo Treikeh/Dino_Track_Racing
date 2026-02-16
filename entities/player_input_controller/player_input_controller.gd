@@ -68,6 +68,9 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	_scale_ui_elements()
+	
+	if _player_id != 0:
+		_add_cpu_controller()
 
 
 func _input(event: InputEvent) -> void:

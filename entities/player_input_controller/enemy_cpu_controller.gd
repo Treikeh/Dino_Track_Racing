@@ -4,7 +4,7 @@ class_name EnemyCpuController
 
 #var visual: Node3D
 
-var _can_drift: bool = true
+var _can_drift: bool = false
 var _is_drifting: bool = false
 #NOTE: In radians
 var _activate_drift_angle: float = 0.6
