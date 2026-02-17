@@ -2,15 +2,34 @@ extends Node
 class_name EnemyCpuController
 
 
+const MIN_DRIFT_ANGLE: float = 0.4
+const MAX_DRIFT_ANGLE: float = 0.8
+
+const MIN_DRIFT_DURATION: float = 1.0
+const MAX_DRIFT_DURATION: float = 1.5
+
+const MIN_DRIFT_COOLDOWN: float = 2.0
+const MAX_DRIFT_COOLDOWN: float = 4.0
+
+const MIN_USE_ITEM_CHANCE: int = 5
+const MAX_USE_ITEM_CHANCE: int = 20
+
+const MIN_USE_ITEM_TIME: float = 1.0
+const MAX_USE_ITEM_TIME: float = 2.0
+
 #var visual: Node3D
 
 var _can_drift: bool = false
 var _is_drifting: bool = false
+
 #NOTE: In radians
 var _activate_drift_angle: float = 0.6
 var _drift_duration: float = 1.25
-var _drift_time: float = 0.0
 var _drift_cooldown: float = 3.0
+var _use_item_chance: int = 10
+var _use_item_wait_time: float = 1.0
+
+var _drift_time: float = 0.0
 var _drift_cooldown_time: float = 0.0
 
 var _car_controller: CarController
@@ -31,10 +50,12 @@ func _ready() -> void:
 	#LevelManager.add_child(visual)
 	#visual.mesh = BoxMesh.new()
 	
+	_randomize_values()
+	
 	_use_item_timer = Timer.new()
 	add_child(_use_item_timer)
 	
-	_use_item_timer.wait_time = 1.0
+	_use_item_timer.wait_time = _use_item_wait_time
 	_use_item_timer.one_shot = false
 	
 	_use_item_timer.timeout.connect(_use_item)
@@ -71,5 +92,13 @@ func _process(_delta: float) -> void:
 
 func _use_item() -> void:
 	var chance: int = randi_range(0, 100)
-	if _car_controller._held_item and chance <= 10:
+	if _car_controller._held_item and chance <= _use_item_chance:
 		_car_controller.use_held_item()
+
+
+func _randomize_values() -> void:
+	_use_item_chance = randi_range(MIN_USE_ITEM_CHANCE, MAX_USE_ITEM_CHANCE)
+	_use_item_wait_time = randf_range(MIN_USE_ITEM_TIME, MAX_USE_ITEM_TIME)
+	_activate_drift_angle = randf_range(MIN_DRIFT_ANGLE, MAX_DRIFT_ANGLE)
+	_drift_duration = randf_range(MIN_DRIFT_DURATION, MAX_DRIFT_DURATION)
+	_drift_cooldown = randf_range(MIN_DRIFT_COOLDOWN, MAX_DRIFT_COOLDOWN)
