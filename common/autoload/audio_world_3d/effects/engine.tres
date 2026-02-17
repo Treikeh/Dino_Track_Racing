@@ -5,7 +5,6 @@
 
 [resource]
 script = ExtResource("1_ku1mu")
-limit = 4
 volume = -5.0
 stream = ExtResource("2_3l3o3")
 metadata/_custom_type_script = "uid://lxow7d5fycpj"

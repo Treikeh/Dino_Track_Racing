@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SfxUI" load_steps=2 format=3 uid="uid://b08kpaxdax2o5"]
+
+[ext_resource type="Script" uid="uid://cx5lnkyiwmvvw" path="res://common/autoload/audio_world_ui/sfx_ui.gd" id="1_fukgm"]
+
+[resource]
+script = ExtResource("1_fukgm")
+metadata/_custom_type_script = "uid://cx5lnkyiwmvvw"

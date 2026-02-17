@@ -19,6 +19,9 @@ const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 @export var _track: Path3D
 @export var _spawn_point: Node3D
 
+@export_group("SFX")
+@export var _background_music: AudioStreamPlayer
+
 var _race_active: bool = false
 # How long the race has lasted
 var _race_duration: float = 0.0
@@ -48,6 +51,17 @@ func _process(delta: float) -> void:
 	
 	if _race_active:
 		_race_duration += delta
+
+
+# Logic for how the positions (1st, 2nd, 3rd, etc..) of the cars should be sorted
+func _sort_positions(a: int, b: int) -> bool:
+	# Check if both track follows are on the same lap
+	if _track_follows[a].current_lap != _track_follows[b].current_lap:
+		# Compare the lap both cars are on
+		return _track_follows[a].current_lap > _track_follows[b].current_lap
+	else:
+		# Compare the progress of both cars when they're on the same lap
+		return _track_follows[a].progress > _track_follows[b].progress
 
 
 #region Spawning
@@ -170,19 +184,18 @@ func _on_countdown_timer_timeout(countdown_timer: Timer) -> void:
 		# Enable all cars
 		get_tree().call_group("car", "set_movement_state", CarController.MovementState.NORMAL)
 		_race_active = true
+		_start_background_music()
 	# Update UI to players
 	countdown_updated.emit(_countdown_duration)
 
 
-# Logic for how the positions (1st, 2nd, 3rd, etc..) of the cars should be sorted
-func _sort_positions(a: int, b: int) -> bool:
-	# Check if both track follows are on the same lap
-	if _track_follows[a].current_lap != _track_follows[b].current_lap:
-		# Compare the lap both cars are on
-		return _track_follows[a].current_lap > _track_follows[b].current_lap
-	else:
-		# Compare the progress of both cars when they're on the same lap
-		return _track_follows[a].progress > _track_follows[b].progress
+func _start_background_music() -> void:
+	_background_music.volume_db = -80.0
+	_background_music.play()
+	
+	# Fade the music in
+	var tween: Tween = create_tween()
+	tween.tween_property(_background_music, "volume_db", -10.0, 1.0)
 
 
 func _on_car_finished_all_laps(car_id: int) -> void:
@@ -195,12 +208,6 @@ func _on_car_finished_all_laps(car_id: int) -> void:
 		if not track_follow.all_laps_finished:
 			return
 	
-	# Check if all cars have completed the level
-	#for i: int in _track_follows:
-	#	# Exit out of the function if one of the players hasn't finished all the laps
-	#	if not _track_follows[i].all_laps_finished:
-	#		return
-	
 	_end_level()
 
 
@@ -209,6 +216,8 @@ func _end_level() -> void:
 		_race_active = false
 		_level_ui.on_race_ended()
 
+
+#region Util
 
 func get_id_from_car(car: CarController) -> int:
 	return _cars.find_key(car)
@@ -226,3 +235,5 @@ func get_car_from_id(id: int) -> CarController:
 func get_car_from_race_position(race_position: int) -> CarController:
 	var car_id: int = _car_positions[race_position]
 	return _track_follows[car_id]._car_controller
+
+#endregion

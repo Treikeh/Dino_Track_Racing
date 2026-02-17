@@ -4,15 +4,17 @@ class_name SfxUI
 
 enum Type {
 	SELECT,
+	ITEM_RECIVED,
 }
 
 
 @export var limit: int = 4
 @export var type: Type = Type.SELECT
+@export var volume: float = 0.0
 @export var stream: AudioStream
 
-var _audio_count: int = 0
+var audio_count: int = 0
 
 
 func has_space() -> bool:
-	return _audio_count < limit
+	return audio_count < limit

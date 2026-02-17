@@ -23,10 +23,14 @@ func picked_up_item(item: ItemResource) -> void:
 	
 	_item_list.material.set("shader_parameter/scroll_speed", 2.0 + item_offset)
 	
+	const TWEEN_DURATION: float = 1.0
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(_item_list.material, "shader_parameter/scroll_speed", item_offset, 1.0)
+	tween.tween_property(_item_list.material, "shader_parameter/scroll_speed", item_offset, TWEEN_DURATION)
+	
+	await get_tree().create_timer(TWEEN_DURATION - 0.3).timeout
+	AudioWorldUi.play_sound(SfxUI.Type.ITEM_RECIVED)
 
 
 func used_item() -> void:

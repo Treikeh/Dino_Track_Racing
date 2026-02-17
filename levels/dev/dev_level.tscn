@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dd51u4enoyits"]
+[gd_scene load_steps=12 format=3 uid="uid://dd51u4enoyits"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="3_vte50"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="4_3kek2"]
 [ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="6_vte50"]
+[ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="7_3kek2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,12 +28,13 @@ _data = {
 }
 point_count = 13
 
-[node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
+[node name="DevLevel" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_background_music")]
 script = ExtResource("1_us0s3")
 _lap_count = 2
 _countdown_duration = 0
 _track = NodePath("Track")
 _spawn_point = NodePath(".")
+_background_music = NodePath("SFX/BackgroundMusic")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)
@@ -105,3 +107,9 @@ material = ExtResource("2_4fi74")
 
 [node name="PalmTree_01_SM" parent="." instance=ExtResource("6_vte50")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.1, 10.7)
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_3kek2")
+volume_db = -10.0

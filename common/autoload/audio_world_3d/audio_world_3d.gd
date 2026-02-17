@@ -1,5 +1,5 @@
 extends AudioListener3D
-#CREDITS: Aarimous - https://www.youtube.com/watch?v=Egf2jgET3nQ
+#INSPIRATION: Aarimous - https://www.youtube.com/watch?v=Egf2jgET3nQ
 
 
 @export var _sound_effects: Array[Sfx3D] = []
@@ -14,22 +14,6 @@ var _sound_queue: Dictionary[Sfx3D.Type, Array] = {}
 func _ready() -> void:
 	for sound_effect: Sfx3D in _sound_effects:
 		_sound_effects_dict[sound_effect.type] = sound_effect
-	
-	## Pool all the sfx players
-	#for sound: Sfx3D.Type in _sound_effects_dict:
-		## Create a new array in of the sound type if it doesn't exist in the sound players
-		#if not _sound_players.has(sound):
-			#_sound_players.set(sound, [])
-		#
-		## Create a sound players up to the limit on the sound
-		#var sound_effect: Sfx3D = _sound_effects_dict[sound]
-		#for i: int in sound_effect.limit:
-			#var player := AudioStreamPlayer3D.new()
-			#add_child(player)
-			#player.finished.connect(_on_sfx_finished)
-			#
-			#player.stream = sound_effect.stream
-			#_sound_players[sound].append(player)
 
 
 func _process(_delta: float) -> void:
@@ -56,35 +40,6 @@ func stop_all_sounds() -> void:
 			child.queue_free()
 
 
-#func play_sound_at_point(sound: Sfx3D.Type, pos: Vector3) -> void:
-	#if _sound_effects_dict.has(sound):
-		#var sound_effect: Sfx3D = _sound_effects_dict[sound]
-		## Create audio source
-		#if sound_effect.has_space():
-			## Get the closest audio listener
-			#var listener: Node3D = _get_closest_listener(pos)
-			#var listener_pos: Vector3 = listener.global_position
-			#var listener_distance: float = listener_pos.distance_squared_to(pos)
-			#
-			## Check if the sound is too far away form the listener
-			#if listener_distance > 500.0:
-				#print("Sound too far away")
-				#return
-			#
-			#sound_effect.audio_count += 1
-			#
-			## Create new audio player
-			##TODO: Cache or pool the players
-			#var player := AudioStreamPlayer3D.new()
-			#add_child(player)
-			#player.finished.connect(_destroy_sfx_player.bind(sound_effect, player))
-			#
-			#var local_pos: Vector3 = pos - listener_pos
-			#player.stream = sound_effect.stream
-			#player.position = local_pos
-			#player.play()
-
-
 ## Play a sound that will be "attached" to a target. Every frame the sound will move to the target's
 ## position, but only if the priority is high enough. Priority is used to check if a sound should be
 ## continious, and it's priority.
@@ -95,7 +50,7 @@ func play_sound(sound: Sfx3D.Type, pos: Vector3, priority: int = 0, pitch: float
 		var listener_pos: Vector3 = listener.global_position
 		var listener_distance: float = listener_pos.distance_squared_to(pos)
 		# Check if the sound is too far away form the listener
-		if listener_distance > 500.0:
+		if listener_distance > 750.0:
 			#print("Sound too far away")
 			return
 		
@@ -117,41 +72,6 @@ func play_sound(sound: Sfx3D.Type, pos: Vector3, priority: int = 0, pitch: float
 		# Create new sound effects if the limit hasn't been reached
 		if sound_effect.has_space():
 			_create_sfx_player(sound_effect, local_pos, pitch)
-		
-		#return
-		## Check if the limit for the sound effect has been reached
-		#if _sound_players[sound].size() < sound_effect.limit:
-			## Get the closest audio listener
-			#var listener: Node3D = _get_closest_listener(pos)
-			#var listener_pos: Vector3 = listener.global_position
-			#var listener_distance: float = listener_pos.distance_squared_to(pos)
-			#
-			## Check if the sound is too far away form the listener
-			#if listener_distance > 500.0:
-				#print("Sound too far away")
-				#return
-			#
-			## Create and add audio player
-			#var player := AudioStreamPlayer3D.new()
-			#add_child(player)
-			#player.finished.connect(_on_sfx_finished.bind(sound, player))
-			#
-			#var local_pos: Vector3 = pos - listener_pos
-			#player.stream = sound_effect.stream
-			#player.position = local_pos
-			#player.play()
-			#
-			#_sound_players[sound].append(player)
-		#else:
-			## Create a new array in of the sound type if it doesn't exist in the sound queue
-			#if not _sound_queue.has(sound):
-				#_sound_queue.set(sound, [])
-			#
-			#var sound_data := AttachedSoundData.new()
-			#sound_data.priority = priority
-			#sound_data.position = pos
-			#
-			#_sound_queue[sound].append(sound_data)
 
 
 # Get the audio listener that is closest to the target position

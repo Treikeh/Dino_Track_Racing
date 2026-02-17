@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3pb86i3casvd"]
+[gd_scene load_steps=6 format=3 uid="uid://b3pb86i3casvd"]
 
 [ext_resource type="Script" uid="uid://cms12qc6n557g" path="res://common/autoload/audio_world_3d/audio_world_3d.gd" id="1_m7et2"]
 [ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="2_vmpet"]
 [ext_resource type="Resource" uid="uid://vrnilj0884ga" path="res://common/autoload/audio_world_3d/effects/engine.tres" id="3_l5t6t"]
 [ext_resource type="Resource" uid="uid://cod4w51u7qsh1" path="res://common/autoload/audio_world_3d/effects/trick.tres" id="4_k3j6j"]
+
+[sub_resource type="Environment" id="Environment_l5t6t"]
 
 [node name="AudioWorld3D" type="AudioListener3D"]
 current = true
@@ -12,3 +14,4 @@ _sound_effects = Array[ExtResource("2_vmpet")]([ExtResource("3_l5t6t"), ExtResou
 
 [node name="Camera3D" type="Camera3D" parent="."]
 cull_mask = 0
+environment = SubResource("Environment_l5t6t")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=15 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_mesh/track_01_sm.tscn" id="3_w8irb"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
 [ext_resource type="PackedScene" uid="uid://c7poo3o6yoe28" path="res://common/scenes/respawn_trigger.tscn" id="6_22u7d"]
+[ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="8_vnc2o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,10 +45,11 @@ point_count = 21
 [sub_resource type="BoxShape3D" id="BoxShape3D_rbhar"]
 size = Vector3(227.2, 10, 194.2)
 
-[node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point")]
+[node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_background_music")]
 script = ExtResource("1_qn7dl")
 _track = NodePath("Track")
 _spawn_point = NodePath("Track/FinishLine")
+_background_music = NodePath("SFX/BackgroundMusic")
 metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -65,7 +67,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.97535765, 0.2206013, 0, -0.22060174, 0.9753557, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9917826, -0.127881, 0.0005653188, -0.12784556, 0.99159986, 0.019443253, -0.0030470681, 0.019211803, -0.9997829, -120.29342, -12.428657, -5.817641)
+transform = Transform3D(-0.9917826, -0.127881, 0.00056531833, -0.12784556, 0.99159986, 0.019443238, -0.0030470681, 0.019211803, -0.9997821, -120.29342, -12.428657, -5.817641)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -131,3 +133,10 @@ _track = NodePath("../Track")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6, 0, 47.100002)
 shape = SubResource("BoxShape3D_rbhar")
 debug_color = Color(0.9882353, 0, 0, 1)
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_vnc2o")
+volume_db = -10.0
+bus = &"Music"
