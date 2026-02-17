@@ -120,6 +120,7 @@ func _process(delta: float) -> void:
 		var drift_turn_input: float = angle_diff * _drift_dir * turn_input
 		# Apply drift rotation
 		_drive_dir.rotation_degrees.y = (center_angle + drift_turn_input) * _drift_dir
+		AudioWorld3d.play_sound(Sfx3D.Type.DRIFT, global_position, base_priority, 0.5)
 	else:
 		# Normal turning
 		_drive_dir.rotation_degrees.y = _max_turn_angle * turn_input * _turn_curve.sample(speed_khm)

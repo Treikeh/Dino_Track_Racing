@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Sfx3D" load_steps=4 format=3 uid="uid://dtk4oymqhlyk2"]
+
+[ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="1_55k3x"]
+[ext_resource type="AudioStream" uid="uid://dv6ahe0aaiv6j" path="res://entities/car_controller/audio/drift.ogg" id="2_55k3x"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_55k3x"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("2_55k3x")
+
+[resource]
+script = ExtResource("1_55k3x")
+limit = 4
+type = 2
+volume = -15.0
+stream = SubResource("AudioStreamRandomizer_55k3x")
+metadata/_custom_type_script = "uid://lxow7d5fycpj"

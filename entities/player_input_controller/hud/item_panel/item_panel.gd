@@ -28,8 +28,6 @@ func picked_up_item(item: ItemResource) -> void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(_item_list.material, "shader_parameter/scroll_speed", item_offset, TWEEN_DURATION)
-	
-	await get_tree().create_timer(TWEEN_DURATION - 0.3).timeout
 	AudioWorldUi.play_sound(SfxUI.Type.ITEM_RECIVED)
 
 

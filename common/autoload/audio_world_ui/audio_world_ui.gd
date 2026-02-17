@@ -22,6 +22,7 @@ func play_sound(type: SfxUI.Type) -> void:
 			add_child(player)
 			player.finished.connect(_destroy_sfx.bind(sound_effect, player))
 			
+			player.bus = "Effects"
 			player.stream = sound_effect.stream
 			player.volume_db = sound_effect.volume
 			player.play()

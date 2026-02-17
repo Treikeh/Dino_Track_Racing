@@ -5,6 +5,7 @@ class_name Sfx3D
 enum Type {
 	ENGINE,
 	TRICK,
+	DRIFT,
 }
 
 

@@ -112,4 +112,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.1, 10.7)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("7_3kek2")
-volume_db = -10.0
+volume_db = -5.0
