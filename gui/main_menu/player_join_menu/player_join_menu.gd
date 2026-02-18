@@ -6,6 +6,7 @@ const PLAYER_JOIN_ENTRY_SCENE: PackedScene = preload("res://gui/main_menu/player
 
 @export var _player_display_grid: GridContainer
 @export var _start_game_progress_bar: Range
+@export var _engine_sfx: AudioStreamPlayer
 
 var _start_game_pressed: bool = false
 var _start_game_player_id: int = -1
@@ -56,6 +57,8 @@ func _add_player(player_id: int) -> void:
 	# Show start game progress bar when the first player joins
 	if not _start_game_progress_bar.visible:
 		_start_game_progress_bar.visible = true
+	
+	_engine_sfx.play()
 
 
 func _start_level() -> void:

@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf6kgm67m4shv"]
+[gd_scene load_steps=7 format=3 uid="uid://cf6kgm67m4shv"]
 
 [ext_resource type="Script" uid="uid://cvdcjdx25s2gh" path="res://gui/main_menu/player_join_menu/player_join_menu.gd" id="1_mb52c"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="2_22gan"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_was43"]
+[ext_resource type="AudioStream" uid="uid://bkaanlkvqak51" path="res://entities/car_controller/audio/engine.ogg" id="4_m4l3f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22gan"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_was43"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar")]
+[node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar", "_engine_sfx")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_mb52c")
 _player_display_grid = NodePath("VBoxContainer/PlayerDisplayGrid")
 _start_game_progress_bar = NodePath("VBoxContainer/StartProgressBar")
+_engine_sfx = NodePath("EngineSFX")
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 layout_mode = 1
@@ -60,11 +62,11 @@ anchor_bottom = 1.0
 offset_left = -174.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 10
 
 [node name="ButtonDisplay" parent="VBoxContainer/StartProgressBar/StartButtonDispaly" instance=ExtResource("3_was43")]
 layout_mode = 2
+alignment = 2
 _front_text = "Hold"
 _button_texture = ExtResource("2_22gan")
 _back_text = "to start"
@@ -88,3 +90,7 @@ layout_mode = 2
 _front_text = ""
 _button_texture = ExtResource("2_22gan")
 _back_text = "to join"
+
+[node name="EngineSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_m4l3f")
+max_polyphony = 4

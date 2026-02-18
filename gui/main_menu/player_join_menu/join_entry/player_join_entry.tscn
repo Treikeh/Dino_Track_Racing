@@ -39,7 +39,7 @@ render_target_update_mode = 4
 current = true
 fov = 45.0
 
-[node name="ScooterDino_01_SK" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_06t76")]
+[node name="ScooterDino_01_SK" parent="SubViewportContainer/SubViewport" groups=["va_listener"] instance=ExtResource("2_06t76")]
 transform = Transform3D(-0.8660253, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660253, 0, -0.8, -3)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport"]

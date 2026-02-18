@@ -21,6 +21,8 @@ func with_data(id: int) -> PlayerJoinEntry:
 func _ready() -> void:
 	# Create input actions for this player
 	Globals.setup_player_inputs(_player_id)
+	
+	AudioWorld3d.play_sound(Sfx3D.Type.ENGINE, _mesh.global_position, 1, 1.25)
 
 
 func _process(delta: float) -> void:
