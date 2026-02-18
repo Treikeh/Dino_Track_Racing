@@ -3,6 +3,7 @@ extends Node3D
 
 @export var _hover_speed: float = 1.0
 @export var _hover_height: float = 0.5
+@export var _rotation_speed: float = 30.0
 @export var _disabled_duration: float = 5.0
 @export var _items: Array[ItemResource] = []
 @export var _mesh_root: Node3D
@@ -20,7 +21,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Make the box move up and down
 	_time += delta
-	_mesh_root.position.y = 1.0 + (sin(_time * _hover_speed) * _hover_height)
+	_mesh_root.position.y = 1.25 + (sin(_time * _hover_speed) * _hover_height)
+	_mesh_root.rotation_degrees.y += _rotation_speed * delta
 
 
 func _give_car_random_item(car: CarController) -> void:

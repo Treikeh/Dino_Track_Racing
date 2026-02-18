@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dosd47fqh8thg"]
+[gd_scene load_steps=19 format=3 uid="uid://dosd47fqh8thg"]
 
 [ext_resource type="Script" uid="uid://r05j8taagghm" path="res://entities/item_box/item_box.gd" id="1_lk11n"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="2_ic5go"]
@@ -11,16 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_cienk"]
 [ext_resource type="Resource" uid="uid://difualdbs5ylv" path="res://entities/items/mine/mine.tres" id="8_cvxbj"]
 [ext_resource type="Resource" uid="uid://d10bdd7c0ndfl" path="res://entities/items/trash_bag/trash_bag.tres" id="9_kc1bj"]
+[ext_resource type="PackedScene" uid="uid://n2xpocjqusu2" path="res://entities/item_box/art/item_box_01_sm.glb" id="10_kwh0m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
 size = Vector3(1.5, 2, 1.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_hyb7p"]
-flip_faces = true
-size = Vector3(0.75, 0.75, 0.7)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic5go"]
-shading_mode = 0
 
 [sub_resource type="Curve" id="Curve_ic5go"]
 _data = [Vector2(0, 1), 0.0, -0.23650752, 0, 0, Vector2(1, 0), -2.5011203, 0.0, 0, 0]
@@ -66,12 +60,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_hyb7p")
 
 [node name="MeshRoot" type="Node3D" parent="."]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshRoot"]
-transform = Transform3D(0.70710677, 0.70710677, 0, -0.49999997, 0.49999997, -0.70710677, -0.49999997, 0.49999997, 0.70710677, 0, 0, 0)
-mesh = SubResource("BoxMesh_hyb7p")
-surface_material_override/0 = SubResource("StandardMaterial3D_ic5go")
+[node name="ItemBox_01_SM" parent="MeshRoot" instance=ExtResource("10_kwh0m")]
+transform = Transform3D(0.53033006, -0.53033006, 0, 0.53033006, 0.53033006, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="ShadowCaster" parent="MeshRoot" instance=ExtResource("7_cienk")]
 
