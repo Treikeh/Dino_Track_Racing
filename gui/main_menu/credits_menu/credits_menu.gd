@@ -58,6 +58,7 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
+	$AudioStreamPlayer.play()
 	var title_tween: Tween = create_tween()
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.set_ease(Tween.EASE_IN)

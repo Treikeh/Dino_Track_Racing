@@ -36,6 +36,7 @@ func _ready() -> void:
 
 func open_menu() -> void:
 	_start_button.grab_focus()
+	$AudioStreamPlayer.play()
 	
 	# Wait until the frame has finished processing to make the tween work properly
 	await get_tree().process_frame

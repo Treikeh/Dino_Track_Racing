@@ -4,11 +4,12 @@ class_name SfxUI
 
 enum Type {
 	SELECT,
+	PRESS,
 	ITEM_RECIVED,
 }
 
 
-@export var limit: int = 4
+@export var limit: int = 5
 @export var type: Type = Type.SELECT
 @export var volume: float = 0.0
 @export var stream: AudioStream

@@ -1,7 +1,15 @@
-[gd_resource type="Resource" script_class="SfxUI" load_steps=2 format=3 uid="uid://b08kpaxdax2o5"]
+[gd_resource type="Resource" script_class="SfxUI" load_steps=4 format=3 uid="uid://b08kpaxdax2o5"]
 
 [ext_resource type="Script" uid="uid://cx5lnkyiwmvvw" path="res://common/autoload/audio_world_ui/sfx_ui.gd" id="1_fukgm"]
+[ext_resource type="AudioStream" uid="uid://dm5npckfhhhgv" path="res://gui/audio/ui_select.ogg" id="2_1q7tt"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1q7tt"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("2_1q7tt")
 
 [resource]
 script = ExtResource("1_fukgm")
+volume = -3.0
+stream = SubResource("AudioStreamRandomizer_1q7tt")
 metadata/_custom_type_script = "uid://cx5lnkyiwmvvw"

@@ -11,7 +11,7 @@ func _ready() -> void:
 		_sound_effects_dict[sound_effect.type] = sound_effect
 
 
-func play_sound(type: SfxUI.Type) -> void:
+func play_sound(type: SfxUI.Type, pitch: float = 1.0) -> void:
 	if _sound_effects_dict.has(type):
 		var sound_effect: SfxUI = _sound_effects_dict[type]
 		# Create audio source
@@ -25,6 +25,7 @@ func play_sound(type: SfxUI.Type) -> void:
 			player.bus = "Effects"
 			player.stream = sound_effect.stream
 			player.volume_db = sound_effect.volume
+			player.pitch_scale = pitch
 			player.play()
 
 

@@ -28,6 +28,7 @@ func _on_mouse_entered(source: Control) -> void:
 
 
 func _on_focus_entered() -> void:
+	AudioWorldUi.play_sound(SfxUI.Type.SELECT, 1.5)
 	if _tween:
 		_tween.stop()
 	rotation_degrees = _rotation if randi() % 2 else -_rotation
@@ -49,6 +50,7 @@ func _on_focus_exited() -> void:
 
 
 func _on_button_down() -> void:
+	AudioWorldUi.play_sound(SfxUI.Type.PRESS, 1.25)
 	if _tween:
 		_tween.stop()
 	

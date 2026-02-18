@@ -121,6 +121,8 @@ func _process(delta: float) -> void:
 		# Apply drift rotation
 		_drive_dir.rotation_degrees.y = (center_angle + drift_turn_input) * _drift_dir
 		AudioWorld3d.play_sound(Sfx3D.Type.DRIFT, global_position, base_priority, 0.5)
+		#if _drift_time >= _min_drift_boost_duration:
+		#	AudioWorld3d.play_sound(Sfx3D.Type.DRIFT_CHARGE, global_position, base_priority, 0.5)
 	else:
 		# Normal turning
 		_drive_dir.rotation_degrees.y = _max_turn_angle * turn_input * _turn_curve.sample(speed_khm)
@@ -168,6 +170,7 @@ func _physics_process(delta: float) -> void:
 				# Show drift vfx when drift duration >= min drift boost duration
 				if _drift_time >= _min_drift_boost_duration and not _drift_vfx.emitting:
 					_drift_vfx.emitting = true
+					AudioWorld3d.play_sound(Sfx3D.Type.DRIFT_CHARGE, global_position)
 				# Stop drift if speed gets too low
 				if speed_khm <= 5.0:
 					stop_drift()
@@ -311,12 +314,13 @@ func _perform_trick() -> void:
 	_mesh.play_trick_anim()
 	_trick_vfx.restart()
 	trick_performed.emit()
-	AudioWorld3d.play_sound(Sfx3D.Type.TRICK, global_position)
+	AudioWorld3d.play_sound(Sfx3D.Type.TRICK, global_position, 0, 1.25)
 
 
 func _start_trick_boost() -> void:
 	_trick_boost_time = 0.0
 	_trick_state = TrickState.BOOSTING
+	AudioWorld3d.play_sound(Sfx3D.Type.DRIFT_BOOST, global_position, 0, 0.75)
 	trick_boost_started.emit()
 
 
