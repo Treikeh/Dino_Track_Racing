@@ -60,6 +60,8 @@ func open_menu() -> void:
 	
 	await get_tree().create_timer(TWEEN_DURATION / 2.0).timeout
 	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 1.1)
+	
 	var title_tween: Tween = create_tween()
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.set_ease(Tween.EASE_OUT)
@@ -89,6 +91,8 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 0.8)
+	
 	var title_tween: Tween = create_tween()
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.set_ease(Tween.EASE_IN)
@@ -168,6 +172,8 @@ func _setup_confirm_pop_up() -> void:
 
 
 func _show_confirm_pop_up() -> void:
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH)
+	
 	_confirm_pop_up.show()
 	_save_button.grab_focus()
 	
@@ -261,6 +267,7 @@ func _on_master_volume_changed(value: float) -> void:
 	_master_volume_slider.value = value
 	_master_volume_value.text = str(value)
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
+	AudioWorldUi.play_sound(SfxUI.Type.SELECT)
 
 
 func _on_effects_volume_changed(value: float) -> void:
@@ -268,6 +275,7 @@ func _on_effects_volume_changed(value: float) -> void:
 	_effects_volume_slider.value = value
 	_effects_volume_value.text = str(value)
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Effects"), value)
+	AudioWorldUi.play_sound(SfxUI.Type.SELECT)
 
 
 func _on_music_volume_changed(value: float) -> void:
@@ -275,6 +283,7 @@ func _on_music_volume_changed(value: float) -> void:
 	_music_volume_slider.value = value
 	_music_volume_value.text = str(value)
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
+	AudioWorldUi.play_sound(SfxUI.Type.SELECT)
 
 #endregion
 
@@ -328,6 +337,7 @@ func _on_display_mode_changed(index: int) -> void:
 	_new_video_settings.display_mode = index
 	_display_mode_options_button.selected = index
 	SettingsManager.set_display_mode(index)
+	AudioWorldUi.play_sound(SfxUI.Type.PRESS)
 
 
 func _on_vsync_mode_changed(index: int) -> void:
@@ -340,12 +350,14 @@ func _on_vsync_mode_changed(index: int) -> void:
 		_fps_slider.editable = false
 	else:
 		_fps_slider.editable = true
+	AudioWorldUi.play_sound(SfxUI.Type.PRESS)
 
 
 func _on_fps_changed(value: float) -> void:
 	_new_video_settings.max_fps = value
 	_fps_slider.value = value
 	_fps_value.text = str(int(value))
+	AudioWorldUi.play_sound(SfxUI.Type.SELECT)
 
 #endregion
 
@@ -383,5 +395,6 @@ func _on_cpu_amount_changed(value: float) -> void:
 	_new_gameplay_settings.cpu_amount = int(value)
 	_cpu_amount_slider.value = value
 	_cpu_amount_value.text = str(int(value))
+	AudioWorldUi.play_sound(SfxUI.Type.SELECT)
 
 #endregion

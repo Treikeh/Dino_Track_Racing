@@ -36,6 +36,8 @@ func open_menu() -> void:
 	
 	await get_tree().create_timer(TWEEN_DURATION / 2.0).timeout
 	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 1.1)
+	
 	var title_tween: Tween = create_tween()
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.set_ease(Tween.EASE_OUT)
@@ -58,7 +60,8 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
-	$AudioStreamPlayer.play()
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 0.8)
+	
 	var title_tween: Tween = create_tween()
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.set_ease(Tween.EASE_IN)

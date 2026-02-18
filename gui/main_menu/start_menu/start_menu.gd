@@ -36,10 +36,11 @@ func _ready() -> void:
 
 func open_menu() -> void:
 	_start_button.grab_focus()
-	$AudioStreamPlayer.play()
 	
 	# Wait until the frame has finished processing to make the tween work properly
 	await get_tree().process_frame
+	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 1.1)
 	
 	# Move buttons into the screen
 	for i: int in _buttons_container.get_child_count():
@@ -86,6 +87,8 @@ func open_menu() -> void:
 
 func close_menu(new_menu: int = 0) -> void:
 	menu_button_pressed.emit(new_menu)
+	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 0.8)
 	
 	# Move buttons out of screen
 	var child_count: int = _buttons_container.get_child_count()

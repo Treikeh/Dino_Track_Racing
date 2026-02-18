@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://8qb2kqenp4m0"]
+[gd_scene load_steps=7 format=3 uid="uid://8qb2kqenp4m0"]
 
 [ext_resource type="Script" uid="uid://cbfw0ndx1b4fi" path="res://common/autoload/audio_world_ui/audio_world_ui.gd" id="1_byda1"]
 [ext_resource type="Script" uid="uid://cx5lnkyiwmvvw" path="res://common/autoload/audio_world_ui/sfx_ui.gd" id="2_g2x6n"]
 [ext_resource type="Resource" uid="uid://bugsjwnnoa6cd" path="res://common/autoload/audio_world_ui/effects/item_recived.tres" id="3_he40d"]
 [ext_resource type="Resource" uid="uid://b08kpaxdax2o5" path="res://common/autoload/audio_world_ui/effects/select.tres" id="4_he40d"]
 [ext_resource type="Resource" uid="uid://00rgo6rk7svu" path="res://common/autoload/audio_world_ui/effects/press.tres" id="4_u7opl"]
+[ext_resource type="Resource" uid="uid://d1spdbm6kf8iq" path="res://common/autoload/audio_world_ui/effects/swoosh.tres" id="6_gbuyf"]
 
 [node name="AudioWorldUI" type="Node"]
 process_mode = 3
 script = ExtResource("1_byda1")
-_sound_effects = Array[ExtResource("2_g2x6n")]([ExtResource("4_he40d"), ExtResource("4_u7opl"), ExtResource("3_he40d")])
+_sound_effects = Array[ExtResource("2_g2x6n")]([ExtResource("4_he40d"), ExtResource("4_u7opl"), ExtResource("3_he40d"), ExtResource("6_gbuyf")])

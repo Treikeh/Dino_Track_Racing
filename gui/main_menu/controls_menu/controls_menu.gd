@@ -48,6 +48,8 @@ func open_menu() -> void:
 	# Add a small delay before closing the menu to avoid overlap with the main menu
 	await get_tree().create_timer(TWEEN_DURATION / 2.0).timeout
 	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 1.1)
+	
 	# Move the menu panel into the screen
 	var panel_tween: Tween = create_tween()
 	panel_tween.set_trans(Tween.TRANS_BACK)
@@ -67,6 +69,8 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH, 0.8)
+	
 	# Tween the panel to the right
 	var panel_tween: Tween = create_tween()
 	panel_tween.set_trans(Tween.TRANS_BACK)
@@ -125,6 +129,8 @@ func _show_right_tab() -> void:
 	tween.parallel().tween_property(next_tab, "position:x", 0.0, TWEEN_DURATION)
 	# Hide current tab when tween finishes
 	tween.tween_callback(current_tab.hide)
+	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH)
 
 
 func _show_left_tab() -> void:
@@ -143,6 +149,8 @@ func _show_left_tab() -> void:
 	tween.parallel().tween_property(next_tab, "position:x", 0.0, TWEEN_DURATION)
 	# Hide current tab when tween finishes
 	tween.tween_callback(current_tab.hide)
+	
+	AudioWorldUi.play_sound(SfxUI.Type.SWOOSH)
 
 
 func _update_current_tab_label() -> void:

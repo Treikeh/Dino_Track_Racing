@@ -6,6 +6,7 @@ enum Type {
 	SELECT,
 	PRESS,
 	ITEM_RECIVED,
+	SWOOSH,
 }
 
 
