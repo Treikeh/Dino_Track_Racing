@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://m2wbc1dhxton"]
+[gd_scene load_steps=15 format=3 uid="uid://m2wbc1dhxton"]
 
 [ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_fjb12"]
@@ -7,9 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="4_1lgak"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_ogjo6"]
 [ext_resource type="Texture2D" uid="uid://w27qonhcr8rt" path="res://entities/items/mine/art/mine_icon.png" id="5_5srox"]
+[ext_resource type="Texture2D" uid="uid://bo2sfdtuppdy2" path="res://entities/items/boost/art/boost_icon.png" id="6_3adlm"]
 [ext_resource type="Texture2D" uid="uid://ba2ij7fnbp8e5" path="res://entities/items/lance/art/lance_icon.png" id="6_o6m73"]
+[ext_resource type="Texture2D" uid="uid://c838vhsh4l1ae" path="res://entities/items/trash_bag/art/trash_bag_icon.png" id="7_6svv1"]
 [ext_resource type="Texture2D" uid="uid://bvg6cmeagmxac" path="res://entities/items/homing_missile/art/missile_icon.png" id="7_dvl5a"]
 [ext_resource type="Texture2D" uid="uid://bltvplbcwaguh" path="res://entities/items/bomb/art/bomb_icon.png" id="8_6svv1"]
+[ext_resource type="Texture2D" uid="uid://0i40qsp435nt" path="res://entities/items/meteor_rain/art/meteor_rain_icon.png" id="8_mck02"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvl5a"]
 
@@ -35,6 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Controller" type="Control" parent="PanelRoot"]
+visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -218,7 +222,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Items" type="Control" parent="PanelRoot"]
-visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -300,7 +303,7 @@ size_flags_vertical = 3
 [node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("5_5srox")
+texture = ExtResource("6_3adlm")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost"]
@@ -341,7 +344,7 @@ size_flags_vertical = 3
 [node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("5_5srox")
+texture = ExtResource("8_mck02")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain"]
@@ -368,7 +371,7 @@ size_flags_vertical = 3
 [node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("5_5srox")
+texture = ExtResource("7_6svv1")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag"]

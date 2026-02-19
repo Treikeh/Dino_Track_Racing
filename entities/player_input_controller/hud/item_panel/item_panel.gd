@@ -13,13 +13,16 @@ func _ready() -> void:
 func picked_up_item(item: ItemResource) -> void:
 	_panel.show()
 	
-	var item_offset: float = 0.0
+	var item_offset: float = 0.143
 	match item.name:
-		"Lance": item_offset = 0.0
-		"Bomb": item_offset = 0.25
-		"Mine": item_offset = 0.5
-		"Missile": item_offset = 0.75
-		_: item_offset = 0.33
+		"Lance": item_offset *= 0
+		"Bomb": item_offset *= 1
+		"Mine": item_offset *= 2
+		"Missile": item_offset *= 3
+		"Trash Bag": item_offset *= 4
+		"Boost": item_offset *= 5
+		"Meteor Rain": item_offset *= 6
+		_: item_offset = 0.5
 	
 	_item_list.material.set("shader_parameter/scroll_speed", 2.0 + item_offset)
 	
