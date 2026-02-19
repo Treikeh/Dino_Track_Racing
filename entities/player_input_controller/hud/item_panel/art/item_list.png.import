@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwfkhxvk3140g"
 path.bptc="res://.godot/imported/item_list.png-5ab962b4fc9c850dfa0d4df9b0fbeae3.bptc.ctex"
+path.astc="res://.godot/imported/item_list.png-5ab962b4fc9c850dfa0d4df9b0fbeae3.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://entities/player_input_controller/hud/item_panel/art/item_list.png"
-dest_files=["res://.godot/imported/item_list.png-5ab962b4fc9c850dfa0d4df9b0fbeae3.bptc.ctex"]
+dest_files=["res://.godot/imported/item_list.png-5ab962b4fc9c850dfa0d4df9b0fbeae3.bptc.ctex", "res://.godot/imported/item_list.png-5ab962b4fc9c850dfa0d4df9b0fbeae3.astc.ctex"]
 
 [params]
 

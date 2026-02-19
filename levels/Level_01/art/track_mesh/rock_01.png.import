@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dw0y8g3v0p6po"
 path.s3tc="res://.godot/imported/rock_01.png-8b1f805ab2a0d036028dcb5d896fb107.s3tc.ctex"
+path.etc2="res://.godot/imported/rock_01.png-8b1f805ab2a0d036028dcb5d896fb107.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://levels/Level_01/art/track_mesh/rock_01.png"
-dest_files=["res://.godot/imported/rock_01.png-8b1f805ab2a0d036028dcb5d896fb107.s3tc.ctex"]
+dest_files=["res://.godot/imported/rock_01.png-8b1f805ab2a0d036028dcb5d896fb107.s3tc.ctex", "res://.godot/imported/rock_01.png-8b1f805ab2a0d036028dcb5d896fb107.etc2.ctex"]
 
 [params]
 

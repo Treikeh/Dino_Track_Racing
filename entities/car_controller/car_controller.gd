@@ -129,8 +129,9 @@ func _process(delta: float) -> void:
 	
 	# Respawn
 	if (global_position.y < -100.0):
-		global_position = Vector3(0.0, 2.0, 0.0)
-		linear_velocity = Vector3.ZERO
+		respawn()
+		#global_position = Vector3(0.0, 2.0, 0.0)
+		#linear_velocity = Vector3.ZERO
 	
 	var engine_pitch: float = _engine_sfx_pitch_curve.sample(speed_khm)
 	var priority: int = int(engine_pitch * 10.0)
@@ -384,3 +385,24 @@ func _on_hitbox_invulnerability_ended() -> void:
 	angular_damp = _default_angular_damp
 
 #endregion
+
+
+func respawn() -> void:
+# Disable movement
+	set_movement_state(CarController.MovementState.DISABLED)
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	linear_velocity = Vector3.ZERO
+	
+	var track: Path3D = LevelManager.current_level._track
+	var local_pos: Vector3 = last_ground_pos * track.global_transform
+	var closest_track_point: Vector3 = track.curve.get_closest_point(local_pos)
+	var respawn_point: Vector3 = closest_track_point + Vector3(0.0, 5.0, 0.0)
+	
+	var tween: Tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "global_position", respawn_point, 1.5)
+	
+	set_movement_state(CarController.MovementState.NORMAL)

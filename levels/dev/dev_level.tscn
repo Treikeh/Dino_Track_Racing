@@ -19,6 +19,7 @@ sky_material = SubResource("ProceduralSkyMaterial_h2yge")
 background_mode = 2
 sky = SubResource("Sky_f5j8r")
 tonemap_mode = 2
+tonemap_white = 2.0
 
 [sub_resource type="Curve3D" id="Curve3D_h2yge"]
 closed = true

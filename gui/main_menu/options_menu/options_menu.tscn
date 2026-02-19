@@ -189,7 +189,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_g635g")
-text = "Fps:"
+text = "Fps limit"
 
 [node name="FpsSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
 layout_mode = 2
@@ -229,7 +229,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_g635g")
-text = "Master Volume: "
+text = "Master Volume"
 vertical_alignment = 1
 
 [node name="EffectsVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names"]
@@ -237,7 +237,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_g635g")
-text = "Effects Volume: "
+text = "Effects Volume"
 vertical_alignment = 1
 
 [node name="MusicVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names"]
@@ -245,7 +245,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_g635g")
-text = "Music Volume: "
+text = "Music Volume"
 vertical_alignment = 1
 
 [node name="Sliders" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer"]

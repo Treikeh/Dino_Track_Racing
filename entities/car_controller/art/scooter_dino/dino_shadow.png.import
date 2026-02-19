@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://wmuug41wcqhb"
 path.s3tc="res://.godot/imported/dino_shadow.png-3715a8c8db6689adedd2b9c8edcd19ef.s3tc.ctex"
+path.etc2="res://.godot/imported/dino_shadow.png-3715a8c8db6689adedd2b9c8edcd19ef.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://entities/car_controller/art/scooter_dino/dino_shadow.png"
-dest_files=["res://.godot/imported/dino_shadow.png-3715a8c8db6689adedd2b9c8edcd19ef.s3tc.ctex"]
+dest_files=["res://.godot/imported/dino_shadow.png-3715a8c8db6689adedd2b9c8edcd19ef.s3tc.ctex", "res://.godot/imported/dino_shadow.png-3715a8c8db6689adedd2b9c8edcd19ef.etc2.ctex"]
 
 [params]
 

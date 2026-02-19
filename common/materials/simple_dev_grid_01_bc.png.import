@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://lpw5jfhmrsd0"
 path.s3tc="res://.godot/imported/simple_dev_grid_01_bc.png-25fa09c675d2661ef7fe1f0debc6fad8.s3tc.ctex"
+path.etc2="res://.godot/imported/simple_dev_grid_01_bc.png-25fa09c675d2661ef7fe1f0debc6fad8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://common/materials/simple_dev_grid_01_bc.png"
-dest_files=["res://.godot/imported/simple_dev_grid_01_bc.png-25fa09c675d2661ef7fe1f0debc6fad8.s3tc.ctex"]
+dest_files=["res://.godot/imported/simple_dev_grid_01_bc.png-25fa09c675d2661ef7fe1f0debc6fad8.s3tc.ctex", "res://.godot/imported/simple_dev_grid_01_bc.png-25fa09c675d2661ef7fe1f0debc6fad8.etc2.ctex"]
 
 [params]
 

@@ -75,6 +75,35 @@ text = "Game made by Treikeh"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Music" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_pnibf")
+text = "MUSIC:
+Created by "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundEffects" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_pnibf")
+text = "SOUND EFFECTS:
+All sound effects are licensed under
+Creative Commons - CC0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Font" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
@@ -88,21 +117,6 @@ text = "FONT:
 Press Start 2P by cody@zone38.net
 licensed under the SIL Open Font License
 Version 1.1."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Audio" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("2_pnibf")
-text = "Audio:
-All audio is licensed under
-Creative Commons  - CC0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqw33ahr5j5l1"
 path.bptc="res://.godot/imported/bomb_01_bc.png-717bf4eb0604ece6b6cd748ff3a618d3.bptc.ctex"
+path.astc="res://.godot/imported/bomb_01_bc.png-717bf4eb0604ece6b6cd748ff3a618d3.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://entities/items/bomb/art/bomb_01_bc.png"
-dest_files=["res://.godot/imported/bomb_01_bc.png-717bf4eb0604ece6b6cd748ff3a618d3.bptc.ctex"]
+dest_files=["res://.godot/imported/bomb_01_bc.png-717bf4eb0604ece6b6cd748ff3a618d3.bptc.ctex", "res://.godot/imported/bomb_01_bc.png-717bf4eb0604ece6b6cd748ff3a618d3.astc.ctex"]
 
 [params]
 

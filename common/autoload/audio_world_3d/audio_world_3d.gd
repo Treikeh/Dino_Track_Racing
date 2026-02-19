@@ -27,6 +27,7 @@ func  update_audio_listeners() -> void:
 
 func stop_all_sounds() -> void:
 	_sound_queue.clear()
+	_virtual_audio_listeners.clear()
 	# Reset sound effects
 	for sound: Sfx3D.Type in _sound_effects_dict:
 		var sound_effect: Sfx3D = _sound_effects_dict[sound]

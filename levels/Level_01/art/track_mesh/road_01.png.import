@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc2laxv2hlpru"
 path.s3tc="res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.s3tc.ctex"
+path.etc2="res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://levels/Level_01/art/track_mesh/road_01.png"
-dest_files=["res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.s3tc.ctex"]
+dest_files=["res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.s3tc.ctex", "res://.godot/imported/road_01.png-b6a1f33a338553dd05cded29b5af9e9f.etc2.ctex"]
 
 [params]
 

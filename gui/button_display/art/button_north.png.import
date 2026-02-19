@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7pof1sf4hcd1"
 path.s3tc="res://.godot/imported/button_north.png-dadfae53858f0becc9554c2c235c7942.s3tc.ctex"
+path.etc2="res://.godot/imported/button_north.png-dadfae53858f0becc9554c2c235c7942.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://gui/button_display/art/button_north.png"
-dest_files=["res://.godot/imported/button_north.png-dadfae53858f0becc9554c2c235c7942.s3tc.ctex"]
+dest_files=["res://.godot/imported/button_north.png-dadfae53858f0becc9554c2c235c7942.s3tc.ctex", "res://.godot/imported/button_north.png-dadfae53858f0becc9554c2c235c7942.etc2.ctex"]
 
 [params]
 

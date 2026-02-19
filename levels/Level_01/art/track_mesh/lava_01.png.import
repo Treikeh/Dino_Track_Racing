@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2q7eam6kvtin"
 path.s3tc="res://.godot/imported/lava_01.png-587bd2e23f1d8bb700716e08e7ccd377.s3tc.ctex"
+path.etc2="res://.godot/imported/lava_01.png-587bd2e23f1d8bb700716e08e7ccd377.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://levels/Level_01/art/track_mesh/lava_01.png"
-dest_files=["res://.godot/imported/lava_01.png-587bd2e23f1d8bb700716e08e7ccd377.s3tc.ctex"]
+dest_files=["res://.godot/imported/lava_01.png-587bd2e23f1d8bb700716e08e7ccd377.s3tc.ctex", "res://.godot/imported/lava_01.png-587bd2e23f1d8bb700716e08e7ccd377.etc2.ctex"]
 
 [params]
 

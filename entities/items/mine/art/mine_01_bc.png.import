@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp8jkvtulg2gq"
 path.bptc="res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.bptc.ctex"
+path.astc="res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://entities/items/mine/art/mine_01_bc.png"
-dest_files=["res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.bptc.ctex"]
+dest_files=["res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.bptc.ctex", "res://.godot/imported/mine_01_bc.png-88f5561901e6ff6bdfc993e1d71ca0b1.astc.ctex"]
 
 [params]
 

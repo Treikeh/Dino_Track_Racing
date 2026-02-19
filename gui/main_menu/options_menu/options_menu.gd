@@ -354,9 +354,10 @@ func _on_vsync_mode_changed(index: int) -> void:
 
 
 func _on_fps_changed(value: float) -> void:
-	_new_video_settings.max_fps = value
+	var int_value: int = roundi(value)
+	_new_video_settings.max_fps = int_value
 	_fps_slider.value = value
-	_fps_value.text = str(int(value))
+	_fps_value.text = str(int_value)
 	AudioWorldUi.play_sound(SfxUI.Type.SELECT)
 
 #endregion

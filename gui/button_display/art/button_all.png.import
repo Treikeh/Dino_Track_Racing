@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvknn2scdga24"
 path.s3tc="res://.godot/imported/button_all.png-17c6d012b31a75f1ce6266ff7e3c2e15.s3tc.ctex"
+path.etc2="res://.godot/imported/button_all.png-17c6d012b31a75f1ce6266ff7e3c2e15.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://gui/button_display/art/button_all.png"
-dest_files=["res://.godot/imported/button_all.png-17c6d012b31a75f1ce6266ff7e3c2e15.s3tc.ctex"]
+dest_files=["res://.godot/imported/button_all.png-17c6d012b31a75f1ce6266ff7e3c2e15.s3tc.ctex", "res://.godot/imported/button_all.png-17c6d012b31a75f1ce6266ff7e3c2e15.etc2.ctex"]
 
 [params]
 
