@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxvndtfus24sx"]
+[gd_scene load_steps=12 format=3 uid="uid://bxvndtfus24sx"]
 
 [ext_resource type="Script" uid="uid://bggo4nj7q34p3" path="res://entities/items/trash_bag/trash_bag.gd" id="1_2n4p8"]
 [ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="3_5tg5q"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="3_wl078"]
+[ext_resource type="Texture2D" uid="uid://c838vhsh4l1ae" path="res://entities/items/trash_bag/art/trash_bag_icon.png" id="4_3b7ey"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vue83"]
 radius = 0.8
@@ -10,10 +11,51 @@ radius = 0.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_hht6s"]
 radius = 0.9
 
-[node name="TrashBag" type="Node3D" node_paths=PackedStringArray("_physics_body", "_hurtbox")]
+[sub_resource type="Curve" id="Curve_3b7ey"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9920635, 0), -3.2527077, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b8a0o"]
+width = 64
+curve = SubResource("Curve_3b7ey")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5tg5q"]
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -360.0
+angle_max = 360.00003
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_min = 0.75
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_b8a0o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8a0o"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_3b7ey")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_3b7ey"]
+material = SubResource("StandardMaterial3D_b8a0o")
+
+[node name="TrashBag" type="Node3D" node_paths=PackedStringArray("_physics_body", "_hurtbox", "_mesh", "_destroy_vfx")]
 script = ExtResource("1_2n4p8")
 _physics_body = NodePath("PhysicsBody")
 _hurtbox = NodePath("PhysicsBody/Hurtbox")
+_mesh = NodePath("PhysicsBody/TrashBag_01_SM")
+_destroy_vfx = NodePath("PhysicsBody/DestroyVFX")
 metadata/_custom_type_script = "uid://751u1m35fd72"
 
 [node name="PhysicsBody" type="CharacterBody3D" parent="."]
@@ -32,4 +74,13 @@ debug_color = Color(1, 0, 0, 0.41960785)
 [node name="TrashBag_01_SM" parent="PhysicsBody" instance=ExtResource("3_5tg5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.041709185, 0)
 
+[node name="DestroyVFX" type="GPUParticles3D" parent="PhysicsBody"]
+emitting = false
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.71
+process_material = SubResource("ParticleProcessMaterial_5tg5q")
+draw_pass_1 = SubResource("QuadMesh_3b7ey")
+
 [connection signal="hit_hitbox" from="PhysicsBody/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]
+[connection signal="finished" from="PhysicsBody/DestroyVFX" to="." method="_on_destroy_vfx_finished"]

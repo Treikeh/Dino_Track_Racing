@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpvtkidb6kwbq" path="res://entities/items/lance/lance.gd" id="1_fw5ah"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_jmxmm"]
+[ext_resource type="PackedScene" uid="uid://kcep0aaja0fb" path="res://entities/items/lance/art/lance_01_sm.tscn" id="3_py646"]
 
 [sub_resource type="Curve" id="Curve_jmxmm"]
 _limits = [0.0, 50.0, 50.0, 110.0]
@@ -9,11 +10,7 @@ _data = [Vector2(77.52941, 43.5681), 0.0, 0.2450251, 0, 0, Vector2(110, 13.30035
 point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_py646"]
-height = 2.5
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jmxmm"]
-radius = 0.25
-height = 2.5
+height = 3.0
 
 [node name="Lance" type="Node3D" node_paths=PackedStringArray("_hurtbox")]
 script = ExtResource("1_fw5ah")
@@ -22,16 +19,15 @@ _speed_boost_curve = SubResource("Curve_jmxmm")
 metadata/_custom_type_script = "uid://751u1m35fd72"
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_jmxmm")]
-transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 0.2, 0.40000004, 0)
+transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 0.2, 0.6000001, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -1.25)
+transform = Transform3D(1, 0, 3.996803e-15, 0, -4.371139e-08, 1, 0, -1, -4.371177e-08, 0, 0, -1.5)
 shape = SubResource("CapsuleShape3D_py646")
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.371139e-09, -1.15)
-mesh = SubResource("CapsuleMesh_jmxmm")
+[node name="Lance_01_SM" parent="Hurtbox" instance=ExtResource("3_py646")]
+transform = Transform3D(1, 0, 9.934108e-09, 0, 1, 0, -9.934108e-09, 0, 1, 0.017431155, 0, -0.19923893)
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 4.0

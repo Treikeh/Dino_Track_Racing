@@ -3,6 +3,8 @@ extends Item3D
 
 @export var _physics_body: CharacterBody3D
 @export var _hurtbox: Hurtbox
+@export var _mesh: Node3D
+@export var _destroy_vfx: GPUParticles3D
 
 
 func _ready() -> void:
@@ -22,4 +24,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurtbox_hit_hitbox(_hitbox: Hitbox) -> void:
+	_mesh.hide()
+	_destroy_vfx.restart()
+	_hurtbox.set_monitoring.call_deferred(false)
+
+
+func _on_destroy_vfx_finished() -> void:
 	queue_free()

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dy68fb657e0vm"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_epen3"]
+[ext_resource type="Texture2D" uid="uid://528jyg6yopgc" path="res://entities/items/lance/art/lance_01_bc.png" id="2_sieye"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_epen3")
+shader_parameter/color_texture = ExtResource("2_sieye")
