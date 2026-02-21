@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_vj281")
 name = "Trash Bag"
+rarity = 14
 icon = ExtResource("1_hw1rq")
-rarity = 13
 scene = ExtResource("2_hw1rq")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"
