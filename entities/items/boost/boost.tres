@@ -7,7 +7,8 @@
 [resource]
 script = ExtResource("3_7c4g7")
 name = "Boost"
-icon = ExtResource("1_q7fw4")
 rarity = 8
+min_positoin = 3
+icon = ExtResource("1_q7fw4")
 scene = ExtResource("2_q7fw4")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"

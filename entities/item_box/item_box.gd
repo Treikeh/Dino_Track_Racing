@@ -34,9 +34,14 @@ func _give_car_random_item(car: CarController) -> void:
 	# Get the random value that the item is at
 	var item_val: int = randi_range(0, rarity_sum)
 	var item_sum: int = 0
+	var car_pos: int = LevelManager.current_level.get_id_from_car(car)
 	for item: ItemResource in _items:
 		item_sum += item.rarity
 		if item_sum >= item_val:
+			# Redo this function if the car is too far to get the item.
+			if car_pos < item.min_positoin:
+				_give_car_random_item(car)
+				return
 			car.pick_up_item(item)
 			return
 
