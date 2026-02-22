@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3pb86i3casvd"]
+[gd_scene load_steps=10 format=3 uid="uid://b3pb86i3casvd"]
 
 [ext_resource type="Script" uid="uid://cms12qc6n557g" path="res://common/autoload/audio_world_3d/audio_world_3d.gd" id="1_m7et2"]
 [ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="2_vmpet"]
@@ -7,13 +7,14 @@
 [ext_resource type="Resource" uid="uid://dtk4oymqhlyk2" path="res://common/autoload/audio_world_3d/effects/drift.tres" id="5_k3j6j"]
 [ext_resource type="Resource" uid="uid://cfw6q06lfffjs" path="res://common/autoload/audio_world_3d/effects/drift_charge.tres" id="6_jgea1"]
 [ext_resource type="Resource" uid="uid://dgf6ns6q5lxd4" path="res://common/autoload/audio_world_3d/effects/drift_boost.tres" id="7_1yfwn"]
+[ext_resource type="Resource" uid="uid://cucj7nsxm1074" path="res://common/autoload/audio_world_3d/effects/explosion.tres" id="8_yyyhm"]
 
 [sub_resource type="Environment" id="Environment_l5t6t"]
 
 [node name="AudioWorld3D" type="AudioListener3D"]
 current = true
 script = ExtResource("1_m7et2")
-_sound_effects = Array[ExtResource("2_vmpet")]([ExtResource("3_l5t6t"), ExtResource("4_k3j6j"), ExtResource("5_k3j6j"), ExtResource("6_jgea1"), ExtResource("7_1yfwn")])
+_sound_effects = Array[ExtResource("2_vmpet")]([ExtResource("3_l5t6t"), ExtResource("4_k3j6j"), ExtResource("5_k3j6j"), ExtResource("6_jgea1"), ExtResource("7_1yfwn"), ExtResource("8_yyyhm")])
 
 [node name="Camera3D" type="Camera3D" parent="."]
 cull_mask = 0

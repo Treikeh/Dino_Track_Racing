@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Sfx3D" load_steps=4 format=3 uid="uid://cucj7nsxm1074"]
+
+[ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="1_f7que"]
+[ext_resource type="AudioStream" uid="uid://chi3gvsshmpt3" path="res://common/vfx/explosion/explosion.ogg" id="2_f7que"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l5t6t"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("2_f7que")
+
+[resource]
+script = ExtResource("1_f7que")
+limit = 8
+type = 8
+volume = -5.0
+stream = SubResource("AudioStreamRandomizer_l5t6t")
+metadata/_custom_type_script = "uid://lxow7d5fycpj"
