@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://51nggv4278od"]
+[gd_scene load_steps=17 format=3 uid="uid://51nggv4278od"]
 
 [ext_resource type="Script" uid="uid://10gebml8vqvv" path="res://entities/items/meteor_rain/meteor/meteor.gd" id="1_bw2u1"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_vcnfa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://6icfa6j3wv7v" path="res://entities/items/meteor_rain/meteor/art/meteor_trail_01_mat.tres" id="5_1cs04"]
 [ext_resource type="Texture2D" uid="uid://0i40qsp435nt" path="res://entities/items/meteor_rain/art/meteor_rain_icon.png" id="6_1cs04"]
 [ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="7_dyyi0"]
+[ext_resource type="PackedScene" uid="uid://dw7h8l2cjmr4i" path="res://common/vfx/explosion/explosion_vfx.tscn" id="8_uh3hd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yw0mm"]
 
@@ -65,13 +66,14 @@ initial_velocity_max = 7.5
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_dyyi0")
 
-[node name="Meteor" type="CharacterBody3D" node_paths=PackedStringArray("_hurtbox", "_mesh", "_break_vfx")]
+[node name="Meteor" type="CharacterBody3D" node_paths=PackedStringArray("_hurtbox", "_mesh", "_break_vfx", "_explosion_vfx")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_bw2u1")
 _hurtbox = NodePath("Hurtbox")
 _mesh = NodePath("Meteor_01_SM")
 _break_vfx = NodePath("BreakVFX")
+_explosion_vfx = NodePath("ExplosionVFX")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_yw0mm")
@@ -80,6 +82,7 @@ shape = SubResource("SphereShape3D_yw0mm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 shape = SubResource("SphereShape3D_jilud")
+debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="Meteor_01_SM" parent="." instance=ExtResource("3_vcnfa")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -100,6 +103,8 @@ _ray_end_offset = Vector3(0, -50, 0)
 
 [node name="ShadowDecal" parent="Meteor_01_SM/ShadowCaster" index="0"]
 size = Vector3(2.5, 2.5, 2.5)
+
+[node name="ExplosionVFX" parent="." instance=ExtResource("8_uh3hd")]
 
 [node name="BreakVFX" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_dyyi0")

@@ -6,6 +6,7 @@ class_name Meteor
 @export var _hurtbox: Hurtbox
 @export var _mesh: Node3D
 @export var _break_vfx: GPUParticles3D
+@export var _explosion_vfx: Node3D
 
 var _target_position: Vector3
 var _instigator: CarController
@@ -40,6 +41,7 @@ func _physics_process(_delta: float) -> void:
 func _explode() -> void:
 	_mesh.hide()
 	_break_vfx.restart()
+	_explosion_vfx.play()
 	
 	_hurtbox.set_monitoring.call_deferred(true)
 	await get_tree().create_timer(0.1).timeout

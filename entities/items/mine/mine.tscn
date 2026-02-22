@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://65ate38ndm47" path="res://entities/items/mine/mine.gd" id="1_5w3oq"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_hht6s"]
 [ext_resource type="PackedScene" uid="uid://don3je28oahk2" path="res://entities/items/mine/art/mine_01_sm.tscn" id="2_uch25"]
+[ext_resource type="PackedScene" uid="uid://dw7h8l2cjmr4i" path="res://common/vfx/explosion/explosion_vfx.tscn" id="4_77qfv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uch25"]
 size = Vector3(0.5, 0.25, 0.5)
@@ -13,18 +14,12 @@ radius = 0.75
 [sub_resource type="SphereShape3D" id="SphereShape3D_uch25"]
 radius = 4.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_hht6s"]
-flip_faces = true
-radius = 4.0
-height = 8.0
-radial_segments = 16
-rings = 8
-
-[node name="Mine" type="Node3D" node_paths=PackedStringArray("_physics_body", "_explosion", "_explosion_hurtbox")]
+[node name="Mine" type="Node3D" node_paths=PackedStringArray("_physics_body", "_hurtbox", "_mesh", "_explosion_vfx")]
 script = ExtResource("1_5w3oq")
 _physics_body = NodePath("PhysicsBody")
-_explosion = NodePath("PhysicsBody/Explosion")
-_explosion_hurtbox = NodePath("PhysicsBody/Explosion/Hurtbox")
+_hurtbox = NodePath("PhysicsBody/Hurtbox")
+_mesh = NodePath("PhysicsBody/Mine_01_SM")
+_explosion_vfx = NodePath("PhysicsBody/ExplosionVFX")
 metadata/_custom_type_script = "uid://751u1m35fd72"
 
 [node name="PhysicsBody" type="CharacterBody3D" parent="."]
@@ -34,9 +29,6 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody"]
 shape = SubResource("BoxShape3D_uch25")
 
-[node name="Mine_01_SM" parent="PhysicsBody" instance=ExtResource("2_uch25")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.175, 0)
-
 [node name="TriggerArea" type="Area3D" parent="PhysicsBody"]
 collision_layer = 0
 collision_mask = 2
@@ -45,16 +37,16 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody/TriggerArea"]
 shape = SubResource("SphereShape3D_hht6s")
 
-[node name="Explosion" type="Node3D" parent="PhysicsBody"]
-
-[node name="Hurtbox" parent="PhysicsBody/Explosion" instance=ExtResource("2_hht6s")]
+[node name="Hurtbox" parent="PhysicsBody" instance=ExtResource("2_hht6s")]
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody/Explosion/Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsBody/Hurtbox"]
 shape = SubResource("SphereShape3D_uch25")
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsBody/Explosion"]
-mesh = SubResource("SphereMesh_hht6s")
+[node name="Mine_01_SM" parent="PhysicsBody" instance=ExtResource("2_uch25")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.175, 0)
+
+[node name="ExplosionVFX" parent="PhysicsBody" instance=ExtResource("4_77qfv")]
 
 [connection signal="body_entered" from="PhysicsBody/TriggerArea" to="." method="_on_trigger_area_body_entered"]

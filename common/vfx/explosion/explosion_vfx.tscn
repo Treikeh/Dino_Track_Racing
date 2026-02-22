@@ -1,0 +1,165 @@
+[gd_scene load_steps=23 format=3 uid="uid://dw7h8l2cjmr4i"]
+
+[ext_resource type="Script" uid="uid://g6lrxrnyv8kg" path="res://common/vfx/explosion/explosion_vfx.gd" id="1_isxp3"]
+[ext_resource type="PlaneMesh" uid="uid://cx43gk552piim" path="res://common/vfx/vfx_plane.tres" id="2_rkfto"]
+[ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="3_3wlnp"]
+[ext_resource type="SphereMesh" uid="uid://bmmqj2t7i62d3" path="res://common/vfx/vfx_sphere.tres" id="4_5veog"]
+
+[sub_resource type="Gradient" id="Gradient_x71rl"]
+offsets = PackedFloat32Array(0, 0.66386557, 0.7184874)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_01b10"]
+gradient = SubResource("Gradient_x71rl")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbtux"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = SubResource("GradientTexture2D_01b10")
+texture_filter = 2
+disable_receive_shadows = true
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_jsbrr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.17470652, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x71rl"]
+width = 64
+curve = SubResource("Curve_jsbrr")
+
+[sub_resource type="Curve" id="Curve_01b10"]
+_data = [Vector2(0, 0), 0.0, 1.2635295, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wbtux"]
+curve = SubResource("Curve_01b10")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rnosg"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_wbtux")
+alpha_curve = SubResource("CurveTexture_x71rl")
+
+[sub_resource type="Gradient" id="Gradient_01b10"]
+colors = PackedColorArray(0.9529412, 0.47843137, 0.18039216, 1, 1, 0.74509805, 0.20392157, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wbtux"]
+gradient = SubResource("Gradient_01b10")
+
+[sub_resource type="Gradient" id="Gradient_wbtux"]
+colors = PackedColorArray(1, 1, 1, 1, 0.29411766, 0.34901962, 0.43529412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bm3p1"]
+gradient = SubResource("Gradient_wbtux")
+
+[sub_resource type="Curve" id="Curve_bm3p1"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.003968261, 0), 0.0, 4.424769, 0, 0, Vector2(0.69047624, 1.5193279), 0.0, 0.0, 0, 0, Vector2(1, 0), -14.284512, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s5d8p"]
+width = 64
+curve = SubResource("Curve_bm3p1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jidpl"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 2, 0)
+scale_min = 1.5
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_s5d8p")
+color_ramp = SubResource("GradientTexture1D_bm3p1")
+color_initial_ramp = SubResource("GradientTexture1D_wbtux")
+
+[sub_resource type="Animation" id="Animation_wbtux"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShockWave:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fire:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_01b10"]
+resource_name = "anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShockWave:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fire:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wbtux"]
+_data = {
+&"RESET": SubResource("Animation_wbtux"),
+&"anim": SubResource("Animation_01b10")
+}
+
+[node name="ExplosionVFX" type="Node3D" node_paths=PackedStringArray("_animation_player")]
+script = ExtResource("1_isxp3")
+_animation_player = NodePath("AnimationPlayer")
+
+[node name="ShockWave" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_wbtux")
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_rnosg")
+draw_pass_1 = ExtResource("2_rkfto")
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+material_override = ExtResource("3_3wlnp")
+emitting = false
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_jidpl")
+draw_pass_1 = ExtResource("4_5veog")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wbtux")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

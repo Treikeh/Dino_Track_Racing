@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://difualdbs5ylv"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://difualdbs5ylv"]
 
-[ext_resource type="Texture2D" uid="uid://w27qonhcr8rt" path="res://entities/items/mine/art/mine_icon.png" id="1_2o1wx"]
 [ext_resource type="Script" uid="uid://cueb0e6107vpe" path="res://entities/items/item_resource.gd" id="1_jm41o"]
 [ext_resource type="PackedScene" uid="uid://dxxkmhklfmce7" path="res://entities/items/mine/mine.tscn" id="2_gsyoy"]
 
@@ -8,6 +7,5 @@
 script = ExtResource("1_jm41o")
 name = "Mine"
 weigth = 12
-icon = ExtResource("1_2o1wx")
 scene = ExtResource("2_gsyoy")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"
