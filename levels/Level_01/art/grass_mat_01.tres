@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bl1tkceuyoxfd"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_tqffa"]
+[ext_resource type="Texture2D" uid="uid://c06sfymsoe0i3" path="res://levels/Level_01/art/grass_01.png" id="2_4my23"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_tqffa")
+shader_parameter/color_texture = ExtResource("2_4my23")

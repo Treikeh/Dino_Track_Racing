@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bn56eff0cmsll"
-path="res://.godot/imported/track_01_sm.glb-e87dbe4b3044d0019c6848b4e8e6e821.scn"
+path="res://.godot/imported/track_01_sm.glb-3bc4268dfdb1bba47d650da67d774738.scn"
 
 [deps]
 
-source_file="res://levels/Level_01/art/track_mesh/track_01_sm.glb"
-dest_files=["res://.godot/imported/track_01_sm.glb-e87dbe4b3044d0019c6848b4e8e6e821.scn"]
+source_file="res://levels/Level_01/art/track_01_sm.glb"
+dest_files=["res://.godot/imported/track_01_sm.glb-3bc4268dfdb1bba47d650da67d774738.scn"]
 
 [params]
 
@@ -41,22 +41,22 @@ _subresources={
 "materials": {
 "grass_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://levels/Level_01/art/track_mesh/grass_mat_01.tres",
+"use_external/fallback_path": "res://levels/Level_01/art/grass_mat_01.tres",
 "use_external/path": "uid://bl1tkceuyoxfd"
 },
 "lava_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://levels/Level_01/art/track_mesh/lava_mat_01.tres",
+"use_external/fallback_path": "res://levels/Level_01/art/lava_mat_01.tres",
 "use_external/path": "uid://bbvq8m8l6gbu1"
 },
 "road_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://levels/Level_01/art/track_mesh/road_mat_01.tres",
+"use_external/fallback_path": "res://levels/Level_01/art/road_mat_01.tres",
 "use_external/path": "uid://bebafnvnhr0uc"
 },
 "rock_mat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://levels/Level_01/art/track_mesh/rock_mat_01.tres",
+"use_external/fallback_path": "res://levels/Level_01/art/rock_mat_01.tres",
 "use_external/path": "uid://l5ja8jy1o7h4"
 }
 }

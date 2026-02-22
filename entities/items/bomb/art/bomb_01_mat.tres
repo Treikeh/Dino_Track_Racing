@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://70gtw5u3nxcv"]
 
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_mwdj8"]
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_mwdj8"]
 [ext_resource type="Texture2D" uid="uid://cqw33ahr5j5l1" path="res://entities/items/bomb/art/bomb_01_bc.png" id="2_mwdj8"]
 
 [resource]

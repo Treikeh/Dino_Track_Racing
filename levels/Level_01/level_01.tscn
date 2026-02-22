@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
 [ext_resource type="Material" uid="uid://kjerpjb00hj8" path="res://levels/Level_01/art/skybox_mat.tres" id="2_rbhar"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_mii42"]
-[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_mesh/track_01_sm.tscn" id="3_w8irb"]
+[ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="3_w8irb"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
 [ext_resource type="PackedScene" uid="uid://c7poo3o6yoe28" path="res://common/scenes/respawn_trigger.tscn" id="6_22u7d"]
 [ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="8_vnc2o"]

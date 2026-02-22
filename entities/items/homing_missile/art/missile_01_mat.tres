@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c21n5ylfcj1ov"]
 
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_jv21c"]
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_jv21c"]
 [ext_resource type="Texture2D" uid="uid://cgqyvp3qxe7v2" path="res://entities/items/homing_missile/art/missile_01_bc.png" id="2_gv7r5"]
 
 [resource]

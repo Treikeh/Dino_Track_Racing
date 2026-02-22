@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cd4rbuweru42"]
-
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_gqls8"]
-[ext_resource type="Texture2D" uid="uid://b7golcedx5sk1" path="res://icon.png" id="2_h8qgp"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_gqls8")
-shader_parameter/color_texture = ExtResource("2_h8qgp")

@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bbvq8m8l6gbu1"]
 
 [ext_resource type="Shader" uid="uid://dwa7vgq6ap7lp" path="res://levels/Level_01/art/lava_shader.gdshader" id="1_i6tsd"]
-[ext_resource type="Texture2D" uid="uid://d2q7eam6kvtin" path="res://levels/Level_01/art/track_mesh/lava_01.png" id="2_isg8e"]
+[ext_resource type="Texture2D" uid="uid://d2q7eam6kvtin" path="res://levels/Level_01/art/lava_01.png" id="2_isg8e"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_isg8e"]
 noise_type = 3

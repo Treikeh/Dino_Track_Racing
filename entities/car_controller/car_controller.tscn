@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=26 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dpwrutkvsid1l" path="res://common/scenes/skid_marker/skid_marker.tscn" id="6_ucq23"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_nnry6"]
 [ext_resource type="Texture2D" uid="uid://wmuug41wcqhb" path="res://entities/car_controller/art/scooter_dino/dino_shadow.png" id="8_rk01o"]
+[ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="10_j652r"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="11_3xtfu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
@@ -41,6 +43,8 @@ width = 128
 curve = SubResource("Curve_po1a6")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nnry6"]
+angle_min = -179.99998
+angle_max = 180.00002
 direction = Vector3(0, 0, 1)
 initial_velocity_min = 2.0
 initial_velocity_max = 3.0
@@ -49,15 +53,6 @@ scale_min = 0.25
 scale_max = 0.25
 scale_curve = SubResource("CurveTexture_j652r")
 color_ramp = SubResource("GradientTexture1D_ucq23")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xtfu"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_ucq23"]
-material = SubResource("StandardMaterial3D_3xtfu")
 
 [sub_resource type="Gradient" id="Gradient_64u7k"]
 offsets = PackedFloat32Array(0, 0.808)
@@ -74,6 +69,8 @@ point_count = 2
 curve = SubResource("Curve_ucq23")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_po1a6"]
+angle_min = -179.99998
+angle_max = 180.00002
 spread = 180.0
 initial_velocity_min = 2.5
 initial_velocity_max = 2.5
@@ -82,15 +79,6 @@ scale_min = 0.25
 scale_max = 0.25
 scale_curve = SubResource("CurveTexture_64u7k")
 color_ramp = SubResource("GradientTexture1D_j652r")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po1a6"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_nnry6"]
-material = SubResource("StandardMaterial3D_po1a6")
 
 [node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_front_skid_marker", "_back_skid_marker", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
 collision_layer = 2
@@ -172,8 +160,6 @@ external_skeleton = NodePath("../../ScooterDino_01_SK/Skeleton3D")
 
 [node name="FrontSkidMarker" parent="VFX/WheelFront" instance=ExtResource("6_ucq23")]
 
-[node name="Node" type="Node" parent="VFX/WheelFront/FrontSkidMarker"]
-
 [node name="WheelBack" type="BoneAttachment3D" parent="VFX"]
 transform = Transform3D(1.15, -8.171241e-15, -7.3108986e-08, 2.4513723e-14, 1.1499999, -6.3913913e-15, 7.3108964e-08, 0, 1.1499996, -5.3551347e-10, -0.40850717, 0.49894947)
 bone_name = "wheel_B.001"
@@ -183,27 +169,28 @@ external_skeleton = NodePath("../../ScooterDino_01_SK/Skeleton3D")
 
 [node name="DriftVFX" type="GPUParticles3D" parent="VFX/WheelBack"]
 transform = Transform3D(1.0000001, -2.1755113e-08, 5.977927e-08, -2.131601e-14, 0.9396926, 0.34202012, -6.3562766e-08, -0.34202027, 0.9396928, 1.0375516e-08, 0.015599847, 0.15577811)
+material_override = ExtResource("10_j652r")
 emitting = false
 amount = 6
 lifetime = 0.3
 visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
 local_coords = true
-transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_nnry6")
-draw_pass_1 = SubResource("QuadMesh_ucq23")
+draw_pass_1 = ExtResource("11_3xtfu")
 
 [node name="BackSkidMarker" parent="VFX/WheelBack" instance=ExtResource("6_ucq23")]
 
 [node name="TrickVFX" type="GPUParticles3D" parent="VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.2)
+material_override = ExtResource("10_j652r")
 emitting = false
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 visibility_aabb = AABB(-2, -1.5, -2, 4, 4, 4)
 local_coords = true
-transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_po1a6")
-draw_pass_1 = SubResource("QuadMesh_nnry6")
+draw_pass_1 = ExtResource("11_3xtfu")
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dy2y34q6mcut" path="res://entities/items/homing_missile/homing_missile.gd" id="1_612hy"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_xbvo7"]
 [ext_resource type="PackedScene" uid="uid://b1hbw60vtu8qt" path="res://entities/items/homing_missile/art/missile_01_sm.glb" id="3_73iqi"]
+[ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="4_pimre"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="5_vh2e0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_612hy"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -37,19 +39,6 @@ scale_max = 0.39999998
 scale_curve = SubResource("CurveTexture_73iqi")
 color_ramp = SubResource("GradientTexture1D_4exyx")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4exyx"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_73iqi"]
-material = SubResource("StandardMaterial3D_4exyx")
-
 [node name="HomingMissile" type="Node3D" node_paths=PackedStringArray("_hurtbox", "_track_follow", "_physics_body")]
 script = ExtResource("1_612hy")
 _hurtbox = NodePath("PhysicsBody/Hurtbox")
@@ -80,10 +69,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="PhysicsBody/Missile_01_SM"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+material_override = ExtResource("4_pimre")
 lifetime = 0.25
 draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_612hy")
-draw_pass_1 = SubResource("QuadMesh_73iqi")
+draw_pass_1 = ExtResource("5_vh2e0")
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 20.0

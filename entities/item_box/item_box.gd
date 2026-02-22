@@ -7,7 +7,7 @@ extends Node3D
 @export var _disabled_duration: float = 5.0
 @export var _items: Array[ItemResource] = []
 @export var _mesh_root: Node3D
-@export var _collect_vfx: GPUParticles3D
+@export var _break_vfx: GPUParticles3D
 @export var _disabled_timer: Timer
 
 var _enabled: bool = true
@@ -67,7 +67,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if _enabled and body is CarController:
 		_give_car_random_item(body)
 		_disable_box()
-		_collect_vfx.restart()
+		_break_vfx.restart()
 
 
 func _on_disabled_timer_timeout() -> void:

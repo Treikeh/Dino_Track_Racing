@@ -12,6 +12,8 @@
 [ext_resource type="Resource" uid="uid://difualdbs5ylv" path="res://entities/items/mine/mine.tres" id="8_cvxbj"]
 [ext_resource type="Resource" uid="uid://d10bdd7c0ndfl" path="res://entities/items/trash_bag/trash_bag.tres" id="9_kc1bj"]
 [ext_resource type="PackedScene" uid="uid://n2xpocjqusu2" path="res://entities/item_box/art/item_box_01_sm.glb" id="10_kwh0m"]
+[ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="13_aml61"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="13_et168"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
 size = Vector3(1.5, 2, 1.5)
@@ -35,19 +37,12 @@ scale_min = 0.25
 scale_max = 0.59999996
 scale_curve = SubResource("CurveTexture_cienk")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6fuj"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_tn08c"]
-material = SubResource("StandardMaterial3D_i6fuj")
-
-[node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_collect_vfx", "_disabled_timer")]
+[node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_break_vfx", "_disabled_timer")]
 script = ExtResource("1_lk11n")
 _disabled_duration = 2.5
 _items = Array[ExtResource("2_ic5go")]([ExtResource("3_rcuga"), ExtResource("5_kwh0m"), ExtResource("8_cvxbj"), ExtResource("7_aml61"), ExtResource("4_dfyjk"), ExtResource("6_et168"), ExtResource("9_kc1bj")])
 _mesh_root = NodePath("MeshRoot")
-_collect_vfx = NodePath("CollectVFX")
+_break_vfx = NodePath("BreakVFX")
 _disabled_timer = NodePath("DisabledTimer")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -74,8 +69,9 @@ text = "?"
 font = ExtResource("5_rcuga")
 font_size = 82
 
-[node name="CollectVFX" type="GPUParticles3D" parent="."]
+[node name="BreakVFX" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("13_aml61")
 emitting = false
 lifetime = 0.5
 one_shot = true
@@ -83,7 +79,7 @@ explosiveness = 1.0
 visibility_aabb = AABB(-4, -3.5, -4, 8, 8, 8)
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_30yuj")
-draw_pass_1 = SubResource("QuadMesh_tn08c")
+draw_pass_1 = ExtResource("13_et168")
 
 [node name="DisabledTimer" type="Timer" parent="."]
 one_shot = true

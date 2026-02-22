@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://u8v6eq8byvqi"]
 
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_rktj5"]
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_rktj5"]
 [ext_resource type="Texture2D" uid="uid://dn76lff2ufnn6" path="res://entities/items/trash_bag/art/trash_bag_01_bc.png" id="2_hyqcv"]
 
 [resource]

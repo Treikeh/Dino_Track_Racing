@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://l5ja8jy1o7h4"]
-
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_5giry"]
-[ext_resource type="Texture2D" uid="uid://dw0y8g3v0p6po" path="res://levels/Level_01/art/track_mesh/rock_01.png" id="2_ymeyf"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_5giry")
-shader_parameter/color_texture = ExtResource("2_ymeyf")

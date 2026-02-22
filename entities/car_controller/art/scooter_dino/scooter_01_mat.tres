@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://5qa481hysybn"]
 
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_22k6o"]
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_22k6o"]
 [ext_resource type="Texture2D" uid="uid://deteekyyvoevd" path="res://entities/car_controller/art/scooter_dino/scooter_01_bc.png" id="2_862vb"]
 
 [resource]

@@ -1,6 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://coa88ept8mxrt"]
 
 [ext_resource type="Script" uid="uid://cl8f04hu0puk2" path="res://entities/items/boost/boost.gd" id="1_5yykb"]
+[ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="2_o6s03"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="3_itmqc"]
 
 [sub_resource type="Curve" id="Curve_tjkpb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6600997, 0.0, 0, 0]
@@ -20,14 +22,6 @@ scale_min = 0.25
 scale_max = 0.75
 scale_curve = SubResource("CurveTexture_5yykb")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjkpb"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_5yykb"]
-material = SubResource("StandardMaterial3D_tjkpb")
-
 [node name="Boost" type="Node3D"]
 script = ExtResource("1_5yykb")
 _boost_amount = 22.5
@@ -36,10 +30,11 @@ metadata/_custom_type_script = "uid://751u1m35fd72"
 
 [node name="BoostVfx" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0.5)
+material_override = ExtResource("2_o6s03")
 lifetime = 0.25
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_tjkpb")
-draw_pass_1 = SubResource("QuadMesh_5yykb")
+draw_pass_1 = ExtResource("3_itmqc")
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 1.75

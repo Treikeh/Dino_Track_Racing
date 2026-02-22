@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://uf5yhrs488q6"]
 
-[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/vertex_color_mult.gdshader" id="1_g8qrs"]
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_g8qrs"]
 [ext_resource type="Texture2D" uid="uid://cp8jkvtulg2gq" path="res://entities/items/mine/art/mine_01_bc.png" id="2_1fe0b"]
 
 [resource]
