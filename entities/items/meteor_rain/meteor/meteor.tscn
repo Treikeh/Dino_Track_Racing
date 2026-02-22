@@ -1,12 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://51nggv4278od"]
+[gd_scene load_steps=14 format=3 uid="uid://51nggv4278od"]
 
 [ext_resource type="Script" uid="uid://10gebml8vqvv" path="res://entities/items/meteor_rain/meteor/meteor.gd" id="1_bw2u1"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_vcnfa"]
 [ext_resource type="PackedScene" uid="uid://clwmyqlqydfyh" path="res://entities/items/meteor_rain/meteor/art/meteor_01_sm.tscn" id="3_vcnfa"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="4_yw0mm"]
 [ext_resource type="Material" uid="uid://6icfa6j3wv7v" path="res://entities/items/meteor_rain/meteor/art/meteor_trail_01_mat.tres" id="5_1cs04"]
-[ext_resource type="Texture2D" uid="uid://0i40qsp435nt" path="res://entities/items/meteor_rain/art/meteor_rain_icon.png" id="6_1cs04"]
-[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="7_dyyi0"]
 [ext_resource type="PackedScene" uid="uid://dw7h8l2cjmr4i" path="res://common/vfx/explosion/explosion_vfx.tscn" id="8_uh3hd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yw0mm"]
@@ -34,37 +32,36 @@ rings = 0
 cap_top = false
 cap_bottom = false
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dyyi0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cs04"]
 transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("6_1cs04")
 texture_filter = 2
+disable_receive_shadows = true
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Curve" id="Curve_1cs04"]
-_data = [Vector2(0, 1), 0.0, -0.07440361, 0, 0, Vector2(1, 0), -3.49412, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_dyyi0"]
-width = 64
-curve = SubResource("Curve_1cs04")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jilud"]
-angle_min = -360.0
-angle_max = 360.00003
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uh3hd"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -179.99998
+angle_max = 180.00002
 direction = Vector3(0, 1, 0)
 spread = 90.0
-initial_velocity_min = 7.5
-initial_velocity_max = 7.5
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_dyyi0")
+initial_velocity_min = 6.0
+initial_velocity_max = 6.0
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.5
+scale_max = 0.75
+color = Color(0.19215687, 0.21568628, 0.28235295, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_nit60"]
 
 [node name="Meteor" type="CharacterBody3D" node_paths=PackedStringArray("_hurtbox", "_mesh", "_break_vfx", "_explosion_vfx")]
 collision_layer = 0
@@ -107,12 +104,14 @@ size = Vector3(2.5, 2.5, 2.5)
 [node name="ExplosionVFX" parent="." instance=ExtResource("8_uh3hd")]
 
 [node name="BreakVFX" type="GPUParticles3D" parent="."]
-material_override = SubResource("StandardMaterial3D_dyyi0")
+material_override = SubResource("StandardMaterial3D_1cs04")
 emitting = false
+amount = 12
+lifetime = 2.0
 one_shot = true
 explosiveness = 0.8
-process_material = SubResource("ParticleProcessMaterial_jilud")
-draw_pass_1 = ExtResource("7_dyyi0")
+process_material = SubResource("ParticleProcessMaterial_uh3hd")
+draw_pass_1 = SubResource("PrismMesh_nit60")
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 10.0

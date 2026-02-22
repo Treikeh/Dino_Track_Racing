@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="3_5tg5q"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="3_wl078"]
 [ext_resource type="Texture2D" uid="uid://c838vhsh4l1ae" path="res://entities/items/trash_bag/art/trash_bag_icon.png" id="4_3b7ey"]
-[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="5_b8a0o"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="5_b8a0o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vue83"]
 radius = 0.8

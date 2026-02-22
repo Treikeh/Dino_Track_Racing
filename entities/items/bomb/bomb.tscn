@@ -47,7 +47,7 @@ debug_color = Color(1, 0, 0, 0.41960785)
 transform = Transform3D(-0.6123724, 0.5, -0.6123724, 0.35355338, 0.8660254, 0.35355338, 0.70710677, 0, -0.70710677, 0, 0, 0)
 
 [node name="ExplosionVFX" parent="PhysicsBody" instance=ExtResource("4_w1g58")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0)
 
 [connection signal="body_entered" from="PhysicsBody" to="." method="_on_bomb_body_body_entered"]
 [connection signal="hit_hitbox" from="PhysicsBody/Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]

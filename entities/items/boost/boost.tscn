@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cl8f04hu0puk2" path="res://entities/items/boost/boost.gd" id="1_5yykb"]
 [ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="2_o6s03"]
-[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="3_itmqc"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="3_itmqc"]
 
 [sub_resource type="Curve" id="Curve_tjkpb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6600997, 0.0, 0, 0]

@@ -13,7 +13,7 @@
 [ext_resource type="Resource" uid="uid://d10bdd7c0ndfl" path="res://entities/items/trash_bag/trash_bag.tres" id="9_kc1bj"]
 [ext_resource type="PackedScene" uid="uid://n2xpocjqusu2" path="res://entities/item_box/art/item_box_01_sm.glb" id="10_kwh0m"]
 [ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="13_aml61"]
-[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="13_et168"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="13_et168"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hyb7p"]
 size = Vector3(1.5, 2, 1.5)

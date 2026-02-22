@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_xbvo7"]
 [ext_resource type="PackedScene" uid="uid://b1hbw60vtu8qt" path="res://entities/items/homing_missile/art/missile_01_sm.glb" id="3_73iqi"]
 [ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="4_pimre"]
-[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad.tres" id="5_vh2e0"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="5_vh2e0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_612hy"]
 size = Vector3(0.5, 0.5, 0.5)
