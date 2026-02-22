@@ -27,16 +27,21 @@ func _process(delta: float) -> void:
 
 func _give_car_random_item(car: CarController) -> void:
 	# Get the total rarity of all items
-	var rarity_sum: int = 0
+	var weigth_sum: int = 0
 	for item: ItemResource in _items:
-		rarity_sum += item.rarity
+		weigth_sum += item.weigth
+	
+	# Randomize the array so that the 
+	# If I don't do this then the items that are at the start of the array are less likely to be
+	# selected, even if they have a higher rarity.
+	_items.shuffle()
 	
 	# Get the random value that the item is at
-	var item_val: int = randi_range(0, rarity_sum)
+	var item_val: int = randi_range(0, weigth_sum)
 	var item_sum: int = 0
-	var car_pos: int = LevelManager.current_level.get_id_from_car(car)
+	var car_pos: int = LevelManager.current_level.get_race_pos_from_car(car)
 	for item: ItemResource in _items:
-		item_sum += item.rarity
+		item_sum += item.weigth
 		if item_sum >= item_val:
 			# Redo this function if the car is too far to get the item.
 			if car_pos < item.min_positoin:

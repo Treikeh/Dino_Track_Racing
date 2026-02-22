@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_jm41o")
 name = "Mine"
-rarity = 11
+weigth = 12
 icon = ExtResource("1_2o1wx")
 scene = ExtResource("2_gsyoy")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"

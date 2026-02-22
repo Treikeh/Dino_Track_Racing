@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_yqmqn")
 name = "Meteor Rain"
+weigth = 10
 min_positoin = 6
 icon = ExtResource("1_fr7r8")
 scene = ExtResource("2_i1nkk")

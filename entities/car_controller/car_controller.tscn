@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c56dtjon3irj1"]
+[gd_scene load_steps=28 format=3 uid="uid://c56dtjon3irj1"]
 
 [ext_resource type="Script" uid="uid://b3gnkhue3t4ao" path="res://entities/car_controller/car_controller.gd" id="1_v4h86"]
 [ext_resource type="Curve" uid="uid://ch7vei680hsvk" path="res://entities/car_controller/data/accel_curve.tres" id="2_po1a6"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dpwrutkvsid1l" path="res://common/scenes/skid_marker/skid_marker.tscn" id="6_ucq23"]
 [ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="7_nnry6"]
 [ext_resource type="Texture2D" uid="uid://wmuug41wcqhb" path="res://entities/car_controller/art/scooter_dino/dino_shadow.png" id="8_rk01o"]
-[ext_resource type="AudioStream" uid="uid://bkaanlkvqak51" path="res://entities/car_controller/audio/engine.ogg" id="10_64u7k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4h86"]
 friction = 0.0
@@ -92,11 +91,6 @@ billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_nnry6"]
 material = SubResource("StandardMaterial3D_po1a6")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_64u7k"]
-random_pitch = 1.15
-streams_count = 1
-stream_0/stream = ExtResource("10_64u7k")
 
 [node name="CarController" type="RigidBody3D" node_paths=PackedStringArray("_drive_dir", "_ground_check", "_front_skid_marker", "_back_skid_marker", "_mesh", "_drift_vfx", "_trick_vfx") groups=["car"]]
 collision_layer = 2
@@ -210,13 +204,6 @@ local_coords = true
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_po1a6")
 draw_pass_1 = SubResource("QuadMesh_nnry6")
-
-[node name="SFX" type="Node3D" parent="."]
-
-[node name="EngineSFX" type="AudioStreamPlayer3D" parent="SFX"]
-stream = SubResource("AudioStreamRandomizer_64u7k")
-volume_db = -4.0
-bus = &"Effects"
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="invulnerability_ended" from="Hitbox" to="." method="_on_hitbox_invulnerability_ended"]

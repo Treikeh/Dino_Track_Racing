@@ -45,7 +45,7 @@ material = SubResource("StandardMaterial3D_i6fuj")
 [node name="ItemBox" type="Node3D" node_paths=PackedStringArray("_mesh_root", "_collect_vfx", "_disabled_timer")]
 script = ExtResource("1_lk11n")
 _disabled_duration = 2.5
-_items = Array[ExtResource("2_ic5go")]([ExtResource("3_rcuga"), ExtResource("6_et168"), ExtResource("5_kwh0m"), ExtResource("7_aml61"), ExtResource("8_cvxbj"), ExtResource("4_dfyjk"), ExtResource("9_kc1bj")])
+_items = Array[ExtResource("2_ic5go")]([ExtResource("3_rcuga"), ExtResource("5_kwh0m"), ExtResource("8_cvxbj"), ExtResource("7_aml61"), ExtResource("4_dfyjk"), ExtResource("6_et168"), ExtResource("9_kc1bj")])
 _mesh_root = NodePath("MeshRoot")
 _collect_vfx = NodePath("CollectVFX")
 _disabled_timer = NodePath("DisabledTimer")

@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_oxjvb")
 name = "Bomb"
+weigth = 14
 icon = ExtResource("1_rv8wl")
-rarity = 10
 scene = ExtResource("2_kqr5t")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"

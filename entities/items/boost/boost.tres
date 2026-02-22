@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_7c4g7")
 name = "Boost"
-rarity = 8
+weigth = 11
 min_positoin = 3
 icon = ExtResource("1_q7fw4")
 scene = ExtResource("2_q7fw4")

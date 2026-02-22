@@ -7,7 +7,8 @@
 [resource]
 script = ExtResource("2_wyn11")
 name = "Lance"
-rarity = 100
+weigth = 13
+min_positoin = 3
 icon = ExtResource("1_wyn11")
 scene = ExtResource("1_wp3p1")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"
