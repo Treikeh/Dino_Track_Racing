@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://m2wbc1dhxton"]
+[gd_scene load_steps=18 format=3 uid="uid://m2wbc1dhxton"]
 
 [ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_fjb12"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_ogjo6"]
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="4_1lgak"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_ogjo6"]
+[ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel_stylebox.tres" id="4_wss0g"]
 [ext_resource type="Texture2D" uid="uid://w27qonhcr8rt" path="res://entities/items/mine/art/mine_icon.png" id="5_5srox"]
 [ext_resource type="Texture2D" uid="uid://bo2sfdtuppdy2" path="res://entities/items/boost/art/boost_icon.png" id="6_3adlm"]
 [ext_resource type="Texture2D" uid="uid://ba2ij7fnbp8e5" path="res://entities/items/lance/art/lance_icon.png" id="6_o6m73"]
@@ -13,10 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://bvg6cmeagmxac" path="res://entities/items/homing_missile/art/missile_icon.png" id="7_dvl5a"]
 [ext_resource type="Texture2D" uid="uid://bltvplbcwaguh" path="res://entities/items/bomb/art/bomb_icon.png" id="8_6svv1"]
 [ext_resource type="Texture2D" uid="uid://0i40qsp435nt" path="res://entities/items/meteor_rain/art/meteor_rain_icon.png" id="8_mck02"]
+[ext_resource type="Texture2D" uid="uid://mrqrjom0f6qm" path="res://gui/art/selection_box_selected.png" id="13_hcfcn"]
+[ext_resource type="Texture2D" uid="uid://bxy2nbahjapgl" path="res://gui/art/selection_box_unselected.png" id="13_mbntm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvl5a"]
 
-[node name="ControlsMenu" type="Control" node_paths=PackedStringArray("_panel", "_button_display", "_current_tab_label", "_tabs")]
+[node name="ControlsMenu" type="Control" node_paths=PackedStringArray("_panel", "_button_display", "_current_tab_container", "_tabs")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +29,9 @@ grow_vertical = 2
 script = ExtResource("1_sbatj")
 _panel = NodePath("PanelRoot")
 _button_display = NodePath("BottomDisplay")
-_current_tab_label = NodePath("BottomDisplay/CurrentTabLabel")
+_current_tab_container = NodePath("BottomDisplay/CurrentTabContainer")
+_selected_tab_texture = ExtResource("13_hcfcn")
+_unselected_tab_texture = ExtResource("13_mbntm")
 _tabs = [NodePath("PanelRoot/Controller"), NodePath("PanelRoot/DriftTrick"), NodePath("PanelRoot/Items")]
 
 [node name="PanelRoot" type="Control" parent="."]
@@ -117,6 +122,7 @@ offset_right = 369.0
 offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_wss0g")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelRoot/DriftTrick/PanelContainer"]
 layout_mode = 2
@@ -258,6 +264,7 @@ offset_right = 369.0
 offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_wss0g")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelRoot/Items/PanelContainer"]
 layout_mode = 2
@@ -289,6 +296,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Mine:
@@ -310,6 +322,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Boost:
@@ -330,6 +347,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Lance:
@@ -351,6 +373,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Meteor Rain:
@@ -378,6 +405,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Trash bag:
@@ -399,6 +431,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Missile:
@@ -420,6 +457,11 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 12
 text = "Bomb:
@@ -438,29 +480,41 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -56.0
+offset_top = -67.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="CurrentTabLabel" type="Label" parent="BottomDisplay"]
+[node name="CurrentTabContainer" type="HBoxContainer" parent="BottomDisplay"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -30.0
-offset_right = 45.0
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 68.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("2_fjb12")
-theme_override_font_sizes/font_size = 20
-text = "O**"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BottomDisplay/CurrentTabContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("13_hcfcn")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="BottomDisplay/CurrentTabContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("13_mbntm")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="BottomDisplay/CurrentTabContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("13_mbntm")
+stretch_mode = 5
 
 [node name="InputButtonsDisplayContainer" type="MarginContainer" parent="BottomDisplay"]
 layout_mode = 1

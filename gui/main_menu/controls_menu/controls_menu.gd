@@ -8,7 +8,9 @@ const TWEEN_DURATION: float = 0.5
 
 @export var _panel: Control
 @export var _button_display: Control
-@export var _current_tab_label: Label
+@export var _current_tab_container: HBoxContainer
+@export var _selected_tab_texture: Texture2D
+@export var _unselected_tab_texture: Texture2D
 @export var _tabs: Array[Control] = []
 
 var _tab_index: int = 0
@@ -32,8 +34,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_cancel"):
 		_go_to_prev_tab()
-	
-	_update_current_tab_label()
 
 
 func open_menu() -> void:
@@ -66,6 +66,8 @@ func open_menu() -> void:
 			_button_dispaly_start_pos,
 			TWEEN_DURATION
 	)
+	
+	_update_current_tab_label()
 
 
 func close_menu() -> void:
@@ -100,6 +102,7 @@ func _go_to_next_tab() -> void:
 	if desired_tab < _tabs.size():
 		_show_right_tab()
 		_tab_index += 1
+		_update_current_tab_label()
 
 
 func _go_to_prev_tab() -> void:
@@ -108,6 +111,7 @@ func _go_to_prev_tab() -> void:
 	if desired_tab > -1:
 		_show_left_tab()
 		_tab_index -= 1
+		_update_current_tab_label()
 	# Colse the menu if trying to go back when on the last tab
 	elif desired_tab <= 0:
 		close_menu()
@@ -154,10 +158,19 @@ func _show_left_tab() -> void:
 
 
 func _update_current_tab_label() -> void:
-	match _tab_index:
-		0:
-			_current_tab_label.text = "O**"
-		1:
-			_current_tab_label.text = "*O*"
-		2:
-			_current_tab_label.text = "**O"
+	for i: int in _current_tab_container.get_child_count():
+		var texture_rect: TextureRect = _current_tab_container.get_child(i)
+		texture_rect.texture = _selected_tab_texture if i == _tab_index else _unselected_tab_texture
+		
+		const NEW_TWEEN_DURATION: float = 0.2
+		var tween: Tween = create_tween()
+		tween.set_trans(Tween.TRANS_BACK)
+		if i == _tab_index:
+			texture_rect.pivot_offset = texture_rect.size / 2.0
+			texture_rect.rotation_degrees = 5.0
+			texture_rect.scale = Vector2.ONE
+			tween.tween_property(texture_rect, "rotation_degrees", 0.0, NEW_TWEEN_DURATION)
+			tween.parallel().tween_property(texture_rect, "scale", Vector2.ONE * 1.15, NEW_TWEEN_DURATION)
+		else:
+			texture_rect.pivot_offset = texture_rect.size / 2.0
+			tween.parallel().tween_property(texture_rect, "scale", Vector2.ONE, NEW_TWEEN_DURATION)
