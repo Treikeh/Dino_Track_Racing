@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0i40qsp435nt"
-path.s3tc="res://.godot/imported/meteor_rain_icon.png-1d7a559f8c7beee9914e0e07078ac63a.s3tc.ctex"
-path.etc2="res://.godot/imported/meteor_rain_icon.png-1d7a559f8c7beee9914e0e07078ac63a.etc2.ctex"
+uid="uid://b0qu8kmdj56hn"
+path.s3tc="res://.godot/imported/meteor_trail_01_bc.png-8e3b288950668d7708e4bad7d2fdc4b2.s3tc.ctex"
+path.etc2="res://.godot/imported/meteor_trail_01_bc.png-8e3b288950668d7708e4bad7d2fdc4b2.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/items/meteor_rain/art/meteor_rain_icon.png"
-dest_files=["res://.godot/imported/meteor_rain_icon.png-1d7a559f8c7beee9914e0e07078ac63a.s3tc.ctex", "res://.godot/imported/meteor_rain_icon.png-1d7a559f8c7beee9914e0e07078ac63a.etc2.ctex"]
+source_file="res://entities/items/meteor_rain/meteor/art/meteor_trail_01_bc.png"
+dest_files=["res://.godot/imported/meteor_trail_01_bc.png-8e3b288950668d7708e4bad7d2fdc4b2.s3tc.ctex", "res://.godot/imported/meteor_trail_01_bc.png-8e3b288950668d7708e4bad7d2fdc4b2.etc2.ctex"]
 
 [params]
 

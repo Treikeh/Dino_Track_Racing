@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://clwmyqlqydfyh"]
+
+[ext_resource type="PackedScene" uid="uid://bnh2k2c01hort" path="res://entities/items/meteor_rain/meteor/art/meteor_01_sm.glb" id="1_hmc31"]
+
+[node name="Meteor_01_SM" instance=ExtResource("1_hmc31")]

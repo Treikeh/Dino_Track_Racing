@@ -7,8 +7,7 @@
 [resource]
 script = ExtResource("1_yqmqn")
 name = "Meteor Rain"
-weigth = 10
-min_positoin = 6
+weigth = 100
 icon = ExtResource("1_fr7r8")
 scene = ExtResource("2_i1nkk")
 metadata/_custom_type_script = "uid://cueb0e6107vpe"

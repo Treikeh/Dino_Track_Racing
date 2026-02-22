@@ -18,6 +18,8 @@ void vertex() {
 }
 
 void fragment() {
+	ALPHA = texture(color_texture, UV).a;
+	ALPHA_SCISSOR_THRESHOLD = 0.5;
 	vec2 uv_pos = UV + (TIME * 0.1);
 	ALBEDO = texture(color_texture, uv_pos).rgb * COLOR.rgb;
 }

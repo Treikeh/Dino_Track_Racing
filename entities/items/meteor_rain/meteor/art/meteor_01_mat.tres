@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ms0j43q2q0ll"]
+
+[ext_resource type="Shader" uid="uid://nsyb2hec36es" path="res://entities/items/meteor_rain/meteor/art/meteor_trail_01_shader.gdshader" id="1_wwdvu"]
+[ext_resource type="Texture2D" uid="uid://8giixhbtbchx" path="res://entities/items/meteor_rain/meteor/art/meteor_01_bc.png" id="2_f3ru2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wwdvu")
+shader_parameter/scroll_speed = Vector2(0.5, -0.5)
+shader_parameter/color_texture = ExtResource("2_f3ru2")

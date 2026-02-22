@@ -4,6 +4,8 @@ class_name Meteor
 
 @export var _move_speed: float = 67.5
 @export var _hurtbox: Hurtbox
+@export var _mesh: Node3D
+@export var _break_vfx: GPUParticles3D
 
 var _target_position: Vector3
 var _instigator: CarController
@@ -24,18 +26,29 @@ func _ready() -> void:
 	
 	var move_dir: Vector3 = global_position.direction_to(_target_position)
 	velocity = move_dir * _move_speed
+	
+	look_at(_target_position)
 
 
 func _physics_process(_delta: float) -> void:
-	#if is_on_wall():
-	#	queue_free()
+	if is_on_wall() and _mesh.visible:
+		_explode()
+	else:
+		move_and_slide()
+
+
+func _explode() -> void:
+	_mesh.hide()
+	_break_vfx.restart()
 	
-	move_and_slide()
-
-
-func _on_hurtbox_hit_hitbox(_hitbox: Hitbox) -> void:
-	queue_free()
+	_hurtbox.set_monitoring.call_deferred(true)
+	await get_tree().create_timer(0.1).timeout
+	_hurtbox.set_monitoring.call_deferred(false)
 
 
 func _on_lifetime_timeout() -> void:
+	queue_free()
+
+
+func _on_break_vfx_finished() -> void:
 	queue_free()

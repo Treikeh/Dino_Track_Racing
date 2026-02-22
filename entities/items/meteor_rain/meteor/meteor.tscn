@@ -1,22 +1,78 @@
-[gd_scene load_steps=6 format=3 uid="uid://51nggv4278od"]
+[gd_scene load_steps=16 format=3 uid="uid://51nggv4278od"]
 
 [ext_resource type="Script" uid="uid://10gebml8vqvv" path="res://entities/items/meteor_rain/meteor/meteor.gd" id="1_bw2u1"]
 [ext_resource type="PackedScene" uid="uid://c5yean24hsl32" path="res://common/scenes/hurtbox.tscn" id="2_vcnfa"]
+[ext_resource type="PackedScene" uid="uid://clwmyqlqydfyh" path="res://entities/items/meteor_rain/meteor/art/meteor_01_sm.tscn" id="3_vcnfa"]
+[ext_resource type="PackedScene" uid="uid://btfrkiblbc5ba" path="res://common/scenes/shadow_caster/shadow_caster.tscn" id="4_yw0mm"]
+[ext_resource type="Material" uid="uid://6icfa6j3wv7v" path="res://entities/items/meteor_rain/meteor/art/meteor_trail_01_mat.tres" id="5_1cs04"]
+[ext_resource type="Texture2D" uid="uid://0i40qsp435nt" path="res://entities/items/meteor_rain/art/meteor_rain_icon.png" id="6_1cs04"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yw0mm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jilud"]
-radius = 1.5
+radius = 3.5
 
-[sub_resource type="SphereMesh" id="SphereMesh_bw2u1"]
-radius = 1.5
-height = 3.0
+[sub_resource type="CylinderMesh" id="CylinderMesh_yw0mm"]
+material = ExtResource("5_1cs04")
+top_radius = 1.52
+bottom_radius = 1.765
+height = 1.785
+radial_segments = 8
+rings = 0
+cap_top = false
+cap_bottom = false
 
-[node name="Meteor" type="CharacterBody3D" node_paths=PackedStringArray("_hurtbox")]
+[sub_resource type="CylinderMesh" id="CylinderMesh_jilud"]
+material = ExtResource("5_1cs04")
+top_radius = 0.855
+bottom_radius = 1.3
+height = 2.225
+radial_segments = 8
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Curve" id="Curve_1cs04"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.49412, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dyyi0"]
+width = 64
+curve = SubResource("Curve_1cs04")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jilud"]
+angle_min = -360.0
+angle_max = 360.00003
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 7.5
+initial_velocity_max = 7.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_dyyi0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jilud"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("6_1cs04")
+texture_filter = 2
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_1cs04"]
+material = SubResource("StandardMaterial3D_jilud")
+
+[node name="Meteor" type="CharacterBody3D" node_paths=PackedStringArray("_hurtbox", "_mesh", "_break_vfx")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_bw2u1")
 _hurtbox = NodePath("Hurtbox")
+_mesh = NodePath("Meteor_01_SM")
+_break_vfx = NodePath("BreakVFX")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_yw0mm")
@@ -26,13 +82,34 @@ shape = SubResource("SphereShape3D_yw0mm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 shape = SubResource("SphereShape3D_jilud")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_bw2u1")
+[node name="Meteor_01_SM" parent="." instance=ExtResource("3_vcnfa")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="TrailMiddle" type="MeshInstance3D" parent="Meteor_01_SM"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70000005, -3.0597974e-08)
+mesh = SubResource("CylinderMesh_yw0mm")
+skeleton = NodePath("../..")
+
+[node name="TrailBack" type="MeshInstance3D" parent="Meteor_01_SM"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4, -1.04907336e-07)
+mesh = SubResource("CylinderMesh_jilud")
+skeleton = NodePath("../..")
+
+[node name="ShadowCaster" parent="Meteor_01_SM" instance=ExtResource("4_yw0mm")]
+transform = Transform3D(2.25, 0, 0, 0, -9.8350625e-08, -2.25, 0, 2.25, -9.8350625e-08, 0, 0, 0)
+_ray_end_offset = Vector3(0, -50, 0)
+
+[node name="BreakVFX" type="GPUParticles3D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 0.91
+process_material = SubResource("ParticleProcessMaterial_jilud")
+draw_pass_1 = SubResource("QuadMesh_1cs04")
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 autostart = true
 
-[connection signal="hit_hitbox" from="Hurtbox" to="." method="_on_hurtbox_hit_hitbox"]
+[connection signal="finished" from="BreakVFX" to="." method="_on_break_vfx_finished"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
