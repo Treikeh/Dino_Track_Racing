@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b2thph50fpwxc"]
+
+[ext_resource type="Shader" uid="uid://dy1uwayefv075" path="res://common/shaders/vhs.gdshader" id="1_o4u6h"]
+
+[resource]
+shader = ExtResource("1_o4u6h")
+shader_parameter/color_offset_multiplier = 0.0010000000475
+shader_parameter/black_offset_multiplier = 0.050000002375
+shader_parameter/color_offset = 0.0020000033548800006
+shader_parameter/blur_amount = 0.0

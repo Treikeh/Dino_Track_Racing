@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi224kerifv8w"]
+[gd_scene load_steps=4 format=3 uid="uid://bi224kerifv8w"]
 
 [ext_resource type="Script" uid="uid://byaesynk2xrfg" path="res://gui/loading_screen/loading_screen.gd" id="1_mkdfe"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_vsl4m"]
+[ext_resource type="Material" uid="uid://b2thph50fpwxc" path="res://common/shaders/vhs_shader_mat.tres" id="3_sm2e5"]
 
 [node name="LoadingScreen" type="CanvasLayer" node_paths=PackedStringArray("_control_root")]
 process_mode = 3
@@ -41,3 +42,11 @@ theme_override_fonts/font = ExtResource("2_vsl4m")
 text = "LOADING"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VhsFilter" type="ColorRect" parent="."]
+material = ExtResource("3_sm2e5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

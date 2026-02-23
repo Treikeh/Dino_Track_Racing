@@ -19,6 +19,7 @@ class_name PlayerInputController
 @export var _countdown_panel: Control
 @export var _wrong_way_panel: Container
 @export var _speed_lines: ColorRect
+@export var _radial_blur: Control
 
 @export_group("Debug")
 @warning_ignore("unused_private_class_variable")
@@ -114,9 +115,16 @@ func _process(delta: float) -> void:
 	
 	_speedometer.update(_car_controller.speed_khm)
 	
-	var speed_lines_mask: float = remap(_car_controller.speed_khm, 80.0, 110.0, 1.0, 0.5)
+	
+	const MIN_SPEED: float = 80.0
+	const MAX_SPEED: float = 100.0
+	var speed_lines_mask: float = remap(_car_controller.speed_khm, MIN_SPEED, MAX_SPEED, 1.0, 0.5)
 	speed_lines_mask = clampf(speed_lines_mask, 0.5, 1.0)
 	_speed_lines.material.set("shader_parameter/mask_edge", speed_lines_mask)
+	
+	var radial_blur_intensity: float = remap(_car_controller.speed_khm, MIN_SPEED, MAX_SPEED, 0.0, 1.0)
+	radial_blur_intensity = clampf(radial_blur_intensity, 0.0, 1.0)
+	_radial_blur.material.set("shader_parameter/intensity", radial_blur_intensity)
 
 
 func _physics_process(delta: float) -> void:
