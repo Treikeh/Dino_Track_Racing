@@ -9,6 +9,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_was43"]
 bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 4
 
 [node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar", "_engine_sfx")]
 layout_mode = 3

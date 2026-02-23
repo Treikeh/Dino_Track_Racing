@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://du0rfhlkcibfd"]
 
 [ext_resource type="Script" uid="uid://dx3cbmx7ce6ai" path="res://gui/level_ui/leaderboard/leaderboard_entry/leaderboard_entry.gd" id="1_cpta0"]
-[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_8pscf"]
+[ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="2_185e6"]
 [ext_resource type="AudioStream" uid="uid://djyvggwey8q0b" path="res://gui/level_ui/leaderboard/leaderboard_entry/audio/plip.ogg" id="3_185e6"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hglvs"]
@@ -27,13 +27,13 @@ theme_override_constants/margin_bottom = 5
 
 [node name="IdLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8pscf")
+theme = ExtResource("2_185e6")
 text = "Player 0:"
 
 [node name="TimeLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("2_8pscf")
+theme = ExtResource("2_185e6")
 text = "00:01:50"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

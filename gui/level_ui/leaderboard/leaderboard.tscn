@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ldv8etwkdrbu"]
+[gd_scene load_steps=7 format=3 uid="uid://ldv8etwkdrbu"]
 
 [ext_resource type="Script" uid="uid://ct0xtrnhj2bye" path="res://gui/level_ui/leaderboard/leaderboard.gd" id="1_5kli7"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_4owjt"]
+[ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="3_fdi2r"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_w2f7t"]
 [ext_resource type="Script" uid="uid://dumnwd4tgwwbn" path="res://gui/button_effect.gd" id="3_yxjio"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_edfku"]
@@ -83,13 +84,13 @@ theme_override_constants/separation = 10
 
 [node name="ReplayButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_4owjt")
+theme = ExtResource("3_fdi2r")
 text = "Replay"
 script = ExtResource("3_yxjio")
 
 [node name="MainMenuButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_4owjt")
+theme = ExtResource("3_fdi2r")
 text = "Main menu"
 script = ExtResource("3_yxjio")
 

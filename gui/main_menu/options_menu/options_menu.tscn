@@ -92,6 +92,7 @@ alignment = 1
 
 [node name="GAMEPLAY" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "GAMEPLAY"
 horizontal_alignment = 1
@@ -103,6 +104,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "CPU Amount"
 
@@ -113,6 +115,7 @@ allow_greater = true
 
 [node name="CpuAmountValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
 layout_mode = 2
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "10"
 
@@ -122,6 +125,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_hlk55")
 
 [node name="DisplayLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "DISPLAY"
 horizontal_alignment = 1
@@ -133,6 +137,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Display mode"
 
@@ -156,6 +161,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Vsync"
 
@@ -177,6 +183,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Fps limit"
 
@@ -190,6 +197,7 @@ allow_greater = true
 
 [node name="FpsValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
 layout_mode = 2
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "10"
 
@@ -199,7 +207,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_6rlu2")
 
 [node name="AudioLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_g635g")
+theme = ExtResource("3_re80b")
 text = "AUDIO"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -217,6 +225,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Master Volume"
 vertical_alignment = 1
@@ -225,6 +234,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Effects Volume"
 vertical_alignment = 1
@@ -233,6 +243,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Music Volume"
 vertical_alignment = 1
@@ -274,6 +285,7 @@ alignment = 1
 [node name="MasterVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "0.75"
 horizontal_alignment = 2
@@ -282,6 +294,7 @@ vertical_alignment = 1
 [node name="EffectsVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "1.0"
 horizontal_alignment = 2
@@ -290,6 +303,7 @@ vertical_alignment = 1
 [node name="MusicVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "1.0"
 horizontal_alignment = 2
@@ -357,7 +371,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_g635g")
+theme = ExtResource("3_re80b")
 text = "Save Changes?"
 horizontal_alignment = 1
 vertical_alignment = 1

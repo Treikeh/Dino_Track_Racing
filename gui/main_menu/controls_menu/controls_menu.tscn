@@ -1,16 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://m2wbc1dhxton"]
+[gd_scene load_steps=19 format=3 uid="uid://m2wbc1dhxton"]
 
 [ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_fjb12"]
-[ext_resource type="Texture2D" uid="uid://veu5na6l50cc" path="res://gui/level_ui/pause_menu/art/xbox_controller.png" id="2_j1d6l"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_ogjo6"]
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="4_1lgak"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_ogjo6"]
 [ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel_stylebox.tres" id="4_wss0g"]
 [ext_resource type="Texture2D" uid="uid://w27qonhcr8rt" path="res://entities/items/mine/art/mine_icon.png" id="5_5srox"]
+[ext_resource type="Texture2D" uid="uid://1c6w7vfaskl3" path="res://gui/level_ui/pause_menu/art/controller_image_2.png" id="5_hcfcn"]
 [ext_resource type="Texture2D" uid="uid://bo2sfdtuppdy2" path="res://entities/items/boost/art/boost_icon.png" id="6_3adlm"]
 [ext_resource type="Texture2D" uid="uid://ba2ij7fnbp8e5" path="res://entities/items/lance/art/lance_icon.png" id="6_o6m73"]
 [ext_resource type="Texture2D" uid="uid://c838vhsh4l1ae" path="res://entities/items/trash_bag/art/trash_bag_icon.png" id="7_6svv1"]
+[ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="7_703s4"]
 [ext_resource type="Texture2D" uid="uid://bvg6cmeagmxac" path="res://entities/items/homing_missile/art/missile_icon.png" id="7_dvl5a"]
 [ext_resource type="Texture2D" uid="uid://bltvplbcwaguh" path="res://entities/items/bomb/art/bomb_icon.png" id="8_6svv1"]
 [ext_resource type="Texture2D" uid="uid://0i40qsp435nt" path="res://entities/items/meteor_rain/art/meteor_rain_icon.png" id="8_mck02"]
@@ -74,13 +75,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -356.0
-offset_top = -194.0
-offset_right = 356.0
-offset_bottom = 232.0
+offset_left = -360.0
+offset_top = -169.0
+offset_right = 352.0
+offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_j1d6l")
+texture = ExtResource("5_hcfcn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -140,6 +141,7 @@ size_flags_horizontal = 3
 
 [node name="Title" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
 layout_mode = 2
+theme = ExtResource("7_703s4")
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 13
 text = "Drifting"
@@ -148,8 +150,9 @@ horizontal_alignment = 1
 [node name="Label" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+theme = ExtResource("7_703s4")
 theme_override_fonts/font = ExtResource("2_fjb12")
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Press [DRIFT BUTTON] while turning to initiate a drift.
 
 Release [DRIFT BUTTON] after 0.2 sec to get a speed boost."
@@ -188,6 +191,7 @@ size_flags_horizontal = 3
 
 [node name="Title" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
 layout_mode = 2
+theme = ExtResource("7_703s4")
 theme_override_fonts/font = ExtResource("2_fjb12")
 theme_override_font_sizes/font_size = 13
 text = "Tricking"
@@ -196,8 +200,9 @@ horizontal_alignment = 1
 [node name="Label" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+theme = ExtResource("7_703s4")
 theme_override_fonts/font = ExtResource("2_fjb12")
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Press [TRICK BUTTON] when entering the air to perform a trick.
 
 Landig after performing a trick will give you a speed boost."
@@ -296,12 +301,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Mine:
 Placed behind
@@ -322,12 +322,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Boost:
 Large speed boost"
@@ -347,12 +342,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Lance:
 Small speed boost
@@ -373,12 +363,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Meteor Rain:
 Targets first player
@@ -405,12 +390,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Trash bag:
 Placed behind
@@ -431,12 +411,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Missile:
 Targets player infront
@@ -457,12 +432,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("2_fjb12")
+theme = ExtResource("7_703s4")
 theme_override_font_sizes/font_size = 12
 text = "Bomb:
 Throw infront
