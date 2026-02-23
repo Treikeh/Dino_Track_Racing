@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_ogjo6"]
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="4_1lgak"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_ogjo6"]
-[ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel_stylebox.tres" id="4_wss0g"]
+[ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel/panel_stylebox.tres" id="4_wss0g"]
 [ext_resource type="Texture2D" uid="uid://w27qonhcr8rt" path="res://entities/items/mine/art/mine_icon.png" id="5_5srox"]
 [ext_resource type="Texture2D" uid="uid://1c6w7vfaskl3" path="res://gui/level_ui/pause_menu/art/controller_image_2.png" id="5_hcfcn"]
 [ext_resource type="Texture2D" uid="uid://bo2sfdtuppdy2" path="res://entities/items/boost/art/boost_icon.png" id="6_3adlm"]

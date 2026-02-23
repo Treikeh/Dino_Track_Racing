@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_g635g"]
 [ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="3_g635g"]
 [ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="3_re80b"]
-[ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel_stylebox.tres" id="3_u7lng"]
+[ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel/panel_stylebox.tres" id="3_u7lng"]
 [ext_resource type="Texture2D" uid="uid://bke3qjwvmk6v2" path="res://gui/button_display/art/button_west.png" id="4_6rlu2"]
 [ext_resource type="Script" uid="uid://dumnwd4tgwwbn" path="res://gui/button_effect.gd" id="6_hlk55"]
 
@@ -111,6 +111,7 @@ text = "CPU Amount"
 [node name="CpuAmountSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_re80b")
 allow_greater = true
 
 [node name="CpuAmountValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
@@ -190,6 +191,7 @@ text = "Fps limit"
 [node name="FpsSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_re80b")
 min_value = 1.0
 max_value = 120.0
 value = 60.0
@@ -258,6 +260,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+theme = ExtResource("3_re80b")
 max_value = 1.0
 step = 0.05
 
@@ -265,6 +268,7 @@ step = 0.05
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+theme = ExtResource("3_re80b")
 max_value = 1.0
 step = 0.05
 
@@ -272,6 +276,7 @@ step = 0.05
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+theme = ExtResource("3_re80b")
 max_value = 1.0
 step = 0.05
 
@@ -310,6 +315,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ButtonDisplays" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -343,6 +349,7 @@ _button_texture = ExtResource("3_g635g")
 _back_text = "Back"
 
 [node name="ConfirmPopUp" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -389,6 +396,7 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../DiscardButton")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Save"
 script = ExtResource("6_hlk55")
@@ -402,6 +410,7 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../SaveButton")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
+theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Discard"
 script = ExtResource("6_hlk55")

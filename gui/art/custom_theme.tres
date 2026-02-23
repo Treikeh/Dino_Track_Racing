@@ -1,13 +1,38 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dg07kjvb2o0nd"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dg07kjvb2o0nd"]
 
+[ext_resource type="StyleBox" uid="uid://dnrudtf2s1dj6" path="res://gui/art/button/button_focus_stylebox.tres" id="1_4gk8x"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="1_nnglc"]
+[ext_resource type="Texture2D" uid="uid://c46ivjcog7g6a" path="res://gui/art/slider/slider_grab_normal.png" id="3_deqfp"]
+[ext_resource type="StyleBox" uid="uid://bke3y7enqcf0a" path="res://gui/art/slider/slider_background.tres" id="3_re5mc"]
+[ext_resource type="StyleBox" uid="uid://0oq5wpdelqlq" path="res://gui/art/panel/panel_stylebox.tres" id="3_thnnf"]
+[ext_resource type="StyleBox" uid="uid://rnxjwdktjsfk" path="res://gui/art/button/button_normal_stylebox.tres" id="3_wryox"]
+[ext_resource type="Texture2D" uid="uid://da8ls4j6t8ecq" path="res://gui/art/slider/slider_grab_disabled.png" id="4_rp4dv"]
+[ext_resource type="Texture2D" uid="uid://c4tjsh3x1dca2" path="res://gui/art/slider/slider_grab_focus.png" id="5_cn2dp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_thnnf"]
 
 [resource]
 default_font = ExtResource("1_nnglc")
 default_font_size = 15
 Button/constants/outline_size = 3
+Button/styles/focus = ExtResource("1_4gk8x")
+Button/styles/hover = ExtResource("1_4gk8x")
+Button/styles/normal = ExtResource("3_wryox")
+Button/styles/pressed = SubResource("StyleBoxEmpty_thnnf")
+HSlider/icons/grabber = ExtResource("3_deqfp")
+HSlider/icons/grabber_disabled = ExtResource("4_rp4dv")
+HSlider/icons/grabber_highlight = ExtResource("5_cn2dp")
+HSlider/styles/grabber_area = ExtResource("1_4gk8x")
+HSlider/styles/grabber_area_highlight = ExtResource("1_4gk8x")
+HSlider/styles/slider = ExtResource("3_re5mc")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
+Panel/styles/panel = ExtResource("3_thnnf")
+PopupMenu/constants/outline_size = 4
+PopupMenu/icons/radio_checked = ExtResource("3_deqfp")
+PopupMenu/icons/radio_unchecked = ExtResource("4_rp4dv")
+PopupMenu/styles/hover = ExtResource("1_4gk8x")
+PopupMenu/styles/panel = ExtResource("3_wryox")
