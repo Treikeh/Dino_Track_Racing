@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4re4rda2ts5x"]
+[gd_scene load_steps=8 format=3 uid="uid://b4re4rda2ts5x"]
 
 [ext_resource type="Script" uid="uid://48xjgrjn0t18" path="res://entities/player_input_controller/hud/item_panel/item_panel.gd" id="1_teqg3"]
+[ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="1_uka50"]
 [ext_resource type="Shader" uid="uid://cy885nlbujkap" path="res://entities/player_input_controller/hud/item_panel/art/item_panel_display.gdshader" id="3_tjklg"]
 [ext_resource type="Texture2D" uid="uid://cwfkhxvk3140g" path="res://entities/player_input_controller/hud/item_panel/art/item_list.png" id="4_uka50"]
 
@@ -33,6 +34,7 @@ _item_list = NodePath("PanelContainer/MarginContainer/ListRoot/ItemList")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
+theme = ExtResource("1_uka50")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -50,5 +52,7 @@ texture_filter = 1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_uka50")
 layout_mode = 0
-offset_right = 70.0
-offset_bottom = 490.0
+offset_left = -6.0
+offset_top = -5.0
+offset_right = 64.0
+offset_bottom = 485.0

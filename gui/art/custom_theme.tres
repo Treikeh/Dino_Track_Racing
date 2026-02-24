@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dg07kjvb2o0nd"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://dg07kjvb2o0nd"]
 
 [ext_resource type="StyleBox" uid="uid://dnrudtf2s1dj6" path="res://gui/art/button/button_focus_stylebox.tres" id="1_4gk8x"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="1_nnglc"]
@@ -8,6 +8,9 @@
 [ext_resource type="StyleBox" uid="uid://rnxjwdktjsfk" path="res://gui/art/button/button_normal_stylebox.tres" id="3_wryox"]
 [ext_resource type="Texture2D" uid="uid://da8ls4j6t8ecq" path="res://gui/art/slider/slider_grab_disabled.png" id="4_rp4dv"]
 [ext_resource type="Texture2D" uid="uid://c4tjsh3x1dca2" path="res://gui/art/slider/slider_grab_focus.png" id="5_cn2dp"]
+[ext_resource type="StyleBox" uid="uid://4slns0hca0c7" path="res://gui/art/scroll_bar/scroll_bar_grabber_normal.tres" id="8_rp4dv"]
+[ext_resource type="StyleBox" uid="uid://csr6rle3ux2jt" path="res://gui/art/scroll_bar/scroll_bar_grabber_highlight.tres" id="9_cn2dp"]
+[ext_resource type="StyleBox" uid="uid://d0jb5wnuucer2" path="res://gui/art/scroll_bar/scroll_bar_grabber_focus.tres" id="9_deqfp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_thnnf"]
 
@@ -31,8 +34,13 @@ Label/constants/outline_size = 2
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Panel/styles/panel = ExtResource("3_thnnf")
+PanelContainer/styles/panel = ExtResource("3_thnnf")
 PopupMenu/constants/outline_size = 4
 PopupMenu/icons/radio_checked = ExtResource("3_deqfp")
 PopupMenu/icons/radio_unchecked = ExtResource("4_rp4dv")
 PopupMenu/styles/hover = ExtResource("1_4gk8x")
 PopupMenu/styles/panel = ExtResource("3_wryox")
+VScrollBar/styles/grabber = ExtResource("8_rp4dv")
+VScrollBar/styles/grabber_highlight = ExtResource("9_cn2dp")
+VScrollBar/styles/grabber_pressed = ExtResource("9_deqfp")
+VScrollBar/styles/scroll = ExtResource("3_re5mc")

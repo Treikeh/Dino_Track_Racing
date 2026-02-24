@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://o0j26svo2pfl"]
+[gd_scene load_steps=6 format=3 uid="uid://o0j26svo2pfl"]
 
 [ext_resource type="Script" uid="uid://dh0ftl38xx6k6" path="res://entities/player_input_controller/hud/position_panel/position_panel.gd" id="1_awfkn"]
 [ext_resource type="FontFile" uid="uid://bdpk3r1acp6i4" path="res://entities/player_input_controller/hud/position_numbers.png" id="1_rugwk"]
 [ext_resource type="Texture2D" uid="uid://ccv670s0y7qhi" path="res://entities/player_input_controller/hud/lap_flag.png" id="2_awfkn"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="4_04lni"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_04lni"]
+
 [node name="PositionPanel" type="PanelContainer" node_paths=PackedStringArray("_race_pos_label", "_lap_label")]
 offset_right = 71.0
 offset_bottom = 85.0
 pivot_offset = Vector2(0, 85)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_04lni")
 script = ExtResource("1_awfkn")
 _race_pos_label = NodePath("VBoxContainer/RacePosLabel")
 _lap_label = NodePath("VBoxContainer/MarginContainer/HBoxContainer/LapLabel")

@@ -13,6 +13,7 @@ stream_0/stream = ExtResource("3_185e6")
 offset_right = 339.0
 offset_bottom = 23.0
 focus_mode = 2
+theme = ExtResource("2_185e6")
 script = ExtResource("1_cpta0")
 _id_label = NodePath("MarginContainer/IdLabel")
 _time_label = NodePath("MarginContainer/TimeLabel")
