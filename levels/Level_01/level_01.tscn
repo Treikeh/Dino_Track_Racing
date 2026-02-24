@@ -57,7 +57,7 @@ metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 environment = SubResource("Environment_w8irb")
 
 [node name="Skybox" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -85.912, 120.39995, 20.5)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -85.912, 120.39995, 20.5)
 material_override = ExtResource("2_rbhar")
 mesh = SubResource("SphereMesh_mq051")
 
@@ -68,7 +68,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.98657185, -0.16294253, 0.008112988, -0.1631359, 0.98579955, -0.03912637, -0.0016225621, -0.03992793, -0.9991179, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.98657155, -0.16294253, 0.008112986, -0.16313584, 0.98579955, -0.03912636, -0.0016225616, -0.03992793, -0.9991176, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
