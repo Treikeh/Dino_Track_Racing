@@ -2,6 +2,7 @@ extends PanelContainer
 
 
 @export var _speedometer_bar: Range
+@export var _speedometer_bar_shadow: Range
 @export var _speed_label: Label
 
 
@@ -11,4 +12,5 @@ func _ready() -> void:
 
 func update(speed_khm: float) -> void:
 	_speedometer_bar.value = speed_khm
+	_speedometer_bar_shadow.value = speed_khm
 	_speed_label.text = "%skm/h" % int(snappedf(speed_khm, 1.0))

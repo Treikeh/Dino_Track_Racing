@@ -1,27 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://o23pygopte4a"]
+[gd_scene load_steps=6 format=3 uid="uid://o23pygopte4a"]
 
 [ext_resource type="Script" uid="uid://clr7bx31nqsgq" path="res://entities/player_input_controller/hud/speedometer/speedometer.gd" id="1_fp6yl"]
-[ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="2_2oc65"]
+[ext_resource type="Texture2D" uid="uid://dsaf6ilglcf2i" path="res://entities/player_input_controller/hud/speedometer/art/speedometer_bar.png" id="2_2b67a"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_j3k0a"]
+[ext_resource type="Texture2D" uid="uid://m2eibto7cmva" path="res://entities/player_input_controller/hud/speedometer/art/speedometer_bar_shadow.png" id="2_tiv0i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j3k0a"]
 
-[sub_resource type="Gradient" id="Gradient_jpoqo"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.40425533, 0.6666667)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_utykj"]
-gradient = SubResource("Gradient_jpoqo")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[node name="Speedometer" type="PanelContainer" node_paths=PackedStringArray("_speedometer_bar", "_speed_label")]
+[node name="Speedometer" type="PanelContainer" node_paths=PackedStringArray("_speedometer_bar", "_speedometer_bar_shadow", "_speed_label")]
 offset_right = 85.0
 offset_bottom = 64.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_j3k0a")
 script = ExtResource("1_fp6yl")
-_speedometer_bar = NodePath("MarginContainer/HBoxContainer/SpeedometerBar")
+_speedometer_bar = NodePath("MarginContainer/HBoxContainer/SpeedometerBarShadow/SpeedometerBar")
+_speedometer_bar_shadow = NodePath("MarginContainer/HBoxContainer/SpeedometerBarShadow")
 _speed_label = NodePath("MarginContainer/HBoxContainer/SpeedLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -35,18 +27,30 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = -40
 
-[node name="SpeedometerBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
+[node name="SpeedometerBarShadow" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 max_value = 160.0
 value = 100.0
 fill_mode = 4
 radial_initial_angle = 180.0
 radial_fill_degrees = 230.0
-texture_progress = SubResource("GradientTexture2D_utykj")
+texture_progress = ExtResource("2_tiv0i")
+
+[node name="SpeedometerBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/SpeedometerBarShadow"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 61.0
+offset_bottom = 61.0
+max_value = 160.0
+value = 100.0
+fill_mode = 4
+radial_initial_angle = 180.0
+radial_fill_degrees = 230.0
+texture_progress = ExtResource("2_2b67a")
 
 [node name="SpeedLabel" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_2oc65")
 theme_override_fonts/font = ExtResource("2_j3k0a")
 text = "123 kmh"
 horizontal_alignment = 2
