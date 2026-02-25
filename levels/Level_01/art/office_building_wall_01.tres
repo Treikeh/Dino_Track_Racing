@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://2lrdtn04hj73"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_6ix02"]
+[ext_resource type="Texture2D" uid="uid://colounqhlyq28" path="res://levels/Level_01/art/office_building_wall_01.png" id="2_cx5nf"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6ix02")
+shader_parameter/color_texture = ExtResource("2_cx5nf")

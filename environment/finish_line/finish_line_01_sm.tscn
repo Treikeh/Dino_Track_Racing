@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://wc2mqqmx0usn"]
+
+[ext_resource type="PackedScene" uid="uid://xhmj7sofemc" path="res://environment/finish_line/finish_line_01_sm.glb" id="1_sa4im"]
+
+[node name="FinishLine_01_SM" instance=ExtResource("1_sa4im")]
+
+[node name="FinishLineMesh_001" parent="." index="0"]
+layers = 3

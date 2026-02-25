@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=17 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
 [ext_resource type="PackedScene" uid="uid://c7poo3o6yoe28" path="res://common/scenes/respawn_trigger.tscn" id="6_22u7d"]
 [ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="8_vnc2o"]
+[ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="9_kctjg"]
+[ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="10_di3ot"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -68,7 +70,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.98657143, -0.16294253, 0.008112985, -0.16313583, 0.98579955, -0.03912635, -0.0016225614, -0.03992793, -0.9991175, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.98657113, -0.16294253, 0.008112983, -0.16313578, 0.98579955, -0.03912634, -0.0016225609, -0.03992793, -0.9991172, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -140,3 +142,21 @@ debug_color = Color(0.9882353, 0, 0, 1)
 stream = ExtResource("8_vnc2o")
 volume_db = -10.0
 bus = &"Music"
+
+[node name="PalmTree_01_SM" parent="." instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.984653, -26.243835, -115.27827)
+
+[node name="PalmTree_01_SM2" parent="." instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.895002, -26.42233, -119.138275)
+
+[node name="PalmTree_01_SM3" parent="." instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.116924, -25.95234, -126.42393)
+
+[node name="PalmTree_01_SM4" parent="." instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9229765, 0.73550045, 54.801426)
+
+[node name="PalmTree_01_SM5" parent="." instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.145767, 0.22562613, 70.77188)
+
+[node name="FinishLine_01_SM" parent="." instance=ExtResource("10_di3ot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0000002)

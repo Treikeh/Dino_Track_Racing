@@ -39,6 +39,11 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
+"building_mat.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://levels/Level_01/art/office_building_wall_01.tres",
+"use_external/path": "uid://2lrdtn04hj73"
+},
 "grass_mat.001": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://levels/Level_01/art/grass_mat_01.tres",

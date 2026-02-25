@@ -155,7 +155,7 @@ func _physics_process(delta: float) -> void:
 		# Only allow input movement when the movement state is normal
 		if _movement_state == MovementState.NORMAL:
 			# Move car
-			# Increase the friction when driving on grass
+			# Increase the friction when driving on 1ss
 			var ground_collider: Node3D = _ground_check.get_collider()
 			var ground_friction: float = 2.0 if ground_collider.is_in_group("grass") else 1.0
 			var accel_force: float = _accel_curve.sample(speed_khm * ground_friction) * throttle
