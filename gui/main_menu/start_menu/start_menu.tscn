@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://duegxma2hxs6a"]
+[gd_scene load_steps=8 format=3 uid="uid://duegxma2hxs6a"]
 
 [ext_resource type="Script" uid="uid://dyb1piqij4rso" path="res://gui/main_menu/start_menu/start_menu.gd" id="1_i1nwf"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_i1nwf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="5_grf3h"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="5_ujcfj"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="6_grf3h"]
+[ext_resource type="Texture2D" uid="uid://dymlbl8g7jg3w" path="res://gui/main_menu/start_menu/art/logo.png" id="7_voykp"]
 
 [node name="StartMenu" type="Control" node_paths=PackedStringArray("_start_button", "_title_label", "_version_label", "_bottom_container", "_buttons_container")]
 layout_mode = 3
@@ -22,6 +23,7 @@ _bottom_container = NodePath("BottomContainer")
 _buttons_container = NodePath("ButtonsContainer")
 
 [node name="Title" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -43,6 +45,13 @@ text = "Dino Track
  Racing"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 321.0
+offset_bottom = 237.0
+texture = ExtResource("7_voykp")
+stretch_mode = 5
 
 [node name="BottomContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

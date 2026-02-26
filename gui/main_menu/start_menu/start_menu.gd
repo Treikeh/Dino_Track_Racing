@@ -32,6 +32,7 @@ func _ready() -> void:
 	add_child(_close_timer)
 	
 	open_menu()
+	
 
 
 func open_menu() -> void:

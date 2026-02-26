@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dvomri3tdyoxl"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_0vpxj"]
+[ext_resource type="Texture2D" uid="uid://d2c0q6qeewmli" path="res://levels/Level_01/art/mountian_backdrop.png" id="2_11mdy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0vpxj")
+shader_parameter/color_texture = ExtResource("2_11mdy")

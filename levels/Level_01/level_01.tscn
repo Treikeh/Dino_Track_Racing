@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=18 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="8_vnc2o"]
 [ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="9_kctjg"]
 [ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="10_di3ot"]
+[ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="10_mq051"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,13 +31,6 @@ fog_density = 0.097
 fog_sky_affect = 0.261
 fog_depth_end = 200.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_mq051"]
-flip_faces = true
-radius = 50.0
-height = 100.0
-radial_segments = 16
-rings = 8
-
 [sub_resource type="Curve3D" id="Curve3D_qn7dl"]
 closed = true
 _data = {
@@ -48,6 +42,13 @@ point_count = 22
 [sub_resource type="BoxShape3D" id="BoxShape3D_rbhar"]
 size = Vector3(227.2, 10, 194.2)
 
+[sub_resource type="SphereMesh" id="SphereMesh_mq051"]
+flip_faces = true
+radius = 50.0
+height = 100.0
+radial_segments = 16
+rings = 8
+
 [node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_background_music")]
 script = ExtResource("1_qn7dl")
 _track = NodePath("Track")
@@ -58,11 +59,6 @@ metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8irb")
 
-[node name="Skybox" type="MeshInstance3D" parent="."]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -85.912, 120.39995, 20.5)
-material_override = ExtResource("2_rbhar")
-mesh = SubResource("SphereMesh_mq051")
-
 [node name="Track" type="Path3D" parent="." groups=["track"]]
 curve = SubResource("Curve3D_qn7dl")
 
@@ -70,7 +66,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.98657113, -0.16294253, 0.008112983, -0.16313578, 0.98579955, -0.03912634, -0.0016225609, -0.03992793, -0.9991172, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.98657054, -0.16294253, 0.008112978, -0.16313568, 0.98579955, -0.039126318, -0.00162256, -0.03992793, -0.9991166, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -136,27 +132,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6, 0, 47.100002)
 shape = SubResource("BoxShape3D_rbhar")
 debug_color = Color(0.9882353, 0, 0, 1)
 
+[node name="Decoration" type="Node3D" parent="."]
+
+[node name="Skybox" type="MeshInstance3D" parent="Decoration"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -85.912, 120.39995, 20.5)
+material_override = ExtResource("2_rbhar")
+mesh = SubResource("SphereMesh_mq051")
+skeleton = NodePath("../..")
+
+[node name="FinishLine_01_SM" parent="Decoration" instance=ExtResource("10_di3ot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0000002)
+
+[node name="PalmTree_01_SM" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.984653, -26.243835, -115.27827)
+
+[node name="PalmTree_01_SM2" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.895002, -26.42233, -119.138275)
+
+[node name="PalmTree_01_SM3" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.116924, -25.95234, -126.42393)
+
+[node name="PalmTree_01_SM4" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9229765, 0.73550045, 54.801426)
+
+[node name="PalmTree_01_SM5" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.145767, 0.22562613, 70.77188)
+
+[node name="PalmTree_01_SM6" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163.2, -24.2, -120.1)
+
+[node name="PalmTree_01_SM7" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175, -23.300001, -111.6)
+
+[node name="PalmTree_01_SM8" parent="Decoration" instance=ExtResource("9_kctjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -171.8, -23.6, -121.4)
+
+[node name="TrashBag_01_SM" parent="Decoration" instance=ExtResource("10_mq051")]
+transform = Transform3D(0.46650636, 0.4829629, -0.7410254, -0.12940952, 0.8660253, 0.48296288, 0.875, -0.12940955, 0.46650636, -105.89319, -24.546412, -138.14824)
+
+[node name="TrashBag_01_SM2" parent="Decoration" instance=ExtResource("10_mq051")]
+transform = Transform3D(0.5756105, 0.34576556, -0.7410253, 0.099143885, 0.8700099, 0.4829629, 0.81169146, -0.35146672, 0.4665064, -109.00719, -24.676765, -140.9014)
+
+[node name="TrashBag_01_SM3" parent="Decoration" instance=ExtResource("10_mq051")]
+transform = Transform3D(0.99329525, 0.09117845, 0.07107097, 0.06407504, 0.07748778, -0.9949322, -0.09622356, 0.99281526, 0.07112603, -111.98784, -25.0652, -142.55353)
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_vnc2o")
 volume_db = -10.0
 bus = &"Music"
-
-[node name="PalmTree_01_SM" parent="." instance=ExtResource("9_kctjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.984653, -26.243835, -115.27827)
-
-[node name="PalmTree_01_SM2" parent="." instance=ExtResource("9_kctjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.895002, -26.42233, -119.138275)
-
-[node name="PalmTree_01_SM3" parent="." instance=ExtResource("9_kctjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.116924, -25.95234, -126.42393)
-
-[node name="PalmTree_01_SM4" parent="." instance=ExtResource("9_kctjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9229765, 0.73550045, 54.801426)
-
-[node name="PalmTree_01_SM5" parent="." instance=ExtResource("9_kctjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.145767, 0.22562613, 70.77188)
-
-[node name="FinishLine_01_SM" parent="." instance=ExtResource("10_di3ot")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0000002)

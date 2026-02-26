@@ -4,22 +4,41 @@
 
 [node name="Track_01_SM" instance=ExtResource("1_1laj4")]
 
-[node name="Road_001" parent="." index="0"]
+[node name="RoadMesh_001" parent="." index="0"]
 layers = 3
 
-[node name="Grass_001" parent="." index="1"]
+[node name="StaticBody3D" parent="RoadMesh_001" index="0"]
+collision_mask = 0
+
+[node name="GrassMesh_001" parent="." index="1"]
 layers = 3
 
-[node name="StaticBody3D" parent="Grass_001" index="0" groups=["grass"]]
+[node name="StaticBody3D" parent="GrassMesh_001" index="0" groups=["grass"]]
+collision_mask = 0
 
-[node name="StaticBody3D" parent="TreesCollision_001" index="0"]
+[node name="TreesWallCollisionMesh_001" parent="." index="2"]
+layers = 3
+
+[node name="StaticBody3D" parent="TreesWallCollisionMesh_001" index="0"]
 collision_layer = 32
+collision_mask = 0
 
-[node name="VulcanoCollision_001" parent="." index="3"]
+[node name="VulcanoWallCollisionMesh_001" parent="." index="3"]
 layers = 3
 
-[node name="StaticBody3D" parent="VulcanoCollision_001" index="0"]
+[node name="StaticBody3D" parent="VulcanoWallCollisionMesh_001" index="0"]
 collision_layer = 32
+collision_mask = 0
 
-[node name="Vulcano_001" parent="." index="4"]
+[node name="RockCaveWallCollisionMesh_001" parent="." index="4"]
+layers = 3
+
+[node name="StaticBody3D" parent="RockCaveWallCollisionMesh_001" index="0"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="VulcanoDeco_001" parent="." index="5"]
+layers = 3
+
+[node name="TreesDeco_001" parent="." index="6"]
 layers = 3

@@ -54,6 +54,16 @@ _subresources={
 "use_external/fallback_path": "res://levels/Level_01/art/lava_mat_01.tres",
 "use_external/path": "uid://bbvq8m8l6gbu1"
 },
+"mountain_mat.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://levels/Level_01/art/mountian_backdrop_01_mat.tres",
+"use_external/path": "uid://dvomri3tdyoxl"
+},
+"palm_tree_mat.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://environment/palm_tree/palm_tree_01_mat.tres",
+"use_external/path": "uid://fs3rfrffxcvi"
+},
 "road_mat.001": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://levels/Level_01/art/road_mat_01.tres",
