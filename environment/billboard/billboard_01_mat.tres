@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c8skpcmq2f1gu"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_wgv1y"]
+[ext_resource type="Texture2D" uid="uid://c5rf5ceyd2s4o" path="res://environment/billboard/billboard_01_bc.png" id="2_kwoay"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wgv1y")
+shader_parameter/color_texture = ExtResource("2_kwoay")

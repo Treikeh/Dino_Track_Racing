@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="6_grf3h"]
 [ext_resource type="Texture2D" uid="uid://dymlbl8g7jg3w" path="res://gui/main_menu/start_menu/art/logo.png" id="7_voykp"]
 
-[node name="StartMenu" type="Control" node_paths=PackedStringArray("_start_button", "_title_label", "_version_label", "_bottom_container", "_buttons_container")]
+[node name="StartMenu" type="Control" node_paths=PackedStringArray("_start_button", "_logo", "_version_label", "_bottom_container", "_buttons_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,34 +17,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i1nwf")
 _start_button = NodePath("ButtonsContainer/StartButton")
-_title_label = NodePath("Title")
+_logo = NodePath("Logo")
 _version_label = NodePath("BottomContainer/VersionLabelContainer/VersionLabel")
 _bottom_container = NodePath("BottomContainer")
 _buttons_container = NodePath("ButtonsContainer")
-
-[node name="Title" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -454.0
-offset_top = 50.0
-offset_right = -54.0
-offset_bottom = 133.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = 19
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("2_i1nwf")
-theme_override_font_sizes/font_size = 40
-text = "Dino Track
- Racing"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Logo" type="TextureRect" parent="."]
 layout_mode = 1

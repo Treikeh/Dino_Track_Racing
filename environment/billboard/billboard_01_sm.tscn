@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkjrcub6yciar"]
+
+[ext_resource type="PackedScene" uid="uid://c68dq3aa61tfm" path="res://environment/billboard/billboard_01_sm.glb" id="1_6tvr1"]
+
+[node name="Billboard_01_SM" instance=ExtResource("1_6tvr1")]

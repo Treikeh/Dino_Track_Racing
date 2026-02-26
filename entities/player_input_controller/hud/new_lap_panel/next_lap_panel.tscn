@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bly7ariee4yik"]
+[gd_scene load_steps=11 format=3 uid="uid://bly7ariee4yik"]
 
 [ext_resource type="Texture2D" uid="uid://cvg4q2567raki" path="res://entities/player_input_controller/hud/new_lap_panel/new_lap_panel.png" id="1_4r700"]
 [ext_resource type="Script" uid="uid://ce7d0ty1t3q7k" path="res://entities/player_input_controller/hud/new_lap_panel/next_lap_panel.gd" id="1_wgvxv"]
 [ext_resource type="Texture2D" uid="uid://ccv670s0y7qhi" path="res://entities/player_input_controller/hud/lap_flag.png" id="2_wgvxv"]
+[ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="4_42vvm"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="4_mdbm8"]
 
 [sub_resource type="Curve" id="Curve_mdbm8"]
@@ -82,7 +83,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_mdbm8")
 
 [node name="LapLabel" type="Label" parent="DinoRoot/DinoImage/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme = ExtResource("4_42vvm")
 theme_override_fonts/font = ExtResource("4_mdbm8")
 theme_override_font_sizes/font_size = 14
 text = "1/3"

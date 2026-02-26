@@ -6,7 +6,7 @@ signal menu_button_pressed(menu_id: int)
 @export var _button_move_distance: float = 500.0
 @export var _move_in_out_duration: float = 0.5
 @export var _start_button: Button
-@export var _title_label: Label
+@export var _logo: TextureRect
 @export var _version_label: Label
 @export var _bottom_container: Container
 @export var _buttons_container: Container
@@ -25,7 +25,7 @@ func _ready() -> void:
 	for button: Button in _buttons_container.get_children():
 		_start_buttons_positions.append(button.position)
 	
-	_title_start_position = _title_label.position
+	_title_start_position = _logo.position
 	_bottom_start_position = _bottom_container.position
 	
 	_close_timer = Timer.new()
@@ -59,14 +59,14 @@ func open_menu() -> void:
 				_move_in_out_duration
 		)
 	
-	_title_label.position.y = _title_start_position.y - 250.0
+	_logo.position.y = _title_start_position.y - 250.0
 	var title_tween: Tween = create_tween()
 	title_tween.set_ease(Tween.EASE_OUT)
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.tween_property(
-			_title_label,
+			_logo,
 			"position:y",
-			_title_label.position.y + 250.0,
+			_logo.position.y + 250.0,
 			_move_in_out_duration
 	)
 	
@@ -111,9 +111,9 @@ func close_menu(new_menu: int = 0) -> void:
 	title_tween.set_ease(Tween.EASE_IN)
 	title_tween.set_trans(Tween.TRANS_BACK)
 	title_tween.tween_property(
-			_title_label,
+			_logo,
 			"position:y",
-			_title_label.position.y - 250.0,
+			_logo.position.y - 250.0,
 			_move_in_out_duration
 	)
 	
