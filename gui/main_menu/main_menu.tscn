@@ -88,7 +88,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98)
 fov = 30.0
 
 [node name="ScooterDino_01_SK" parent="BackgroundViewport/SubViewport" instance=ExtResource("2_bhc4r")]
-transform = Transform3D(-0.7949368, 0.011854864, 0.6065763, -0.06761746, 0.9918487, -0.107999355, -0.60291225, -0.12686782, -0.78765553, 0.865, -1.037, -2.541)
+transform = Transform3D(-0.7949368, 0.011854864, 0.6065763, -0.06761746, 0.9918487, -0.107999355, -0.60291225, -0.12686782, -0.78765553, 0.8661855, -0.93781507, -2.5536866)
 
 [node name="Skeleton3D" parent="BackgroundViewport/SubViewport/ScooterDino_01_SK" index="0"]
 bones/2/rotation = Quaternion(-0.06671888, 0.66952854, 0.7109416, 0.20455375)
