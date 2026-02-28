@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cnnkfjhuolbqp"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_erydg"]
+[ext_resource type="Texture2D" uid="uid://djkpawt33iswy" path="res://environment/street_light/street_light_01_bc.png" id="2_71em4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_erydg")
+shader_parameter/color_texture = ExtResource("2_71em4")

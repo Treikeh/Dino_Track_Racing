@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7golcedx5sk1"
-path.bptc="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.bptc.ctex"
-path.astc="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.astc.ctex"
+uid="uid://djkpawt33iswy"
+path.bptc="res://.godot/imported/street_light_01_bc.png-c7d39f44e9a287ea6d46496b0141f123.bptc.ctex"
+path.astc="res://.godot/imported/street_light_01_bc.png-c7d39f44e9a287ea6d46496b0141f123.astc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.bptc.ctex", "res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.astc.ctex"]
+source_file="res://environment/street_light/street_light_01_bc.png"
+dest_files=["res://.godot/imported/street_light_01_bc.png-c7d39f44e9a287ea6d46496b0141f123.bptc.ctex", "res://.godot/imported/street_light_01_bc.png-c7d39f44e9a287ea6d46496b0141f123.astc.ctex"]
 
 [params]
 

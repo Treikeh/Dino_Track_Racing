@@ -77,8 +77,8 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 theme = ExtResource("4_q4y1n")
-text = "MUSIC:
-Created by "
+text = "TRACK MUSIC:
+Created by IHateTuesdays via Pixabay"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=20 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="10_di3ot"]
 [ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="10_mq051"]
 [ext_resource type="PackedScene" uid="uid://bkjrcub6yciar" path="res://environment/billboard/billboard_01_sm.tscn" id="12_i20lp"]
+[ext_resource type="PackedScene" uid="uid://cjniii7bsnrev" path="res://environment/street_light/street_light_01_sm.tscn" id="13_0mo3p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -67,7 +68,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.98657006, -0.16294253, 0.0081129735, -0.1631356, 0.98579955, -0.0391263, -0.0016225592, -0.03992793, -0.9991161, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.98656976, -0.16294253, 0.008112972, -0.16313556, 0.98579955, -0.03912629, -0.0016225587, -0.03992793, -0.9991158, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -179,6 +180,48 @@ transform = Transform3D(0.99329525, 0.09117845, 0.07107097, 0.06407504, 0.077487
 
 [node name="Billboard_01_SM" parent="Decoration" instance=ExtResource("12_i20lp")]
 transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -126.799995, -2.5, -90.4)
+
+[node name="StreetLight_01_SM" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.8660253, 0, -0.5000001, 0, 1, 0, 0.5000001, 0, -0.8660253, -68.00001, -28.3, -117)
+
+[node name="StreetLight_01_SM2" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881907, -210, -8, 32.4)
+
+[node name="StreetLight_01_SM3" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -183, -23.199999, -99.9)
+
+[node name="StreetLight_01_SM4" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 12.5, -26.7, -125.1)
+
+[node name="StreetLight_01_SM5" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.86602557, 0, -0.5, 0, 1, 0, 0.5, 0, -0.86602557, 9, 0.7, 118.9)
+
+[node name="StreetLight_01_SM6" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(0.5735764, 0, -0.8191521, 0, 1, 0, 0.8191521, 0, 0.5735764, -184.3, -8.5, 101.00001)
+
+[node name="StreetLight_01_SM7" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -109.9, -2.4, 148.8)
+
+[node name="StreetLight_01_SM8" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -122.200005, -25.7, -118.8)
+
+[node name="StreetLight_01_SM9" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.2, -25.6, -132.7)
+
+[node name="StreetLight_01_SM10" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.76604444, 0, 0.64278764, 0, 1, 0, -0.64278764, 0, -0.76604444, -164.2, -15.8, -43.9)
+
+[node name="StreetLight_01_SM11" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -124.3, -7, -10.5)
+
+[node name="StreetLight_01_SM12" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4, -26.900002, -134)
+
+[node name="StreetLight_01_SM13" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.100002, -1, 129.5)
+
+[node name="StreetLight_01_SM14" parent="Decoration" instance=ExtResource("13_0mo3p")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 9.5, 0.19999999, 68.8)
 
 [node name="SFX" type="Node" parent="."]
 
