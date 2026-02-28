@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=28 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
@@ -13,7 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="10_mq051"]
 [ext_resource type="PackedScene" uid="uid://bkjrcub6yciar" path="res://environment/billboard/billboard_01_sm.tscn" id="12_i20lp"]
 [ext_resource type="PackedScene" uid="uid://cjniii7bsnrev" path="res://environment/street_light/street_light_01_sm.tscn" id="13_0mo3p"]
+[ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="14_bbnjd"]
 [ext_resource type="PackedScene" uid="uid://dmsrach3rtkrs" path="res://environment/trash_can/trash_can_01_sm.tscn" id="14_i4jfb"]
+[ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="15_bhh5v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -52,6 +54,38 @@ height = 100.0
 radial_segments = 16
 rings = 8
 
+[sub_resource type="Gradient" id="Gradient_km0sl"]
+offsets = PackedFloat32Array(0.092920355, 0.41150442, 0.90707964)
+colors = PackedColorArray(0.29411766, 0.34901962, 0.43529412, 1, 0.9529412, 0.47843137, 0.18039216, 1, 0.19215687, 0.21568628, 0.28235295, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ren5v"]
+gradient = SubResource("Gradient_km0sl")
+
+[sub_resource type="Curve" id="Curve_bbnjd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bhh5v"]
+width = 64
+curve = SubResource("Curve_bbnjd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dgpm2"]
+emission_shape_scale = Vector3(82.38, 0.705, 49.03)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -360.0
+angle_max = 360.00003
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = -2.2351742e-06
+scale_min = 0.39999998
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_bhh5v")
+color_initial_ramp = SubResource("GradientTexture1D_ren5v")
+
 [node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_background_music")]
 script = ExtResource("1_qn7dl")
 _track = NodePath("Track")
@@ -69,7 +103,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.98656875, -0.16294253, 0.008112966, -0.1631354, 0.98579955, -0.039126262, -0.001622557, -0.03992793, -0.99911517, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.98656857, -0.16294253, 0.008112965, -0.16313536, 0.98579955, -0.039126255, -0.0016225567, -0.03992793, -0.999115, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -232,6 +266,17 @@ transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86
 
 [node name="TrashCan_01_SM2" parent="Decoration" instance=ExtResource("14_i4jfb")]
 transform = Transform3D(0.7071068, -0.704416, -0.06162834, 0, 0.08715565, -0.9961948, 0.7071068, 0.704416, 0.061628357, -110.45791, -24.677837, -141.8421)
+
+[node name="VFX" type="Node3D" parent="."]
+
+[node name="LavaVfx" type="GPUParticles3D" parent="VFX"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -157.2, -9.6, 78.20001)
+material_override = ExtResource("14_bbnjd")
+amount = 64
+lifetime = 10.0
+visibility_aabb = AABB(-81.03212, -1.5132704, -50.61737, 167.06972, 17.845974, 101.7722)
+process_material = SubResource("ParticleProcessMaterial_dgpm2")
+draw_pass_1 = ExtResource("15_bhh5v")
 
 [node name="SFX" type="Node" parent="."]
 

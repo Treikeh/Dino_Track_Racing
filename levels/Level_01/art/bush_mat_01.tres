@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://chx7qjqyurdsc"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_3hx31"]
+[ext_resource type="Texture2D" uid="uid://bxfw33mji3jnx" path="res://levels/Level_01/art/bushes_01_bc.png" id="2_3hx31"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3hx31")
+shader_parameter/color_texture = ExtResource("2_3hx31")

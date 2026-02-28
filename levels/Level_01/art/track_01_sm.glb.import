@@ -44,6 +44,11 @@ _subresources={
 "use_external/fallback_path": "res://levels/Level_01/art/office_building_wall_01.tres",
 "use_external/path": "uid://2lrdtn04hj73"
 },
+"bush_mat.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://levels/Level_01/art/bush_mat_01.tres",
+"use_external/path": "uid://chx7qjqyurdsc"
+},
 "grass_mat.001": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://levels/Level_01/art/grass_mat_01.tres",
@@ -73,6 +78,11 @@ _subresources={
 "use_external/enabled": true,
 "use_external/fallback_path": "res://levels/Level_01/art/rock_mat_01.tres",
 "use_external/path": "uid://l5ja8jy1o7h4"
+},
+"trees_mat.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://levels/Level_01/art/trees_mat_01.tres",
+"use_external/path": "uid://c52nuqjamoo40"
 }
 }
 }
