@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd51u4enoyits"]
+[gd_scene load_steps=17 format=3 uid="uid://dd51u4enoyits"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
@@ -9,6 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="7_3kek2"]
 [ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="8_mwujg"]
 [ext_resource type="PackedScene" uid="uid://dmsrach3rtkrs" path="res://environment/trash_can/trash_can_01_sm.tscn" id="9_i8lxu"]
+[ext_resource type="PackedScene" uid="uid://cjniii7bsnrev" path="res://environment/street_light/street_light_01_sm.tscn" id="10_iynsk"]
+[ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="10_mr5pi"]
+[ext_resource type="PackedScene" uid="uid://bkjrcub6yciar" path="res://environment/billboard/billboard_01_sm.tscn" id="11_4onfx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -55,48 +58,50 @@ transform = Transform3D(0.99998266, 0, 0.0058877906, 0, 1, 0, -0.0058877906, 0, 
 [node name="Checkpoint" parent="Track" instance=ExtResource("4_3kek2")]
 transform = Transform3D(-0.023249263, 0, -0.9997254, 0, 1, 0, 0.9997254, 0, -0.023249263, 0.12072235, 0, 44.753067)
 
-[node name="Ground" type="CSGBox3D" parent="."]
+[node name="ItemBox" parent="." instance=ExtResource("3_tqy1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.400001, 0, -8.200001)
+
+[node name="Collision" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Collision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 layers = 3
 material_override = ExtResource("2_4fi74")
 use_collision = true
 size = Vector3(200, 1, 200)
 
-[node name="Ramp" type="CSGBox3D" parent="."]
+[node name="Ramp" type="CSGBox3D" parent="Collision"]
 transform = Transform3D(1, 0, 0, 0, 0.93863153, -0.34492144, 0, 0.34492144, 0.93863153, 0, 0, -10.857231)
 use_collision = true
 size = Vector3(8.423584, 1, 7.236328)
 
-[node name="Ramp2" type="CSGBox3D" parent="."]
+[node name="Ramp2" type="CSGBox3D" parent="Collision"]
 transform = Transform3D(0.42047268, -0.7353533, 0.5314682, 0.9036336, 0.39205077, -0.1724607, -0.08154291, 0.55276746, 0.8293364, 1.6530108, 4.9072967, -22.434975)
 use_collision = true
 size = Vector3(8.423584, 1, 10.8)
 
-[node name="Ramp3" type="CSGBox3D" parent="."]
+[node name="Ramp3" type="CSGBox3D" parent="Collision"]
 transform = Transform3D(0.04983994, -0.61770403, 0.7848299, 0.978595, -0.12689458, -0.16201769, 0.19966953, 0.7761055, 0.5981575, -6.4869285, 6.4185896, -32.367973)
 use_collision = true
 size = Vector3(8.423584, 1, 14.400001)
 
-[node name="Bump" type="CSGSphere3D" parent="."]
+[node name="Bump" type="CSGSphere3D" parent="Collision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.292329, -3.7729082, 0.8880811)
 use_collision = true
 radius = 4.410091
 
-[node name="Ledge" type="CSGBox3D" parent="."]
+[node name="Ledge" type="CSGBox3D" parent="Collision"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18, -0.4, 0)
 use_collision = true
 size = Vector3(10, 1, 1)
 
-[node name="ItemBox" parent="." instance=ExtResource("3_tqy1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.400001, 0, -8.200001)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Halfpipe" type="CSGBox3D" parent="Collision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.1, 10.800002, 0)
 use_collision = true
 size = Vector3(23.800001, 32.4, 54.7)
 material = ExtResource("2_4fi74")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Collision/Halfpipe"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 12.199997, 0, 0)
 operation = 2
 radius = 10.8
@@ -104,21 +109,47 @@ height = 57.4
 sides = 32
 material = ExtResource("2_4fi74")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.25, 11.000001, 0)
-size = Vector3(39.3, 1, 61.4)
+[node name="CSGBox3D" type="CSGBox3D" parent="Collision/Halfpipe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.25, 13.35, 0)
+size = Vector3(39.3, 5.71, 54.7)
 material = ExtResource("2_4fi74")
 
-[node name="PalmTree_01_SM" parent="." instance=ExtResource("6_vte50")]
+[node name="Deco" type="Node3D" parent="."]
+
+[node name="FinishLine_01_SM" parent="Deco" instance=ExtResource("8_mwujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="PalmTree_01_SM" parent="Deco" instance=ExtResource("6_vte50")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.1, 10.7)
+
+[node name="TrashCan_01_SM" parent="Deco" instance=ExtResource("9_i8lxu")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -8.1, 0, 9.7)
+
+[node name="TrashBag_01_SM" parent="Deco" instance=ExtResource("10_mr5pi")]
+transform = Transform3D(-0.8660253, 0.12940954, 0.48296294, 0, 0.9659258, -0.25881904, -0.50000006, -0.22414386, -0.8365163, -8.3, 1, 11)
+
+[node name="StreetLight_01_SM" parent="Deco" instance=ExtResource("10_iynsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8, 0.1, 49.9)
+
+[node name="StreetLight_01_SM2" parent="Deco" instance=ExtResource("10_iynsk")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 45.7, 0.1, 48.4)
+
+[node name="StreetLight_01_SM3" parent="Deco" instance=ExtResource("10_iynsk")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 27.4, 0.1, -44.600002)
+
+[node name="StreetLight_01_SM4" parent="Deco" instance=ExtResource("10_iynsk")]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, -41.5, 0.1, 30.9)
+
+[node name="StreetLight_01_SM5" parent="Deco" instance=ExtResource("10_iynsk")]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, -42.5, 0.1, -33.5)
+
+[node name="StreetLight_01_SM6" parent="Deco" instance=ExtResource("10_iynsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 28.5)
+
+[node name="Billboard_01_SM" parent="Deco" instance=ExtResource("11_4onfx")]
+transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, -48.6, 27, 0)
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("7_3kek2")
-
-[node name="FinishLine_01_SM" parent="." instance=ExtResource("8_mwujg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-
-[node name="TrashCan_01_SM" parent="." instance=ExtResource("9_i8lxu")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -8.1, 0, 9.7)
