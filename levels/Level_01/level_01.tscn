@@ -67,7 +67,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.98657024, -0.16294253, 0.008112975, -0.16313563, 0.98579955, -0.039126307, -0.0016225595, -0.03992793, -0.9991163, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.98657006, -0.16294253, 0.0081129735, -0.1631356, 0.98579955, -0.0391263, -0.0016225592, -0.03992793, -0.9991161, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
