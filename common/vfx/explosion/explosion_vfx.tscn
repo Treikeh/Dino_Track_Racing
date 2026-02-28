@@ -6,8 +6,9 @@
 [ext_resource type="Material" uid="uid://bv4q7scc2axb5" path="res://common/vfx/vfx_mat_no_billboard.tres" id="5_rkfto"]
 
 [sub_resource type="Gradient" id="Gradient_x71rl"]
-offsets = PackedFloat32Array(0, 0.66386557, 0.7184874)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.13865547, 0.33193278, 0.5420168, 0.697479)
+colors = PackedColorArray(0, 0, 0, 0, 0.4425, 0.5211666, 0.59, 0.3529412, 0.73950005, 0.8186917, 0.85, 0.5568628, 0.9882353, 0.99607843, 0.99607843, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_01b10"]
 gradient = SubResource("Gradient_x71rl")

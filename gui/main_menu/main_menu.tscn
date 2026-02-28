@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bq1mlqlqbd661"]
+[gd_scene load_steps=22 format=3 uid="uid://bq1mlqlqbd661"]
 
 [ext_resource type="Script" uid="uid://ck062g2ny5ksf" path="res://gui/main_menu/main_menu.gd" id="1_ahke7"]
 [ext_resource type="PackedScene" uid="uid://duegxma2hxs6a" path="res://gui/main_menu/start_menu/start_menu.tscn" id="2_6wy0j"]
@@ -11,6 +11,11 @@
 [ext_resource type="Shader" uid="uid://cym5tvj1581t" path="res://common/shaders/skybox_shader.gdshader" id="5_a4tfy"]
 [ext_resource type="PackedScene" uid="uid://clb3u028vrack" path="res://gui/main_menu/credits_menu/credits_menu.tscn" id="5_ubcky"]
 [ext_resource type="Texture2D" uid="uid://bmfg1ifhi2ag" path="res://levels/Level_01/art/skybox.png" id="6_3llyq"]
+[ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="8_iovch"]
+[ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="9_mb5hd"]
+[ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="10_cjrou"]
+[ext_resource type="PackedScene" uid="uid://bkjrcub6yciar" path="res://environment/billboard/billboard_01_sm.tscn" id="11_hr6mf"]
+[ext_resource type="PackedScene" uid="uid://cjniii7bsnrev" path="res://environment/street_light/street_light_01_sm.tscn" id="12_2snu5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhc4r"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -144,6 +149,86 @@ active = false
 
 [node name="Track_01_SM2" parent="BackgroundViewport/SubViewport" instance=ExtResource("4_a4tfy")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 110.1, 25.115, -107.84)
+
+[node name="Decoration" type="Node3D" parent="BackgroundViewport/SubViewport/Track_01_SM2"]
+
+[node name="FinishLine_01_SM" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("8_iovch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0000002)
+
+[node name="PalmTree_01_SM" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.984653, -26.243835, -115.27827)
+
+[node name="PalmTree_01_SM2" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.895002, -26.42233, -119.138275)
+
+[node name="PalmTree_01_SM3" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.116924, -25.95234, -126.42393)
+
+[node name="PalmTree_01_SM4" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9229765, 0.73550045, 54.801426)
+
+[node name="PalmTree_01_SM5" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.145767, 0.22562613, 70.77188)
+
+[node name="PalmTree_01_SM6" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163.2, -24.2, -120.1)
+
+[node name="PalmTree_01_SM7" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175, -23.300001, -111.6)
+
+[node name="PalmTree_01_SM8" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("9_mb5hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -171.8, -23.6, -121.4)
+
+[node name="TrashBag_01_SM" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("10_cjrou")]
+transform = Transform3D(0.46650636, 0.4829629, -0.7410254, -0.12940952, 0.8660253, 0.48296288, 0.875, -0.12940955, 0.46650636, -105.89319, -24.546412, -138.14824)
+
+[node name="TrashBag_01_SM2" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("10_cjrou")]
+transform = Transform3D(0.5756105, 0.34576556, -0.7410253, 0.099143885, 0.8700099, 0.4829629, 0.81169146, -0.35146672, 0.4665064, -109.00719, -24.676765, -140.9014)
+
+[node name="TrashBag_01_SM3" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("10_cjrou")]
+transform = Transform3D(0.99329525, 0.09117845, 0.07107097, 0.06407504, 0.07748778, -0.9949322, -0.09622356, 0.99281526, 0.07112603, -111.98784, -25.0652, -142.55353)
+
+[node name="Billboard_01_SM" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("11_hr6mf")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -126.799995, -2.5, -90.4)
+
+[node name="StreetLight_01_SM2" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881907, -210, -8, 32.4)
+
+[node name="StreetLight_01_SM3" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -183, -23.199999, -99.9)
+
+[node name="StreetLight_01_SM4" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 12.5, -26.7, -125.1)
+
+[node name="StreetLight_01_SM5" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-0.86602557, 0, -0.5, 0, 1, 0, 0.5, 0, -0.86602557, 9, 0.7, 118.9)
+
+[node name="StreetLight_01_SM6" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(0.5735764, 0, -0.8191521, 0, 1, 0, 0.8191521, 0, 0.5735764, -184.3, -8.5, 101.00001)
+
+[node name="StreetLight_01_SM7" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -109.9, -2.4, 148.8)
+
+[node name="StreetLight_01_SM8" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -122.200005, -25.7, -118.8)
+
+[node name="StreetLight_01_SM9" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.2, -25.6, -132.7)
+
+[node name="StreetLight_01_SM10" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-0.76604444, 0, 0.64278764, 0, 1, 0, -0.64278764, 0, -0.76604444, -164.2, -15.8, -43.9)
+
+[node name="StreetLight_01_SM11" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -124.3, -7, -10.5)
+
+[node name="StreetLight_01_SM12" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4, -26.900002, -134)
+
+[node name="StreetLight_01_SM13" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.100002, -1, 129.5)
+
+[node name="StreetLight_01_SM14" parent="BackgroundViewport/SubViewport/Track_01_SM2/Decoration" instance=ExtResource("12_2snu5")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 9.5, 0.19999999, 68.8)
 
 [node name="MenuRoot" type="Control" parent="."]
 layout_mode = 1
