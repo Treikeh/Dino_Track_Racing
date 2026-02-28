@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Dino_track_racing"
-config/version="0.1.3"
+config/name="Dino Track Racing"
+config/version="0.1.4"
 config/tags=PackedStringArray("proper_project", "school")
 run/main_scene="uid://wwcxxmjxspog"
 config/features=PackedStringArray("4.5", "GL Compatibility")
