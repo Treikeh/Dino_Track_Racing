@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmsrach3rtkrs"]
+
+[ext_resource type="PackedScene" uid="uid://dmapcwvwap7vu" path="res://environment/trash_can/trash_can_01_sm.glb" id="1_ia68u"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ia68u"]
+height = 1.6
+radius = 0.6
+
+[node name="TrashCan_01_SM" instance=ExtResource("1_ia68u")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CylinderShape3D_ia68u")

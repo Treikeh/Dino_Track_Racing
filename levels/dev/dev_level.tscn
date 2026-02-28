@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dd51u4enoyits"]
+[gd_scene load_steps=14 format=3 uid="uid://dd51u4enoyits"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_us0s3"]
 [ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="2_4fi74"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="6_vte50"]
 [ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="7_3kek2"]
 [ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="8_mwujg"]
+[ext_resource type="PackedScene" uid="uid://dmsrach3rtkrs" path="res://environment/trash_can/trash_can_01_sm.tscn" id="9_i8lxu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -118,3 +119,6 @@ stream = ExtResource("7_3kek2")
 
 [node name="FinishLine_01_SM" parent="." instance=ExtResource("8_mwujg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="TrashCan_01_SM" parent="." instance=ExtResource("9_i8lxu")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -8.1, 0, 9.7)
