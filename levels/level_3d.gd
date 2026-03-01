@@ -188,7 +188,7 @@ func _on_countdown_timer_timeout(countdown_timer: Timer) -> void:
 		_countdown_player.play()
 	elif _countdown_duration <= 0:
 		_countdown_player.stream = _countdown_go_sfx
-		_countdown_player.pitch_scale = 0.0
+		_countdown_player.pitch_scale = 1.0
 		_countdown_player.play()
 		countdown_timer.stop()
 		# Enable all cars
