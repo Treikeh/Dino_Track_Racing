@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bot86e7hj6lxs"]
+
+[ext_resource type="Shader" uid="uid://kiayt2kveihh" path="res://common/shaders/default_shader.gdshader" id="1_6kmpm"]
+[ext_resource type="Texture2D" uid="uid://c8c2mj7xvv7rj" path="res://entities/car_controller/art/scooter_dino/hats_01_bc.png" id="2_0vahv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6kmpm")
+shader_parameter/color_texture = ExtResource("2_0vahv")

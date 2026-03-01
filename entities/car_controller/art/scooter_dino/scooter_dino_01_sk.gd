@@ -1,6 +1,7 @@
 extends Node3D
 
 
+@export var skeleton: Skeleton3D
 @export var _anim_tree: AnimationTree
 
 var is_screaming: bool = false
@@ -34,3 +35,17 @@ func play_trick_anim() -> void:
 
 func play_hit_anim() -> void:
 	_anim_tree.set("parameters/hit_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+func enable_hat(desired_hat: int) -> void:
+	# Disable all hats if theres no desired hat
+	if desired_hat <= 0 or desired_hat > (skeleton.get_child_count() - 2):
+		for i: int in range(2, skeleton.get_child_count()):
+			var hat: Node3D = skeleton.get_child(i)
+			hat.visible = false
+		return
+	
+	# Show only the desired hat
+	for i: int in range(2, skeleton.get_child_count()):
+		var hat: Node3D = skeleton.get_child(i)
+		hat.visible = true if i == (desired_hat + 1) else false

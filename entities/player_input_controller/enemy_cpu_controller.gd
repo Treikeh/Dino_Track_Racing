@@ -36,6 +36,8 @@ var _car_controller: CarController
 var _track_follow: TrackFollow
 var _use_item_timer: Timer
 
+var _hat: int = 0
+
 @onready var _track: Path3D = _track_follow.get_parent()
 @onready var _track_curve: Curve3D = _track.curve
 
@@ -102,3 +104,6 @@ func _randomize_values() -> void:
 	_activate_drift_angle = randf_range(MIN_DRIFT_ANGLE, MAX_DRIFT_ANGLE)
 	_drift_duration = randf_range(MIN_DRIFT_DURATION, MAX_DRIFT_DURATION)
 	_drift_cooldown = randf_range(MIN_DRIFT_COOLDOWN, MAX_DRIFT_COOLDOWN)
+	
+	_hat = randi_range(0, (_car_controller._mesh.skeleton.get_child_count() - 1))
+	_car_controller._mesh.enable_hat(_hat)

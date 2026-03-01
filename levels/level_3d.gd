@@ -201,7 +201,7 @@ func _start_background_music() -> void:
 func _on_car_finished_all_laps(car_id: int) -> void:
 	# Set how long it took a player ro finish all the laps
 	if Globals.players.has(car_id):
-		Globals.players[car_id] = _race_duration
+		Globals.players[car_id].time_taken = _race_duration
 	
 	for i:int in Globals.players:
 		var track_follow: TrackFollow = _track_follows[i]

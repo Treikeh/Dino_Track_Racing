@@ -22,9 +22,14 @@ func populate() -> void:
 		# Get info about the player
 		var id: int = players[i]
 		#var time_taken: float = _finished_cars[id]
-		var time_taken: float = Globals.players[id]
+		var time_taken: float = Globals.players[id].time_taken
 		
 		_add_entry.call_deferred(i, id, time_taken)
+
+
+func _sort_player_time_taken(a: int, b: int) -> bool:
+	#return _finished_cars[a] < _finished_cars[b]
+	return Globals.players[a].time_taken < Globals.players[b].time_taken
 
 
 func _add_entry(index: int, id: int, time_taken: float) -> void:
@@ -45,11 +50,6 @@ func _add_entry(index: int, id: int, time_taken: float) -> void:
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.tween_property(entry, "scale", Vector2.ONE, 0.25)
 	tween.parallel().tween_property(entry, "rotation_degrees", 0.0, TWEEN_DURATION)
-
-
-func _sort_player_time_taken(a: int, b: int) -> bool:
-	#return _finished_cars[a] < _finished_cars[b]
-	return Globals.players[a] < Globals.players[b]
 
 
 func _on_replay_button_pressed() -> void:

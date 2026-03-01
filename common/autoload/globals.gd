@@ -4,6 +4,17 @@ extends Node
 signal input_mode_changed(input_mode: InputModes)
 
 
+
+class PlayerData:
+	var hat: int = 0
+	var time_taken: float = 0.0
+	
+	func _init(_hat: int = 0, _time_taken: float = 0.0) -> void:
+		hat = _hat
+		time_taken = _time_taken
+
+
+
 enum InputModes {
 	MOUSE_KEYBOARD,
 	GAMEPAD,
@@ -22,9 +33,8 @@ const INPUT_ACTIONS: Array[String] = [
 
 # Stores info about all the players that are in the game
 #NOTE: int = player_id, float = time taken to complete the race (for leaderboard)
-#NOTE: The float is no longer necessary
-var players: Dictionary[int, float] = {
-	0: 0.0,
+var players: Dictionary[int, PlayerData] = {
+	0: PlayerData.new(3),
 	#1: 0.0,
 	#2: 0.0,
 	#3: 0.0,

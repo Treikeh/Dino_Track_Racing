@@ -123,26 +123,6 @@ debug_color = Color(0, 1, 0, 0.41960785)
 [node name="ScooterDino_01_SK" parent="." instance=ExtResource("2_xt16y")]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.55, 0)
 
-[node name="Skeleton3D" parent="ScooterDino_01_SK" index="0"]
-bones/3/position = Vector3(-3.962769e-08, 0.21397407, 0.45328817)
-bones/3/rotation = Quaternion(9.065177e-08, 0.5348194, 0.8449664, 1.0413319e-07)
-bones/4/rotation = Quaternion(0.07680702, 3.169266e-08, -2.0753657e-08, 0.997046)
-bones/5/rotation = Quaternion(0.14372195, 9.3525854e-15, -3.4265973e-08, 0.9896181)
-bones/6/rotation = Quaternion(-0.83942777, 6.4786796e-08, 1.0006759e-07, 0.5434713)
-bones/7/position = Vector3(-0.14013767, 0.18052946, -0.058365077)
-bones/7/rotation = Quaternion(-0.6576467, 0.06282034, 0.100547, 0.7439387)
-bones/9/position = Vector3(0.14013764, 0.18052946, -0.058365162)
-bones/9/rotation = Quaternion(-0.65764683, -0.06282019, -0.10054688, 0.7439387)
-bones/11/rotation = Quaternion(0.90103966, 6.549233e-08, -1.3605346e-07, 0.43373668)
-bones/12/rotation = Quaternion(-0.080133185, -1.188265e-07, 9.552697e-09, 0.99678415)
-bones/13/rotation = Quaternion(-0.041018974, 7.3690625e-13, 9.7797175e-09, 0.9991584)
-bones/14/rotation = Quaternion(0.9376451, -0.088033654, -0.008653126, -0.33615008)
-bones/15/rotation = Quaternion(-0.28507537, 0.007164218, -0.15416007, 0.9459997)
-bones/16/rotation = Quaternion(0.120016165, -0.01319896, 0.05941417, 0.99090457)
-bones/17/rotation = Quaternion(0.9376451, 0.08803358, 0.008652924, -0.33615008)
-bones/18/rotation = Quaternion(-0.28507537, -0.0071642655, 0.1541601, 0.9459997)
-bones/19/rotation = Quaternion(0.12001612, 0.013198959, -0.059414174, 0.99090457)
-
 [node name="VFX" type="Node3D" parent="."]
 
 [node name="ShadowCaster" parent="VFX" instance=ExtResource("7_nnry6")]

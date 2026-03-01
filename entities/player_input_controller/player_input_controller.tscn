@@ -100,7 +100,9 @@ transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881907, 0, -0.25881907, 0.96
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 texture_filter = 2
-text = "P1"
+text = "P1
+
+"
 font = ExtResource("2_8seoj")
 
 [node name="Orientation" type="Node3D" parent="ViewportWithRadialBlur/SubViewport" groups=["va_listener"]]

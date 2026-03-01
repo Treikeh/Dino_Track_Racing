@@ -8,6 +8,7 @@ const PLAYER_JOIN_ENTRY_SCENE: PackedScene = preload("res://gui/main_menu/player
 @export var _start_game_progress_bar: Range
 @export var _engine_sfx: AudioStreamPlayer
 
+var _all_players_ready: bool = false
 var _start_game_pressed: bool = false
 var _start_game_player_id: int = -1
 var _start_game_time: float = 0.0
@@ -22,6 +23,11 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and !_connected_players.has(event.device):
 		_add_player(event.device)
+	
+	# Don't allow the game to start if not all players are ready
+	if not _all_players_ready:
+		return
+	
 	# Start timer to start the level when a joined player presses ui_accept
 	elif event.is_action_pressed("ui_accept") and _start_game_player_id == -1:
 		_start_game_pressed = true
@@ -49,6 +55,10 @@ func _add_player(player_id: int) -> void:
 	
 	var player_label: PlayerJoinEntry = PLAYER_JOIN_ENTRY_SCENE.instantiate().with_data(player_id)
 	_player_display_grid.add_child(player_label)
+	player_label.player_readied_up.connect(_on_player_readied_up)
+	player_label.player_unreadiedy_up.connect(_on_player_readied_up)
+	
+	_on_player_readied_up()
 	
 	# Change how many columns the player display grid container should have when a new player joins
 	var columns: int = ceili(sqrt(_connected_players.size()))
@@ -61,11 +71,23 @@ func _add_player(player_id: int) -> void:
 	_engine_sfx.play()
 
 
+func _on_player_readied_up() -> void:
+	# Check if all players are ready
+	for id: int in _connected_players:
+		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(id)
+		if not player_join_entry.is_ready:
+			_all_players_ready = false
+			return
+		
+		_all_players_ready = true
+
+
 func _start_level() -> void:
 	# Rest the players dict
 	Globals.players.clear()
 	# Add all the new players to the players dict
-	for player: int in _connected_players:
-		Globals.players[player] = 0.0
+	for id: int in _connected_players:
+		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(id)
+		Globals.players[id] = Globals.PlayerData.new(player_join_entry.current_hat)
 	
 	LevelManager.load_level("res://levels/Level_01/level_01.tscn")

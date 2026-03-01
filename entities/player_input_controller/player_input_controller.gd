@@ -63,11 +63,14 @@ func _ready() -> void:
 	_track_follow.lap_changed.connect(_on_lap_changed)
 	_track_follow.finished_all_laps.connect(_on_finished_all_laps)
 	
-	_id_label.text = "P%s" % (_player_id + 1)
+	_id_label.text = "P%s \n \n \n \n \n \n \n \n" % (_player_id + 1)
 	_orientation.global_position = _car_controller.global_position
 	
 	# Set up hud
 	_position_panel.update_lap_label(1, _track_follow.total_laps)
+	
+	# Enable chosen hat
+	_car_controller._mesh.enable_hat(Globals.players[_player_id].hat)
 	
 	await get_tree().process_frame
 	_scale_ui_elements()
