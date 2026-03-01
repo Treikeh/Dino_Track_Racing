@@ -1,9 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://dpqb3feve26hb"]
+[gd_scene load_steps=32 format=3 uid="uid://dpqb3feve26hb"]
 
 [ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_qn7dl"]
+[ext_resource type="AudioStream" uid="uid://les05yr4lii3" path="res://levels/Level_01/audio/countdown_1-3.ogg" id="2_km0sl"]
 [ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_knpns"]
 [ext_resource type="Material" uid="uid://kjerpjb00hj8" path="res://levels/Level_01/art/skybox_mat.tres" id="2_rbhar"]
 [ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_mii42"]
+[ext_resource type="AudioStream" uid="uid://s3d1i47jodwd" path="res://levels/Level_01/audio/countdown_go.ogg" id="3_ren5v"]
 [ext_resource type="PackedScene" uid="uid://uyqpdbitujjk" path="res://levels/Level_01/art/track_01_sm.tscn" id="3_w8irb"]
 [ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="5_y6nhf"]
 [ext_resource type="PackedScene" uid="uid://c7poo3o6yoe28" path="res://common/scenes/respawn_trigger.tscn" id="6_22u7d"]
@@ -16,6 +18,11 @@
 [ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="14_bbnjd"]
 [ext_resource type="PackedScene" uid="uid://dmsrach3rtkrs" path="res://environment/trash_can/trash_can_01_sm.tscn" id="14_i4jfb"]
 [ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="15_bhh5v"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dgpm2"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("2_km0sl")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn7dl"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -89,11 +96,14 @@ scale_max = 0.75
 scale_curve = SubResource("CurveTexture_bhh5v")
 color_initial_ramp = SubResource("GradientTexture1D_ren5v")
 
-[node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_background_music")]
+[node name="Level01" type="Node3D" node_paths=PackedStringArray("_track", "_spawn_point", "_background_music", "_countdown_player")]
 script = ExtResource("1_qn7dl")
 _track = NodePath("Track")
 _spawn_point = NodePath("Track/FinishLine")
+_countdown_1_3_sfx = SubResource("AudioStreamRandomizer_dgpm2")
+_countdown_go_sfx = ExtResource("3_ren5v")
 _background_music = NodePath("SFX/BackgroundMusic")
+_countdown_player = NodePath("SFX/Countdown")
 metadata/_custom_type_script = "uid://ddsg81fi6kjdd"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -106,7 +116,7 @@ curve = SubResource("Curve3D_qn7dl")
 transform = Transform3D(0.9999823, 0, 0, 0, 0.9992882, -0.037442587, 0, 0.037442625, 0.9992872, 0, 0, 0)
 
 [node name="Checkpoint" parent="Track" instance=ExtResource("3_mii42")]
-transform = Transform3D(-0.9865682, -0.16294253, 0.008112961, -0.16313529, 0.98579955, -0.03912624, -0.0016225561, -0.03992793, -0.99911463, -120.450966, -11.182336, -6.8317885)
+transform = Transform3D(-0.9865679, -0.16294253, 0.00811296, -0.16313525, 0.98579955, -0.03912623, -0.0016225555, -0.03992793, -0.99911433, -120.450966, -11.182336, -6.8317885)
 progress = 561.58
 
 [node name="Track_01_SM" parent="." instance=ExtResource("3_w8irb")]
@@ -271,7 +281,7 @@ transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86
 transform = Transform3D(0.7071068, -0.704416, -0.06162834, 0, 0.08715565, -0.9961948, 0.7071068, 0.704416, 0.061628357, -110.45791, -24.677837, -141.8421)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="Decoration"]
-transform = Transform3D(0.6132793, 0, 0.78986603, 0, 1, 0, -0.78986603, 0, 0.6132793, -109.328674, -24.000002, -140.27556)
+transform = Transform3D(0.6132793, 0, 0.78986603, 0, 1, 0, -0.78986603, 0, 0.6132793, -109.328674, -24.400002, -140.27556)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decoration/StaticBody3D2"]
 transform = Transform3D(0.99999917, 0, -5.9604645e-07, 0, 1, 0, 5.9604645e-07, 0, 0.99999917, 0, 0, 0)
@@ -294,3 +304,5 @@ draw_pass_1 = ExtResource("15_bhh5v")
 stream = ExtResource("8_vnc2o")
 volume_db = -10.0
 bus = &"Music"
+
+[node name="Countdown" type="AudioStreamPlayer" parent="SFX"]

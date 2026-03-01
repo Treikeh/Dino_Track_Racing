@@ -20,7 +20,10 @@ const TRACK_FOLLOW: PackedScene = preload("uid://jp5mah0qlvwj")
 @export var _spawn_point: Node3D
 
 @export_group("SFX")
+@export var _countdown_1_3_sfx: AudioStream
+@export var _countdown_go_sfx: AudioStream
 @export var _background_music: AudioStreamPlayer
+@export var _countdown_player: AudioStreamPlayer
 
 var _race_active: bool = false
 # How long the race has lasted
@@ -179,7 +182,12 @@ func _start_countdown() -> void:
 
 func _on_countdown_timer_timeout(countdown_timer: Timer) -> void:
 	_countdown_duration -= 1
-	if _countdown_duration <= 0:
+	if _countdown_duration > 0:
+		_countdown_player.stream = _countdown_1_3_sfx
+		_countdown_player.play()
+	elif _countdown_duration <= 0:
+		_countdown_player.stream = _countdown_go_sfx
+		_countdown_player.play()
 		countdown_timer.stop()
 		# Enable all cars
 		get_tree().call_group("car", "set_movement_state", CarController.MovementState.NORMAL)
