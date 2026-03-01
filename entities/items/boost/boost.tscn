@@ -1,8 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://coa88ept8mxrt"]
+[gd_scene load_steps=9 format=3 uid="uid://coa88ept8mxrt"]
 
 [ext_resource type="Script" uid="uid://cl8f04hu0puk2" path="res://entities/items/boost/boost.gd" id="1_5yykb"]
 [ext_resource type="Material" uid="uid://dldd4mdde1njb" path="res://common/vfx/vfx_mat.tres" id="2_o6s03"]
 [ext_resource type="QuadMesh" uid="uid://cf4d18dppujhv" path="res://common/vfx/vfx_quad_z.tres" id="3_itmqc"]
+
+[sub_resource type="Gradient" id="Gradient_o6s03"]
+offsets = PackedFloat32Array(0, 0.30973452, 0.6902655, 1)
+colors = PackedColorArray(0.79607844, 0.25882354, 0.31764707, 1, 0.9529412, 0.47843137, 0.18039216, 1, 1, 0.74509805, 0.20392157, 1, 1, 0.96862745, 0.7254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_itmqc"]
+gradient = SubResource("Gradient_o6s03")
 
 [sub_resource type="Curve" id="Curve_tjkpb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6600997, 0.0, 0, 0]
@@ -21,6 +28,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.25
 scale_max = 0.75
 scale_curve = SubResource("CurveTexture_5yykb")
+color_ramp = SubResource("GradientTexture1D_itmqc")
 
 [node name="Boost" type="Node3D"]
 script = ExtResource("1_5yykb")

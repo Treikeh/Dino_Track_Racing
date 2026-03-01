@@ -12,6 +12,7 @@ enum Type {
 	HIT_ITEM_BOX,
 	USE_ITEM,
 	EXPLOSION,
+	MISSILE,
 }
 
 

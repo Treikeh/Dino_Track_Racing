@@ -42,6 +42,8 @@ func _physics_process(delta: float) -> void:
 	# Move track follow forwards
 	_track_follow.progress += _track_follow_move_speed * delta
 	
+	AudioWorld3d.play_sound(Sfx3D.Type.MISSILE, global_position, 5)
+	
 	if _should_track:
 		# Check if it should follow the missiles track follow or the target car
 		# Track follow of the target car, not the missile
