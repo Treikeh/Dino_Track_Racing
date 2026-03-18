@@ -262,6 +262,7 @@ visible = false
 layout_mode = 1
 
 [connection signal="menu_button_pressed" from="MenuRoot/StartMenu" to="." method="_on_start_menu_menu_button_pressed"]
+[connection signal="menu_closed" from="MenuRoot/PlayerJoinMenu" to="." method="_on_menu_closed"]
 [connection signal="menu_closed" from="MenuRoot/ControlsMenu" to="." method="_on_menu_closed"]
 [connection signal="menu_closed" from="MenuRoot/OptionsMenu" to="." method="_on_menu_closed"]
 [connection signal="menu_closed" from="MenuRoot/CreditsMenu" to="." method="_on_menu_closed"]

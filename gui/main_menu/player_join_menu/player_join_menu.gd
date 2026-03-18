@@ -1,6 +1,9 @@
 extends Control
 
 
+signal menu_closed(menu: Control)
+
+
 const PLAYER_JOIN_ENTRY_SCENE: PackedScene = preload("res://gui/main_menu/player_join_menu/join_entry/player_join_entry.tscn")
 
 
@@ -57,6 +60,7 @@ func _add_player(player_id: int) -> void:
 	_player_display_grid.add_child(player_label)
 	player_label.player_readied_up.connect(_on_player_readied_up)
 	player_label.player_unreadiedy_up.connect(_on_player_readied_up)
+	player_label.player_removed.connect(_on_player_removed)
 	
 	_on_player_readied_up()
 	
@@ -73,7 +77,7 @@ func _add_player(player_id: int) -> void:
 
 func _on_player_readied_up() -> void:
 	# Check if all players are ready
-	for id: int in _connected_players:
+	for id: int in _connected_players.size():
 		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(id)
 		if not player_join_entry.is_ready:
 			_all_players_ready = false
@@ -82,12 +86,27 @@ func _on_player_readied_up() -> void:
 		_all_players_ready = true
 
 
+func _on_player_removed(id: int) -> void:
+	var index: int = _connected_players.find(id)
+	_connected_players.pop_at(index)
+	_player_display_grid.get_child(index).queue_free()
+	
+	if _connected_players.size() > 0:
+		var columns: int = ceili(sqrt(_connected_players.size()))
+		_player_display_grid.columns = columns
+	else:
+		hide()
+		process_mode = Node.PROCESS_MODE_DISABLED
+		menu_closed.emit(self)
+
+
 func _start_level() -> void:
 	# Rest the players dict
 	Globals.players.clear()
 	# Add all the new players to the players dict
-	for id: int in _connected_players:
-		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(id)
+	for i: int in _connected_players.size():
+		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(i)
+		var id: int = player_join_entry._player_id
 		Globals.players[id] = Globals.PlayerData.new(player_join_entry.current_hat)
 	
 	LevelManager.load_level("res://levels/Level_01/level_01.tscn")

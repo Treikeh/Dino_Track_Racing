@@ -29,6 +29,10 @@ const INPUT_ACTIONS: Array[String] = [
 	"turn_r",
 	"drift",
 	"use_held_item",
+	"ui_accept",
+	"ui_cancel",
+	"ui_right",
+	"ui_left",
 ]
 
 # Stores info about all the players that are in the game

@@ -4,6 +4,7 @@ class_name PlayerJoinEntry
 
 signal player_readied_up
 signal player_unreadiedy_up
+signal player_removed(id: int)
 
 
 const TWEEN_DURATION: float = 0.25
@@ -49,7 +50,7 @@ func _input(event: InputEvent) -> void:
 	
 	if is_ready:
 		# Unready
-		if event.is_action_pressed("reverse"):
+		if event.is_action_pressed("reverse%s" % _player_id):
 			_unready_up()
 		
 		# Scream when pressing the drift button
@@ -61,14 +62,17 @@ func _input(event: InputEvent) -> void:
 			_mesh.is_screaming = false
 	else:
 		# Ready up
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_pressed("ui_accept%s" % _player_id):
 			_ready_up()
 		
+		if event.is_action_pressed("ui_cancel%s" % _player_id):
+			_remove_entry()
+		
 		# Next hat
-		if event.is_action_pressed("ui_right"):
+		if event.is_action_pressed("ui_right%s" % _player_id):
 			_show_next_hat()
 		# Prev hat
-		if event.is_action_pressed("ui_left"):
+		if event.is_action_pressed("ui_left%s" % _player_id):
 			_show_prev_hat()
 
 
@@ -105,6 +109,10 @@ func _unready_up() -> void:
 	_ready_label_tween.set_trans(Tween.TRANS_BACK)
 	_ready_label_tween.tween_property(_ready_label, "scale", Vector2.ZERO, TWEEN_DURATION)
 	_ready_label_tween.tween_callback(_ready_label.hide)
+
+
+func _remove_entry() -> void:
+	player_removed.emit(_player_id)
 
 
 func _start_scream() -> void:
