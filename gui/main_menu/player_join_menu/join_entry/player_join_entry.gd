@@ -69,10 +69,10 @@ func _input(event: InputEvent) -> void:
 			_remove_entry()
 		
 		# Next hat
-		if event.is_action_pressed("ui_right%s" % _player_id):
+		if Input.is_action_just_pressed("ui_right%s" % _player_id):
 			_show_next_hat()
 		# Prev hat
-		if event.is_action_pressed("ui_left%s" % _player_id):
+		if Input.is_action_just_pressed("ui_left%s" % _player_id):
 			_show_prev_hat()
 
 

@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://wwcxxmjxspog"]
+[gd_scene format=3 uid="uid://wwcxxmjxspog"]
 
 [ext_resource type="Script" uid="uid://c3tix6qnrptyp" path="res://gui/splash_screen/splash_screen.gd" id="1_4jifb"]
+[ext_resource type="Script" uid="uid://bqxa70m0k7w7g" path="res://gui/splash_screen/shader_compiler.gd" id="2_fjiqa"]
 [ext_resource type="Texture2D" uid="uid://cxxgi8b16ir1y" path="res://gui/splash_screen/art/Made_with_godot.png" id="2_xq6og"]
 
-[node name="SplashScreen" type="Control" node_paths=PackedStringArray("_splash_screens_container")]
+[sub_resource type="QuadMesh" id="QuadMesh_fjiqa"]
+
+[node name="SplashScreen" type="Control" unique_id=1783280846 node_paths=PackedStringArray("_splash_screens_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +16,34 @@ grow_vertical = 2
 script = ExtResource("1_4jifb")
 _splash_screens_container = NodePath("SplashScreensContainer")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ShaderCompiler" type="SubViewportContainer" parent="." unique_id=1880388495 node_paths=PackedStringArray("_mesh")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_fjiqa")
+_mesh = NodePath("SubViewport/MeshInstance3D")
+
+[node name="SubViewport" type="SubViewport" parent="ShaderCompiler" unique_id=2021011800]
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="ShaderCompiler/SubViewport" unique_id=172065833]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShaderCompiler/SubViewport" unique_id=1478392769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+mesh = SubResource("QuadMesh_fjiqa")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=306684827]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,11 +55,11 @@ theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = -10
 theme_override_constants/margin_bottom = -10
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=2057205247]
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="SplashScreensContainer" type="CenterContainer" parent="."]
+[node name="SplashScreensContainer" type="CenterContainer" parent="." unique_id=1519289747]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +67,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="SplashScreensContainer"]
+[node name="TextureRect" type="TextureRect" parent="SplashScreensContainer" unique_id=537729838]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_xq6og")
+
+[connection signal="all_materials_loaded" from="ShaderCompiler" to="." method="_on_all_materials_loaded"]

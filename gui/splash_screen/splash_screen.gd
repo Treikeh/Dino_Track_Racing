@@ -9,6 +9,9 @@ extends Control
 @export var _interval_time: float = 0.5
 @export var _splash_screens_container: Control
 
+var _shaders_done_compiling: bool = false
+var _load_main_menu: bool = false
+var _main_menu_loading: bool = false
 var _splash_screens: Array[Node] = []
 
 
@@ -20,13 +23,22 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		_load_main_menu()
+		_load_main_menu = true
 
 
 func _get_screens() -> void:
 	_splash_screens = _splash_screens_container.get_children()
 	for screen: Control in _splash_screens:
 		screen.modulate = Color.TRANSPARENT
+
+
+func _process(_delta: float) -> void:
+	if _main_menu_loading:
+		return
+	
+	if _load_main_menu and _shaders_done_compiling:
+		_main_menu_loading = true
+		LevelManager.load_level("res://gui/main_menu/main_menu.tscn")
 
 
 func _fade_between_screens() -> void:
@@ -36,8 +48,8 @@ func _fade_between_screens() -> void:
 		tween.tween_property(screen, "modulate", Color.WHITE, _fade_in_time)
 		tween.tween_interval(_pause_time)
 		tween.tween_property(screen, "modulate", Color.TRANSPARENT, _fade_out_time)
-		tween.tween_callback(_load_main_menu)
+		tween.tween_callback(func (): _load_main_menu = true)
 
 
-func _load_main_menu() -> void:
-	LevelManager.load_level("res://gui/main_menu/main_menu.tscn")
+func _on_all_materials_loaded() -> void:
+	_shaders_done_compiling = true
