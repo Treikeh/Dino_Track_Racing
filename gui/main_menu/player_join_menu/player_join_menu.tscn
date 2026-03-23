@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf6kgm67m4shv"]
+[gd_scene format=3 uid="uid://cf6kgm67m4shv"]
 
 [ext_resource type="Script" uid="uid://cvdcjdx25s2gh" path="res://gui/main_menu/player_join_menu/player_join_menu.gd" id="1_mb52c"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="2_22gan"]
@@ -11,7 +11,7 @@
 bg_color = Color(1, 1, 1, 1)
 border_width_bottom = 4
 
-[node name="PlayerJoinMenu" type="Control" node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar", "_engine_sfx")]
+[node name="PlayerJoinMenu" type="Control" unique_id=1169718252 node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar", "_engine_sfx")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ _player_display_grid = NodePath("VBoxContainer/PlayerDisplayGrid")
 _start_game_progress_bar = NodePath("VBoxContainer/StartProgressBar")
 _engine_sfx = NodePath("EngineSFX")
 
-[node name="BackgroundColor" type="ColorRect" parent="."]
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=232125275]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.27058825)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1158190403]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,11 +40,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerDisplayGrid" type="GridContainer" parent="VBoxContainer"]
+[node name="PlayerDisplayGrid" type="GridContainer" parent="VBoxContainer" unique_id=1377895668]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="StartProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="PlayerJoinPrompt" type="Control" parent="VBoxContainer/PlayerDisplayGrid" unique_id=128364830]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="JoinButtonDispaly" type="MarginContainer" parent="VBoxContainer/PlayerDisplayGrid/PlayerJoinPrompt" unique_id=1195559654]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -26.0
+offset_right = 96.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="ButtonDisplay" parent="VBoxContainer/PlayerDisplayGrid/PlayerJoinPrompt/JoinButtonDispaly" unique_id=81994995 instance=ExtResource("3_was43")]
+layout_mode = 2
+_front_text = ""
+_button_texture = ExtResource("2_22gan")
+_back_text = "to join"
+
+[node name="StartProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1227482186]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_22gan")
@@ -54,7 +83,7 @@ step = 0.0
 value = 0.5
 show_percentage = false
 
-[node name="StartButtonDispaly" type="MarginContainer" parent="VBoxContainer/StartProgressBar"]
+[node name="StartButtonDispaly" type="MarginContainer" parent="VBoxContainer/StartProgressBar" unique_id=238497051]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -65,33 +94,13 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_right = 10
 
-[node name="ButtonDisplay" parent="VBoxContainer/StartProgressBar/StartButtonDispaly" instance=ExtResource("3_was43")]
+[node name="ButtonDisplay" parent="VBoxContainer/StartProgressBar/StartButtonDispaly" unique_id=1762657097 instance=ExtResource("3_was43")]
 layout_mode = 2
 alignment = 2
 _front_text = "Hold"
 _button_texture = ExtResource("2_22gan")
 _back_text = "to start"
 
-[node name="JoinButtonDispaly" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -87.0
-offset_right = 87.0
-offset_bottom = 52.0
-grow_horizontal = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="ButtonDisplay" parent="JoinButtonDispaly" instance=ExtResource("3_was43")]
-layout_mode = 2
-_front_text = ""
-_button_texture = ExtResource("2_22gan")
-_back_text = "to join"
-
-[node name="EngineSFX" type="AudioStreamPlayer" parent="."]
+[node name="EngineSFX" type="AudioStreamPlayer" parent="." unique_id=1653749819]
 stream = ExtResource("4_m4l3f")
 max_polyphony = 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://m2wbc1dhxton"]
+[gd_scene format=3 uid="uid://m2wbc1dhxton"]
 
 [ext_resource type="Script" uid="uid://cp2iyu0g5s781" path="res://gui/main_menu/controls_menu/controls_menu.gd" id="1_sbatj"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_fjb12"]
@@ -19,12 +19,13 @@
 [ext_resource type="VideoStream" uid="uid://cipjstabj71x1" path="res://gui/main_menu/controls_menu/art/controls_trick.ogv" id="10_ld6go"]
 [ext_resource type="Texture2D" uid="uid://mrqrjom0f6qm" path="res://gui/art/selection_box_selected.png" id="13_hcfcn"]
 [ext_resource type="Texture2D" uid="uid://bxy2nbahjapgl" path="res://gui/art/selection_box_unselected.png" id="13_mbntm"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="19_wuetj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ld6go"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvl5a"]
 
-[node name="ControlsMenu" type="Control" node_paths=PackedStringArray("_panel", "_button_display", "_current_tab_container", "_tabs")]
+[node name="ControlsMenu" type="Control" unique_id=1609609172 node_paths=PackedStringArray("_panel", "_button_display", "_current_tab_container", "_tabs")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +40,7 @@ _selected_tab_texture = ExtResource("13_hcfcn")
 _unselected_tab_texture = ExtResource("13_mbntm")
 _tabs = [NodePath("PanelRoot/Controller"), NodePath("PanelRoot/DriftTrick"), NodePath("PanelRoot/Items")]
 
-[node name="PanelRoot" type="Control" parent="."]
+[node name="PanelRoot" type="Control" parent="." unique_id=2131110965]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,13 +48,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Controller" type="Control" parent="PanelRoot"]
+[node name="Controller" type="Control" parent="PanelRoot" unique_id=392494676]
 visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Title" type="Label" parent="PanelRoot/Controller"]
+[node name="Title" type="Label" parent="PanelRoot/Controller" unique_id=47945760]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -72,7 +73,7 @@ text = "Inputs"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Controller"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Controller" unique_id=2114257059]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,12 +90,12 @@ texture = ExtResource("5_hcfcn")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DriftTrick" type="Control" parent="PanelRoot"]
+[node name="DriftTrick" type="Control" parent="PanelRoot" unique_id=214056021]
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Title" type="Label" parent="PanelRoot/DriftTrick"]
+[node name="Title" type="Label" parent="PanelRoot/DriftTrick" unique_id=742427732]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -113,7 +114,7 @@ text = "Drift and Tricking"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelRoot/DriftTrick"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelRoot/DriftTrick" unique_id=1562406132]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,21 +129,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_wss0g")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelRoot/DriftTrick/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelRoot/DriftTrick/PanelContainer" unique_id=75199095]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer" unique_id=2074704823]
 layout_mode = 2
 
-[node name="Drifting" type="VBoxContainer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Drifting" type="VBoxContainer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer" unique_id=1748292878]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
+[node name="Title" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting" unique_id=871324300]
 layout_mode = 2
 theme = ExtResource("7_703s4")
 theme_override_fonts/font = ExtResource("2_fjb12")
@@ -150,7 +151,7 @@ theme_override_font_sizes/font_size = 13
 text = "Drifting"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
+[node name="Label" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting" unique_id=726520981]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 theme = ExtResource("7_703s4")
@@ -162,13 +163,13 @@ Release [DRIFT BUTTON] after 0.2 sec to get a speed boost.
 "
 autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting" unique_id=2099053836]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("4_1lgak")
 stretch_mode = 5
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting/TextureRect"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Drifting/TextureRect" unique_id=656130483]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,15 +186,15 @@ stream = ExtResource("9_mblpu")
 autoplay = true
 loop = true
 
-[node name="VSeparator" type="VSeparator" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer" unique_id=1528468837]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ld6go")
 
-[node name="Tricking" type="VBoxContainer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Tricking" type="VBoxContainer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer" unique_id=1740886504]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
+[node name="Title" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking" unique_id=774942452]
 layout_mode = 2
 theme = ExtResource("7_703s4")
 theme_override_fonts/font = ExtResource("2_fjb12")
@@ -201,7 +202,7 @@ theme_override_font_sizes/font_size = 13
 text = "Tricking"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
+[node name="Label" type="Label" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking" unique_id=115070559]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 theme = ExtResource("7_703s4")
@@ -212,13 +213,13 @@ text = "Press [TRICK BUTTON] when entering the air to perform a trick.
 Landig after performing a trick will give you a speed boost."
 autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking" unique_id=1025038055]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("4_1lgak")
 stretch_mode = 5
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking/TextureRect"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelRoot/DriftTrick/PanelContainer/MarginContainer/HBoxContainer/Tricking/TextureRect" unique_id=46891553]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,13 +232,13 @@ stream = ExtResource("10_ld6go")
 autoplay = true
 loop = true
 
-[node name="Items" type="Control" parent="PanelRoot"]
+[node name="Items" type="Control" parent="PanelRoot" unique_id=591774052]
 visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Title" type="Label" parent="PanelRoot/Items"]
+[node name="Title" type="Label" parent="PanelRoot/Items" unique_id=730745660]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -256,7 +257,7 @@ text = "Items"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelRoot/Items"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelRoot/Items" unique_id=560599102]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -271,33 +272,33 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_wss0g")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelRoot/Items/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelRoot/Items/PanelContainer" unique_id=710106085]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer" unique_id=1371992325]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer" unique_id=1762502915]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Mine" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Mine" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2139670665]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Mine"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Mine" unique_id=770042109]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("5_5srox")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Mine"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Mine" unique_id=2108215586]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -308,17 +309,17 @@ Placed behind
 Explodes on contact"
 autowrap_mode = 2
 
-[node name="Boost" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Boost" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1488540815]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost" unique_id=1488076122]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("6_3adlm")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Boost" unique_id=823112202]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -328,17 +329,17 @@ text = "Boost:
 Large speed boost"
 autowrap_mode = 2
 
-[node name="Lance" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Lance" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1755925408]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Lance"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Lance" unique_id=1663284421]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("6_o6m73")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Lance"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Lance" unique_id=72695389]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -349,17 +350,17 @@ Small speed boost
 Hits oponents on contact"
 autowrap_mode = 2
 
-[node name="MeteorRain" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MeteorRain" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1320358794]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain" unique_id=1003313317]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("8_mck02")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MeteorRain" unique_id=616372127]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -370,23 +371,23 @@ Targets first player
 Makes it rain meteors"
 autowrap_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer" unique_id=982060929]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="TrashBag" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="TrashBag" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=2126777980]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag" unique_id=1944486939]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("7_6svv1")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/TrashBag" unique_id=2109107410]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -397,17 +398,17 @@ Placed behind
 Hits oponent on contact"
 autowrap_mode = 2
 
-[node name="Missile" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="Missile" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1690625680]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Missile"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Missile" unique_id=172216812]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("7_dvl5a")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Missile"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Missile" unique_id=1054672003]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -418,17 +419,17 @@ Targets player infront
 Explodes on contact"
 autowrap_mode = 2
 
-[node name="Bomb" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="Bomb" type="HBoxContainer" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1602353586]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Bomb"]
+[node name="TextureRect" type="TextureRect" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Bomb" unique_id=990905324]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("8_6svv1")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Bomb"]
+[node name="Label" type="Label" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/Bomb" unique_id=200463719]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -439,12 +440,12 @@ Throw infront
 Explodes on contact"
 autowrap_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="PanelRoot/Items/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1534132360]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_dvl5a")
 
-[node name="BottomDisplay" type="Control" parent="."]
+[node name="BottomDisplay" type="Control" parent="." unique_id=1880053387]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -454,7 +455,7 @@ offset_top = -67.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="CurrentTabContainer" type="HBoxContainer" parent="BottomDisplay"]
+[node name="CurrentTabContainer" type="HBoxContainer" parent="BottomDisplay" unique_id=2106442673]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -468,25 +469,25 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="BottomDisplay/CurrentTabContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomDisplay/CurrentTabContainer" unique_id=1074454118]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 texture = ExtResource("13_hcfcn")
 stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="BottomDisplay/CurrentTabContainer"]
+[node name="TextureRect2" type="TextureRect" parent="BottomDisplay/CurrentTabContainer" unique_id=2005299424]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 texture = ExtResource("13_mbntm")
 stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="BottomDisplay/CurrentTabContainer"]
+[node name="TextureRect3" type="TextureRect" parent="BottomDisplay/CurrentTabContainer" unique_id=2028124937]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 texture = ExtResource("13_mbntm")
 stretch_mode = 5
 
-[node name="InputButtonsDisplayContainer" type="MarginContainer" parent="BottomDisplay"]
+[node name="InputButtonsDisplayContainer" type="MarginContainer" parent="BottomDisplay" unique_id=1193117654]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -502,17 +503,17 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomDisplay/InputButtonsDisplayContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomDisplay/InputButtonsDisplayContainer" unique_id=1430621155]
 layout_mode = 2
 
-[node name="BackButtonDisplay" parent="BottomDisplay/InputButtonsDisplayContainer/HBoxContainer" instance=ExtResource("3_ogjo6")]
+[node name="BackButtonDisplay" parent="BottomDisplay/InputButtonsDisplayContainer/HBoxContainer" unique_id=1929569264 instance=ExtResource("3_ogjo6")]
 layout_mode = 2
 alignment = 2
 _front_text = ""
-_button_texture = ExtResource("4_ogjo6")
+_button_texture = ExtResource("19_wuetj")
 _back_text = "Back"
 
-[node name="NextButtonDisplay" parent="BottomDisplay/InputButtonsDisplayContainer/HBoxContainer" instance=ExtResource("3_ogjo6")]
+[node name="NextButtonDisplay" parent="BottomDisplay/InputButtonsDisplayContainer/HBoxContainer" unique_id=545256856 instance=ExtResource("3_ogjo6")]
 layout_mode = 2
 alignment = 2
 _front_text = ""

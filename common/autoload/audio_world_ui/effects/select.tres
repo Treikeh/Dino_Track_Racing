@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SfxUI" load_steps=4 format=3 uid="uid://b08kpaxdax2o5"]
+[gd_resource type="Resource" script_class="SfxUI" format=3 uid="uid://b08kpaxdax2o5"]
 
 [ext_resource type="Script" uid="uid://cx5lnkyiwmvvw" path="res://common/autoload/audio_world_ui/sfx_ui.gd" id="1_fukgm"]
 [ext_resource type="AudioStream" uid="uid://dm5npckfhhhgv" path="res://gui/audio/ui_select.ogg" id="2_1q7tt"]

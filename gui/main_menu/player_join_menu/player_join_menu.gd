@@ -27,6 +27,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and !_connected_players.has(event.device):
 		_add_player(event.device)
 	
+	if event.is_action_pressed("reverse") and _connected_players.is_empty():
+		hide()
+		process_mode = Node.PROCESS_MODE_DISABLED
+		menu_closed.emit(self)
+	
 	# Don't allow the game to start if not all players are ready
 	if not _all_players_ready:
 		return
@@ -62,10 +67,14 @@ func _add_player(player_id: int) -> void:
 	player_label.player_unreadiedy_up.connect(_on_player_readied_up)
 	player_label.player_removed.connect(_on_player_removed)
 	
+	await get_tree().process_frame
+	_player_display_grid.move_child(player_label, player_label.get_index() - 1)
+	
 	_on_player_readied_up()
 	
 	# Change how many columns the player display grid container should have when a new player joins
-	var columns: int = ceili(sqrt(_connected_players.size()))
+	#NOTE: +1 to account for the player join prompt
+	var columns: int = ceili(sqrt(_connected_players.size() + 1))
 	_player_display_grid.columns = columns
 	
 	# Show start game progress bar when the first player joins
@@ -77,6 +86,7 @@ func _add_player(player_id: int) -> void:
 
 func _on_player_readied_up() -> void:
 	# Check if all players are ready
+	#NOTE: -1 to account for the player join prompt
 	for id: int in _connected_players.size():
 		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(id)
 		if not player_join_entry.is_ready:
@@ -88,16 +98,14 @@ func _on_player_readied_up() -> void:
 
 func _on_player_removed(id: int) -> void:
 	var index: int = _connected_players.find(id)
-	_connected_players.pop_at(index)
-	_player_display_grid.get_child(index).queue_free()
 	
-	if _connected_players.size() > 0:
+	if not _connected_players.is_empty():
+		#NOTE: +1 to account for the player join prompt
 		var columns: int = ceili(sqrt(_connected_players.size()))
 		_player_display_grid.columns = columns
-	else:
-		hide()
-		process_mode = Node.PROCESS_MODE_DISABLED
-		menu_closed.emit(self)
+	
+	_player_display_grid.get_child(index).queue_free()
+	_connected_players.pop_at.call_deferred(index)
 
 
 func _start_level() -> void:

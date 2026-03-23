@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Sfx3D" load_steps=4 format=3 uid="uid://cucj7nsxm1074"]
+[gd_resource type="Resource" script_class="Sfx3D" format=3 uid="uid://cucj7nsxm1074"]
 
 [ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="1_f7que"]
 [ext_resource type="AudioStream" uid="uid://chi3gvsshmpt3" path="res://common/vfx/explosion/explosion.ogg" id="2_f7que"]

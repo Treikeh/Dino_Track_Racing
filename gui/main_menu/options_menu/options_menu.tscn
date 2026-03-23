@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5mba2bh6v4ys"]
+[gd_scene format=3 uid="uid://b5mba2bh6v4ys"]
 
 [ext_resource type="Script" uid="uid://c2ffsve8ee2io" path="res://gui/main_menu/options_menu/options_menu.gd" id="1_6uhmo"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="2_cqamk"]
@@ -15,7 +15,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1jrn"]
 
-[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("_title", "_settings_panel", "_button_display", "_confirm_pop_up", "_save_button", "_discard_button", "_master_volume_slider", "_master_volume_value", "_effects_volume_slider", "_effects_volume_value", "_music_volume_slider", "_music_volume_value", "_display_mode_options_button", "_vsync_mode_options_button", "_fps_slider", "_fps_value", "_cpu_amount_slider", "_cpu_amount_value")]
+[node name="OptionsMenu" type="Control" unique_id=1142254499 node_paths=PackedStringArray("_title", "_settings_panel", "_button_display", "_confirm_pop_up", "_save_button", "_discard_button", "_master_volume_slider", "_master_volume_value", "_effects_volume_slider", "_effects_volume_value", "_music_volume_slider", "_music_volume_value", "_display_mode_options_button", "_vsync_mode_options_button", "_fps_slider", "_fps_value", "_cpu_amount_slider", "_cpu_amount_value")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +42,7 @@ _fps_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/FpsSlider/Fps
 _cpu_amount_slider = NodePath("SettingsPanel/MarginContainer/VBoxContainer/CpuAmount/CpuAmountSlider")
 _cpu_amount_value = NodePath("SettingsPanel/MarginContainer/VBoxContainer/CpuAmount/CpuAmountValue")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1133872765]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -61,7 +61,7 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsPanel" type="PanelContainer" parent="."]
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=741188798]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -76,21 +76,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_u7lng")
 
-[node name="MarginContainer" type="MarginContainer" parent="SettingsPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="SettingsPanel" unique_id=601993712]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MarginContainer" unique_id=1084426156]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="GAMEPLAY" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="GAMEPLAY" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=574944788]
 layout_mode = 2
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
@@ -98,33 +98,33 @@ text = "GAMEPLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CpuAmount" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="CpuAmount" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=1438953862]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount" unique_id=876044018]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "CPU Amount"
 
-[node name="CpuAmountSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
+[node name="CpuAmountSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount" unique_id=1811025256]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
 allow_greater = true
 
-[node name="CpuAmountValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount"]
+[node name="CpuAmountValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/CpuAmount" unique_id=1740140079]
 layout_mode = 2
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "10"
 
-[node name="DispalySeperator" type="HSeparator" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="DispalySeperator" type="HSeparator" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=166773226]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hlk55")
 
-[node name="DisplayLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="DisplayLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=1138264310]
 layout_mode = 2
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
@@ -132,17 +132,17 @@ text = "DISPLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DisplayMode" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="DisplayMode" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=751187911]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode"]
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode" unique_id=1404303992]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Display mode"
 
-[node name="DisplayModeOptionsButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode"]
+[node name="DisplayModeOptionsButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/DisplayMode" unique_id=1991920043]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
@@ -156,17 +156,17 @@ popup/item_1/id = 1
 popup/item_2/text = "Windowed"
 popup/item_2/id = 2
 
-[node name="Vsync" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="Vsync" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=876078555]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync"]
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync" unique_id=582676292]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Vsync"
 
-[node name="VsyncModeOptionsButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync"]
+[node name="VsyncModeOptionsButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/Vsync" unique_id=1038941557]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
@@ -178,17 +178,17 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
-[node name="FpsSlider" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="FpsSlider" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=1244520502]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
+[node name="Label" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider" unique_id=877399483]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "Fps limit"
 
-[node name="FpsSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
+[node name="FpsSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider" unique_id=1857762595]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_re80b")
@@ -197,33 +197,33 @@ max_value = 120.0
 value = 60.0
 allow_greater = true
 
-[node name="FpsValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider"]
+[node name="FpsValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/FpsSlider" unique_id=1109606076]
 layout_mode = 2
 theme = ExtResource("3_re80b")
 theme_override_fonts/font = ExtResource("2_g635g")
 text = "10"
 
-[node name="AudioSeperator" type="HSeparator" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="AudioSeperator" type="HSeparator" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=1698759293]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_6rlu2")
 
-[node name="AudioLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="AudioLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=36548041]
 layout_mode = 2
 theme = ExtResource("3_re80b")
 text = "AUDIO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioContainer" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+[node name="AudioContainer" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer" unique_id=1070996022]
 layout_mode = 2
 
-[node name="Names" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer"]
+[node name="Names" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer" unique_id=2048001690]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="MasterVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names"]
+[node name="MasterVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names" unique_id=1901860044]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -232,7 +232,7 @@ theme_override_fonts/font = ExtResource("2_g635g")
 text = "Master Volume"
 vertical_alignment = 1
 
-[node name="EffectsVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names"]
+[node name="EffectsVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names" unique_id=240519729]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -241,7 +241,7 @@ theme_override_fonts/font = ExtResource("2_g635g")
 text = "Effects Volume"
 vertical_alignment = 1
 
-[node name="MusicVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names"]
+[node name="MusicVolume" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Names" unique_id=684781492]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -250,13 +250,13 @@ theme_override_fonts/font = ExtResource("2_g635g")
 text = "Music Volume"
 vertical_alignment = 1
 
-[node name="Sliders" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer"]
+[node name="Sliders" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer" unique_id=148619047]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="MasterVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Sliders"]
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Sliders" unique_id=1294688541]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -264,7 +264,7 @@ theme = ExtResource("3_re80b")
 max_value = 1.0
 step = 0.05
 
-[node name="EffectsVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Sliders"]
+[node name="EffectsVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Sliders" unique_id=922587039]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -272,7 +272,7 @@ theme = ExtResource("3_re80b")
 max_value = 1.0
 step = 0.05
 
-[node name="MusicVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Sliders"]
+[node name="MusicVolumeSlider" type="HSlider" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Sliders" unique_id=169982722]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -280,14 +280,14 @@ theme = ExtResource("3_re80b")
 max_value = 1.0
 step = 0.05
 
-[node name="Values" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer"]
+[node name="Values" type="VBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer" unique_id=2032080217]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="MasterVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values"]
+[node name="MasterVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values" unique_id=626078518]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_re80b")
@@ -296,7 +296,7 @@ text = "0.75"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="EffectsVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values"]
+[node name="EffectsVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values" unique_id=1025062281]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_re80b")
@@ -305,7 +305,7 @@ text = "1.0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MusicVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values"]
+[node name="MusicVolumeValue" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/AudioContainer/Values" unique_id=1441936919]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_re80b")
@@ -314,7 +314,7 @@ text = "1.0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ButtonDisplays" type="MarginContainer" parent="."]
+[node name="ButtonDisplays" type="MarginContainer" parent="." unique_id=1050614596]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -330,24 +330,24 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ButtonDisplays"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ButtonDisplays" unique_id=87181068]
 layout_mode = 2
 
-[node name="DefaultButtonDisplay" parent="ButtonDisplays/HBoxContainer" instance=ExtResource("2_cqamk")]
+[node name="DefaultButtonDisplay" parent="ButtonDisplays/HBoxContainer" unique_id=1439102831 instance=ExtResource("2_cqamk")]
 layout_mode = 2
 alignment = 2
 _front_text = ""
 _button_texture = ExtResource("4_6rlu2")
 _back_text = "Defaults"
 
-[node name="BackButtonDisplay" parent="ButtonDisplays/HBoxContainer" instance=ExtResource("2_cqamk")]
+[node name="BackButtonDisplay" parent="ButtonDisplays/HBoxContainer" unique_id=101544298 instance=ExtResource("2_cqamk")]
 layout_mode = 2
 alignment = 2
 _front_text = ""
 _button_texture = ExtResource("3_g635g")
 _back_text = "Back"
 
-[node name="ConfirmPopUp" type="PanelContainer" parent="."]
+[node name="ConfirmPopUp" type="PanelContainer" parent="." unique_id=1907802029]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -363,30 +363,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_u7lng")
 
-[node name="MarginContainer" type="MarginContainer" parent="ConfirmPopUp"]
+[node name="MarginContainer" type="MarginContainer" parent="ConfirmPopUp" unique_id=1892736475]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPopUp/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPopUp/MarginContainer" unique_id=1502983153]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Label" type="Label" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="ConfirmPopUp/MarginContainer/VBoxContainer" unique_id=83255640]
 layout_mode = 2
 theme = ExtResource("3_re80b")
 text = "Save Changes?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ConfirmPopUp/MarginContainer/VBoxContainer" unique_id=389840379]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_w1jrn")
 
-[node name="SaveButton" type="Button" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
+[node name="SaveButton" type="Button" parent="ConfirmPopUp/MarginContainer/VBoxContainer" unique_id=1794742704]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")
@@ -400,7 +400,7 @@ theme_override_fonts/font = ExtResource("2_g635g")
 text = "Save"
 script = ExtResource("6_hlk55")
 
-[node name="DiscardButton" type="Button" parent="ConfirmPopUp/MarginContainer/VBoxContainer"]
+[node name="DiscardButton" type="Button" parent="ConfirmPopUp/MarginContainer/VBoxContainer" unique_id=741465199]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")

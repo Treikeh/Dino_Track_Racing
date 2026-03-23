@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Sfx3D" load_steps=4 format=3 uid="uid://cod4w51u7qsh1"]
+[gd_resource type="Resource" script_class="Sfx3D" format=3 uid="uid://cod4w51u7qsh1"]
 
 [ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="1_mwvx3"]
 [ext_resource type="AudioStream" uid="uid://c3ydscicqfi58" path="res://entities/car_controller/audio/trick.ogg" id="2_mwvx3"]

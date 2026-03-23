@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Sfx3D" load_steps=4 format=3 uid="uid://dtk4oymqhlyk2"]
+[gd_resource type="Resource" script_class="Sfx3D" format=3 uid="uid://dtk4oymqhlyk2"]
 
 [ext_resource type="Script" uid="uid://lxow7d5fycpj" path="res://common/autoload/audio_world_3d/sfx_3d.gd" id="1_55k3x"]
 [ext_resource type="AudioStream" uid="uid://chgosl8vhoha2" path="res://entities/car_controller/audio/drift.ogg" id="2_55k3x"]
