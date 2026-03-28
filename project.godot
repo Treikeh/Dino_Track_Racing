@@ -16,8 +16,10 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Dino Track Racing"
 config/version="1.0.2"
-config/tags=PackedStringArray("proper_project", "school")
+config/tags=PackedStringArray("proper_project")
 run/main_scene="uid://wwcxxmjxspog"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="dino_track_racing"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
