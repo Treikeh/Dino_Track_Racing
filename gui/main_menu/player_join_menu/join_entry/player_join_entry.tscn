@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7vjvq2mj44l1"]
+[gd_scene format=3 uid="uid://c7vjvq2mj44l1"]
 
 [ext_resource type="Script" uid="uid://dlglhlfg0iapj" path="res://gui/main_menu/player_join_menu/join_entry/player_join_entry.gd" id="1_n5a3w"]
 [ext_resource type="PackedScene" uid="uid://c34gft7iam7yp" path="res://entities/car_controller/art/scooter_dino/scooter_dino_01_sk.tscn" id="2_06t76"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="3_jnnsd"]
 [ext_resource type="Texture2D" uid="uid://ct3yo7cj63752" path="res://gui/main_menu/player_join_menu/join_entry/arrow_right.png" id="3_sfd5j"]
-[ext_resource type="AudioStream" uid="uid://d274iio7abcy4" path="res://gui/main_menu/player_join_menu/join_entry/dino_scream.ogg" id="6_252or"]
 [ext_resource type="Theme" uid="uid://dg07kjvb2o0nd" path="res://gui/art/custom_theme.tres" id="6_sfd5j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sfd5j"]
 
-[node name="PlayerJoinEntry" type="Control" node_paths=PackedStringArray("_mesh", "_player_id_label", "_arrow_container", "_ready_label", "_scream_stream_player")]
+[node name="PlayerJoinEntry" type="Control" unique_id=89753244 node_paths=PackedStringArray("_mesh", "_player_id_label", "_arrow_container", "_ready_label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 390.0
@@ -21,9 +20,8 @@ _mesh = NodePath("SubViewportContainer/SubViewport/ScooterDino_01_SK")
 _player_id_label = NodePath("PlayerIdLabel")
 _arrow_container = NodePath("ArrowContainer")
 _ready_label = NodePath("ReadyLabel")
-_scream_stream_player = NodePath("ScreamStreamPlayer")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1262735297]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,24 +32,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=940670788]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(390, 265)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=2060943924]
 current = true
 fov = 45.0
 
-[node name="ScooterDino_01_SK" parent="SubViewportContainer/SubViewport" groups=["va_listener"] instance=ExtResource("2_06t76")]
+[node name="ScooterDino_01_SK" parent="SubViewportContainer/SubViewport" unique_id=1657195144 groups=["va_listener"] instance=ExtResource("2_06t76")]
 transform = Transform3D(-0.8660253, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660253, 0, -0.8, -3)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport"]
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport" unique_id=1171209790]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 0)
 
-[node name="ArrowContainer" type="MarginContainer" parent="."]
+[node name="ArrowContainer" type="MarginContainer" parent="." unique_id=1564986270]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -64,11 +62,11 @@ grow_vertical = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ArrowContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ArrowContainer" unique_id=162508901]
 layout_mode = 2
 alignment = 1
 
-[node name="LeftArrow" type="TextureRect" parent="ArrowContainer/HBoxContainer"]
+[node name="LeftArrow" type="TextureRect" parent="ArrowContainer/HBoxContainer" unique_id=684286845]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -76,18 +74,18 @@ texture = ExtResource("3_sfd5j")
 stretch_mode = 5
 flip_h = true
 
-[node name="VSeparator" type="VSeparator" parent="ArrowContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="ArrowContainer/HBoxContainer" unique_id=1118976509]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_sfd5j")
 
-[node name="RightArrow" type="TextureRect" parent="ArrowContainer/HBoxContainer"]
+[node name="RightArrow" type="TextureRect" parent="ArrowContainer/HBoxContainer" unique_id=1649080219]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("3_sfd5j")
 stretch_mode = 5
 
-[node name="PlayerIdLabel" type="Label" parent="."]
+[node name="PlayerIdLabel" type="Label" parent="." unique_id=735984754]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -109,7 +107,7 @@ text = "Player 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ReadyLabel" type="Label" parent="."]
+[node name="ReadyLabel" type="Label" parent="." unique_id=1675923730]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,7 +127,3 @@ theme_override_font_sizes/font_size = 30
 text = "READY"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ScreamStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_252or")
-parameters/looping = true

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="2_22gan"]
 [ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_was43"]
 [ext_resource type="AudioStream" uid="uid://bkaanlkvqak51" path="res://entities/car_controller/audio/engine.ogg" id="4_m4l3f"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="4_pomfu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22gan"]
 
@@ -11,7 +12,7 @@
 bg_color = Color(1, 1, 1, 1)
 border_width_bottom = 4
 
-[node name="PlayerJoinMenu" type="Control" unique_id=1169718252 node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar", "_engine_sfx")]
+[node name="PlayerJoinMenu" type="Control" unique_id=1169718252 node_paths=PackedStringArray("_player_display_grid", "_start_game_progress_bar", "_engine_sfx", "_hold_button_display")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +23,7 @@ script = ExtResource("1_mb52c")
 _player_display_grid = NodePath("VBoxContainer/PlayerDisplayGrid")
 _start_game_progress_bar = NodePath("VBoxContainer/StartProgressBar")
 _engine_sfx = NodePath("EngineSFX")
+_hold_button_display = NodePath("VBoxContainer/StartProgressBar/SelectButtonDisplayContainer/HBoxContainer/HoldButtonDisplay")
 
 [node name="BackgroundColor" type="ColorRect" parent="." unique_id=232125275]
 layout_mode = 1
@@ -78,28 +80,44 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_22gan")
 theme_override_styles/fill = SubResource("StyleBoxFlat_was43")
-max_value = 2.0
+max_value = 1.25
 step = 0.0
 value = 0.5
 show_percentage = false
 
-[node name="StartButtonDispaly" type="MarginContainer" parent="VBoxContainer/StartProgressBar" unique_id=238497051]
+[node name="SelectButtonDisplayContainer" type="MarginContainer" parent="VBoxContainer/StartProgressBar" unique_id=715821413]
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -174.0
+offset_left = -177.0
+offset_top = -52.0
 grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_right = 10
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
 
-[node name="ButtonDisplay" parent="VBoxContainer/StartProgressBar/StartButtonDispaly" unique_id=1762657097 instance=ExtResource("3_was43")]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/StartProgressBar/SelectButtonDisplayContainer" unique_id=2008722658]
+layout_mode = 2
+alignment = 2
+
+[node name="HoldButtonDisplay" parent="VBoxContainer/StartProgressBar/SelectButtonDisplayContainer/HBoxContainer" unique_id=1762657097 instance=ExtResource("3_was43")]
 layout_mode = 2
 alignment = 2
 _front_text = "Hold"
 _button_texture = ExtResource("2_22gan")
-_back_text = "to start"
+_back_text = "select level"
+
+[node name="BackButtonDisplay" parent="VBoxContainer/StartProgressBar/SelectButtonDisplayContainer/HBoxContainer" unique_id=1581980107 instance=ExtResource("3_was43")]
+layout_mode = 2
+alignment = 2
+_front_text = " "
+_button_texture = ExtResource("4_pomfu")
+_back_text = "Back"
 
 [node name="EngineSFX" type="AudioStreamPlayer" parent="." unique_id=1653749819]
 stream = ExtResource("4_m4l3f")

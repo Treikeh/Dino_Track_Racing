@@ -106,6 +106,8 @@ var players: Dictionary[int, PlayerData] = {
 
 var cpu_amount: int = 40
 
+var races_completed: int = 0
+
 # Container that will hold all the player cameras
 var viewports_container: GridContainer
 

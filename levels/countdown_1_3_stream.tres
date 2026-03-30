@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b6d3tcib1jxda"]
+
+[ext_resource type="AudioStream" uid="uid://les05yr4lii3" path="res://levels/Level_01/audio/countdown_1-3.ogg" id="1_ux5lo"]
+
+[resource]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("1_ux5lo")

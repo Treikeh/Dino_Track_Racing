@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://bvgj443in12h6"]
+
+[ext_resource type="Script" uid="uid://bhubtxpck8qm2" path="res://gui/level_select/level_select.gd" id="1_yl3in"]
+[ext_resource type="Texture2D" uid="uid://b4ylv3wgl01l8" path="res://levels/Level_01/level_01_select_preview.png" id="2_6v2ro"]
+[ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_tr0m3"]
+[ext_resource type="StyleBox" uid="uid://rnxjwdktjsfk" path="res://gui/art/button/button_normal_stylebox.tres" id="3_h1nhk"]
+[ext_resource type="PackedScene" uid="uid://b2blrti5eokjj" path="res://gui/button_display/button_display.tscn" id="3_h8s1v"]
+[ext_resource type="StyleBox" uid="uid://dnrudtf2s1dj6" path="res://gui/art/button/button_focus_stylebox.tres" id="4_4roxq"]
+[ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_gvnv7"]
+[ext_resource type="Script" uid="uid://dumnwd4tgwwbn" path="res://gui/button_effect.gd" id="5_4roxq"]
+[ext_resource type="Texture2D" uid="uid://bhd00l5u00odr" path="res://gui/button_display/art/button_east.png" id="5_gvnv7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4roxq"]
+
+[node name="LevelSelect" type="Control" unique_id=1667366529 node_paths=PackedStringArray("_start_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yl3in")
+_start_focus = NodePath("GridContainer/Level_01Button")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=1516193013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.27058825)
+
+[node name="Title" type="Label" parent="." unique_id=1461442552]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -270.0
+offset_right = 270.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_tr0m3")
+theme_override_font_sizes/font_size = 30
+text = "Select Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1019145674]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -185.0
+offset_right = 312.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 70
+theme_override_constants/v_separation = 50
+columns = 2
+
+[node name="Level_01Button" type="Button" parent="GridContainer" unique_id=1697453781]
+custom_minimum_size = Vector2(260, 175)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_h1nhk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4roxq")
+theme_override_styles/hover = ExtResource("4_4roxq")
+theme_override_styles/focus = ExtResource("4_4roxq")
+script = ExtResource("5_4roxq")
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/Level_01Button" unique_id=1853674276]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Level01" type="TextureRect" parent="GridContainer/Level_01Button/MarginContainer" unique_id=58791033]
+layout_mode = 2
+texture = ExtResource("2_6v2ro")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Level_02Button" type="Button" parent="GridContainer" unique_id=694086602]
+custom_minimum_size = Vector2(260, 175)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_h1nhk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4roxq")
+theme_override_styles/hover = ExtResource("4_4roxq")
+theme_override_styles/focus = ExtResource("4_4roxq")
+script = ExtResource("5_4roxq")
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/Level_02Button" unique_id=1132162828]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Level01" type="TextureRect" parent="GridContainer/Level_02Button/MarginContainer" unique_id=1713967829]
+layout_mode = 2
+texture = ExtResource("2_6v2ro")
+expand_mode = 2
+
+[node name="Level_03Button" type="Button" parent="GridContainer" unique_id=1769216293]
+custom_minimum_size = Vector2(260, 175)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_h1nhk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4roxq")
+theme_override_styles/hover = ExtResource("4_4roxq")
+theme_override_styles/focus = ExtResource("4_4roxq")
+script = ExtResource("5_4roxq")
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/Level_03Button" unique_id=1572321444]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Level01" type="TextureRect" parent="GridContainer/Level_03Button/MarginContainer" unique_id=1252950719]
+layout_mode = 2
+texture = ExtResource("2_6v2ro")
+expand_mode = 2
+
+[node name="Level_04Button" type="Button" parent="GridContainer" unique_id=376952665]
+custom_minimum_size = Vector2(260, 175)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_h1nhk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4roxq")
+theme_override_styles/hover = ExtResource("4_4roxq")
+theme_override_styles/focus = ExtResource("4_4roxq")
+script = ExtResource("5_4roxq")
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/Level_04Button" unique_id=1589737459]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Level01" type="TextureRect" parent="GridContainer/Level_04Button/MarginContainer" unique_id=1759855913]
+layout_mode = 2
+texture = ExtResource("2_6v2ro")
+expand_mode = 2
+
+[node name="SelectButtonDisplayContainer" type="MarginContainer" parent="." unique_id=1334407506]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectButtonDisplayContainer" unique_id=986311941]
+layout_mode = 2
+
+[node name="SelectButtonDisplay" parent="SelectButtonDisplayContainer/HBoxContainer" unique_id=1725564664 instance=ExtResource("3_h8s1v")]
+layout_mode = 2
+alignment = 2
+_front_text = ""
+_button_texture = ExtResource("4_gvnv7")
+_back_text = "Select"
+
+[node name="BackButtonDisplay" parent="SelectButtonDisplayContainer/HBoxContainer" unique_id=1439819039 instance=ExtResource("3_h8s1v")]
+layout_mode = 2
+alignment = 2
+_front_text = ""
+_button_texture = ExtResource("5_gvnv7")
+_back_text = "Back"
+
+[connection signal="pressed" from="GridContainer/Level_01Button" to="." method="_on_level_button_pressed" flags=18]
+[connection signal="pressed" from="GridContainer/Level_02Button" to="." method="_on_level_button_pressed" flags=18]
+[connection signal="pressed" from="GridContainer/Level_03Button" to="." method="_on_level_button_pressed" flags=18]
+[connection signal="pressed" from="GridContainer/Level_04Button" to="." method="_on_level_button_pressed" flags=18]

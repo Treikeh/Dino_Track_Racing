@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ldv8etwkdrbu"]
+[gd_scene format=3 uid="uid://ldv8etwkdrbu"]
 
 [ext_resource type="Script" uid="uid://ct0xtrnhj2bye" path="res://gui/level_ui/leaderboard/leaderboard.gd" id="1_5kli7"]
 [ext_resource type="FontFile" uid="uid://dhrvvr01843te" path="res://common/fonts/PressStart2P-Regular.ttf" id="2_4owjt"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dumnwd4tgwwbn" path="res://gui/button_effect.gd" id="3_yxjio"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_edfku"]
 
-[node name="Leaderboard" type="Control" node_paths=PackedStringArray("_entry_container", "_start_focus_object")]
+[node name="Leaderboard" type="Control" unique_id=969818627 node_paths=PackedStringArray("_entry_container", "_start_focus_object")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ script = ExtResource("1_5kli7")
 _entry_container = NodePath("ScrollContainer/MarginContainer/EntryContainer")
 _start_focus_object = NodePath("ButtonsContainer/ReplayButton")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=575669575]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -37,7 +37,7 @@ text = "Leaderboard"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1416702356]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -52,7 +52,7 @@ grow_vertical = 2
 theme = ExtResource("3_fdi2r")
 follow_focus = true
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=686747971]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -61,14 +61,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 10
 
-[node name="EntryContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+[node name="EntryContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=2036734482]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+[node name="ButtonsContainer" type="VBoxContainer" parent="." unique_id=929841057]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -83,19 +83,19 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="ReplayButton" type="Button" parent="ButtonsContainer"]
+[node name="ReplayButton" type="Button" parent="ButtonsContainer" unique_id=1510627614]
 layout_mode = 2
 theme = ExtResource("3_fdi2r")
 text = "Replay"
 script = ExtResource("3_yxjio")
 
-[node name="MainMenuButton" type="Button" parent="ButtonsContainer"]
+[node name="MainMenuButton" type="Button" parent="ButtonsContainer" unique_id=1526679276]
 layout_mode = 2
 theme = ExtResource("3_fdi2r")
 text = "Main menu"
 script = ExtResource("3_yxjio")
 
-[node name="ButtonDisplay" type="MarginContainer" parent="."]
+[node name="ButtonDisplay" type="MarginContainer" parent="." unique_id=1339406750]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -111,7 +111,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="SelectButtonDisplay" parent="ButtonDisplay" instance=ExtResource("3_w2f7t")]
+[node name="SelectButtonDisplay" parent="ButtonDisplay" unique_id=492634508 instance=ExtResource("3_w2f7t")]
 layout_mode = 2
 alignment = 2
 _front_text = ""

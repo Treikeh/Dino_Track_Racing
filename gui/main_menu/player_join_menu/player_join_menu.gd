@@ -1,6 +1,7 @@
 extends Control
 
 
+signal all_players_ready
 signal menu_closed(menu: Control)
 
 
@@ -10,6 +11,7 @@ const PLAYER_JOIN_ENTRY_SCENE: PackedScene = preload("res://gui/main_menu/player
 @export var _player_display_grid: GridContainer
 @export var _start_game_progress_bar: Range
 @export var _engine_sfx: AudioStreamPlayer
+@export var _hold_button_display: Control
 
 var _all_players_ready: bool = false
 var _start_game_pressed: bool = false
@@ -21,6 +23,7 @@ var _connected_players: Array[int] = []
 
 func _ready() -> void:
 	_start_game_progress_bar.visible = false
+	_hold_button_display.visible = false
 
 
 func _input(event: InputEvent) -> void:
@@ -28,9 +31,7 @@ func _input(event: InputEvent) -> void:
 		_add_player(event.device)
 	
 	if event.is_action_pressed("reverse") and _connected_players.is_empty():
-		hide()
-		process_mode = Node.PROCESS_MODE_DISABLED
-		menu_closed.emit(self)
+		close_menu()
 	
 	# Don't allow the game to start if not all players are ready
 	if not _all_players_ready:
@@ -51,7 +52,7 @@ func _process(delta: float) -> void:
 	if _start_game_pressed:
 		_start_game_time += delta
 		# Start game after a short while
-		if _start_game_time >= 2.0:
+		if _start_game_time >= _start_game_progress_bar.max_value:
 			_start_level()
 	elif _start_game_time > 0.0:
 		_start_game_time -= delta
@@ -91,9 +92,11 @@ func _on_player_readied_up() -> void:
 		var player_join_entry: PlayerJoinEntry = _player_display_grid.get_child(id)
 		if not player_join_entry.is_ready:
 			_all_players_ready = false
+			_hold_button_display.visible = false
 			return
 		
 		_all_players_ready = true
+		_hold_button_display.visible = true
 
 
 func _on_player_removed(id: int) -> void:
@@ -117,4 +120,28 @@ func _start_level() -> void:
 		var id: int = player_join_entry._player_id
 		Globals.players[id] = Globals.PlayerData.new(player_join_entry.current_hat)
 	
-	LevelManager.load_level("res://levels/Level_01/level_01.tscn")
+	#LevelManager.load_level("res://levels/Level_01/level_01.tscn")
+	# Load level select
+	print("All players ready")
+	Globals.races_completed = 0
+	all_players_ready.emit()
+	hide()
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func open_menu() -> void:
+	# Show and enable the menu
+	process_mode = Node.PROCESS_MODE_INHERIT
+	show()
+	_start_game_pressed = false
+	_start_game_player_id = -1
+	_start_game_time = 0.0
+	_start_game_progress_bar.value = 0.0
+
+
+func close_menu() -> void:
+	hide()
+	process_mode = Node.PROCESS_MODE_DISABLED
+	menu_closed.emit(self)
+	_start_game_progress_bar.visible = false
+	_hold_button_display.visible = false

@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://bv1yo7ak8vlbf"]
+
+[ext_resource type="Script" uid="uid://ddsg81fi6kjdd" path="res://levels/level_3d.gd" id="1_yc15p"]
+[ext_resource type="AudioStream" uid="uid://b6d3tcib1jxda" path="res://levels/countdown_1_3_stream.tres" id="2_1md7u"]
+[ext_resource type="PackedScene" uid="uid://b4sqyesberv8x" path="res://entities/finish_line/finish_line.tscn" id="2_gr6my"]
+[ext_resource type="AudioStream" uid="uid://s3d1i47jodwd" path="res://levels/Level_01/audio/countdown_go.ogg" id="3_1md7u"]
+[ext_resource type="PackedScene" uid="uid://db0hy38cav5y0" path="res://entities/checkpoint/checkpoint.tscn" id="3_it0d2"]
+[ext_resource type="PackedScene" uid="uid://dosd47fqh8thg" path="res://entities/item_box/item_box.tscn" id="4_fifag"]
+[ext_resource type="Material" uid="uid://hc84c3ara74y" path="res://common/materials/dev_grid_gray.tres" id="5_v8coi"]
+[ext_resource type="PackedScene" uid="uid://wc2mqqmx0usn" path="res://environment/finish_line/finish_line_01_sm.tscn" id="6_obj07"]
+[ext_resource type="PackedScene" uid="uid://b7vedx747ywaw" path="res://environment/palm_tree/palm_tree_01_sm.tscn" id="7_4bjfq"]
+[ext_resource type="PackedScene" uid="uid://dmsrach3rtkrs" path="res://environment/trash_can/trash_can_01_sm.tscn" id="8_s21is"]
+[ext_resource type="PackedScene" uid="uid://1u4rkolapqqg" path="res://entities/items/trash_bag/art/trash_bag_01_sm.tscn" id="9_uvhy7"]
+[ext_resource type="PackedScene" uid="uid://cjniii7bsnrev" path="res://environment/street_light/street_light_01_sm.tscn" id="10_mo6y7"]
+[ext_resource type="PackedScene" uid="uid://bkjrcub6yciar" path="res://environment/billboard/billboard_01_sm.tscn" id="11_chvjh"]
+[ext_resource type="AudioStream" uid="uid://bqwqsx7b1cqhj" path="res://levels/Level_01/audio/ihatetuesdays-jungle-ish-beat-for-video-games-314073.mp3" id="12_ui38v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_f5j8r"]
+sky_material = SubResource("ProceduralSkyMaterial_h2yge")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_f5j8r")
+tonemap_mode = 2
+tonemap_white = 2.0
+
+[sub_resource type="Curve3D" id="Curve3D_h2yge"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.16563028, 0, -28.130651, 0, 0, 0, 0, 0, 0, -13.174606, 0, -42.95197, 0, 0, 0, 0, 0, 0, -40.407738, 0, -29.122644, 0, 0, 0, 0, 0, 0, -41.546, 0, 23.447, 0, 0, 0, 0, 0, 0, -5.7303853, 0, 44.616993, 0, 0, 0, 0, 0, 0, 44.58708, 0, 45.787163, 0, 0, 0, 0, 0, 0, 44.374317, 0, 2.38436, 0, 0, 0, 0, 0, 0, 41.609657, 0, -38.90209, 0, 0, 0, 0, 0, 0, 24.376192, 0, -41.98709, 0, 0, 0, 0, 0, 0, 17.036013, 0, -29.753458, 0, 0, 0, 0, 0, 0, 23.41878, 0, 14.393995, 0, 0, 0, 0, 0, 0, 0, 0, 26.096),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 13
+
+[node name="Level02" type="Node3D" unique_id=1517911867 node_paths=PackedStringArray("_track", "_spawn_point", "_background_music", "_countdown_player")]
+script = ExtResource("1_yc15p")
+_track = NodePath("Track")
+_spawn_point = NodePath(".")
+_countdown_1_3_sfx = ExtResource("2_1md7u")
+_countdown_go_sfx = ExtResource("3_1md7u")
+_background_music = NodePath("SFX/BackgroundMusic")
+_countdown_player = NodePath("SFX/Countdown")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1511144959]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1057315507]
+environment = SubResource("Environment_1bvp3")
+
+[node name="Track" type="Path3D" parent="." unique_id=1465411839 groups=["track"]]
+curve = SubResource("Curve3D_h2yge")
+
+[node name="FinishLine" parent="Track" unique_id=111825855 instance=ExtResource("2_gr6my")]
+transform = Transform3D(0.99998266, 0, 0.0058877906, 0, 1, 0, -0.0058877906, 0, 0.99998266, 0, 0, 0)
+
+[node name="Checkpoint" parent="Track" unique_id=445971885 instance=ExtResource("3_it0d2")]
+transform = Transform3D(-0.023249263, 0, -0.9997254, 0, 1, 0, 0.9997254, 0, -0.023249263, 0.12072235, 0, 44.753067)
+
+[node name="ItemBox" parent="." unique_id=1668936420 instance=ExtResource("4_fifag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.400001, 0, -8.200001)
+
+[node name="Collision" type="Node3D" parent="." unique_id=738778563]
+
+[node name="Ground" type="CSGBox3D" parent="Collision" unique_id=352032091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+layers = 3
+material_override = ExtResource("5_v8coi")
+use_collision = true
+size = Vector3(200, 1, 200)
+
+[node name="Ramp" type="CSGBox3D" parent="Collision" unique_id=870308984]
+transform = Transform3D(1, 0, 0, 0, 0.93863153, -0.34492144, 0, 0.34492144, 0.93863153, 0, 0, -10.857231)
+use_collision = true
+size = Vector3(8.423584, 1, 7.236328)
+
+[node name="Ramp2" type="CSGBox3D" parent="Collision" unique_id=1034776426]
+transform = Transform3D(0.42047268, -0.7353533, 0.5314682, 0.9036336, 0.39205077, -0.1724607, -0.08154291, 0.55276746, 0.8293364, 1.6530108, 4.9072967, -22.434975)
+use_collision = true
+size = Vector3(8.423584, 1, 10.8)
+
+[node name="Ramp3" type="CSGBox3D" parent="Collision" unique_id=2129963484]
+transform = Transform3D(0.04983994, -0.61770403, 0.7848299, 0.978595, -0.12689458, -0.16201769, 0.19966953, 0.7761055, 0.5981575, -6.4869285, 6.4185896, -32.367973)
+use_collision = true
+size = Vector3(8.423584, 1, 14.400001)
+
+[node name="Bump" type="CSGSphere3D" parent="Collision" unique_id=1003472902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.292329, -3.7729082, 0.8880811)
+use_collision = true
+radius = 4.410091
+
+[node name="Ledge" type="CSGBox3D" parent="Collision" unique_id=1422001712]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18, -0.4, 0)
+use_collision = true
+size = Vector3(10, 1, 1)
+
+[node name="Halfpipe" type="CSGBox3D" parent="Collision" unique_id=90336381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.1, 10.800002, 0)
+use_collision = true
+size = Vector3(23.800001, 32.4, 54.7)
+material = ExtResource("5_v8coi")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Collision/Halfpipe" unique_id=1030746532]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 12.199997, 0, 0)
+operation = 2
+radius = 10.8
+height = 57.4
+sides = 32
+material = ExtResource("5_v8coi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Collision/Halfpipe" unique_id=1419820632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.25, 13.35, 0)
+size = Vector3(39.3, 5.71, 54.7)
+material = ExtResource("5_v8coi")
+
+[node name="Deco" type="Node3D" parent="." unique_id=2117560251]
+
+[node name="FinishLine_01_SM" parent="Deco" unique_id=811915965 instance=ExtResource("6_obj07")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="PalmTree_01_SM" parent="Deco" unique_id=688848499 instance=ExtResource("7_4bjfq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.1, 10.7)
+
+[node name="TrashCan_01_SM" parent="Deco" unique_id=2083938374 instance=ExtResource("8_s21is")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -8.1, 0, 9.7)
+
+[node name="TrashBag_01_SM" parent="Deco" unique_id=1595264424 instance=ExtResource("9_uvhy7")]
+transform = Transform3D(-0.8660253, 0.12940954, 0.48296294, 0, 0.9659258, -0.25881904, -0.50000006, -0.22414386, -0.8365163, -8.3, 1, 11)
+
+[node name="StreetLight_01_SM" parent="Deco" unique_id=2025805416 instance=ExtResource("10_mo6y7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8, 0.1, 49.9)
+
+[node name="StreetLight_01_SM2" parent="Deco" unique_id=1768633721 instance=ExtResource("10_mo6y7")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 45.7, 0.1, 48.4)
+
+[node name="StreetLight_01_SM3" parent="Deco" unique_id=999354606 instance=ExtResource("10_mo6y7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 27.4, 0.1, -44.600002)
+
+[node name="StreetLight_01_SM4" parent="Deco" unique_id=558158631 instance=ExtResource("10_mo6y7")]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, -41.5, 0.1, 30.9)
+
+[node name="StreetLight_01_SM5" parent="Deco" unique_id=914074339 instance=ExtResource("10_mo6y7")]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, -42.5, 0.1, -33.5)
+
+[node name="StreetLight_01_SM6" parent="Deco" unique_id=1612147255 instance=ExtResource("10_mo6y7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 28.5)
+
+[node name="Billboard_01_SM" parent="Deco" unique_id=854134111 instance=ExtResource("11_chvjh")]
+transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, -48.6, 27, 0)
+
+[node name="SFX" type="Node" parent="." unique_id=33025247]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="SFX" unique_id=787856014]
+stream = ExtResource("12_ui38v")
+
+[node name="Countdown" type="AudioStreamPlayer" parent="SFX" unique_id=1823112727]

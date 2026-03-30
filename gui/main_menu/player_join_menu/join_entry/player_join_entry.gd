@@ -14,7 +14,6 @@ const TWEEN_DURATION: float = 0.25
 @export var _player_id_label: Label
 @export var _arrow_container: Control
 @export var _ready_label: Label
-@export var _scream_stream_player: AudioStreamPlayer
 
 var is_ready: bool = false
 var current_hat: int = 0
@@ -52,14 +51,6 @@ func _input(event: InputEvent) -> void:
 		# Unready
 		if event.is_action_pressed("reverse%s" % _player_id):
 			_unready_up()
-		
-		# Scream when pressing the drift button
-		if event.is_action_pressed("use_held_item%s" % _player_id):
-			_start_scream()
-			_mesh.is_screaming = true
-		elif event.is_action_released("use_held_item%s" % _player_id):
-			_scream_stream_player.stream_paused = true
-			_mesh.is_screaming = false
 	else:
 		# Ready up
 		if event.is_action_pressed("ui_accept%s" % _player_id):
@@ -113,14 +104,6 @@ func _unready_up() -> void:
 
 func _remove_entry() -> void:
 	player_removed.emit(_player_id)
-
-
-func _start_scream() -> void:
-	# Start the scream stream if it hasn't started yet
-	if !_scream_stream_player.playing and !_scream_stream_player.stream_paused:
-		_scream_stream_player.play()
-	else: # Unpause scream stream when if it has started
-		_scream_stream_player.stream_paused = false
 
 
 func _show_next_hat() -> void:
