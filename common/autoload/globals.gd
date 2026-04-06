@@ -8,6 +8,7 @@ signal input_mode_changed(input_mode: InputModes)
 class PlayerData:
 	var hat: int = 0
 	var time_taken: float = 0.0
+	var total_time_taken: float = 0.0
 	
 	func _init(_hat: int = 0, _time_taken: float = 0.0) -> void:
 		hat = _hat
@@ -107,6 +108,7 @@ var players: Dictionary[int, PlayerData] = {
 var cpu_amount: int = 40
 
 var races_completed: int = 0
+var max_races: int = 4
 
 # Container that will hold all the player cameras
 var viewports_container: GridContainer

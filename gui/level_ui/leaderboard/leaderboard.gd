@@ -1,11 +1,19 @@
 extends Control
 
 
+signal show_level_select_menu
+
+
 const ENTRY_SCENE: PackedScene = preload("res://gui/level_ui/leaderboard/leaderboard_entry/leaderboard_entry.tscn")
 
 
 @export var _entry_container: Container
 @export var _start_focus_object: Control
+@export var _replay_button: Button
+@export var _main_menu_button: Button
+
+
+var show_total_time_taken: bool = false
 
 
 # Add all the entires to the leaderboard
@@ -28,8 +36,30 @@ func populate() -> void:
 
 
 func _sort_player_time_taken(a: int, b: int) -> bool:
-	#return _finished_cars[a] < _finished_cars[b]
 	return Globals.players[a].time_taken < Globals.players[b].time_taken
+
+
+func populate_total() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	_start_focus_object.grab_focus()
+	
+	#_finished_cars = finished_cars
+	#var players: Array[int] = _finished_cars.keys()
+	var players: Array[int] = Globals.players.keys()
+	players.sort_custom(_sort_player_total_time_taken)
+	
+	for i: int in players.size():
+		# Get info about the player
+		var id: int = players[i]
+		#var time_taken: float = _finished_cars[id]
+		var time_taken: float = Globals.players[id].total_time_taken
+		print(Globals.players[id].total_time_taken)
+		
+		_add_entry.call_deferred(i, id, time_taken)
+
+
+func _sort_player_total_time_taken(a: int, b: int) -> bool:
+	return Globals.players[a].total_time_taken < Globals.players[b].total_time_taken
 
 
 func _add_entry(index: int, id: int, time_taken: float) -> void:
@@ -53,7 +83,23 @@ func _add_entry(index: int, id: int, time_taken: float) -> void:
 
 
 func _on_replay_button_pressed() -> void:
-	LevelManager.load_level(LevelManager.current_level_path)
+	if Globals.races_completed == 1:
+		show_level_select_menu.emit()
+		return
+	
+	if show_total_time_taken == true:
+		show_level_select_menu.emit()
+	else:
+		show_total_time_taken = true
+		# Show total time taken leaderboard
+		for child: Node in _entry_container.get_children():
+			_entry_container.remove_child(child)
+			child.queue_free()
+		populate_total()
+		# Hide next button when all races have been completed
+		if Globals.races_completed >= Globals.max_races:
+			_replay_button.hide()
+			_main_menu_button.grab_focus()
 
 
 func _on_main_menu_button_pressed() -> void:

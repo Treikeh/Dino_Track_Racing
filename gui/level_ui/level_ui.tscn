@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnkpb3dawgrxk"]
+[gd_scene format=3 uid="uid://dnkpb3dawgrxk"]
 
 [ext_resource type="Script" uid="uid://bcv14wku4unfh" path="res://gui/level_ui/level_ui.gd" id="1_lxkqr"]
 [ext_resource type="PackedScene" uid="uid://ldv8etwkdrbu" path="res://gui/level_ui/leaderboard/leaderboard.tscn" id="2_cqata"]
 [ext_resource type="PackedScene" uid="uid://cmy21chwdl2dx" path="res://gui/level_ui/pause_menu/pause_menu.tscn" id="3_irvqn"]
+[ext_resource type="PackedScene" uid="uid://bvgj443in12h6" path="res://gui/level_select/level_select.tscn" id="4_cqata"]
 
-[node name="LevelUi" type="CanvasLayer" node_paths=PackedStringArray("_leaderboard", "_pause_menu")]
+[node name="LevelUi" type="CanvasLayer" unique_id=2055382558 node_paths=PackedStringArray("_leaderboard", "_pause_menu", "_level_select_menu")]
 script = ExtResource("1_lxkqr")
 _leaderboard = NodePath("Leaderboard")
 _pause_menu = NodePath("PauseMenu")
+_level_select_menu = NodePath("LevelSelect")
 
-[node name="Leaderboard" parent="." instance=ExtResource("2_cqata")]
+[node name="Leaderboard" parent="." unique_id=1176997208 instance=ExtResource("2_cqata")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("3_irvqn")]
+[node name="PauseMenu" parent="." unique_id=2053695271 instance=ExtResource("3_irvqn")]
+
+[node name="LevelSelect" parent="." unique_id=1667366529 instance=ExtResource("4_cqata")]
+
+[connection signal="show_level_select_menu" from="Leaderboard" to="." method="_on_leaderboard_show_level_select_menu"]

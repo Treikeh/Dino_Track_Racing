@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dumnwd4tgwwbn" path="res://gui/button_effect.gd" id="3_yxjio"]
 [ext_resource type="Texture2D" uid="uid://qij0mmu81umb" path="res://gui/button_display/art/button_south.png" id="4_edfku"]
 
-[node name="Leaderboard" type="Control" unique_id=969818627 node_paths=PackedStringArray("_entry_container", "_start_focus_object")]
+[node name="Leaderboard" type="Control" unique_id=969818627 node_paths=PackedStringArray("_entry_container", "_start_focus_object", "_replay_button", "_main_menu_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,8 @@ grow_vertical = 2
 script = ExtResource("1_5kli7")
 _entry_container = NodePath("ScrollContainer/MarginContainer/EntryContainer")
 _start_focus_object = NodePath("ButtonsContainer/ReplayButton")
+_replay_button = NodePath("ButtonsContainer/ReplayButton")
+_main_menu_button = NodePath("ButtonsContainer/MainMenuButton")
 
 [node name="Title" type="Label" parent="." unique_id=575669575]
 layout_mode = 1
@@ -86,7 +88,7 @@ theme_override_constants/separation = 10
 [node name="ReplayButton" type="Button" parent="ButtonsContainer" unique_id=1510627614]
 layout_mode = 2
 theme = ExtResource("3_fdi2r")
-text = "Replay"
+text = "Next"
 script = ExtResource("3_yxjio")
 
 [node name="MainMenuButton" type="Button" parent="ButtonsContainer" unique_id=1526679276]

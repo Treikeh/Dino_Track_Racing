@@ -3,6 +3,7 @@ extends CanvasLayer
 
 @export var _leaderboard: Control
 @export var _pause_menu: Control
+@export var _level_select_menu: Control
 
 var _race_ended: bool = false
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_leaderboard.hide()
 	_pause_menu.hide()
+	_level_select_menu.close_menu()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -25,3 +27,8 @@ func on_race_ended() -> void:
 	await get_tree().create_timer(2.5).timeout
 	_leaderboard.show()
 	_leaderboard.populate()
+
+
+func _on_leaderboard_show_level_select_menu() -> void:
+	_level_select_menu.open_menu()
+	_leaderboard.hide()

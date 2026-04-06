@@ -38,6 +38,7 @@ point_count = 13
 
 [node name="Level02" type="Node3D" unique_id=1517911867 node_paths=PackedStringArray("_track", "_spawn_point", "_background_music", "_countdown_player")]
 script = ExtResource("1_yc15p")
+_lap_count = 1
 _track = NodePath("Track")
 _spawn_point = NodePath(".")
 _countdown_1_3_sfx = ExtResource("2_1md7u")
